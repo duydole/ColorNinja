@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D96E8CD13F30FDE723362F0D /* Pods_ColorNinja.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57F237B10E2F49C95DDF1EC4 /* Pods_ColorNinja.framework */; };
 		F2C0607A246566B5001FAD58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C06079246566B5001FAD58 /* AppDelegate.swift */; };
 		F2C0607C246566B5001FAD58 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C0607B246566B5001FAD58 /* SceneDelegate.swift */; };
 		F2C0607E246566B5001FAD58 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C0607D246566B5001FAD58 /* ViewController.swift */; };
@@ -16,6 +17,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2EA3A6356F910FED2BED91AD /* Pods-ColorNinja.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorNinja.release.xcconfig"; path = "Target Support Files/Pods-ColorNinja/Pods-ColorNinja.release.xcconfig"; sourceTree = "<group>"; };
+		57C86C5C019D378438E37339 /* Pods-ColorNinja.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorNinja.debug.xcconfig"; path = "Target Support Files/Pods-ColorNinja/Pods-ColorNinja.debug.xcconfig"; sourceTree = "<group>"; };
+		57F237B10E2F49C95DDF1EC4 /* Pods_ColorNinja.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ColorNinja.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2C06076246566B5001FAD58 /* ColorNinja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorNinja.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2C06079246566B5001FAD58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2C0607B246566B5001FAD58 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -31,17 +35,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D96E8CD13F30FDE723362F0D /* Pods_ColorNinja.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2DD68138F1FAD3D7E224F3DA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				57F237B10E2F49C95DDF1EC4 /* Pods_ColorNinja.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9ABBD60AE1D01816F1BBF25E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				57C86C5C019D378438E37339 /* Pods-ColorNinja.debug.xcconfig */,
+				2EA3A6356F910FED2BED91AD /* Pods-ColorNinja.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		F2C0606D246566B5001FAD58 = {
 			isa = PBXGroup;
 			children = (
 				F2C06078246566B5001FAD58 /* ColorNinja */,
 				F2C06077246566B5001FAD58 /* Products */,
+				9ABBD60AE1D01816F1BBF25E /* Pods */,
+				2DD68138F1FAD3D7E224F3DA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -74,9 +99,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F2C0608A246566B7001FAD58 /* Build configuration list for PBXNativeTarget "ColorNinja" */;
 			buildPhases = (
+				DC6ADB5518A2BC6B8BF37F13 /* [CP] Check Pods Manifest.lock */,
 				F2C06072246566B5001FAD58 /* Sources */,
 				F2C06073246566B5001FAD58 /* Frameworks */,
 				F2C06074246566B5001FAD58 /* Resources */,
+				8C8CAFFAEDCD592B44B37789 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -132,6 +159,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8C8CAFFAEDCD592B44B37789 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ColorNinja/Pods-ColorNinja-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ColorNinja/Pods-ColorNinja-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ColorNinja/Pods-ColorNinja-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DC6ADB5518A2BC6B8BF37F13 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ColorNinja-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F2C06072246566B5001FAD58 /* Sources */ = {
@@ -282,6 +351,7 @@
 		};
 		F2C0608B246566B7001FAD58 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 57C86C5C019D378438E37339 /* Pods-ColorNinja.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -300,6 +370,7 @@
 		};
 		F2C0608C246566B7001FAD58 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2EA3A6356F910FED2BED91AD /* Pods-ColorNinja.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
