@@ -3,11 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		D96E8CD13F30FDE723362F0D /* Pods_ColorNinja.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57F237B10E2F49C95DDF1EC4 /* Pods_ColorNinja.framework */; };
+		F22F85642465A34900493BB6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F85632465A34900493BB6 /* Constants.swift */; };
+		F22F85662465A71E00493BB6 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F85652465A71E00493BB6 /* UIView+Extension.swift */; };
+		F22F85682465AF2100493BB6 /* ZButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F85672465AF2100493BB6 /* ZButton.swift */; };
+		F22F856A2465B55400493BB6 /* PlayingGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F85692465B55400493BB6 /* PlayingGameViewController.swift */; };
 		F2C0607A246566B5001FAD58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C06079246566B5001FAD58 /* AppDelegate.swift */; };
 		F2C0607C246566B5001FAD58 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C0607B246566B5001FAD58 /* SceneDelegate.swift */; };
 		F2C0607E246566B5001FAD58 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C0607D246566B5001FAD58 /* ViewController.swift */; };
@@ -20,6 +24,10 @@
 		2EA3A6356F910FED2BED91AD /* Pods-ColorNinja.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorNinja.release.xcconfig"; path = "Target Support Files/Pods-ColorNinja/Pods-ColorNinja.release.xcconfig"; sourceTree = "<group>"; };
 		57C86C5C019D378438E37339 /* Pods-ColorNinja.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorNinja.debug.xcconfig"; path = "Target Support Files/Pods-ColorNinja/Pods-ColorNinja.debug.xcconfig"; sourceTree = "<group>"; };
 		57F237B10E2F49C95DDF1EC4 /* Pods_ColorNinja.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ColorNinja.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F22F85632465A34900493BB6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		F22F85652465A71E00493BB6 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		F22F85672465AF2100493BB6 /* ZButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZButton.swift; sourceTree = "<group>"; };
+		F22F85692465B55400493BB6 /* PlayingGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingGameViewController.swift; sourceTree = "<group>"; };
 		F2C06076246566B5001FAD58 /* ColorNinja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorNinja.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2C06079246566B5001FAD58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2C0607B246566B5001FAD58 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,8 +64,32 @@
 				57C86C5C019D378438E37339 /* Pods-ColorNinja.debug.xcconfig */,
 				2EA3A6356F910FED2BED91AD /* Pods-ColorNinja.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		F22F85602465A31B00493BB6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F22F85672465AF2100493BB6 /* ZButton.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F22F85612465A32500493BB6 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				F22F85692465B55400493BB6 /* PlayingGameViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		F22F85622465A33300493BB6 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				F22F85632465A34900493BB6 /* Constants.swift */,
+				F22F85652465A71E00493BB6 /* UIView+Extension.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		F2C0606D246566B5001FAD58 = {
@@ -81,6 +113,9 @@
 		F2C06078246566B5001FAD58 /* ColorNinja */ = {
 			isa = PBXGroup;
 			children = (
+				F22F85622465A33300493BB6 /* Utilities */,
+				F22F85612465A32500493BB6 /* ViewControllers */,
+				F22F85602465A31B00493BB6 /* Views */,
 				F2C06079246566B5001FAD58 /* AppDelegate.swift */,
 				F2C0607B246566B5001FAD58 /* SceneDelegate.swift */,
 				F2C0607D246566B5001FAD58 /* ViewController.swift */,
@@ -207,7 +242,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F22F856A2465B55400493BB6 /* PlayingGameViewController.swift in Sources */,
+				F22F85682465AF2100493BB6 /* ZButton.swift in Sources */,
+				F22F85642465A34900493BB6 /* Constants.swift in Sources */,
 				F2C0607E246566B5001FAD58 /* ViewController.swift in Sources */,
+				F22F85662465A71E00493BB6 /* UIView+Extension.swift in Sources */,
 				F2C0607A246566B5001FAD58 /* AppDelegate.swift in Sources */,
 				F2C0607C246566B5001FAD58 /* SceneDelegate.swift in Sources */,
 			);

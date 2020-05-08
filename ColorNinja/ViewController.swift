@@ -7,14 +7,98 @@
 //
 
 import UIKit
+import SnapKit
 
 class ViewController: UIViewController {
-
+    
+    let iconImageView : UIImageView = UIImageView()
+    let appNameLabel : UILabel = UILabel()
+    let startButton : ZButton = ZButton()
+    let rankingButton : ZButton = ZButton()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        self.setupViews()
+    }
+    
+    // MARK: Setup views
+    
+    private func setupViews() {
+        self.setupBackgroundImage()
+        self.addAppIconView()
+        self.addAppNameLabel()
+        self.addStartButton()
+        self.addRankingButton()
+    }
+    
+    private func setupBackgroundImage() {
+        let bgImageView : UIImageView = UIImageView(frame: self.view.bounds)
+        bgImageView.image = UIImage(named: "bg")
+        self.view.addSubview(bgImageView)
+    }
+    
+    private func addAppIconView() {
+        iconImageView.image = UIImage(named: Constants.HomeScreen.ninjaImageName)
+        self.view.addSubview(iconImageView)
+        iconImageView.snp.makeConstraints { (make) in
+            make.top.equalTo(Constants.HomeScreen.paddingTopOfIcon)
+            make.width.height.equalTo(self.iconWidth)
+            make.centerX.equalTo(self.view)
+        }
+    }
+    
+    private func addAppNameLabel() {
+        self.view.addSubview(appNameLabel)
+        appNameLabel.snp.makeConstraints { (make) in
+            make.height.equalTo(Constants.HomeScreen.appNameLabelHeight)
+            make.centerX.equalTo(self.view)
+            make.bottom.equalTo(iconImageView).offset(Constants.HomeScreen.appNameLabelHeight + self.standardPadding)
+        }
+        
+        appNameLabel.text = Constants.HomeScreen.appName
+        appNameLabel.textAlignment = NSTextAlignment.center
+        appNameLabel.font = appNameLabel.font.withSize(Constants.HomeScreen.appNameFontSize)
+        appNameLabel.textColor = Constants.HomeScreen.appNameColor
+    }
+    
+    private func addStartButton() {
+        startButton.setTitle("START", for: .normal)
+        self.view.addSubview(startButton)
+        startButton.snp.makeConstraints { (make) in
+            make.center.equalTo(self.view)
+        }
+        
+        startButton.addTarget(self, action: #selector(didTapStartButton), for: .touchUpInside)
     }
 
-
+    private func addRankingButton() {
+        rankingButton.setTitle("RANK", for: .normal)
+        self.view.addSubview(rankingButton)
+        rankingButton.snp.makeConstraints { (make) in
+            make.bottom.equalTo(startButton).offset(70)
+            make.centerX.equalTo(self.view)
+        }
+    }
+        
+    // MARK: Action handler
+    
+    @objc private func didTapStartButton() {
+        let gameVC = PlayingGameViewController()
+        self.present(gameVC, animated: true, completion: nil)
+    }
+    
+    // MARK: Getter
+    
+    private var standardPadding : CGFloat {
+        get {
+            return Constants.HomeScreen.standardPadding
+        }
+    }
+    
+    private var iconWidth : CGFloat {
+        get {
+            return Constants.HomeScreen.iconWidth
+        }
+    }
 }
 

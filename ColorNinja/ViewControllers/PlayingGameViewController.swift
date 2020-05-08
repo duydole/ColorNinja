@@ -7,3 +7,12 @@
 //
 
 import Foundation
+import UIKit
+
+class PlayingGameViewController : UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor = UIColor.red
+    }
+}
