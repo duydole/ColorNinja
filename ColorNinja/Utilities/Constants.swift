@@ -31,7 +31,7 @@ struct Constants {
     }
     
     struct GameScreen {
-        static let backgroundColor = BluePalletes.level2
+        static let backgroundColor = LytoColor.gameBGColor
         static let topInset : CGFloat = Size.statusBarHeight + 20
         static let leftInset : CGFloat = 20
         static let rightInset : CGFloat = 20
@@ -39,6 +39,7 @@ struct Constants {
         static let settingImageName = "setting1"
         static let exitImageName = "close"
         static let exitButtonWidth = GameScreen.settingButtonWidth
+        static let buttonTintColor = LytoColor.settingButtonColor
     }
 }
 
@@ -49,4 +50,9 @@ struct BluePalletes {
     static let level0 = ColorRGB(225,245,254)
     static let level1 = ColorRGB(179,229,252)
     static let level2 = ColorRGB(129,212,250)
+}
+
+struct LytoColor {
+    static let gameBGColor = ColorRGB(42, 34, 53)
+    static let settingButtonColor = ColorRGB(112, 102, 135)
 }
