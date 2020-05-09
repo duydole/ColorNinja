@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 extension UIView {
+    
     var top : CGFloat  {
         get {
             return self.frame.origin.y
@@ -21,5 +22,4 @@ extension UIView {
             return self.frame.origin.y + self.frame.size.height
         }
     }
-    
 }
