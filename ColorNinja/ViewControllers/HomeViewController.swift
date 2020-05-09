@@ -86,7 +86,7 @@ class HomeViewController: UIViewController {
     @objc private func didTapStartButton() {
         let gameVC = PlayingGameViewController()
         gameVC.modalPresentationStyle = .fullScreen
-        self.present(gameVC, animated: true, completion: nil)
+        self.present(gameVC, animated: false, completion: nil)
     }
     
     // MARK: Getter
