@@ -35,11 +35,25 @@ class PlayingGameViewController : UIViewController {
     }
     
     private func setupSettingButton() {
-        
+        self.view.addSubview(settingButton)
+        settingButton.setImage(UIImage(named: Constants.GameScreen.settingImageName), for: .normal)
+        settingButton.addTarget(self, action: #selector(didTapSettingButton), for: .touchUpInside)
+        settingButton.snp.makeConstraints { (make) in
+            make.width.height.equalTo(Constants.GameScreen.settingButtonWidth)
+            make.top.equalTo(Constants.GameScreen.topInset)
+            make.leading.equalTo(Constants.GameScreen.leftInset)
+        }
     }
     
     private func setupExitButton() {
-            
+        self.view.addSubview(exitButton)
+        exitButton.setImage(UIImage(named: Constants.GameScreen.exitImageName), for: .normal)
+        exitButton.addTarget(self, action: #selector(didTapExitButton), for: .touchUpInside)
+        exitButton.snp.makeConstraints { (make) in
+            make.width.height.equalTo(Constants.GameScreen.exitButtonWidth)
+            make.top.equalTo(Constants.GameScreen.topInset)
+            make.trailing.equalTo(-Constants.GameScreen.rightInset)
+        }
     }
     
     private func setupLevelViews() {
@@ -56,5 +70,15 @@ class PlayingGameViewController : UIViewController {
     
     private func setupCollectionViews() {
         
+    }
+    
+    // MARK: Event handler
+    
+    @objc private func didTapSettingButton() {
+        
+    }
+    
+    @objc private func didTapExitButton() {
+        self.dismiss(animated: true, completion: nil)
     }
 }
