@@ -32,6 +32,13 @@ struct Constants {
     
     struct GameScreen {
         static let backgroundColor = BluePalletes.level2
+        static let topInset : CGFloat = Size.statusBarHeight + 20
+        static let leftInset : CGFloat = 20
+        static let rightInset : CGFloat = 20
+        static let settingButtonWidth : CGFloat = 40
+        static let settingImageName = "setting1"
+        static let exitImageName = "close"
+        static let exitButtonWidth = GameScreen.settingButtonWidth
     }
 }
 
