@@ -32,7 +32,6 @@ class PlayingGameViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Constants.GameScreen.backgroundColor
-        ViewControllerStore.gameController = self
         self.setupViews()
     }
     

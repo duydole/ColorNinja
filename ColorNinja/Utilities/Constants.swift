@@ -69,10 +69,6 @@ struct Constants {
     }
 }
 
-struct ViewControllerStore {
-    weak static var gameController : PlayingGameViewController?
-}
-
 /**
  * Link: https://www.pinterest.com/pin/95842298307867764/
  */
