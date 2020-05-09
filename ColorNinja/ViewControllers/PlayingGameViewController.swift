@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreGraphics
 
 class PlayingGameViewController : UIViewController {
     
@@ -16,6 +17,10 @@ class PlayingGameViewController : UIViewController {
     let levelCountLabel : UILabel = UILabel()
     let appImage : UIImageView = UIImageView()
     let remainTimeLabel : UILabel = UILabel()
+    let labelsContainer : UIView = UIView()
+    
+    var currentLevel : Int = 1
+    var remainingTime : String = "00:00"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +33,7 @@ class PlayingGameViewController : UIViewController {
     private func setupViews() {
         self.setupSettingButton()
         self.setupExitButton()
+        self.setupLabelsContainer()
         self.setupLevelViews()
         self.setupAppImageView()
         self.setupTimerView()
@@ -58,8 +64,41 @@ class PlayingGameViewController : UIViewController {
         }
     }
     
+    private func setupLabelsContainer() {
+        self.view.addSubview(labelsContainer)
+        labelsContainer.snp.makeConstraints { (make) in
+            make.top.equalTo(settingButton.snp.bottom).offset(Constants.GameScreen.LabelsContainer.margins.top)
+            make.leading.equalTo(Constants.GameScreen.LabelsContainer.margins.left)
+            make.trailing.equalTo(-Constants.GameScreen.LabelsContainer.margins.right)
+            make.height.equalTo(Constants.GameScreen.LabelsContainer.height)
+        }
+    }
+    
     private func setupLevelViews() {
         
+        // Level
+        let levelLabel = UILabel()
+        levelLabel.text = "LEVEL"
+        levelLabel.textAlignment = .center
+        levelLabel.textColor = Constants.GameScreen.LabelsContainer.textColor
+        levelLabel.font = UIFont.systemFont(ofSize: Constants.GameScreen.LabelsContainer.fontSize, weight: .bold)
+        labelsContainer.addSubview(levelLabel)
+        levelLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(labelsContainer)
+            make.leading.equalTo(labelsContainer)
+        }
+        
+        // Level Count
+        labelsContainer.addSubview(levelCountLabel)
+        levelCountLabel.text = "\(currentLevel)"
+        levelCountLabel.textAlignment = .center
+        levelCountLabel.textColor = .white
+        levelCountLabel.font = UIFont.systemFont(ofSize: Constants.GameScreen.LabelsContainer.fontSize, weight: .bold)
+        levelCountLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(levelLabel.snp.bottom)
+            make.leading.equalTo(labelsContainer)
+            make.centerX.equalTo(levelLabel.snp.centerX)
+        }
     }
     
     private func setupAppImageView() {
@@ -68,6 +107,29 @@ class PlayingGameViewController : UIViewController {
     
     private func setupTimerView() {
         
+        // Time
+        let timeLabel = UILabel()
+        timeLabel.text = "TIME"
+        timeLabel.textAlignment = .center
+        timeLabel.textColor = Constants.GameScreen.LabelsContainer.textColor
+        timeLabel.font = UIFont.systemFont(ofSize: Constants.GameScreen.LabelsContainer.fontSize, weight: .bold)
+        labelsContainer.addSubview(timeLabel)
+        timeLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(labelsContainer)
+            make.trailing.equalTo(labelsContainer)
+        }
+        
+        // Remain Time
+        labelsContainer.addSubview(remainTimeLabel)
+        remainTimeLabel.text = remainingTime
+        remainTimeLabel.textAlignment = .center
+        remainTimeLabel.textColor = .white
+        remainTimeLabel.font = UIFont.systemFont(ofSize: Constants.GameScreen.LabelsContainer.fontSize, weight: .bold)
+        remainTimeLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(timeLabel.snp.bottom)
+            make.trailing.equalTo(labelsContainer)
+            make.centerX.equalTo(timeLabel.snp.centerX)
+        }
     }
     
     private func setupCollectionViews() {

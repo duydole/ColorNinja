@@ -40,6 +40,20 @@ struct Constants {
         static let exitImageName = "close"
         static let exitButtonWidth = GameScreen.settingButtonWidth
         static let buttonTintColor = LytoColor.settingButtonColor
+        
+        struct LabelsContainer {
+            static let fontSize : CGFloat = 25
+            static let textColor : UIColor = LytoColor.labelColorInGame
+            static let height : CGFloat = 80
+            static let padding : UIEdgeInsets = UIEdgeInsets(top: 10,
+                                                            left: 10,
+                                                            bottom: 10,
+                                                            right: 10)
+            static let margins : UIEdgeInsets = UIEdgeInsets(top: 50,
+                                                             left: 50,
+                                                             bottom: 50,
+                                                             right: 50)
+        }
     }
 }
 
@@ -55,4 +69,5 @@ struct BluePalletes {
 struct LytoColor {
     static let gameBGColor = ColorRGB(42, 34, 53)
     static let settingButtonColor = ColorRGB(112, 102, 135)
+    static let labelColorInGame = ColorRGB(170, 68, 119)
 }
