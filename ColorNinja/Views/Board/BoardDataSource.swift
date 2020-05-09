@@ -11,7 +11,11 @@ import UIKit
 
 class BoardDataSource : NSObject, UICollectionViewDataSource {
     
+    // MARK: - Public properties
+    
     var levelModel: LevelModel = LevelStore.shared.allLevels[0]
+    
+    // MARK: - UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return levelModel.numberOfItems

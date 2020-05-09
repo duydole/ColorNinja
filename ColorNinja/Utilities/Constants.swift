@@ -67,6 +67,10 @@ struct Constants {
             static let spacingBetweenCells : CGFloat = 5
         }
     }
+    
+    struct GameSetting {
+        static let maxLevelCount = 100
+    }
 }
 
 /**

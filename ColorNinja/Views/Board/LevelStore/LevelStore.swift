@@ -11,11 +11,17 @@ import UIKit
 
 class LevelStore {
     
+    // MARK: - Shared
+    
     static let shared = LevelStore()
-    let maxLevelCount: Int = 100
+    
+    // MARK: - Public Property
+    
+    let maxLevelCount: Int = Constants.GameSetting.maxLevelCount
+    
     var allLevels: [LevelModel] = []
 
-    // MARK: Private
+    // MARK: - Private
     
     private init() {
         self.setupLevels()

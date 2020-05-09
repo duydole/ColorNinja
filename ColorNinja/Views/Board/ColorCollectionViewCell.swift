@@ -11,7 +11,11 @@ import UIKit
 
 class ColorCollectionViewCell: UICollectionViewCell {
     
+    // MARK: - Public Propperty
+    
     var viewModel : ColorCellModel?
+    
+    // MARK: - Initialize
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,14 +27,16 @@ class ColorCollectionViewCell: UICollectionViewCell {
         self.setupCell()
     }
     
-    private func setupCell() {
-        
-    }
-    
-    // MARK: Layout
+    // MARK: - Layout
     
     override func layoutSubviews() {
         let cellWidth = viewModel!.width
         self.layer.cornerRadius = cellWidth/2
+    }
+    
+    // MARK: - Private Methods
+    
+    private func setupCell() {
+        
     }
 }

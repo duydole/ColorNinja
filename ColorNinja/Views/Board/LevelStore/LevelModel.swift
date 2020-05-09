@@ -11,19 +11,28 @@ import UIKit
 
 class LevelModel {
     
+    // MARK: - Public Properties
+    
     let levelIndex: Int
+    
     var numberOfItems: Int {
         get {
             return numberOfRows * numberOfRows
         }
     }
+    
     let numberOfRows: Int
+    
     var cellWidth: CGFloat = 0
+    
+    // MARK: - Public Methods
     
     init(levelIndex: Int) {
         self.levelIndex = levelIndex
         self.numberOfRows = LevelModel.numberOfRowsInLevel(index: levelIndex)
     }
+    
+    // MARK: - Static Methods
     
     static func numberOfRowsInLevel(index: Int) -> Int {
         var numberOfRows = 0

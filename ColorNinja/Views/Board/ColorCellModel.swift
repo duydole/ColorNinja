@@ -10,7 +10,12 @@ import Foundation
 import UIKit
 
 class ColorCellModel {
+    
+    // MARK: - Public property
+    
     var width : CGFloat = 0
+    
+    // MARK: - Initialize
     
     init(width: CGFloat) {
         self.width = width
