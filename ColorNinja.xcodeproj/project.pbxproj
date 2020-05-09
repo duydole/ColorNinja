@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D96E8CD13F30FDE723362F0D /* Pods_ColorNinja.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57F237B10E2F49C95DDF1EC4 /* Pods_ColorNinja.framework */; };
+		B578F0D34AD32072DAE16B92 /* libPods-ColorNinja.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D31865BADC3632B0661ECFB /* libPods-ColorNinja.a */; };
 		F22F85642465A34900493BB6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F85632465A34900493BB6 /* Constants.swift */; };
 		F22F85662465A71E00493BB6 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F85652465A71E00493BB6 /* UIView+Extension.swift */; };
 		F22F85682465AF2100493BB6 /* ZButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F85672465AF2100493BB6 /* ZButton.swift */; };
@@ -26,7 +26,7 @@
 /* Begin PBXFileReference section */
 		2EA3A6356F910FED2BED91AD /* Pods-ColorNinja.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorNinja.release.xcconfig"; path = "Target Support Files/Pods-ColorNinja/Pods-ColorNinja.release.xcconfig"; sourceTree = "<group>"; };
 		57C86C5C019D378438E37339 /* Pods-ColorNinja.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorNinja.debug.xcconfig"; path = "Target Support Files/Pods-ColorNinja/Pods-ColorNinja.debug.xcconfig"; sourceTree = "<group>"; };
-		57F237B10E2F49C95DDF1EC4 /* Pods_ColorNinja.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ColorNinja.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D31865BADC3632B0661ECFB /* libPods-ColorNinja.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ColorNinja.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F22F85632465A34900493BB6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F22F85652465A71E00493BB6 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		F22F85672465AF2100493BB6 /* ZButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZButton.swift; sourceTree = "<group>"; };
@@ -49,7 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D96E8CD13F30FDE723362F0D /* Pods_ColorNinja.framework in Frameworks */,
+				B578F0D34AD32072DAE16B92 /* libPods-ColorNinja.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,7 +59,7 @@
 		2DD68138F1FAD3D7E224F3DA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				57F237B10E2F49C95DDF1EC4 /* Pods_ColorNinja.framework */,
+				8D31865BADC3632B0661ECFB /* libPods-ColorNinja.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -147,7 +147,6 @@
 				F2C06072246566B5001FAD58 /* Sources */,
 				F2C06073246566B5001FAD58 /* Frameworks */,
 				F2C06074246566B5001FAD58 /* Resources */,
-				8C8CAFFAEDCD592B44B37789 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -206,23 +205,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		8C8CAFFAEDCD592B44B37789 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ColorNinja/Pods-ColorNinja-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ColorNinja/Pods-ColorNinja-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ColorNinja/Pods-ColorNinja-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		DC6ADB5518A2BC6B8BF37F13 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
