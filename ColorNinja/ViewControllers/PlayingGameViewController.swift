@@ -23,6 +23,10 @@ class PlayingGameViewController : UIViewController {
     
     var currentLevel : Int = 1
     var remainingTime : String = "00:00"
+    weak var boardContainer : UIView!
+    weak var boardCollectionView : BoardCollectionView!
+    let boardDataSource: BoardDataSource = BoardDataSource()
+    var shrinkCell : Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +39,10 @@ class PlayingGameViewController : UIViewController {
         // Animation ReadyView
         self.animationReadyView(index: 0) { (done) in
             
+            // Show CollectionView with currentLevel
+            self.boardCollectionView.alpha = 1.0
+            self.shrinkCell = false
+            self.boardCollectionView.reloadItems(at: self.boardCollectionView.indexPathsForVisibleItems)
         }
     }
     
@@ -72,6 +80,9 @@ class PlayingGameViewController : UIViewController {
         
         // ReadyView
         self.setupReadyView()
+        
+        // CollectionView
+        self.setupBoardCollectionView()
     }
     
     private func setupSettingButton() {
@@ -181,6 +192,34 @@ class PlayingGameViewController : UIViewController {
         }
     }
     
+    private func setupBoardCollectionView() {
+        
+        // Container
+        let boardContainer = UIView()
+        self.view.addSubview(boardContainer)
+        boardContainer.snp.makeConstraints { (make) in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(self.labelsContainer.snp.bottom)
+        }
+        self.boardContainer = boardContainer
+        
+        // Board
+        let flowLayout = BoardCollectionViewFlowLayout()
+        let boardCollectionView = BoardCollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        boardContainer.addSubview(boardCollectionView)
+        boardCollectionView.alpha = 0.0
+        boardCollectionView.backgroundColor = .clear
+        boardCollectionView.dataSource = boardDataSource
+        boardCollectionView.delegate = self
+        boardCollectionView.register(ColorCollectionViewCell.self, forCellWithReuseIdentifier: Constants.GameScreen.BoardCollectionView.cellId)
+        let boardWidth = Constants.GameScreen.BoardCollectionView.boardWidth
+        boardCollectionView.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+            make.width.height.equalTo(boardWidth)
+        }
+        self.boardCollectionView = boardCollectionView
+    }
+    
     // MARK: Event handler
     
     @objc private func didTapSettingButton() {
@@ -190,4 +229,16 @@ class PlayingGameViewController : UIViewController {
     @objc private func didTapExitButton() {
         self.dismiss(animated: true, completion: nil)
     }
+}
+
+// MARK: Delegate
+
+extension PlayingGameViewController : UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let itemWidth = Constants.GameScreen.BoardCollectionView.boardWidth/2 - 5
+        return shrinkCell ? .zero : CGSize(width: itemWidth, height: itemWidth)
+    }
+    
+    
 }

@@ -54,6 +54,16 @@ struct Constants {
                                                              bottom: 50,
                                                              right: 50)
         }
+        
+        struct ReadyView {
+            static let textColor : UIColor = .yellow
+            static let fontSize : CGFloat = 180
+        }
+        
+        struct BoardCollectionView {
+            static let cellId : String = "colorCollectionViewCellIdentifier"
+            static var boardWidth = Constants.Screen.width - 2*Constants.GameScreen.leftInset - 50
+        }
     }
 }
 
