@@ -13,9 +13,10 @@
 		F22F85682465AF2100493BB6 /* ZButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F85672465AF2100493BB6 /* ZButton.swift */; };
 		F22F856A2465B55400493BB6 /* PlayingGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F85692465B55400493BB6 /* PlayingGameViewController.swift */; };
 		F22F8584246679DA00493BB6 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F8583246679DA00493BB6 /* Size.swift */; };
+		F22F85882466940900493BB6 /* StaticFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F85872466940900493BB6 /* StaticFunctions.swift */; };
 		F2C0607A246566B5001FAD58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C06079246566B5001FAD58 /* AppDelegate.swift */; };
 		F2C0607C246566B5001FAD58 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C0607B246566B5001FAD58 /* SceneDelegate.swift */; };
-		F2C0607E246566B5001FAD58 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C0607D246566B5001FAD58 /* ViewController.swift */; };
+		F2C0607E246566B5001FAD58 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C0607D246566B5001FAD58 /* HomeViewController.swift */; };
 		F2C06081246566B5001FAD58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2C0607F246566B5001FAD58 /* Main.storyboard */; };
 		F2C06083246566B7001FAD58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2C06082246566B7001FAD58 /* Assets.xcassets */; };
 		F2C06086246566B7001FAD58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2C06084246566B7001FAD58 /* LaunchScreen.storyboard */; };
@@ -30,10 +31,11 @@
 		F22F85672465AF2100493BB6 /* ZButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZButton.swift; sourceTree = "<group>"; };
 		F22F85692465B55400493BB6 /* PlayingGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingGameViewController.swift; sourceTree = "<group>"; };
 		F22F8583246679DA00493BB6 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
+		F22F85872466940900493BB6 /* StaticFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticFunctions.swift; sourceTree = "<group>"; };
 		F2C06076246566B5001FAD58 /* ColorNinja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorNinja.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2C06079246566B5001FAD58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2C0607B246566B5001FAD58 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F2C0607D246566B5001FAD58 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F2C0607D246566B5001FAD58 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F2C06080246566B5001FAD58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F2C06082246566B7001FAD58 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2C06085246566B7001FAD58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 		F22F85612465A32500493BB6 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				F2C0607D246566B5001FAD58 /* HomeViewController.swift */,
 				F22F85692465B55400493BB6 /* PlayingGameViewController.swift */,
 			);
 			path = ViewControllers;
@@ -91,6 +94,7 @@
 				F22F85632465A34900493BB6 /* Constants.swift */,
 				F22F85652465A71E00493BB6 /* UIView+Extension.swift */,
 				F22F8583246679DA00493BB6 /* Size.swift */,
+				F22F85872466940900493BB6 /* StaticFunctions.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -121,7 +125,6 @@
 				F22F85602465A31B00493BB6 /* Views */,
 				F2C06079246566B5001FAD58 /* AppDelegate.swift */,
 				F2C0607B246566B5001FAD58 /* SceneDelegate.swift */,
-				F2C0607D246566B5001FAD58 /* ViewController.swift */,
 				F2C0607F246566B5001FAD58 /* Main.storyboard */,
 				F2C06082246566B7001FAD58 /* Assets.xcassets */,
 				F2C06084246566B7001FAD58 /* LaunchScreen.storyboard */,
@@ -247,9 +250,10 @@
 			files = (
 				F22F8584246679DA00493BB6 /* Size.swift in Sources */,
 				F22F856A2465B55400493BB6 /* PlayingGameViewController.swift in Sources */,
+				F22F85882466940900493BB6 /* StaticFunctions.swift in Sources */,
 				F22F85682465AF2100493BB6 /* ZButton.swift in Sources */,
 				F22F85642465A34900493BB6 /* Constants.swift in Sources */,
-				F2C0607E246566B5001FAD58 /* ViewController.swift in Sources */,
+				F2C0607E246566B5001FAD58 /* HomeViewController.swift in Sources */,
 				F22F85662465A71E00493BB6 /* UIView+Extension.swift in Sources */,
 				F2C0607A246566B5001FAD58 /* AppDelegate.swift in Sources */,
 				F2C0607C246566B5001FAD58 /* SceneDelegate.swift in Sources */,

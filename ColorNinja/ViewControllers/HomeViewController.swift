@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
     
     let iconImageView : UIImageView = UIImageView()
     let appNameLabel : UILabel = UILabel()
