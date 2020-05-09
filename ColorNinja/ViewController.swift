@@ -65,7 +65,8 @@ class ViewController: UIViewController {
         startButton.setTitle("START", for: .normal)
         self.view.addSubview(startButton)
         startButton.snp.makeConstraints { (make) in
-            make.center.equalTo(self.view)
+            make.centerX.equalTo(self.view)
+            make.bottom.equalTo(appNameLabel).offset(100)
         }
         
         startButton.addTarget(self, action: #selector(didTapStartButton), for: .touchUpInside)
