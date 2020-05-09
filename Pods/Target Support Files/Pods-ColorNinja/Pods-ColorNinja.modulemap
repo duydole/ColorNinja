@@ -1,4 +1,4 @@
-module Pods_ColorNinja {
+framework module Pods_ColorNinja {
   umbrella header "Pods-ColorNinja-umbrella.h"
 
   export *

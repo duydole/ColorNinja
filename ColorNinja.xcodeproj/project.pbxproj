@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B578F0D34AD32072DAE16B92 /* libPods-ColorNinja.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D31865BADC3632B0661ECFB /* libPods-ColorNinja.a */; };
+		D96E8CD13F30FDE723362F0D /* Pods_ColorNinja.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57F237B10E2F49C95DDF1EC4 /* Pods_ColorNinja.framework */; };
 		F22F85642465A34900493BB6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F85632465A34900493BB6 /* Constants.swift */; };
 		F22F85662465A71E00493BB6 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F85652465A71E00493BB6 /* UIView+Extension.swift */; };
 		F22F85682465AF2100493BB6 /* ZButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F85672465AF2100493BB6 /* ZButton.swift */; };
@@ -15,6 +15,11 @@
 		F22F8584246679DA00493BB6 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F8583246679DA00493BB6 /* Size.swift */; };
 		F22F85882466940900493BB6 /* StaticFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F85872466940900493BB6 /* StaticFunctions.swift */; };
 		F22F858A24669BC200493BB6 /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = F22F858924669BC200493BB6 /* setting.png */; };
+		F2A6E68A2466FF5600970D1B /* LevelStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6E6852466FF5600970D1B /* LevelStore.swift */; };
+		F2A6E68B2466FF5600970D1B /* BoardCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6E6862466FF5600970D1B /* BoardCollectionViewFlowLayout.swift */; };
+		F2A6E68C2466FF5600970D1B /* BoardCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6E6872466FF5600970D1B /* BoardCollectionView.swift */; };
+		F2A6E68D2466FF5600970D1B /* BoardDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6E6882466FF5600970D1B /* BoardDataSource.swift */; };
+		F2A6E68E2466FF5600970D1B /* ColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6E6892466FF5600970D1B /* ColorCollectionViewCell.swift */; };
 		F2C0607A246566B5001FAD58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C06079246566B5001FAD58 /* AppDelegate.swift */; };
 		F2C0607C246566B5001FAD58 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C0607B246566B5001FAD58 /* SceneDelegate.swift */; };
 		F2C0607E246566B5001FAD58 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C0607D246566B5001FAD58 /* HomeViewController.swift */; };
@@ -26,7 +31,7 @@
 /* Begin PBXFileReference section */
 		2EA3A6356F910FED2BED91AD /* Pods-ColorNinja.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorNinja.release.xcconfig"; path = "Target Support Files/Pods-ColorNinja/Pods-ColorNinja.release.xcconfig"; sourceTree = "<group>"; };
 		57C86C5C019D378438E37339 /* Pods-ColorNinja.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorNinja.debug.xcconfig"; path = "Target Support Files/Pods-ColorNinja/Pods-ColorNinja.debug.xcconfig"; sourceTree = "<group>"; };
-		8D31865BADC3632B0661ECFB /* libPods-ColorNinja.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ColorNinja.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		57F237B10E2F49C95DDF1EC4 /* Pods_ColorNinja.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ColorNinja.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F22F85632465A34900493BB6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F22F85652465A71E00493BB6 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		F22F85672465AF2100493BB6 /* ZButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZButton.swift; sourceTree = "<group>"; };
@@ -34,6 +39,11 @@
 		F22F8583246679DA00493BB6 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
 		F22F85872466940900493BB6 /* StaticFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticFunctions.swift; sourceTree = "<group>"; };
 		F22F858924669BC200493BB6 /* setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting.png; sourceTree = "<group>"; };
+		F2A6E6852466FF5600970D1B /* LevelStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelStore.swift; sourceTree = "<group>"; };
+		F2A6E6862466FF5600970D1B /* BoardCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		F2A6E6872466FF5600970D1B /* BoardCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardCollectionView.swift; sourceTree = "<group>"; };
+		F2A6E6882466FF5600970D1B /* BoardDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardDataSource.swift; sourceTree = "<group>"; };
+		F2A6E6892466FF5600970D1B /* ColorCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCollectionViewCell.swift; sourceTree = "<group>"; };
 		F2C06076246566B5001FAD58 /* ColorNinja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorNinja.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2C06079246566B5001FAD58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2C0607B246566B5001FAD58 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,7 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B578F0D34AD32072DAE16B92 /* libPods-ColorNinja.a in Frameworks */,
+				D96E8CD13F30FDE723362F0D /* Pods_ColorNinja.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,7 +69,7 @@
 		2DD68138F1FAD3D7E224F3DA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8D31865BADC3632B0661ECFB /* libPods-ColorNinja.a */,
+				57F237B10E2F49C95DDF1EC4 /* Pods_ColorNinja.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -76,6 +86,7 @@
 		F22F85602465A31B00493BB6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F2A6E6842466FF5600970D1B /* Board */,
 				F22F85672465AF2100493BB6 /* ZButton.swift */,
 			);
 			path = Views;
@@ -99,6 +110,18 @@
 				F22F85872466940900493BB6 /* StaticFunctions.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		F2A6E6842466FF5600970D1B /* Board */ = {
+			isa = PBXGroup;
+			children = (
+				F2A6E6852466FF5600970D1B /* LevelStore.swift */,
+				F2A6E6862466FF5600970D1B /* BoardCollectionViewFlowLayout.swift */,
+				F2A6E6872466FF5600970D1B /* BoardCollectionView.swift */,
+				F2A6E6882466FF5600970D1B /* BoardDataSource.swift */,
+				F2A6E6892466FF5600970D1B /* ColorCollectionViewCell.swift */,
+			);
+			path = Board;
 			sourceTree = "<group>";
 		};
 		F2C0606D246566B5001FAD58 = {
@@ -147,6 +170,7 @@
 				F2C06072246566B5001FAD58 /* Sources */,
 				F2C06073246566B5001FAD58 /* Frameworks */,
 				F2C06074246566B5001FAD58 /* Resources */,
+				8C8CAFFAEDCD592B44B37789 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -205,6 +229,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		8C8CAFFAEDCD592B44B37789 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ColorNinja/Pods-ColorNinja-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ColorNinja/Pods-ColorNinja-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ColorNinja/Pods-ColorNinja-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		DC6ADB5518A2BC6B8BF37F13 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -236,13 +277,18 @@
 			files = (
 				F22F8584246679DA00493BB6 /* Size.swift in Sources */,
 				F22F856A2465B55400493BB6 /* PlayingGameViewController.swift in Sources */,
+				F2A6E68A2466FF5600970D1B /* LevelStore.swift in Sources */,
 				F22F85882466940900493BB6 /* StaticFunctions.swift in Sources */,
 				F22F85682465AF2100493BB6 /* ZButton.swift in Sources */,
 				F22F85642465A34900493BB6 /* Constants.swift in Sources */,
 				F2C0607E246566B5001FAD58 /* HomeViewController.swift in Sources */,
 				F22F85662465A71E00493BB6 /* UIView+Extension.swift in Sources */,
+				F2A6E68E2466FF5600970D1B /* ColorCollectionViewCell.swift in Sources */,
 				F2C0607A246566B5001FAD58 /* AppDelegate.swift in Sources */,
+				F2A6E68B2466FF5600970D1B /* BoardCollectionViewFlowLayout.swift in Sources */,
 				F2C0607C246566B5001FAD58 /* SceneDelegate.swift in Sources */,
+				F2A6E68D2466FF5600970D1B /* BoardDataSource.swift in Sources */,
+				F2A6E68C2466FF5600970D1B /* BoardCollectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
