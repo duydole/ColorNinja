@@ -31,6 +31,15 @@ struct Constants {
     }
     
     struct GameScreen {
-        
+        static let backgroundColor = BluePalletes.level2
     }
+}
+
+/**
+ * Link: https://www.pinterest.com/pin/95842298307867764/
+ */
+struct BluePalletes {
+    static let level0 = ColorRGB(225,245,254)
+    static let level1 = ColorRGB(179,229,252)
+    static let level2 = ColorRGB(129,212,250)
 }
