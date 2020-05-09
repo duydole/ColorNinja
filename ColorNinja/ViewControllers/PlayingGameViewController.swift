@@ -21,16 +21,18 @@ class PlayingGameViewController : UIViewController {
     let readyLabel : UILabel = UILabel()
     let readyListString : [String] = ["READY","3","2","1","Go!"]
     
-    var currentLevel : Int = 1
     var remainingTime : String = "00:00"
     weak var boardContainer : UIView!
     weak var boardCollectionView : BoardCollectionView!
     let boardDataSource: BoardDataSource = BoardDataSource()
     var shrinkCell : Bool = true
     
+    var currentLevel : LevelModel = LevelStore.shared.allLevels[0]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Constants.GameScreen.backgroundColor
+        ViewControllerStore.gameController = self
         self.setupViews()
     }
     
@@ -38,11 +40,8 @@ class PlayingGameViewController : UIViewController {
         
         // Animation ReadyView
         self.animationReadyView(index: 0) { (done) in
-            
-            // Show CollectionView with currentLevel
-            self.boardCollectionView.alpha = 1.0
-            self.shrinkCell = false
-            self.boardCollectionView.reloadItems(at: self.boardCollectionView.indexPathsForVisibleItems)
+            self.currentLevel.cellWidth = self.cellWidthOfLevel(level: self.currentLevel)
+            self.showLevel(level: self.currentLevel)
         }
     }
     
@@ -60,7 +59,7 @@ class PlayingGameViewController : UIViewController {
             self.readyLabel.alpha = 1.0
             self.readyLabel.transform = CGAffineTransform(scaleX: 0.4, y: 0.4)
         }) { (success) in
-            Thread.sleep(forTimeInterval: 0.65)
+            Thread.sleep(forTimeInterval: 0.3)
             self.readyLabel.transform = CGAffineTransform(scaleX: 1/0.4, y: 1/0.4)
             self.readyLabel.alpha = 0.0
             self.animationReadyView(index: index + 1, completion: completion)
@@ -135,7 +134,7 @@ class PlayingGameViewController : UIViewController {
         
         // Level Count
         labelsContainer.addSubview(levelCountLabel)
-        levelCountLabel.text = "\(currentLevel)"
+        levelCountLabel.text = "1"
         levelCountLabel.textAlignment = .center
         levelCountLabel.textColor = .white
         levelCountLabel.font = UIFont.systemFont(ofSize: Constants.GameScreen.LabelsContainer.fontSize, weight: .bold)
@@ -205,6 +204,8 @@ class PlayingGameViewController : UIViewController {
         
         // Board
         let flowLayout = BoardCollectionViewFlowLayout()
+        flowLayout.minimumInteritemSpacing = 0.0
+        flowLayout.minimumLineSpacing = Constants.GameScreen.BoardCollectionView.spacingBetweenCells
         let boardCollectionView = BoardCollectionView(frame: .zero, collectionViewLayout: flowLayout)
         boardContainer.addSubview(boardCollectionView)
         boardCollectionView.alpha = 0.0
@@ -229,6 +230,36 @@ class PlayingGameViewController : UIViewController {
     @objc private func didTapExitButton() {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    // MARK: Handle Level Flow
+    
+    private func showLevel(level: LevelModel) {
+        
+        // Update level for DataSource
+        boardDataSource.levelModel = level
+        
+        // ReloadData
+        self.boardCollectionView.reloadData()
+        self.boardCollectionView.layoutIfNeeded()
+        
+        // ReloadItems to gain animations:
+        self.boardCollectionView.alpha = 1.0
+        self.shrinkCell = false
+        self.boardCollectionView.reloadItems(at: self.boardCollectionView.indexPathsForVisibleItems)
+        
+        // Update LevelCount
+        levelCountLabel.text = "\(level.levelIndex + 1)"
+    }
+    
+    // MARK: Other
+    
+    private func cellWidthOfLevel(level: LevelModel) -> CGFloat {
+        let N: CGFloat = CGFloat(level.numberOfRows)
+        let spacing: CGFloat = Constants.GameScreen.BoardCollectionView.spacingBetweenCells
+        let boardWidth: CGFloat = Constants.GameScreen.BoardCollectionView.boardWidth
+        let itemWidth = (boardWidth - (N - 1) * spacing) / N
+        return itemWidth
+    }
 }
 
 // MARK: Delegate
@@ -236,9 +267,17 @@ class PlayingGameViewController : UIViewController {
 extension PlayingGameViewController : UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemWidth = Constants.GameScreen.BoardCollectionView.boardWidth/2 - 5
+        let itemWidth = currentLevel.cellWidth
         return shrinkCell ? .zero : CGSize(width: itemWidth, height: itemWidth)
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        // Update current LevelModel
+        let nextLevel = LevelStore.shared.allLevels[currentLevel.levelIndex + 1]
+        currentLevel = nextLevel
+        nextLevel.cellWidth = self.cellWidthOfLevel(level: nextLevel)
+        
+        self.showLevel(level: nextLevel)
+    }
 }

@@ -10,16 +10,17 @@ import Foundation
 import UIKit
 
 class BoardDataSource : NSObject, UICollectionViewDataSource {
-
+    
+    var levelModel: LevelModel = LevelStore.shared.allLevels[0]
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return levelModel.numberOfItems
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: ColorCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.GameScreen.BoardCollectionView.cellId, for: indexPath) as! ColorCollectionViewCell
+        cell.viewModel = ColorCellModel(width: levelModel.cellWidth)
         cell.backgroundColor = UIColor.yellow
         return cell
     }
-    
-    
 }

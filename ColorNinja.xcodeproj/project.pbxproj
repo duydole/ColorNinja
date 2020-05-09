@@ -15,11 +15,13 @@
 		F22F8584246679DA00493BB6 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F8583246679DA00493BB6 /* Size.swift */; };
 		F22F85882466940900493BB6 /* StaticFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F85872466940900493BB6 /* StaticFunctions.swift */; };
 		F22F858A24669BC200493BB6 /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = F22F858924669BC200493BB6 /* setting.png */; };
+		F234761124671FE1004C8363 /* ColorCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F234761024671FE1004C8363 /* ColorCellModel.swift */; };
 		F2A6E68A2466FF5600970D1B /* LevelStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6E6852466FF5600970D1B /* LevelStore.swift */; };
 		F2A6E68B2466FF5600970D1B /* BoardCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6E6862466FF5600970D1B /* BoardCollectionViewFlowLayout.swift */; };
 		F2A6E68C2466FF5600970D1B /* BoardCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6E6872466FF5600970D1B /* BoardCollectionView.swift */; };
 		F2A6E68D2466FF5600970D1B /* BoardDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6E6882466FF5600970D1B /* BoardDataSource.swift */; };
 		F2A6E68E2466FF5600970D1B /* ColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6E6892466FF5600970D1B /* ColorCollectionViewCell.swift */; };
+		F2A6E6912467029300970D1B /* LevelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6E6902467029300970D1B /* LevelModel.swift */; };
 		F2C0607A246566B5001FAD58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C06079246566B5001FAD58 /* AppDelegate.swift */; };
 		F2C0607C246566B5001FAD58 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C0607B246566B5001FAD58 /* SceneDelegate.swift */; };
 		F2C0607E246566B5001FAD58 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C0607D246566B5001FAD58 /* HomeViewController.swift */; };
@@ -39,11 +41,13 @@
 		F22F8583246679DA00493BB6 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
 		F22F85872466940900493BB6 /* StaticFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticFunctions.swift; sourceTree = "<group>"; };
 		F22F858924669BC200493BB6 /* setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting.png; sourceTree = "<group>"; };
+		F234761024671FE1004C8363 /* ColorCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCellModel.swift; sourceTree = "<group>"; };
 		F2A6E6852466FF5600970D1B /* LevelStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelStore.swift; sourceTree = "<group>"; };
 		F2A6E6862466FF5600970D1B /* BoardCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		F2A6E6872466FF5600970D1B /* BoardCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardCollectionView.swift; sourceTree = "<group>"; };
 		F2A6E6882466FF5600970D1B /* BoardDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardDataSource.swift; sourceTree = "<group>"; };
 		F2A6E6892466FF5600970D1B /* ColorCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCollectionViewCell.swift; sourceTree = "<group>"; };
+		F2A6E6902467029300970D1B /* LevelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelModel.swift; sourceTree = "<group>"; };
 		F2C06076246566B5001FAD58 /* ColorNinja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorNinja.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2C06079246566B5001FAD58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2C0607B246566B5001FAD58 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -115,13 +119,23 @@
 		F2A6E6842466FF5600970D1B /* Board */ = {
 			isa = PBXGroup;
 			children = (
-				F2A6E6852466FF5600970D1B /* LevelStore.swift */,
+				F2A6E68F2467027600970D1B /* LevelStore */,
 				F2A6E6862466FF5600970D1B /* BoardCollectionViewFlowLayout.swift */,
 				F2A6E6872466FF5600970D1B /* BoardCollectionView.swift */,
 				F2A6E6882466FF5600970D1B /* BoardDataSource.swift */,
 				F2A6E6892466FF5600970D1B /* ColorCollectionViewCell.swift */,
+				F234761024671FE1004C8363 /* ColorCellModel.swift */,
 			);
 			path = Board;
+			sourceTree = "<group>";
+		};
+		F2A6E68F2467027600970D1B /* LevelStore */ = {
+			isa = PBXGroup;
+			children = (
+				F2A6E6852466FF5600970D1B /* LevelStore.swift */,
+				F2A6E6902467029300970D1B /* LevelModel.swift */,
+			);
+			path = LevelStore;
 			sourceTree = "<group>";
 		};
 		F2C0606D246566B5001FAD58 = {
@@ -286,9 +300,11 @@
 				F2A6E68E2466FF5600970D1B /* ColorCollectionViewCell.swift in Sources */,
 				F2C0607A246566B5001FAD58 /* AppDelegate.swift in Sources */,
 				F2A6E68B2466FF5600970D1B /* BoardCollectionViewFlowLayout.swift in Sources */,
+				F2A6E6912467029300970D1B /* LevelModel.swift in Sources */,
 				F2C0607C246566B5001FAD58 /* SceneDelegate.swift in Sources */,
 				F2A6E68D2466FF5600970D1B /* BoardDataSource.swift in Sources */,
 				F2A6E68C2466FF5600970D1B /* BoardCollectionView.swift in Sources */,
+				F234761124671FE1004C8363 /* ColorCellModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

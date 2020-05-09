@@ -11,6 +11,8 @@ import UIKit
 
 class ColorCollectionViewCell: UICollectionViewCell {
     
+    var viewModel : ColorCellModel?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setupCell()
@@ -22,6 +24,13 @@ class ColorCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupCell() {
-        self.layer.cornerRadius = 157/2
+        
+    }
+    
+    // MARK: Layout
+    
+    override func layoutSubviews() {
+        let cellWidth = viewModel!.width
+        self.layer.cornerRadius = cellWidth/2
     }
 }

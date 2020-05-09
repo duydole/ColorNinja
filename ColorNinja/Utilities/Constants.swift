@@ -28,10 +28,11 @@ struct Constants {
         static let appNameFontSize : CGFloat = 50
         static let buttonFontSize : CGFloat = 40
         static let buttonWidth : CGFloat = 200
+        static let backgroundColor = NiceColor.backgroundColor1
     }
     
     struct GameScreen {
-        static let backgroundColor = LytoColor.gameBGColor
+        static let backgroundColor = NiceColor.backgroundColor1
         static let topInset : CGFloat = Size.statusBarHeight + 20
         static let leftInset : CGFloat = 20
         static let rightInset : CGFloat = 20
@@ -63,8 +64,13 @@ struct Constants {
         struct BoardCollectionView {
             static let cellId : String = "colorCollectionViewCellIdentifier"
             static var boardWidth = Constants.Screen.width - 2*Constants.GameScreen.leftInset - 50
+            static let spacingBetweenCells : CGFloat = 5
         }
     }
+}
+
+struct ViewControllerStore {
+    weak static var gameController : PlayingGameViewController?
 }
 
 /**
@@ -80,4 +86,8 @@ struct LytoColor {
     static let gameBGColor = ColorRGB(42, 34, 53)
     static let settingButtonColor = ColorRGB(112, 102, 135)
     static let labelColorInGame = ColorRGB(170, 68, 119)
+}
+
+struct NiceColor {
+    static let backgroundColor1 = ColorRGB(29, 53, 87)
 }
