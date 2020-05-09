@@ -18,7 +18,7 @@ struct Constants {
     }
     
     struct HomeScreen {
-        static let paddingTopOfIcon : CGFloat = 100
+        static let paddingTopOfIcon : CGFloat = Size.statusBarHeight + 20
         static let ninjaImageName = "ninjaicon"
         static let appName = "Color Ninja"
         static let appNameColor = UIColor.red.withAlphaComponent(0.5)

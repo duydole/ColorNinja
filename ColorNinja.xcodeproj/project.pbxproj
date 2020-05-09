@@ -12,6 +12,7 @@
 		F22F85662465A71E00493BB6 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F85652465A71E00493BB6 /* UIView+Extension.swift */; };
 		F22F85682465AF2100493BB6 /* ZButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F85672465AF2100493BB6 /* ZButton.swift */; };
 		F22F856A2465B55400493BB6 /* PlayingGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F85692465B55400493BB6 /* PlayingGameViewController.swift */; };
+		F22F8584246679DA00493BB6 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F8583246679DA00493BB6 /* Size.swift */; };
 		F2C0607A246566B5001FAD58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C06079246566B5001FAD58 /* AppDelegate.swift */; };
 		F2C0607C246566B5001FAD58 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C0607B246566B5001FAD58 /* SceneDelegate.swift */; };
 		F2C0607E246566B5001FAD58 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C0607D246566B5001FAD58 /* ViewController.swift */; };
@@ -28,6 +29,7 @@
 		F22F85652465A71E00493BB6 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		F22F85672465AF2100493BB6 /* ZButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZButton.swift; sourceTree = "<group>"; };
 		F22F85692465B55400493BB6 /* PlayingGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingGameViewController.swift; sourceTree = "<group>"; };
+		F22F8583246679DA00493BB6 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
 		F2C06076246566B5001FAD58 /* ColorNinja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorNinja.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2C06079246566B5001FAD58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2C0607B246566B5001FAD58 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 			children = (
 				F22F85632465A34900493BB6 /* Constants.swift */,
 				F22F85652465A71E00493BB6 /* UIView+Extension.swift */,
+				F22F8583246679DA00493BB6 /* Size.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F22F8584246679DA00493BB6 /* Size.swift in Sources */,
 				F22F856A2465B55400493BB6 /* PlayingGameViewController.swift in Sources */,
 				F22F85682465AF2100493BB6 /* ZButton.swift in Sources */,
 				F22F85642465A34900493BB6 /* Constants.swift in Sources */,
