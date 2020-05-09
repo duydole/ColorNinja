@@ -18,6 +18,8 @@ class PlayingGameViewController : UIViewController {
     let appImage : UIImageView = UIImageView()
     let remainTimeLabel : UILabel = UILabel()
     let labelsContainer : UIView = UIView()
+    let readyLabel : UILabel = UILabel()
+    let readyListString : [String] = ["READY","3","2","1","Go!"]
     
     var currentLevel : Int = 1
     var remainingTime : String = "00:00"
@@ -26,6 +28,35 @@ class PlayingGameViewController : UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = Constants.GameScreen.backgroundColor
         self.setupViews()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        // Animation ReadyView
+        self.animationReadyView(index: 0) { (done) in
+            
+        }
+    }
+    
+    // MARK: Handle Animations
+    
+    private func animationReadyView(index: Int, completion: ((Bool) -> ())? ) {
+        
+        if index > self.readyListString.count - 1 {
+            completion!(true)
+            return
+        }
+        
+        self.readyLabel.text = readyListString[index]
+        UIView.animate(withDuration: 0.35, delay: 0.0, options: .curveEaseInOut, animations: {
+            self.readyLabel.alpha = 1.0
+            self.readyLabel.transform = CGAffineTransform(scaleX: 0.4, y: 0.4)
+        }) { (success) in
+            Thread.sleep(forTimeInterval: 0.65)
+            self.readyLabel.transform = CGAffineTransform(scaleX: 1/0.4, y: 1/0.4)
+            self.readyLabel.alpha = 0.0
+            self.animationReadyView(index: index + 1, completion: completion)
+        }
     }
     
     // MARK: Setup views
@@ -38,6 +69,9 @@ class PlayingGameViewController : UIViewController {
         self.setupAppImageView()
         self.setupTimerView()
         self.setupCollectionViews()
+        
+        // ReadyView
+        self.setupReadyView()
     }
     
     private func setupSettingButton() {
@@ -134,6 +168,17 @@ class PlayingGameViewController : UIViewController {
     
     private func setupCollectionViews() {
         
+    }
+    
+    private func setupReadyView() {
+        self.view.addSubview(readyLabel)
+        readyLabel.textAlignment = .center
+        readyLabel.textColor = Constants.GameScreen.ReadyView.textColor
+        readyLabel.font = UIFont.systemFont(ofSize: Constants.GameScreen.ReadyView.fontSize, weight: .heavy)
+        readyLabel.alpha = 0.0
+        readyLabel.snp.makeConstraints { (make) in
+            make.center.equalTo(self.view)
+        }
     }
     
     // MARK: Event handler
