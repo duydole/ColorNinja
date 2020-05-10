@@ -20,9 +20,9 @@ class PlayingGameViewController : UIViewController {
     var remainTimeLabel : UILabel!
     var labelsContainer : UIView!
     var readyLabel : UILabel!
-    var readyListString : [String] = ["READY","3","2","1","Go!"]
+    var readyListString : [String] = ["3","2","1","Go!"]
     
-    var remainingTime : TimeInterval = 2.0
+    var remainingTime : TimeInterval = 20.0
     var boardContainer : UIView!
     var boardCollectionView : BoardCollectionView!
     let boardDataSource: BoardDataSource = BoardDataSource()
@@ -49,7 +49,9 @@ class PlayingGameViewController : UIViewController {
         self.animationReadyView(index: 0) { (done) in
             self.currentLevel.cellWidth = self.cellWidthOfLevel(level: self.currentLevel)
             self.showLevel(level: self.currentLevel)
-            self.startTimer()
+            if self.presentedViewController == nil {
+                self.startTimer()
+            }
         }
     }
     
@@ -309,17 +311,30 @@ class PlayingGameViewController : UIViewController {
         self.shrinkCell = false
         self.boardCollectionView.reloadItems(at: self.boardCollectionView.indexPathsForVisibleItems)
     }
+    
+    private func pauseGame() {
+        self.pauseTimer()
+    }
+    
+    private func resumeGame() {
+        if remainingTime > 0 {
+            self.startTimer()
+        }
+    }
 
     // MARK: - Event handler
     
     @objc private func didTapSettingButton() {
         // PauseTimer
-        self.pauseTimer()
+        self.pauseGame()
         
         // Present Popup
         let gameSettingPopup = GameSettingPopup()
         gameSettingPopup.modalPresentationStyle = .overCurrentContext
         self.present(gameSettingPopup, animated: false, completion: nil)
+        gameSettingPopup.didDismissPopUp = {
+            self.resumeGame()
+        }
     }
     
     @objc private func didTapExitButton() {

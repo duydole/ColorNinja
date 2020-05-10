@@ -22,12 +22,18 @@ class PopupViewController: UIViewController {
         return Constants.PopupViewController.defaultCornerRadius
     }
     
+    var didDismissPopUp: (() -> Void)?
+    
     func dismissPopUp() {
         UIView.animate(withDuration: 0.3, animations: {
             self.contentView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
         }) { (success) in
             self.darkLayer.backgroundColor = .clear
-            self.dismiss(animated: false, completion: nil)
+            self.dismiss(animated: false) {
+                if let didDismissPopUp = self.didDismissPopUp {
+                    didDismissPopUp()
+                }
+            }
         }
     }
 
