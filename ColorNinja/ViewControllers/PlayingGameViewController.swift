@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import CoreGraphics
+import AudioToolbox
 
 class PlayingGameViewController : UIViewController {
     
@@ -248,6 +249,8 @@ class PlayingGameViewController : UIViewController {
             
             // stop timer
             if self.remainingTime < 0.001 {
+                self.remainingTime = 0.00
+                self.remainTimeLabel.text = self.currentRemainTimeString()
                 self.boardCollectionView.isUserInteractionEnabled = false
                 self.stopTimer()
             }
@@ -269,7 +272,7 @@ class PlayingGameViewController : UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    // MARK: Handle Level Flow
+    // MARK: - Handle Level Flow
     
     private func showLevel(level: LevelModel) {
         
@@ -286,6 +289,12 @@ class PlayingGameViewController : UIViewController {
         self.boardCollectionView.reloadItems(at: self.boardCollectionView.indexPathsForVisibleItems)
     }
     
+    // MARK: - Handle Audio
+    
+    private func vibrateDevice() {
+        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+    }
+    
     // MARK: - Getter
     
     private func cellWidthOfLevel(level: LevelModel) -> CGFloat {
@@ -297,7 +306,7 @@ class PlayingGameViewController : UIViewController {
     }
     
     private func currentRemainTimeString() -> String {
-        return String(format: "%.2f", self.remainingTime > 0 ? self.remainingTime : -self.remainingTime)
+        return String(format: "%.2f", self.remainingTime)
     }
 }
 
@@ -320,6 +329,7 @@ extension PlayingGameViewController : UICollectionViewDelegate, UICollectionView
         } else {
             remainingTime -= 0.5
             // Select Wrong Color
+            self.vibrateDevice()
         }
     }
     
