@@ -33,6 +33,7 @@ struct Constants {
     
     struct GameScreen {
         static let backgroundColor = NiceColor.backgroundColor1
+        static let forcegroundColor = NiceColor.backgroundColor2
         static let topInset : CGFloat = Size.statusBarHeight + 20
         static let leftInset : CGFloat = 20
         static let rightInset : CGFloat = 20
@@ -98,5 +99,5 @@ struct LytoColor {
 
 struct NiceColor {
     static let backgroundColor1 = ColorRGB(17, 18, 45)
-    static let backgroundColor2 = ColorRGB(29, 53, 87)
+    static let backgroundColor2 = ColorRGB(129, 153, 187)
 }

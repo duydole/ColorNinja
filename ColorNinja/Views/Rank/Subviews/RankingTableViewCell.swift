@@ -12,7 +12,7 @@ import SnapKit
 class RankingTableViewCell: UITableViewCell {
     
      // MARK: - Constants
-    static let padding: Int = 10;
+    static let padding: Int = 15;
     
     // MARK: - Property
     private var imgAvatar: UIImageView!
@@ -36,10 +36,20 @@ class RankingTableViewCell: UITableViewCell {
     // MARK: - Setup view
     
     private func setupView() {
+        
+        self.contentView.backgroundColor = Constants.GameScreen.forcegroundColor
         self.imgAvatar = UIImageView()
         self.rankingLabel = UILabel()
+        self.rankingLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        self.rankingLabel.textColor = .white
+        self.rankingLabel.textAlignment = .center
         self.nameLabel = UILabel()
+        self.nameLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        self.nameLabel.textColor = .white
         self.recordLabel = UILabel()
+        self.recordLabel.textAlignment = .center
+        self.recordLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        self.recordLabel.textColor = .white
         
         self.contentView.addSubview(self.imgAvatar)
         self.contentView.addSubview(self.rankingLabel)
