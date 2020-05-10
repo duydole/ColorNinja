@@ -32,9 +32,10 @@ class HomeViewController: UIViewController {
     }
     
     private func setupBackgroundImage() {
-        let bgImageView : UIImageView = UIImageView(frame: self.view.bounds)
-        bgImageView.image = UIImage(named: "bg")
-        self.view.addSubview(bgImageView)
+        //let bgImageView : UIImageView = UIImageView(frame: self.view.bounds)
+        //bgImageView.image = UIImage(named: "bg")
+        //self.view.addSubview(bgImageView)
+        self.view.backgroundColor = Constants.HomeScreen.backgroundColor
     }
     
     private func addAppIconView() {

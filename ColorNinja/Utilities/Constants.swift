@@ -21,7 +21,7 @@ struct Constants {
         static let paddingTopOfIcon : CGFloat = Size.statusBarHeight + 20
         static let ninjaImageName = "ninjaicon"
         static let appName = "Color Ninja"
-        static let appNameColor = UIColor.red.withAlphaComponent(0.5)
+        static let appNameColor : UIColor = .white
         static let iconWidth : CGFloat = 200
         static let standardPadding : CGFloat = 10
         static let appNameLabelHeight : CGFloat = 50
@@ -89,5 +89,6 @@ struct LytoColor {
 }
 
 struct NiceColor {
-    static let backgroundColor1 = ColorRGB(29, 53, 87)
+    static let backgroundColor1 = ColorRGB(17, 18, 45)
+    static let backgroundColor2 = ColorRGB(29, 53, 87)
 }
