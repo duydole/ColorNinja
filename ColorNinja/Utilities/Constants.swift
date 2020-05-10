@@ -71,6 +71,14 @@ struct Constants {
     struct GameSetting {
         static let maxLevelCount = 100
     }
+    
+    struct GameOverPopup {
+        static let contentSize = CGSize(width: 4*Constants.Screen.width/5, height: 2*Constants.Screen.height/3)
+    }
+    
+    struct GameSettingPopup {
+        static let contentSize = CGSize(width: 3*Constants.Screen.width/4, height: Constants.Screen.height/2)
+    }
 }
 
 /**

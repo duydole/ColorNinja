@@ -255,30 +255,45 @@ class PlayingGameViewController : UIViewController {
             
             // stop timer
             if self.remainingTime < 0.001 {
-                self.remainingTime = 0.00
-                self.remainTimeLabel.text = self.currentRemainTimeString()
-                self.boardCollectionView.isUserInteractionEnabled = false
-                self.stopTimer()
+                self.processGameOver()
             }
         })
     }
     
     private func stopTimer() {
+        if timer == nil {
+            return
+        }
+        
         self.timer.invalidate()
         self.timer = nil
     }
     
-    // MARK: - Event handler
+    private func pauseTimer() {
+        self.stopTimer()
+    }
     
-    @objc private func didTapSettingButton() {
+    private func resumeTimer() {
+        self.startTimer()
+    }
+    
+    // MARK: - Game Flow
+    
+    private func processGameOver() {
         
+        // Reset CountDownLabel
+        self.remainingTime = 0.00
+        self.remainTimeLabel.text = self.currentRemainTimeString()
+        self.boardCollectionView.isUserInteractionEnabled = false
+        
+        // StopTimer
+        self.stopTimer()
+        
+        // Show Popup GameOver
+        let gameOverPopup = GameOverPopup()
+        gameOverPopup.modalPresentationStyle = .overCurrentContext
+        self.present(gameOverPopup, animated: false, completion: nil)
     }
-    
-    @objc private func didTapExitButton() {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    // MARK: - Handle Level Flow
     
     private func showLevel(level: LevelModel) {
         
@@ -293,6 +308,22 @@ class PlayingGameViewController : UIViewController {
         self.boardCollectionView.alpha = 1.0
         self.shrinkCell = false
         self.boardCollectionView.reloadItems(at: self.boardCollectionView.indexPathsForVisibleItems)
+    }
+
+    // MARK: - Event handler
+    
+    @objc private func didTapSettingButton() {
+        // PauseTimer
+        self.pauseTimer()
+        
+        // Present Popup
+        let gameSettingPopup = GameSettingPopup()
+        gameSettingPopup.modalPresentationStyle = .overCurrentContext
+        self.present(gameSettingPopup, animated: false, completion: nil)
+    }
+    
+    @objc private func didTapExitButton() {
+        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Handle Audio

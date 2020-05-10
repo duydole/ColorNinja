@@ -19,6 +19,8 @@
 		F22F858A24669BC200493BB6 /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = F22F858924669BC200493BB6 /* setting.png */; };
 		F234761124671FE1004C8363 /* ColorCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F234761024671FE1004C8363 /* ColorCellModel.swift */; };
 		F23476142467B4D0004C8363 /* ColorStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23476132467B4D0004C8363 /* ColorStore.swift */; };
+		F2347631246809C5004C8363 /* GameOverPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2347630246809C5004C8363 /* GameOverPopup.swift */; };
+		F234763324680D75004C8363 /* GameSettingPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F234763224680D75004C8363 /* GameSettingPopup.swift */; };
 		F2A6E68A2466FF5600970D1B /* LevelStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6E6852466FF5600970D1B /* LevelStore.swift */; };
 		F2A6E68B2466FF5600970D1B /* BoardCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6E6862466FF5600970D1B /* BoardCollectionViewFlowLayout.swift */; };
 		F2A6E68C2466FF5600970D1B /* BoardCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6E6872466FF5600970D1B /* BoardCollectionView.swift */; };
@@ -48,6 +50,8 @@
 		F22F858924669BC200493BB6 /* setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting.png; sourceTree = "<group>"; };
 		F234761024671FE1004C8363 /* ColorCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCellModel.swift; sourceTree = "<group>"; };
 		F23476132467B4D0004C8363 /* ColorStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorStore.swift; sourceTree = "<group>"; };
+		F2347630246809C5004C8363 /* GameOverPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverPopup.swift; sourceTree = "<group>"; };
+		F234763224680D75004C8363 /* GameSettingPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettingPopup.swift; sourceTree = "<group>"; };
 		F2A6E6852466FF5600970D1B /* LevelStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelStore.swift; sourceTree = "<group>"; };
 		F2A6E6862466FF5600970D1B /* BoardCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		F2A6E6872466FF5600970D1B /* BoardCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardCollectionView.swift; sourceTree = "<group>"; };
@@ -117,6 +121,8 @@
 			children = (
 				F2C0607D246566B5001FAD58 /* HomeViewController.swift */,
 				F22F85692465B55400493BB6 /* PlayingGameViewController.swift */,
+				F2347630246809C5004C8363 /* GameOverPopup.swift */,
+				F234763224680D75004C8363 /* GameSettingPopup.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -322,11 +328,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2347631246809C5004C8363 /* GameOverPopup.swift in Sources */,
 				F22F8584246679DA00493BB6 /* Size.swift in Sources */,
 				8C6EC7492467E3C100612802 /* PopupViewController.swift in Sources */,
 				F22F856A2465B55400493BB6 /* PlayingGameViewController.swift in Sources */,
 				F2A6E68A2466FF5600970D1B /* LevelStore.swift in Sources */,
 				F22F85882466940900493BB6 /* StaticFunctions.swift in Sources */,
+				F234763324680D75004C8363 /* GameSettingPopup.swift in Sources */,
 				F22F85682465AF2100493BB6 /* ZButton.swift in Sources */,
 				F22F85642465A34900493BB6 /* Constants.swift in Sources */,
 				F2C0607E246566B5001FAD58 /* HomeViewController.swift in Sources */,

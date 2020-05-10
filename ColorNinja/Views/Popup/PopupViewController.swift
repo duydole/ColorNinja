@@ -14,7 +14,9 @@ class PopupViewController: UIViewController {
     
     var contentView: UIView!
     
-    var popupSize: CGSize = CGSize(width: 3*Constants.Screen.width/4, height: Constants.Screen.height/2)
+    var contentSize: CGSize {
+        return CGSize(width: 3*Constants.Screen.width/4, height: Constants.Screen.height/2)
+    }
 
     // MARK: - Private Property
     
@@ -64,8 +66,8 @@ class PopupViewController: UIViewController {
         contentView.backgroundColor = .white
         contentView.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
-            make.width.equalTo(popupSize.width)
-            make.height.equalTo(popupSize.height)
+            make.width.equalTo(contentSize.width)
+            make.height.equalTo(contentSize.height)
         }
         contentView.transform = CGAffineTransform(scaleX: 0.0, y: 0.0)
     }
