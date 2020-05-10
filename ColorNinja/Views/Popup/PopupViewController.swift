@@ -13,12 +13,12 @@ class PopupViewController: UIViewController {
     private var darkLayer: UIControl!
     
     // MARK: Life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.setupView()
         self.view.alpha = 0.0
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,7 +36,6 @@ class PopupViewController: UIViewController {
         }
     }
     
-    
     // MARK: Setup views
     
     private func setupView() {
@@ -44,8 +43,8 @@ class PopupViewController: UIViewController {
         self.addDarkLayer()
         
         let contentView = UIView()
-        // Custom your view
         
+        // Custom your view
         self.view.addSubview(contentView)
         contentView.layer.cornerRadius = 16
         contentView.backgroundColor = .white
@@ -57,7 +56,7 @@ class PopupViewController: UIViewController {
         }
     }
     
-    private func addDarkLayer(){
+    private func addDarkLayer() {
         self.darkLayer = UIControl(frame: UIScreen.main.bounds)
         self.darkLayer.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4)
         self.view.addSubview(darkLayer)
@@ -77,5 +76,4 @@ class PopupViewController: UIViewController {
             //
         }
     }
-
 }
