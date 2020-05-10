@@ -9,7 +9,9 @@
 import UIKit
 
 class PopupViewController: UIViewController {
-
+    
+    var contentView : UIView!
+    
     private var darkLayer: UIControl!
     
     // MARK: Life cycle
@@ -39,16 +41,15 @@ class PopupViewController: UIViewController {
     // MARK: Setup views
     
     private func setupView() {
-        
         self.addDarkLayer()
-        
-        let contentView = UIView()
-        
-        // Custom your view
+        self.addContentView()
+    }
+    
+    private func addContentView() {
+        contentView = UIView()
         self.view.addSubview(contentView)
         contentView.layer.cornerRadius = 16
         contentView.backgroundColor = .white
-        
         contentView.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
             make.width.equalTo(300)
@@ -60,7 +61,7 @@ class PopupViewController: UIViewController {
         self.darkLayer = UIControl(frame: UIScreen.main.bounds)
         self.darkLayer.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4)
         self.view.addSubview(darkLayer)
-        self.darkLayer.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
+        self.darkLayer.addTarget(self, action: #selector(didTapDarkLayer), for: .touchUpInside)
     }
     
     @objc private func showDarkLayer() {
@@ -71,9 +72,7 @@ class PopupViewController: UIViewController {
         self.darkLayer.isHidden = true
     }
     
-    @objc private func dismissView() {
-        self .dismiss(animated: true) {
-            //
-        }
+    @objc private func didTapDarkLayer() {
+        self.dismiss(animated: true, completion: nil)
     }
 }
