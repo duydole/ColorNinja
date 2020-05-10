@@ -116,15 +116,22 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		F2347612246726BA004C8363 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F234761024671FE1004C8363 /* ColorCellModel.swift */,
+				F2A6E68F2467027600970D1B /* LevelStore */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		F2A6E6842466FF5600970D1B /* Board */ = {
 			isa = PBXGroup;
 			children = (
-				F2A6E68F2467027600970D1B /* LevelStore */,
 				F2A6E6862466FF5600970D1B /* BoardCollectionViewFlowLayout.swift */,
 				F2A6E6872466FF5600970D1B /* BoardCollectionView.swift */,
 				F2A6E6882466FF5600970D1B /* BoardDataSource.swift */,
 				F2A6E6892466FF5600970D1B /* ColorCollectionViewCell.swift */,
-				F234761024671FE1004C8363 /* ColorCellModel.swift */,
 			);
 			path = Board;
 			sourceTree = "<group>";
@@ -159,6 +166,7 @@
 		F2C06078246566B5001FAD58 /* ColorNinja */ = {
 			isa = PBXGroup;
 			children = (
+				F2347612246726BA004C8363 /* Model */,
 				F22F85622465A33300493BB6 /* Utilities */,
 				F22F85612465A32500493BB6 /* ViewControllers */,
 				F22F85602465A31B00493BB6 /* Views */,

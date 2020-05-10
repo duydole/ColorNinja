@@ -12,18 +12,18 @@ import CoreGraphics
 
 class PlayingGameViewController : UIViewController {
     
-    let settingButton : UIButton = UIButton()
-    let exitButton : UIButton = UIButton()
-    let levelCountLabel : UILabel = UILabel()
-    let appImage : UIImageView = UIImageView()
-    let remainTimeLabel : UILabel = UILabel()
-    let labelsContainer : UIView = UIView()
-    let readyLabel : UILabel = UILabel()
-    let readyListString : [String] = ["READY","3","2","1","Go!"]
+    var settingButton : UIButton!
+    var exitButton : UIButton!
+    var levelCountLabel : UILabel!
+    var appImage : UIImageView!
+    var remainTimeLabel : UILabel!
+    var labelsContainer : UIView!
+    var readyLabel : UILabel!
+    var readyListString : [String] = ["READY","3","2","1","Go!"]
     
     var remainingTime : String = "00:00"
-    weak var boardContainer : UIView!
-    weak var boardCollectionView : BoardCollectionView!
+    var boardContainer : UIView!
+    var boardCollectionView : BoardCollectionView!
     let boardDataSource: BoardDataSource = BoardDataSource()
     var shrinkCell : Bool = true
     
@@ -84,6 +84,7 @@ class PlayingGameViewController : UIViewController {
     }
     
     private func setupSettingButton() {
+        settingButton = UIButton()
         self.view.addSubview(settingButton)
         settingButton.setImage(UIImage(named: Constants.GameScreen.settingImageName)?.withRenderingMode(.alwaysTemplate), for: .normal)
         settingButton.addTarget(self, action: #selector(didTapSettingButton), for: .touchUpInside)
@@ -96,6 +97,7 @@ class PlayingGameViewController : UIViewController {
     }
     
     private func setupExitButton() {
+        exitButton = UIButton()
         self.view.addSubview(exitButton)
         exitButton.setImage(UIImage(named: Constants.GameScreen.exitImageName)?.withRenderingMode(.alwaysTemplate), for: .normal)
         exitButton.addTarget(self, action: #selector(didTapExitButton), for: .touchUpInside)
@@ -108,6 +110,7 @@ class PlayingGameViewController : UIViewController {
     }
     
     private func setupLabelsContainer() {
+        labelsContainer = UIView()
         self.view.addSubview(labelsContainer)
         labelsContainer.snp.makeConstraints { (make) in
             make.top.equalTo(settingButton.snp.bottom).offset(Constants.GameScreen.LabelsContainer.margins.top)
@@ -132,6 +135,7 @@ class PlayingGameViewController : UIViewController {
         }
         
         // Level Count
+        levelCountLabel = UILabel()
         labelsContainer.addSubview(levelCountLabel)
         levelCountLabel.text = "1"
         levelCountLabel.textAlignment = .center
@@ -163,6 +167,7 @@ class PlayingGameViewController : UIViewController {
         }
         
         // Remain Time
+        remainTimeLabel = UILabel()
         labelsContainer.addSubview(remainTimeLabel)
         remainTimeLabel.text = remainingTime
         remainTimeLabel.textAlignment = .center
@@ -180,6 +185,7 @@ class PlayingGameViewController : UIViewController {
     }
     
     private func setupReadyView() {
+        readyLabel = UILabel()
         self.view.addSubview(readyLabel)
         readyLabel.textAlignment = .center
         readyLabel.textColor = Constants.GameScreen.ReadyView.textColor
@@ -193,19 +199,18 @@ class PlayingGameViewController : UIViewController {
     private func setupBoardCollectionView() {
         
         // Container
-        let boardContainer = UIView()
+        boardContainer = UIView()
         self.view.addSubview(boardContainer)
         boardContainer.snp.makeConstraints { (make) in
             make.leading.trailing.bottom.equalToSuperview()
             make.top.equalTo(self.labelsContainer.snp.bottom)
         }
-        self.boardContainer = boardContainer
         
         // Board
         let flowLayout = BoardCollectionViewFlowLayout()
         flowLayout.minimumInteritemSpacing = 0.0
         flowLayout.minimumLineSpacing = Constants.GameScreen.BoardCollectionView.spacingBetweenCells
-        let boardCollectionView = BoardCollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        boardCollectionView = BoardCollectionView(frame: .zero, collectionViewLayout: flowLayout)
         boardContainer.addSubview(boardCollectionView)
         boardCollectionView.alpha = 0.0
         boardCollectionView.backgroundColor = .clear
@@ -217,7 +222,6 @@ class PlayingGameViewController : UIViewController {
             make.center.equalToSuperview()
             make.width.height.equalTo(boardWidth)
         }
-        self.boardCollectionView = boardCollectionView
     }
     
     // MARK: Event handler
