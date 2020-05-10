@@ -80,6 +80,10 @@ class HomeViewController: UIViewController {
             make.centerX.equalTo(self.view)
         }
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
         
     // MARK: Action handler
     

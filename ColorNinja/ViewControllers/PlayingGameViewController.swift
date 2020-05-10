@@ -242,6 +242,10 @@ class PlayingGameViewController : UIViewController {
         }
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
+    
     // MARK: - Handle Timer
     
     private func startTimer() {
