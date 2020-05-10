@@ -17,6 +17,19 @@ class PopupViewController: UIViewController {
     var contentSize: CGSize {
         return CGSize(width: 3*Constants.Screen.width/4, height: Constants.Screen.height/2)
     }
+    
+    var cornerRadius: CGFloat {
+        return Constants.PopupViewController.defaultCornerRadius
+    }
+    
+    func dismissPopUp() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.contentView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+        }) { (success) in
+            self.darkLayer.backgroundColor = .clear
+            self.dismiss(animated: false, completion: nil)
+        }
+    }
 
     // MARK: - Private Property
     
@@ -62,7 +75,7 @@ class PopupViewController: UIViewController {
     private func addContentView() {
         contentView = UIView()
         self.view.addSubview(contentView)
-        contentView.layer.cornerRadius = 16
+        contentView.layer.cornerRadius = cornerRadius
         contentView.backgroundColor = .white
         contentView.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
@@ -88,6 +101,6 @@ class PopupViewController: UIViewController {
     }
     
     @objc private func didTapDarkLayer() {
-        self.dismiss(animated: true, completion: nil)
+        self.dismissPopUp()
     }
 }

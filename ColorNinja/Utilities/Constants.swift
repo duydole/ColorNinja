@@ -18,7 +18,7 @@ struct Constants {
     }
     
     struct HomeScreen {
-        static let paddingTopOfIcon : CGFloat = Size.statusBarHeight + 20
+        static let paddingTopOfIcon : CGFloat = Size.statusBarHeight + 100
         static let ninjaImageName = "ninjaicon"
         static let appName = "Color Ninja"
         static let appNameColor : UIColor = .white
@@ -78,7 +78,15 @@ struct Constants {
     }
     
     struct GameSettingPopup {
-        static let contentSize = CGSize(width: 3*Constants.Screen.width/4, height: Constants.Screen.height/2)
+        static let width = 3*Constants.Screen.width/4
+        static let height = width
+        static let contentSize = CGSize(width: Constants.GameSettingPopup.width, height: Constants.GameSettingPopup.height)
+        static let cornerRadius: CGFloat = 35
+        static let navigationBarHeight: CGFloat = 70
+    }
+    
+    struct PopupViewController {
+        static let defaultCornerRadius: CGFloat = 16
     }
 }
 
@@ -89,6 +97,14 @@ struct BluePalletes {
     static let level0 = ColorRGB(225,245,254)
     static let level1 = ColorRGB(179,229,252)
     static let level2 = ColorRGB(129,212,250)
+    static let level3 = UIColor(rgb: 0x4FC3F7)
+    static let level4 = UIColor(rgb: 0x29B6F6)
+    static let level5 = UIColor(rgb: 0x03A9F4)
+    static let level6 = UIColor(rgb: 0x039BE5)
+    static let level7 = UIColor(rgb: 0x0288D1)
+    static let level8 = UIColor(rgb: 0x0277BD)
+    static let level9 = UIColor(rgb: 0x01579B)
+
 }
 
 struct LytoColor {

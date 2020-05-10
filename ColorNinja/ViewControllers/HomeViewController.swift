@@ -77,8 +77,8 @@ class HomeViewController: UIViewController {
         rankingButton.setTitle("RANK", for: .normal)
         self.view.addSubview(rankingButton)
         rankingButton.snp.makeConstraints { (make) in
-            make.bottom.equalTo(startButton).offset(70)
-            make.centerX.equalTo(self.view)
+            make.top.equalTo(startButton.snp.bottom).offset(30)
+            make.centerX.equalToSuperview()
         }
         self.rankingButton.addTarget(self, action: #selector(didTapRankingButton), for: .touchUpInside)
     }
