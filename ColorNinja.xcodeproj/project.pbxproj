@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		8C6EC7442467DE8E00612802 /* ZPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EC7432467DE8E00612802 /* ZPopup.swift */; };
 		8C6EC7492467E3C100612802 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EC7482467E3C100612802 /* PopupViewController.swift */; };
+		8C2C72782467A58C00883388 /* RankingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C72772467A58C00883388 /* RankingViewController.swift */; };
+		8C2C727C2467A79700883388 /* RankingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C727B2467A79700883388 /* RankingTableView.swift */; };
+		8C2C72802467A7CC00883388 /* RankingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C727F2467A7CC00883388 /* RankingTableViewCell.swift */; };
+		8C2C72822467ACD300883388 /* RankingCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C72812467ACD300883388 /* RankingCellModel.swift */; };
 		D96E8CD13F30FDE723362F0D /* Pods_ColorNinja.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57F237B10E2F49C95DDF1EC4 /* Pods_ColorNinja.framework */; };
 		F22F85642465A34900493BB6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F85632465A34900493BB6 /* Constants.swift */; };
 		F22F85662465A71E00493BB6 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F85652465A71E00493BB6 /* UIView+Extension.swift */; };
@@ -41,6 +45,10 @@
 		57F237B10E2F49C95DDF1EC4 /* Pods_ColorNinja.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ColorNinja.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C6EC7432467DE8E00612802 /* ZPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZPopup.swift; sourceTree = "<group>"; };
 		8C6EC7482467E3C100612802 /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
+		8C2C72772467A58C00883388 /* RankingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingViewController.swift; sourceTree = "<group>"; };
+		8C2C727B2467A79700883388 /* RankingTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingTableView.swift; sourceTree = "<group>"; };
+		8C2C727F2467A7CC00883388 /* RankingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingTableViewCell.swift; sourceTree = "<group>"; };
+		8C2C72812467ACD300883388 /* RankingCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingCellModel.swift; sourceTree = "<group>"; };
 		F22F85632465A34900493BB6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F22F85652465A71E00493BB6 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		F22F85672465AF2100493BB6 /* ZButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZButton.swift; sourceTree = "<group>"; };
@@ -97,6 +105,24 @@
 			path = Popup;
 			sourceTree = "<group>";
 		};
+		8C2C72792467A6ED00883388 /* Rank */ = {
+			isa = PBXGroup;
+			children = (
+				8C2C727D2467A7A500883388 /* Subviews */,
+				8C2C727B2467A79700883388 /* RankingTableView.swift */,
+				8C2C72812467ACD300883388 /* RankingCellModel.swift */,
+			);
+			path = Rank;
+			sourceTree = "<group>";
+		};
+		8C2C727D2467A7A500883388 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				8C2C727F2467A7CC00883388 /* RankingTableViewCell.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
 		9ABBD60AE1D01816F1BBF25E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				8C6EC7472467E38900612802 /* Popup */,
+				8C2C72792467A6ED00883388 /* Rank */,
 				F2A6E6842466FF5600970D1B /* Board */,
 				F22F85672465AF2100493BB6 /* ZButton.swift */,
 			);
@@ -123,6 +150,7 @@
 				F22F85692465B55400493BB6 /* PlayingGameViewController.swift */,
 				F2347630246809C5004C8363 /* GameOverPopup.swift */,
 				F234763224680D75004C8363 /* GameSettingPopup.swift */,
+				8C2C72772467A58C00883388 /* RankingViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -329,19 +357,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2347631246809C5004C8363 /* GameOverPopup.swift in Sources */,
+				8C2C72822467ACD300883388 /* RankingCellModel.swift in Sources */,
 				F22F8584246679DA00493BB6 /* Size.swift in Sources */,
 				8C6EC7492467E3C100612802 /* PopupViewController.swift in Sources */,
 				F22F856A2465B55400493BB6 /* PlayingGameViewController.swift in Sources */,
+				8C2C72802467A7CC00883388 /* RankingTableViewCell.swift in Sources */,
 				F2A6E68A2466FF5600970D1B /* LevelStore.swift in Sources */,
 				F22F85882466940900493BB6 /* StaticFunctions.swift in Sources */,
 				F234763324680D75004C8363 /* GameSettingPopup.swift in Sources */,
 				F22F85682465AF2100493BB6 /* ZButton.swift in Sources */,
 				F22F85642465A34900493BB6 /* Constants.swift in Sources */,
+				8C2C727C2467A79700883388 /* RankingTableView.swift in Sources */,
 				F2C0607E246566B5001FAD58 /* HomeViewController.swift in Sources */,
 				F23476142467B4D0004C8363 /* ColorStore.swift in Sources */,
 				F22F85662465A71E00493BB6 /* UIView+Extension.swift in Sources */,
 				F2A6E68E2466FF5600970D1B /* ColorCollectionViewCell.swift in Sources */,
 				F2C0607A246566B5001FAD58 /* AppDelegate.swift in Sources */,
+				8C2C72782467A58C00883388 /* RankingViewController.swift in Sources */,
 				F2A6E68B2466FF5600970D1B /* BoardCollectionViewFlowLayout.swift in Sources */,
 				F2A6E6912467029300970D1B /* LevelModel.swift in Sources */,
 				8C6EC7442467DE8E00612802 /* ZPopup.swift in Sources */,

@@ -80,6 +80,7 @@ class HomeViewController: UIViewController {
             make.bottom.equalTo(startButton).offset(70)
             make.centerX.equalTo(self.view)
         }
+        self.rankingButton.addTarget(self, action: #selector(didTapRankingButton), for: .touchUpInside)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -92,6 +93,14 @@ class HomeViewController: UIViewController {
         let gameVC = PlayingGameViewController()
         gameVC.modalPresentationStyle = .fullScreen
         self.present(gameVC, animated: false, completion: nil)
+    }
+    
+    @objc private func didTapRankingButton() {
+        let viewController = RankingViewController()
+        viewController.modalPresentationStyle = .fullScreen
+        self.present(viewController, animated: true) {
+            //
+        }
     }
     
     // MARK: Getter
