@@ -24,7 +24,11 @@ class BoardDataSource : NSObject, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: ColorCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.GameScreen.BoardCollectionView.cellId, for: indexPath) as! ColorCollectionViewCell
         cell.viewModel = ColorCellModel(width: levelModel.cellWidth)
-        cell.backgroundColor = UIColor.yellow
+        if indexPath.item == levelModel.correctIndex {
+            cell.backgroundColor = levelModel.correctColor
+        } else {
+            cell.backgroundColor = levelModel.mainColor
+        }
         return cell
     }
 }

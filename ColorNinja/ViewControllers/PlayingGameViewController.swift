@@ -35,6 +35,10 @@ class PlayingGameViewController : UIViewController {
         self.setupViews()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        LevelStore.shared.setColorForAllLevels()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         
         // Animation ReadyView

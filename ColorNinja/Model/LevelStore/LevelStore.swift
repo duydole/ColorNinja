@@ -20,6 +20,14 @@ class LevelStore {
     let maxLevelCount: Int = Constants.GameSetting.maxLevelCount
     
     var allLevels: [LevelModel] = []
+    
+    // MARK: - Public Methods
+    
+    func setColorForAllLevels() {
+        for level in self.allLevels {
+            level.setRandomColor()
+        }
+    }
 
     // MARK: - Private
     

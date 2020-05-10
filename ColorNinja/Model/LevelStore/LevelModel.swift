@@ -13,23 +13,36 @@ class LevelModel {
     
     // MARK: - Public Properties
     
-    let levelIndex: Int
+    let levelIndex : Int
     
-    var numberOfItems: Int {
+    var numberOfItems : Int {
         get {
             return numberOfRows * numberOfRows
         }
     }
     
-    let numberOfRows: Int
+    let numberOfRows : Int
     
-    var cellWidth: CGFloat = 0
+    var cellWidth : CGFloat = 0
+    
+    var mainColor : UIColor!
+    
+    var correctColor : UIColor!
+    
+    var correctIndex : Int
     
     // MARK: - Public Methods
     
     init(levelIndex: Int) {
         self.levelIndex = levelIndex
-        self.numberOfRows = LevelModel.numberOfRowsInLevel(index: levelIndex)
+        numberOfRows = LevelModel.numberOfRowsInLevel(index: levelIndex)
+        correctIndex = Int.random(in: 0...numberOfRows*numberOfRows-1)
+    }
+    
+    func setRandomColor() {
+        let pairOfColor : (UIColor, UIColor) = ColorStore.shared.getPairOfColorRandom(levelOfDifficult: self.levelIndex)
+        mainColor = pairOfColor.0
+        correctColor = pairOfColor.1
     }
     
     // MARK: - Static Methods
