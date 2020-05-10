@@ -71,6 +71,17 @@ class PlayingGameViewController : UIViewController {
         }
     }
     
+    private func zoomX2LabelAnimation(label: UILabel, text: String) {
+        label.text = text
+        UIView.animate(withDuration: 0.2, animations: {
+            label.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
+        }, completion: { _ in
+            UIView.animate(withDuration: 0.2) {
+                label.transform = CGAffineTransform(scaleX: CGFloat(1.0), y: CGFloat(1.0))
+            }
+        })
+    }
+    
     // MARK: Setup views
     
     private func setupViews() {
@@ -273,9 +284,6 @@ class PlayingGameViewController : UIViewController {
         self.boardCollectionView.alpha = 1.0
         self.shrinkCell = false
         self.boardCollectionView.reloadItems(at: self.boardCollectionView.indexPathsForVisibleItems)
-        
-        // Update LevelCount
-        levelCountLabel.text = "\(level.levelIndex + 1)"
     }
     
     // MARK: - Getter
@@ -298,6 +306,7 @@ class PlayingGameViewController : UIViewController {
 extension PlayingGameViewController : UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     // MARK: - Delegate
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let itemWidth = currentLevel.cellWidth
         return shrinkCell ? .zero : CGSize(width: itemWidth, height: itemWidth)
@@ -317,10 +326,14 @@ extension PlayingGameViewController : UICollectionViewDelegate, UICollectionView
     // MARK: - Private Methods
     
     private func goToNextLevel() {
+        
         // Update current LevelModel
         let nextLevel = LevelStore.shared.allLevels[currentLevel.levelIndex + 1]
         currentLevel = nextLevel
         nextLevel.cellWidth = self.cellWidthOfLevel(level: nextLevel)
+        
+        // Update LevelCount
+        self.zoomX2LabelAnimation(label: levelCountLabel, text: "\(nextLevel.levelIndex + 1)")
         
         self.showLevel(level: nextLevel)
     }
