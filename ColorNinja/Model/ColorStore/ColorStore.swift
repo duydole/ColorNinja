@@ -58,25 +58,28 @@ class ColorStore {
         // Random độ thay đổi
         var degreeOfChange : CGFloat = 0
         if level < 5 {
-            degreeOfChange = 80
-        } else if level < 10 {
             degreeOfChange = 50
-        } else if level < 15 {
+        } else if level < 10 {
             degreeOfChange = 40
-        } else if level < 20 {
-            degreeOfChange = 35
-        } else {
+        } else if level < 15 {
             degreeOfChange = 30
+        } else if level < 20 {
+            degreeOfChange = 20
+        } else {
+            degreeOfChange = 10
         }
         
         // Random đổi R, G hay B
         let colorWillChange = Int.random(in: 0...2)
         if colorWillChange == 0 {
             red = red + degreeOfChange > 255 ? 255 : red + degreeOfChange
+            green = green + degreeOfChange > 255 ? 255 : green + degreeOfChange
         } else if colorWillChange == 1 {
             green = green + degreeOfChange > 255 ? 255 : green + degreeOfChange
+            blue = blue + degreeOfChange > 255 ? 255 : blue + degreeOfChange
         } else if colorWillChange == 2 {
             blue = blue + degreeOfChange > 255 ? 255 : blue + degreeOfChange
+            red = red + degreeOfChange > 255 ? 255 : red + degreeOfChange
         }
         
         return ColorRGB(red, green, blue)
