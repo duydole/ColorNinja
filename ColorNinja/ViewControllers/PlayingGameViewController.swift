@@ -21,11 +21,12 @@ class PlayingGameViewController : UIViewController {
     var readyLabel : UILabel!
     var readyListString : [String] = ["READY","3","2","1","Go!"]
     
-    var remainingTime : String = "00:00"
+    var remainingTime : TimeInterval = 20.00
     var boardContainer : UIView!
     var boardCollectionView : BoardCollectionView!
     let boardDataSource: BoardDataSource = BoardDataSource()
     var shrinkCell : Bool = true
+    var timer : Timer!
     
     var currentLevel : LevelModel = LevelStore.shared.allLevels[0]
     
@@ -45,6 +46,7 @@ class PlayingGameViewController : UIViewController {
         self.animationReadyView(index: 0) { (done) in
             self.currentLevel.cellWidth = self.cellWidthOfLevel(level: self.currentLevel)
             self.showLevel(level: self.currentLevel)
+            self.startTimer()
         }
     }
     
@@ -173,14 +175,12 @@ class PlayingGameViewController : UIViewController {
         // Remain Time
         remainTimeLabel = UILabel()
         labelsContainer.addSubview(remainTimeLabel)
-        remainTimeLabel.text = remainingTime
-        remainTimeLabel.textAlignment = .center
+        remainTimeLabel.text = self.currentRemainTimeString()
         remainTimeLabel.textColor = .white
         remainTimeLabel.font = UIFont.systemFont(ofSize: Constants.GameScreen.LabelsContainer.fontSize, weight: .bold)
         remainTimeLabel.snp.makeConstraints { (make) in
             make.top.equalTo(timeLabel.snp.bottom)
-            make.trailing.equalTo(labelsContainer)
-            make.centerX.equalTo(timeLabel.snp.centerX)
+            make.left.equalTo(timeLabel.snp.left)
         }
     }
     
@@ -228,6 +228,26 @@ class PlayingGameViewController : UIViewController {
         }
     }
     
+    // MARK: Handle Timer
+    
+    private func startTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { (timer) in
+            self.remainingTime -= 0.01
+            self.remainTimeLabel.text = self.currentRemainTimeString()
+            
+            // stop timer
+            if self.remainingTime < 0.001 {
+                self.boardCollectionView.isUserInteractionEnabled = false
+                self.stopTimer()
+            }
+        })
+    }
+    
+    private func stopTimer() {
+        self.timer.invalidate()
+        self.timer = nil
+    }
+    
     // MARK: Event handler
     
     @objc private func didTapSettingButton() {
@@ -258,7 +278,7 @@ class PlayingGameViewController : UIViewController {
         levelCountLabel.text = "\(level.levelIndex + 1)"
     }
     
-    // MARK: Other
+    // MARK: - Getter
     
     private func cellWidthOfLevel(level: LevelModel) -> CGFloat {
         let N: CGFloat = CGFloat(level.numberOfRows)
@@ -267,12 +287,17 @@ class PlayingGameViewController : UIViewController {
         let itemWidth = (boardWidth - (N - 1) * spacing) / N
         return itemWidth
     }
+    
+    private func currentRemainTimeString() -> String {
+        return String(format: "%.2f", self.remainingTime > 0 ? self.remainingTime : -self.remainingTime)
+    }
 }
 
-// MARK: Delegate
+// MARK: - Delegate
 
 extension PlayingGameViewController : UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
+    // MARK: - Delegate
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let itemWidth = currentLevel.cellWidth
         return shrinkCell ? .zero : CGSize(width: itemWidth, height: itemWidth)
@@ -280,6 +305,18 @@ extension PlayingGameViewController : UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        if indexPath.item == currentLevel.correctIndex {
+            remainingTime += 1.0
+            self.goToNextLevel()
+        } else {
+            remainingTime -= 0.5
+            // Select Wrong Color
+        }
+    }
+    
+    // MARK: - Private Methods
+    
+    private func goToNextLevel() {
         // Update current LevelModel
         let nextLevel = LevelStore.shared.allLevels[currentLevel.levelIndex + 1]
         currentLevel = nextLevel
