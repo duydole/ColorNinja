@@ -137,6 +137,7 @@
 			children = (
 				F23476152467B4D7004C8363 /* ColorStore */,
 				F2A6E68F2467027600970D1B /* LevelStore */,
+				F234761024671FE1004C8363 /* ColorCellModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -191,7 +192,6 @@
 			isa = PBXGroup;
 			children = (
 				F2347612246726BA004C8363 /* Model */,
-				F234761024671FE1004C8363 /* ColorCellModel.swift */,
 				F22F85622465A33300493BB6 /* Utilities */,
 				F22F85612465A32500493BB6 /* ViewControllers */,
 				F22F85602465A31B00493BB6 /* Views */,
