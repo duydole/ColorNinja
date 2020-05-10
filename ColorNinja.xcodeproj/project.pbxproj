@@ -16,6 +16,7 @@
 		F22F85882466940900493BB6 /* StaticFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F85872466940900493BB6 /* StaticFunctions.swift */; };
 		F22F858A24669BC200493BB6 /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = F22F858924669BC200493BB6 /* setting.png */; };
 		F234761124671FE1004C8363 /* ColorCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F234761024671FE1004C8363 /* ColorCellModel.swift */; };
+		F23476142467B4D0004C8363 /* ColorStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23476132467B4D0004C8363 /* ColorStore.swift */; };
 		F2A6E68A2466FF5600970D1B /* LevelStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6E6852466FF5600970D1B /* LevelStore.swift */; };
 		F2A6E68B2466FF5600970D1B /* BoardCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6E6862466FF5600970D1B /* BoardCollectionViewFlowLayout.swift */; };
 		F2A6E68C2466FF5600970D1B /* BoardCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6E6872466FF5600970D1B /* BoardCollectionView.swift */; };
@@ -42,6 +43,7 @@
 		F22F85872466940900493BB6 /* StaticFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticFunctions.swift; sourceTree = "<group>"; };
 		F22F858924669BC200493BB6 /* setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting.png; sourceTree = "<group>"; };
 		F234761024671FE1004C8363 /* ColorCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCellModel.swift; sourceTree = "<group>"; };
+		F23476132467B4D0004C8363 /* ColorStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorStore.swift; sourceTree = "<group>"; };
 		F2A6E6852466FF5600970D1B /* LevelStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelStore.swift; sourceTree = "<group>"; };
 		F2A6E6862466FF5600970D1B /* BoardCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		F2A6E6872466FF5600970D1B /* BoardCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardCollectionView.swift; sourceTree = "<group>"; };
@@ -119,10 +121,18 @@
 		F2347612246726BA004C8363 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F234761024671FE1004C8363 /* ColorCellModel.swift */,
+				F23476152467B4D7004C8363 /* ColorStore */,
 				F2A6E68F2467027600970D1B /* LevelStore */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		F23476152467B4D7004C8363 /* ColorStore */ = {
+			isa = PBXGroup;
+			children = (
+				F23476132467B4D0004C8363 /* ColorStore.swift */,
+			);
+			path = ColorStore;
 			sourceTree = "<group>";
 		};
 		F2A6E6842466FF5600970D1B /* Board */ = {
@@ -167,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				F2347612246726BA004C8363 /* Model */,
+				F234761024671FE1004C8363 /* ColorCellModel.swift */,
 				F22F85622465A33300493BB6 /* Utilities */,
 				F22F85612465A32500493BB6 /* ViewControllers */,
 				F22F85602465A31B00493BB6 /* Views */,
@@ -304,6 +315,7 @@
 				F22F85682465AF2100493BB6 /* ZButton.swift in Sources */,
 				F22F85642465A34900493BB6 /* Constants.swift in Sources */,
 				F2C0607E246566B5001FAD58 /* HomeViewController.swift in Sources */,
+				F23476142467B4D0004C8363 /* ColorStore.swift in Sources */,
 				F22F85662465A71E00493BB6 /* UIView+Extension.swift in Sources */,
 				F2A6E68E2466FF5600970D1B /* ColorCollectionViewCell.swift in Sources */,
 				F2C0607A246566B5001FAD58 /* AppDelegate.swift in Sources */,
