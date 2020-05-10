@@ -23,7 +23,7 @@ class ZButton: UIButton {
     }
     
     func setupButton() {
-        self.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        self.backgroundColor = .orange
         self.titleLabel!.font = self.titleLabel!.font.withSize(Constants.HomeScreen.buttonFontSize)
         let buttonSize : CGSize = self.sizeThatFits(Constants.Screen.size)
         self.layer.cornerRadius = buttonSize.height/2
