@@ -31,6 +31,8 @@ class PlayingGameViewController : UIViewController {
     
     var currentLevel : LevelModel = LevelStore.shared.allLevels[0]
     
+    // MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Constants.GameScreen.backgroundColor
@@ -51,7 +53,7 @@ class PlayingGameViewController : UIViewController {
         }
     }
     
-    // MARK: Handle Animations
+    // MARK: - Handle Animations
     
     private func animationReadyView(index: Int, completion: ((Bool) -> ())? ) {
         
@@ -83,7 +85,7 @@ class PlayingGameViewController : UIViewController {
         })
     }
     
-    // MARK: Setup views
+    // MARK: - Setup views
     
     private func setupViews() {
         self.setupSettingButton()
@@ -240,7 +242,7 @@ class PlayingGameViewController : UIViewController {
         }
     }
     
-    // MARK: Handle Timer
+    // MARK: - Handle Timer
     
     private func startTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { (timer) in
@@ -262,7 +264,7 @@ class PlayingGameViewController : UIViewController {
         self.timer = nil
     }
     
-    // MARK: Event handler
+    // MARK: - Event handler
     
     @objc private func didTapSettingButton() {
         
@@ -310,7 +312,7 @@ class PlayingGameViewController : UIViewController {
     }
 }
 
-// MARK: - Delegate
+// MARK: - CollectionView Delegate
 
 extension PlayingGameViewController : UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
