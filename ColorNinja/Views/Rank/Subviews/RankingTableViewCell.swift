@@ -38,17 +38,23 @@ class RankingTableViewCell: UITableViewCell {
     private func setupView() {
         
         self.contentView.backgroundColor = Constants.GameScreen.forcegroundColor
+        
         self.imgAvatar = UIImageView()
+        self.imgAvatar.layer.cornerRadius = 30.0/2
+        self.imgAvatar.clipsToBounds = true
+        
         self.rankingLabel = UILabel()
-        self.rankingLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        self.rankingLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         self.rankingLabel.textColor = .white
         self.rankingLabel.textAlignment = .center
+        
         self.nameLabel = UILabel()
-        self.nameLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        self.nameLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         self.nameLabel.textColor = .white
+        
         self.recordLabel = UILabel()
         self.recordLabel.textAlignment = .center
-        self.recordLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        self.recordLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         self.recordLabel.textColor = .white
         
         self.contentView.addSubview(self.imgAvatar)
@@ -89,6 +95,11 @@ class RankingTableViewCell: UITableViewCell {
         self.rankingLabel.text = "\(cellObject.ranking)"
         self.nameLabel.text = cellObject.name
         self.recordLabel.text = "\(cellObject.record)"
+        self.rankingLabel.textColor = cellObject.playerType.colorTitle
+        
+        if cellObject.playerType != .normal {
+            self.rankingLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        }
         
         if let image = UIImage(named: cellObject.avatarURL) {
             self.imgAvatar.image = image

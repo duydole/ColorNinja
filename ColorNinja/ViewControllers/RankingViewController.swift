@@ -84,11 +84,30 @@ class RankingViewController: UIViewController {
         
         let keyInfo1 = UILabel()
         keyInfo1.text = "MY RANK"
+        keyInfo1.textColor = Constants.GameScreen.LabelsContainer.textColor
+        keyInfo1.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         let keyInfo2 = UILabel()
         keyInfo2.text = "MY BEST RECORD"
+        keyInfo2.textColor = Constants.GameScreen.LabelsContainer.textColor
+        keyInfo2.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        
+        let valueInfo1 = UILabel()
+        valueInfo1.text = "100"
+        valueInfo1.textColor = .white
+        valueInfo1.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        valueInfo1.textAlignment = .right
+        
+        let valueInfo2 = UILabel()
+        valueInfo2.text = "21"
+        valueInfo2.textColor = .white
+        valueInfo2.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        valueInfo2.textAlignment = .right
         
         self.infoView.addSubview(keyInfo1)
         self.infoView.addSubview(keyInfo2)
+        self.infoView.addSubview(valueInfo1)
+        self.infoView.addSubview(valueInfo2)
+        
         
         keyInfo1.snp.makeConstraints { (make) in
             make.left.equalToSuperview()
@@ -102,6 +121,20 @@ class RankingViewController: UIViewController {
             make.top.equalTo(keyInfo1.snp.bottom)
             make.bottom.equalToSuperview()
             make.width.equalTo(150)
+        }
+        
+        valueInfo1.snp.makeConstraints { (make) in
+            make.left.equalTo(keyInfo1.snp.right)
+            make.right.equalToSuperview()
+            make.top.equalToSuperview()
+            make.bottom.equalTo(self.infoView.snp.centerY)
+        }
+        
+        valueInfo2.snp.makeConstraints { (make) in
+            make.left.equalTo(keyInfo2.snp.right)
+            make.right.equalToSuperview()
+            make.top.equalTo(valueInfo1.snp.bottom)
+            make.bottom.equalToSuperview()
         }
     }
     
@@ -128,16 +161,16 @@ class RankingViewController: UIViewController {
         exitButton.addTarget(self, action: #selector(didTapExitButton), for: .touchUpInside)
         exitButton.imageView?.tintColor = Constants.GameScreen.buttonTintColor
         exitButton.snp.makeConstraints { (make) in
-            make.width.height.equalTo(Constants.GameScreen.exitButtonWidth)
+            make.width.height.equalTo(Constants.GameScreen.exitButtonWidth * 0.75)
             make.top.equalTo(Constants.GameScreen.topInset)
             make.right.equalTo(-Constants.GameScreen.rightInset)
         }
     }
     
     private func prepareData() {
-        let testData1 = RankingCellModel(ranking: 1, name: "Kim Thi", avatarURL: "avatar", record: 50)
-        let testData2 = RankingCellModel(ranking: 2, name: "Do Huu Phuc", avatarURL: "steve_profile", record: 45)
-        let testData3 = RankingCellModel(ranking: 3, name: "Con Cho Le Duy", avatarURL: "zuck_profile", record: 40)
+        let testData1 = RankingCellModel(ranking: 1, name: "Kim Thi", avatarURL: "avatar", record: 50, type: .top1)
+        let testData2 = RankingCellModel(ranking: 2, name: "Do Huu Phuc", avatarURL: "steve_profile", record: 45, type: .top2)
+        let testData3 = RankingCellModel(ranking: 3, name: "Con Cho Le Duy", avatarURL: "zuck_profile", record: 40, type: .top3)
         let testData4 = RankingCellModel(ranking: 4, name: "Nguyen Van A", avatarURL: "hillary_profile", record: 35)
         let testData5 = RankingCellModel(ranking: 5, name: "Nguyen Van B", avatarURL: "avatar", record: 30)
         let testData6 = RankingCellModel(ranking: 6, name: "TEST", avatarURL: "avatar", record: 20)

@@ -92,19 +92,18 @@ extension RankingTableView: UITableViewDelegate, UITableViewDataSource {
         rankingLabel.textAlignment = .center
         rankingLabel.text = "NO"
         rankingLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        rankingLabel.textColor = Constants.GameScreen.backgroundColor
+        rankingLabel.textColor = Constants.GameScreen.LabelsContainer.textColor
         
         let nameLabel = UILabel()
         nameLabel.text = "NAME"
         nameLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        nameLabel.textColor = Constants.GameScreen.backgroundColor
+        nameLabel.textColor = Constants.GameScreen.LabelsContainer.textColor
         
         let recordLabel = UILabel()
         recordLabel.textAlignment = .center
         recordLabel.text = "BEST RECORD"
         recordLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        recordLabel.textColor = Constants.GameScreen.backgroundColor
-        
+        recordLabel.textColor = Constants.GameScreen.LabelsContainer.textColor
         headerView.addSubview(rankingLabel)
         headerView.addSubview(nameLabel)
         headerView.addSubview(recordLabel)

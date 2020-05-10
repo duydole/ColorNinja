@@ -99,5 +99,5 @@ struct LytoColor {
 
 struct NiceColor {
     static let backgroundColor1 = ColorRGB(17, 18, 45)
-    static let backgroundColor2 = ColorRGB(129, 153, 187)
+    static let backgroundColor2 = ColorRGB(109, 133, 167)
 }
