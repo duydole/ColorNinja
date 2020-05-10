@@ -10,11 +10,17 @@ import UIKit
 
 class PopupViewController: UIViewController {
     
-    var contentView : UIView!
+    // MARK: - Public Property
+    
+    var contentView: UIView!
+    
+    var popupSize: CGSize = CGSize(width: 3*Constants.Screen.width/4, height: Constants.Screen.height/2)
+
+    // MARK: - Private Property
     
     private var darkLayer: UIControl!
     
-    // MARK: Life cycle
+    // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +37,12 @@ class PopupViewController: UIViewController {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        UIView.animate(withDuration: 0.3) {
+            self.contentView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        }
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super .viewWillAppear(animated)
         UIView.animate(withDuration: 0.2) {
@@ -38,7 +50,7 @@ class PopupViewController: UIViewController {
         }
     }
     
-    // MARK: Setup views
+    // MARK: - Setup views
     
     private func setupView() {
         self.addDarkLayer()
@@ -52,9 +64,10 @@ class PopupViewController: UIViewController {
         contentView.backgroundColor = .white
         contentView.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
-            make.width.equalTo(300)
-            make.height.equalTo(400)
+            make.width.equalTo(popupSize.width)
+            make.height.equalTo(popupSize.height)
         }
+        contentView.transform = CGAffineTransform(scaleX: 0.0, y: 0.0)
     }
     
     private func addDarkLayer() {
