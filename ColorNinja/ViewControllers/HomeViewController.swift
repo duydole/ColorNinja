@@ -8,13 +8,15 @@
 
 import UIKit
 import SnapKit
+import GoogleMobileAds
 
 class HomeViewController: UIViewController {
     
-    let iconImageView : UIImageView = UIImageView()
-    let appNameLabel : UILabel = UILabel()
-    let startButton : ZButton = ZButton()
-    let rankingButton : ZButton = ZButton()
+    let iconImageView: UIImageView = UIImageView()
+    let appNameLabel: UILabel = UILabel()
+    let startButton: ZButton = ZButton()
+    let rankingButton: ZButton = ZButton()
+    var adBannerView: GADBannerView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +31,9 @@ class HomeViewController: UIViewController {
         self.addAppNameLabel()
         self.addStartButton()
         self.addRankingButton()
+        
+        // Admob
+        self.setupBannerAd()
     }
     
     private func setupBackgroundImage() {
@@ -81,6 +86,20 @@ class HomeViewController: UIViewController {
             make.centerX.equalToSuperview()
         }
         self.rankingButton.addTarget(self, action: #selector(didTapRankingButton), for: .touchUpInside)
+    }
+    
+    private func setupBannerAd() {
+        adBannerView = GADBannerView()
+        adBannerView.rootViewController = self
+        adBannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        adBannerView.load(GADRequest())
+        self.view.addSubview(adBannerView)
+        adBannerView.snp.makeConstraints { (make) in
+            make.leading.equalTo(20)
+            make.trailing.equalTo(-20)
+            make.bottom.equalTo(-50)
+            make.height.equalTo(100)
+        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
