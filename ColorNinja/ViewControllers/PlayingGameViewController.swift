@@ -48,7 +48,7 @@ class PlayingGameViewController : UIViewController {
         // Animation ReadyView
         self.animationReadyView(index: 0) { (done) in
             self.currentLevel.cellWidth = self.cellWidthOfLevel(level: self.currentLevel)
-            self.showLevel(level: self.currentLevel)
+            self.showCurrentLevel()
             if self.presentedViewController == nil {
                 self.startTimer()
             }
@@ -286,7 +286,6 @@ class PlayingGameViewController : UIViewController {
         // Reset CountDownLabel
         self.remainingTime = 0.00
         self.remainTimeLabel.text = self.currentRemainTimeString()
-        self.boardCollectionView.isUserInteractionEnabled = false
         
         // StopTimer
         self.stopTimer()
@@ -294,13 +293,14 @@ class PlayingGameViewController : UIViewController {
         // Show Popup GameOver
         let gameOverPopup = GameOverPopup()
         gameOverPopup.modalPresentationStyle = .overCurrentContext
+        gameOverPopup.gameOverDelegate = self
         self.present(gameOverPopup, animated: false, completion: nil)
     }
     
-    private func showLevel(level: LevelModel) {
+    private func showCurrentLevel() {
         
         // Update level for DataSource
-        boardDataSource.levelModel = level
+        boardDataSource.levelModel = currentLevel
         
         // ReloadData
         self.boardCollectionView.reloadData()
@@ -320,6 +320,21 @@ class PlayingGameViewController : UIViewController {
         if remainingTime > 0 {
             self.startTimer()
         }
+    }
+    
+    private func replayGame() {
+        
+        // Reset lại View
+        remainingTime = Constants.GameSetting.maxRemainTime
+        self.remainTimeLabel.text = self.currentRemainTimeString()
+        levelCountLabel.text = "1"
+        
+        // Reset lại model
+        LevelStore.shared.setColorForAllLevels()
+        currentLevel = LevelStore.shared.allLevels[0]
+
+        self.showCurrentLevel()
+        self.resumeGame()
     }
 
     // MARK: - Event handler
@@ -397,6 +412,19 @@ extension PlayingGameViewController : UICollectionViewDelegate, UICollectionView
         // Update LevelCount
         self.zoomX2LabelAnimation(label: levelCountLabel, text: "\(nextLevel.levelIndex + 1)")
         
-        self.showLevel(level: nextLevel)
+        self.showCurrentLevel()
+    }
+}
+
+// MARK: - GameOverPopup Delegate
+
+extension PlayingGameViewController: GameOverPopupDelegate {
+    
+    func didTapGoHomeButton() {
+        self.dismiss(animated: false, completion: nil)
+    }
+    
+    func didTapReplayButton() {
+        self.replayGame()
     }
 }

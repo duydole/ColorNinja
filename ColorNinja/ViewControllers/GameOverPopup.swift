@@ -9,10 +9,16 @@
 import Foundation
 import UIKit
 
+protocol GameOverPopupDelegate {
+    func didTapReplayButton() -> Void
+    func didTapGoHomeButton() -> Void
+}
+
 class GameOverPopup: PopupViewController {
     
-    var goHomeButton: UIButton!
-    var replayButton: UIButton!
+    var goHomeButton: ButtonWithImage!
+    var replayButton: ButtonWithImage!
+    var gameOverDelegate: GameOverPopupDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,11 +36,15 @@ class GameOverPopup: PopupViewController {
     // MARK: - Event Handlers
     
     @objc private func didTapGoHomeButton() {
-
+        self.dismiss(animated: false) {
+            self.gameOverDelegate?.didTapGoHomeButton()
+        }
     }
 
     @objc private func didTapReplayButton() {
-        
+        self.dismiss(animated: false) {
+            self.gameOverDelegate?.didTapReplayButton()
+        }
     }
     
     // MARK: - Setup Views
@@ -88,12 +98,12 @@ class GameOverPopup: PopupViewController {
         
         // GoHome
         goHomeButton = ButtonWithImage()
-        goHomeButton.setTitle("Home", for: .normal)
-        goHomeButton.setImage(UIImage(named: "homeicon"), for: .normal)
+        goHomeButton.titleText = "Home"
+        goHomeButton.image = UIImage(named: "homeicon")
         goHomeButton.layer.cornerRadius = 25
         goHomeButton.backgroundColor = .orange
         goHomeButton.makeShadow()
-        goHomeButton.addTarget(self, action: #selector(didTapGoHomeButton), for: .touchUpInside)
+        goHomeButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapGoHomeButton))
         container.addSubview(goHomeButton)
         goHomeButton.snp.makeConstraints { (make) in
             make.width.equalToSuperview().multipliedBy(0.47)
@@ -103,12 +113,12 @@ class GameOverPopup: PopupViewController {
         
         // PlayAgain
         replayButton = ButtonWithImage()
-        replayButton.setTitle("Replay", for: .normal)
-        replayButton.setImage(UIImage(named: "replayicon"), for: .normal)
+        replayButton.titleText = "Replay"
+        replayButton.image = UIImage(named: "replayicon")
         replayButton.backgroundColor = .orange
         replayButton.layer.cornerRadius = 25
         replayButton.makeShadow()
-        replayButton.addTarget(self, action: #selector(didTapReplayButton), for: .touchUpInside)
+        replayButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapReplayButton))
         container.addSubview(replayButton)
         replayButton.snp.makeConstraints { (make) in
             make.width.equalToSuperview().multipliedBy(0.47)
