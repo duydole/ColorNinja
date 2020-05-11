@@ -22,7 +22,7 @@ class PlayingGameViewController : UIViewController {
     var readyLabel : UILabel!
     var readyListString : [String] = ["3","2","1","Go!"]
     
-    var remainingTime : TimeInterval = 20.0
+    var remainingTime : TimeInterval = 0.1
     var boardContainer : UIView!
     var boardCollectionView : BoardCollectionView!
     let boardDataSource: BoardDataSource = BoardDataSource()

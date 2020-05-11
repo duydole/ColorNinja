@@ -22,4 +22,10 @@ extension UIView {
             return self.frame.origin.y + self.frame.size.height
         }
     }
+    
+    func makeShadow() {
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 0.5
+        layer.shadowOffset = .zero
+    }
 }
