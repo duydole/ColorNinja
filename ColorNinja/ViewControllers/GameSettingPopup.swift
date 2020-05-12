@@ -13,7 +13,8 @@ class GameSettingPopup: PopupViewController {
     
     var navigationBar: UIView!
     var subContentView: UIView!
-    var muteBgSoundButton: UIButton!
+    var mainSoundSwitch: UISwitch!
+    var effectSoundSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,7 @@ class GameSettingPopup: PopupViewController {
     private func setupViews() {
         self.setupNavigationBar()
         self.setupSubContentView()
-        self.setupButtons()
+        self.setupSwitchs()
     }
     
     private func setupNavigationBar() {
@@ -88,16 +89,48 @@ class GameSettingPopup: PopupViewController {
         }
     }
     
-    private func setupButtons() {
-        muteBgSoundButton = UIButton()
-        muteBgSoundButton.setTitle("MUTE", for: .normal)
-        muteBgSoundButton.setTitleColor(.black, for: .normal)
-        subContentView.addSubview(muteBgSoundButton)
-        muteBgSoundButton.snp.makeConstraints { (make) in
-            make.center.equalToSuperview()
+    private func setupSwitchs() {
+        
+        // MainSound Switch
+        mainSoundSwitch = UISwitch()
+        mainSoundSwitch.isOn = GameSettingManager.shared.allowMainSound
+        mainSoundSwitch.addTarget(self, action: #selector(mainSoundSwitchDidChange(_:)), for: .valueChanged)
+        subContentView.addSubview(mainSoundSwitch)
+        mainSoundSwitch.snp.makeConstraints { (make) in
+            make.top.equalTo(30)
+            make.trailing.equalTo(-20)
         }
-        muteBgSoundButton.addTarget(self, action: #selector(didTapMuteBackgroundSoundButton), for: .touchUpInside)
+        
+        // MainLabel
+        let mainLabel = UILabel()
+        mainLabel.text = "MAIN SOUND"
+        subContentView.addSubview(mainLabel)
+        mainLabel.snp.makeConstraints { (make) in
+            make.leading.equalTo(20)
+            make.centerY.equalTo(mainSoundSwitch)
+        }
+        
+        // EffectSound Switch
+        effectSoundSwitch = UISwitch()
+        effectSoundSwitch.isOn = GameSettingManager.shared.allowEffectSound
+        effectSoundSwitch.addTarget(self, action: #selector(effectSoundSwitchDidChange(_:)), for: .valueChanged)
+        subContentView.addSubview(effectSoundSwitch)
+        effectSoundSwitch.snp.makeConstraints { (make) in
+            make.top.equalTo(mainSoundSwitch.snp.bottom).offset(30)
+            make.centerX.equalTo(mainSoundSwitch)
+        }
+        
+        // MainLabel
+        let effectLabel = UILabel()
+        effectLabel.text = "EFFECT SOUND"
+        subContentView.addSubview(effectLabel)
+        effectLabel.snp.makeConstraints { (make) in
+            make.leading.equalTo(20)
+            make.centerY.equalTo(effectSoundSwitch)
+        }
     }
+    
+    // MARK: - Handle Events
     
     @objc private func didTapExitButton() {
         self.dismissPopUp()
@@ -105,6 +138,18 @@ class GameSettingPopup: PopupViewController {
     
     @objc private func didTapMuteBackgroundSoundButton() {
         GameMusicPlayer.shared.muteBackgroundGameMusic()
+    }
+    
+    @objc func mainSoundSwitchDidChange(_ sender: UISwitch) {
+        if sender.isOn {
+            GameMusicPlayer.shared.unmuteBackgroundGameMusic()
+        } else {
+            GameMusicPlayer.shared.muteBackgroundGameMusic()
+        }
+    }
+    
+    @objc func effectSoundSwitchDidChange(_ sender: UISwitch) {
+        GameSettingManager.shared.allowEffectSound = sender.isOn
     }
 }
 

@@ -10,8 +10,14 @@ import Foundation
 import AVFoundation
 
 class GameMusicPlayer {
+    
     static let shared = GameMusicPlayer()
+    
     var audioPlayer: AVAudioPlayer?
+    
+    var isMuteMainSound: Bool {
+        return audioPlayer?.volume == 0
+    }
     
     func startBackgroundMusic() {
         if let bundle = Bundle.main.path(forResource: "bgmusic", ofType: "mp3") {

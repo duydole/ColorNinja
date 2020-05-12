@@ -392,21 +392,26 @@ extension PlayingGameViewController : UICollectionViewDelegate, UICollectionView
         
         if indexPath.item == currentLevel.correctIndex {
             remainingTime += 1.0
+            
+            if GameSettingManager.shared.allowEffectSound {
+                GameMusicPlayer.shared.playCorrectSound()
+            }
+            
             self.goToNextLevel()
         } else {
             remainingTime -= 0.5
-            // Select Wrong Color
-            self.vibrateDevice()
-            GameMusicPlayer.shared.playInCorrectSound()
+            
+            if GameSettingManager.shared.allowEffectSound {
+                self.vibrateDevice()
+                GameMusicPlayer.shared.playInCorrectSound()
+            }
         }
     }
     
     // MARK: - Private Methods
     
     private func goToNextLevel() {
-        
-        GameMusicPlayer.shared.playCorrectSound()
-        
+                
         // Update current LevelModel
         let nextLevel = LevelStore.shared.allLevels[currentLevel.levelIndex + 1]
         currentLevel = nextLevel

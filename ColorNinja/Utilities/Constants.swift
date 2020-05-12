@@ -79,7 +79,7 @@ struct Constants {
     }
     
     struct GameSettingPopup {
-        static let width = 3*Constants.Screen.width/4
+        static let width = 250
         static let height = width
         static let contentSize = CGSize(width: Constants.GameSettingPopup.width, height: Constants.GameSettingPopup.height)
         static let cornerRadius: CGFloat = 35
