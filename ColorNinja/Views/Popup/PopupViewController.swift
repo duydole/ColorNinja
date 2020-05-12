@@ -107,6 +107,6 @@ class PopupViewController: UIViewController {
     }
     
     @objc private func didTapDarkLayer() {
-        self.dismissPopUp()
+        
     }
 }

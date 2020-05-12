@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import GoogleMobileAds
 
 protocol GameOverPopupDelegate {
     func didTapReplayButton() -> Void
@@ -20,6 +21,8 @@ class GameOverPopup: PopupViewController {
     var replayButton: ButtonWithImage!
     var gameOverDelegate: GameOverPopupDelegate?
     
+    var interstitial: GADInterstitial!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupViews()
@@ -42,8 +45,10 @@ class GameOverPopup: PopupViewController {
     }
 
     @objc private func didTapReplayButton() {
-        self.dismiss(animated: false) {
-            self.gameOverDelegate?.didTapReplayButton()
+        if interstitial.isReady {
+            interstitial.present(fromRootViewController: self)
+        } else {
+            assert(true, "Ads is not ready")
         }
     }
     
@@ -53,6 +58,7 @@ class GameOverPopup: PopupViewController {
         self.setupGameOverViews()
         self.setupGameResult()
         self.setupButtons()
+        self.setupFullScreenAds()
     }
     
     private func setupGameOverViews() {
@@ -125,5 +131,23 @@ class GameOverPopup: PopupViewController {
             make.top.equalToSuperview()
             make.trailing.bottom.equalToSuperview()
         }
+    }
+    
+    private func setupFullScreenAds() {
+        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        interstitial.delegate = self
+        let request = GADRequest()
+        interstitial.load(request)
+    }
+}
+
+
+// MARK: - Delegate FullScreen
+
+extension GameOverPopup : GADInterstitialDelegate {
+    
+    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+        self.dismissPopUp()
+        self.gameOverDelegate?.didTapReplayButton()
     }
 }
