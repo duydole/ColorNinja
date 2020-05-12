@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMobileAds
+import ZaloSDK
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         GameMusicPlayer.shared.startBackgroundMusic()
+        
+        ZaloSDK.sharedInstance().initialize(withAppId: "3798956987156040112")
 
         return true
     }

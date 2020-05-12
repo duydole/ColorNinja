@@ -13,6 +13,7 @@
 		8C2C72822467ACD300883388 /* RankingCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C72812467ACD300883388 /* RankingCellModel.swift */; };
 		8C6EC7442467DE8E00612802 /* ZPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EC7432467DE8E00612802 /* ZPopup.swift */; };
 		8C6EC7492467E3C100612802 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EC7482467E3C100612802 /* PopupViewController.swift */; };
+		8C73DB8D246AA8E40095FE8A /* ZaloSDKApiWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C73DB8C246AA8E40095FE8A /* ZaloSDKApiWrapper.swift */; };
 		D96E8CD13F30FDE723362F0D /* Pods_ColorNinja.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57F237B10E2F49C95DDF1EC4 /* Pods_ColorNinja.framework */; };
 		F22F85642465A34900493BB6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F85632465A34900493BB6 /* Constants.swift */; };
 		F22F85662465A71E00493BB6 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F85652465A71E00493BB6 /* UIView+Extension.swift */; };
@@ -58,6 +59,7 @@
 		8C2C72812467ACD300883388 /* RankingCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingCellModel.swift; sourceTree = "<group>"; };
 		8C6EC7432467DE8E00612802 /* ZPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZPopup.swift; sourceTree = "<group>"; };
 		8C6EC7482467E3C100612802 /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
+		8C73DB8C246AA8E40095FE8A /* ZaloSDKApiWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZaloSDKApiWrapper.swift; sourceTree = "<group>"; };
 		F22F85632465A34900493BB6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F22F85652465A71E00493BB6 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		F22F85672465AF2100493BB6 /* ZButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZButton.swift; sourceTree = "<group>"; };
@@ -139,6 +141,22 @@
 				8C6EC7482467E3C100612802 /* PopupViewController.swift */,
 			);
 			path = Popup;
+			sourceTree = "<group>";
+		};
+		8C73DB8A246AA8C20095FE8A /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				8C73DB8B246AA8C90095FE8A /* Zalo */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		8C73DB8B246AA8C90095FE8A /* Zalo */ = {
+			isa = PBXGroup;
+			children = (
+				8C73DB8C246AA8E40095FE8A /* ZaloSDKApiWrapper.swift */,
+			);
+			path = Zalo;
 			sourceTree = "<group>";
 		};
 		9ABBD60AE1D01816F1BBF25E /* Pods */ = {
@@ -276,6 +294,7 @@
 				F28098BB246AE2060060693D /* Manager */,
 				F28098BA246AE1EF0060693D /* Resouces */,
 				F27454F0246A718E0037A8BA /* MusicComponent */,
+				8C73DB8A246AA8C20095FE8A /* Core */,
 				F2347612246726BA004C8363 /* Model */,
 				F22F85622465A33300493BB6 /* Utilities */,
 				F22F85612465A32500493BB6 /* ViewControllers */,
@@ -439,6 +458,7 @@
 				F28098BD246AE2410060693D /* GameSettingManager.swift in Sources */,
 				F2C0607C246566B5001FAD58 /* SceneDelegate.swift in Sources */,
 				F2A6E68D2466FF5600970D1B /* BoardDataSource.swift in Sources */,
+				8C73DB8D246AA8E40095FE8A /* ZaloSDKApiWrapper.swift in Sources */,
 				F2A6E68C2466FF5600970D1B /* BoardCollectionView.swift in Sources */,
 				F234761124671FE1004C8363 /* ColorCellModel.swift in Sources */,
 			);
