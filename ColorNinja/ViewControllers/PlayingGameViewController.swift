@@ -397,12 +397,15 @@ extension PlayingGameViewController : UICollectionViewDelegate, UICollectionView
             remainingTime -= 0.5
             // Select Wrong Color
             self.vibrateDevice()
+            GameMusicPlayer.shared.playInCorrectSound()
         }
     }
     
     // MARK: - Private Methods
     
     private func goToNextLevel() {
+        
+        GameMusicPlayer.shared.playCorrectSound()
         
         // Update current LevelModel
         let nextLevel = LevelStore.shared.allLevels[currentLevel.levelIndex + 1]

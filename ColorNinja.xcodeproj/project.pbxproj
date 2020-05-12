@@ -27,6 +27,10 @@
 		F234763324680D75004C8363 /* GameSettingPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F234763224680D75004C8363 /* GameSettingPopup.swift */; };
 		F2347635246836D7004C8363 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2347634246836D7004C8363 /* UIColor+Extension.swift */; };
 		F2347638246851A5004C8363 /* ButtonWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2347637246851A5004C8363 /* ButtonWithImage.swift */; };
+		F27454F2246A71A40037A8BA /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27454F1246A71A40037A8BA /* MusicPlayer.swift */; };
+		F27454F4246A72F80037A8BA /* bgmusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F27454F3246A72F80037A8BA /* bgmusic.mp3 */; };
+		F27454F6246A74660037A8BA /* correctsound.wav in Resources */ = {isa = PBXBuildFile; fileRef = F27454F5246A74660037A8BA /* correctsound.wav */; };
+		F27454F8246A76470037A8BA /* incorrectsound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F27454F7246A76460037A8BA /* incorrectsound.mp3 */; };
 		F2A6E68A2466FF5600970D1B /* LevelStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6E6852466FF5600970D1B /* LevelStore.swift */; };
 		F2A6E68B2466FF5600970D1B /* BoardCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6E6862466FF5600970D1B /* BoardCollectionViewFlowLayout.swift */; };
 		F2A6E68C2466FF5600970D1B /* BoardCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6E6872466FF5600970D1B /* BoardCollectionView.swift */; };
@@ -64,6 +68,10 @@
 		F234763224680D75004C8363 /* GameSettingPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettingPopup.swift; sourceTree = "<group>"; };
 		F2347634246836D7004C8363 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		F2347637246851A5004C8363 /* ButtonWithImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWithImage.swift; sourceTree = "<group>"; };
+		F27454F1246A71A40037A8BA /* MusicPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
+		F27454F3246A72F80037A8BA /* bgmusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bgmusic.mp3; sourceTree = "<group>"; };
+		F27454F5246A74660037A8BA /* correctsound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = correctsound.wav; sourceTree = "<group>"; };
+		F27454F7246A76460037A8BA /* incorrectsound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = incorrectsound.mp3; sourceTree = "<group>"; };
 		F2A6E6852466FF5600970D1B /* LevelStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelStore.swift; sourceTree = "<group>"; };
 		F2A6E6862466FF5600970D1B /* BoardCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		F2A6E6872466FF5600970D1B /* BoardCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardCollectionView.swift; sourceTree = "<group>"; };
@@ -198,6 +206,14 @@
 			path = CustomButton;
 			sourceTree = "<group>";
 		};
+		F27454F0246A718E0037A8BA /* MusicComponent */ = {
+			isa = PBXGroup;
+			children = (
+				F27454F1246A71A40037A8BA /* MusicPlayer.swift */,
+			);
+			path = MusicComponent;
+			sourceTree = "<group>";
+		};
 		F2A6E6842466FF5600970D1B /* Board */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +237,9 @@
 		F2C0606D246566B5001FAD58 = {
 			isa = PBXGroup;
 			children = (
+				F27454F7246A76460037A8BA /* incorrectsound.mp3 */,
+				F27454F5246A74660037A8BA /* correctsound.wav */,
+				F27454F3246A72F80037A8BA /* bgmusic.mp3 */,
 				F2C06078246566B5001FAD58 /* ColorNinja */,
 				F2C06077246566B5001FAD58 /* Products */,
 				9ABBD60AE1D01816F1BBF25E /* Pods */,
@@ -239,6 +258,7 @@
 		F2C06078246566B5001FAD58 /* ColorNinja */ = {
 			isa = PBXGroup;
 			children = (
+				F27454F0246A718E0037A8BA /* MusicComponent */,
 				F2347612246726BA004C8363 /* Model */,
 				F22F85622465A33300493BB6 /* Utilities */,
 				F22F85612465A32500493BB6 /* ViewControllers */,
@@ -314,6 +334,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F27454F8246A76470037A8BA /* incorrectsound.mp3 in Resources */,
+				F27454F6246A74660037A8BA /* correctsound.wav in Resources */,
+				F27454F4246A72F80037A8BA /* bgmusic.mp3 in Resources */,
 				F22F858A24669BC200493BB6 /* setting.png in Resources */,
 				F2C06086246566B7001FAD58 /* LaunchScreen.storyboard in Resources */,
 				F2C06083246566B7001FAD58 /* Assets.xcassets in Resources */,
@@ -388,6 +411,7 @@
 				F22F85662465A71E00493BB6 /* UIView+Extension.swift in Sources */,
 				F2A6E68E2466FF5600970D1B /* ColorCollectionViewCell.swift in Sources */,
 				F2C0607A246566B5001FAD58 /* AppDelegate.swift in Sources */,
+				F27454F2246A71A40037A8BA /* MusicPlayer.swift in Sources */,
 				8C2C72782467A58C00883388 /* RankingViewController.swift in Sources */,
 				F2347638246851A5004C8363 /* ButtonWithImage.swift in Sources */,
 				F2A6E68B2466FF5600970D1B /* BoardCollectionViewFlowLayout.swift in Sources */,

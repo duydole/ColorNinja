@@ -13,6 +13,7 @@ class GameSettingPopup: PopupViewController {
     
     var navigationBar: UIView!
     var subContentView: UIView!
+    var muteBgSoundButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +33,7 @@ class GameSettingPopup: PopupViewController {
     private func setupViews() {
         self.setupNavigationBar()
         self.setupSubContentView()
+        self.setupButtons()
     }
     
     private func setupNavigationBar() {
@@ -86,8 +88,23 @@ class GameSettingPopup: PopupViewController {
         }
     }
     
+    private func setupButtons() {
+        muteBgSoundButton = UIButton()
+        muteBgSoundButton.setTitle("MUTE", for: .normal)
+        muteBgSoundButton.setTitleColor(.black, for: .normal)
+        subContentView.addSubview(muteBgSoundButton)
+        muteBgSoundButton.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+        }
+        muteBgSoundButton.addTarget(self, action: #selector(didTapMuteBackgroundSoundButton), for: .touchUpInside)
+    }
+    
     @objc private func didTapExitButton() {
         self.dismissPopUp()
+    }
+    
+    @objc private func didTapMuteBackgroundSoundButton() {
+        GameMusicPlayer.shared.muteBackgroundGameMusic()
     }
 }
 
