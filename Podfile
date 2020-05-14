@@ -9,5 +9,7 @@ target 'ColorNinja' do
   pod 'SnapKit', '~> 5.0.0'
   pod 'Google-Mobile-Ads-SDK'
   pod 'ZaloSDK'
+  pod 'RxSwift', '~> 5'
+  pod 'RxCocoa', '~> 5'
 
 end
