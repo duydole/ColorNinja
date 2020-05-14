@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+struct Font {
+    static let snesitalic = "SNES-Italic"
+}
+
 struct Constants {
     
     struct Screen {

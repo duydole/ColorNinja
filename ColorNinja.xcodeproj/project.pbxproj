@@ -31,6 +31,10 @@
 		F27454F4246A72F80037A8BA /* bgmusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F27454F3246A72F80037A8BA /* bgmusic.mp3 */; };
 		F27454F6246A74660037A8BA /* correctsound.wav in Resources */ = {isa = PBXBuildFile; fileRef = F27454F5246A74660037A8BA /* correctsound.wav */; };
 		F27454F8246A76470037A8BA /* incorrectsound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F27454F7246A76460037A8BA /* incorrectsound.mp3 */; };
+		F28098BD246AE2410060693D /* GameSettingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28098BC246AE2410060693D /* GameSettingManager.swift */; };
+		F28098C3246B02A80060693D /* EvilEmpire-4BBVK.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F28098C2246B02A80060693D /* EvilEmpire-4BBVK.ttf */; };
+		F28098C5246B02C00060693D /* SnesItalic-vmAPZ.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F28098C4246B02C00060693D /* SnesItalic-vmAPZ.ttf */; };
+		F28098C7246B0D2E0060693D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F28098C6246B0D2E0060693D /* Assets.xcassets */; };
 		F2A6E68A2466FF5600970D1B /* LevelStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6E6852466FF5600970D1B /* LevelStore.swift */; };
 		F2A6E68B2466FF5600970D1B /* BoardCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6E6862466FF5600970D1B /* BoardCollectionViewFlowLayout.swift */; };
 		F2A6E68C2466FF5600970D1B /* BoardCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6E6872466FF5600970D1B /* BoardCollectionView.swift */; };
@@ -41,7 +45,6 @@
 		F2C0607C246566B5001FAD58 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C0607B246566B5001FAD58 /* SceneDelegate.swift */; };
 		F2C0607E246566B5001FAD58 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C0607D246566B5001FAD58 /* HomeViewController.swift */; };
 		F2C06081246566B5001FAD58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2C0607F246566B5001FAD58 /* Main.storyboard */; };
-		F2C06083246566B7001FAD58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2C06082246566B7001FAD58 /* Assets.xcassets */; };
 		F2C06086246566B7001FAD58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2C06084246566B7001FAD58 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +75,10 @@
 		F27454F3246A72F80037A8BA /* bgmusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bgmusic.mp3; sourceTree = "<group>"; };
 		F27454F5246A74660037A8BA /* correctsound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = correctsound.wav; sourceTree = "<group>"; };
 		F27454F7246A76460037A8BA /* incorrectsound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = incorrectsound.mp3; sourceTree = "<group>"; };
+		F28098BC246AE2410060693D /* GameSettingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettingManager.swift; sourceTree = "<group>"; };
+		F28098C2246B02A80060693D /* EvilEmpire-4BBVK.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "EvilEmpire-4BBVK.ttf"; sourceTree = "<group>"; };
+		F28098C4246B02C00060693D /* SnesItalic-vmAPZ.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SnesItalic-vmAPZ.ttf"; sourceTree = "<group>"; };
+		F28098C6246B0D2E0060693D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2A6E6852466FF5600970D1B /* LevelStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelStore.swift; sourceTree = "<group>"; };
 		F2A6E6862466FF5600970D1B /* BoardCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		F2A6E6872466FF5600970D1B /* BoardCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardCollectionView.swift; sourceTree = "<group>"; };
@@ -83,7 +90,6 @@
 		F2C0607B246566B5001FAD58 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F2C0607D246566B5001FAD58 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F2C06080246566B5001FAD58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		F2C06082246566B7001FAD58 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2C06085246566B7001FAD58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F2C06087246566B7001FAD58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -182,19 +188,10 @@
 		F2347612246726BA004C8363 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F23476152467B4D7004C8363 /* ColorStore */,
-				F2A6E68F2467027600970D1B /* LevelStore */,
+				F2A6E6902467029300970D1B /* LevelModel.swift */,
 				F234761024671FE1004C8363 /* ColorCellModel.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		F23476152467B4D7004C8363 /* ColorStore */ = {
-			isa = PBXGroup;
-			children = (
-				F23476132467B4D0004C8363 /* ColorStore.swift */,
-			);
-			path = ColorStore;
 			sourceTree = "<group>";
 		};
 		F23476362468518B004C8363 /* CustomButton */ = {
@@ -214,6 +211,36 @@
 			path = MusicComponent;
 			sourceTree = "<group>";
 		};
+		F28098BA246AE1EF0060693D /* Resouces */ = {
+			isa = PBXGroup;
+			children = (
+				F28098BE246AFD650060693D /* Font */,
+				F27454F7246A76460037A8BA /* incorrectsound.mp3 */,
+				F27454F5246A74660037A8BA /* correctsound.wav */,
+				F27454F3246A72F80037A8BA /* bgmusic.mp3 */,
+			);
+			path = Resouces;
+			sourceTree = "<group>";
+		};
+		F28098BB246AE2060060693D /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				F23476132467B4D0004C8363 /* ColorStore.swift */,
+				F2A6E6852466FF5600970D1B /* LevelStore.swift */,
+				F28098BC246AE2410060693D /* GameSettingManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		F28098BE246AFD650060693D /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				F28098C4246B02C00060693D /* SnesItalic-vmAPZ.ttf */,
+				F28098C2246B02A80060693D /* EvilEmpire-4BBVK.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		F2A6E6842466FF5600970D1B /* Board */ = {
 			isa = PBXGroup;
 			children = (
@@ -225,21 +252,9 @@
 			path = Board;
 			sourceTree = "<group>";
 		};
-		F2A6E68F2467027600970D1B /* LevelStore */ = {
-			isa = PBXGroup;
-			children = (
-				F2A6E6852466FF5600970D1B /* LevelStore.swift */,
-				F2A6E6902467029300970D1B /* LevelModel.swift */,
-			);
-			path = LevelStore;
-			sourceTree = "<group>";
-		};
 		F2C0606D246566B5001FAD58 = {
 			isa = PBXGroup;
 			children = (
-				F27454F7246A76460037A8BA /* incorrectsound.mp3 */,
-				F27454F5246A74660037A8BA /* correctsound.wav */,
-				F27454F3246A72F80037A8BA /* bgmusic.mp3 */,
 				F2C06078246566B5001FAD58 /* ColorNinja */,
 				F2C06077246566B5001FAD58 /* Products */,
 				9ABBD60AE1D01816F1BBF25E /* Pods */,
@@ -258,6 +273,8 @@
 		F2C06078246566B5001FAD58 /* ColorNinja */ = {
 			isa = PBXGroup;
 			children = (
+				F28098BB246AE2060060693D /* Manager */,
+				F28098BA246AE1EF0060693D /* Resouces */,
 				F27454F0246A718E0037A8BA /* MusicComponent */,
 				F2347612246726BA004C8363 /* Model */,
 				F22F85622465A33300493BB6 /* Utilities */,
@@ -266,7 +283,7 @@
 				F2C06079246566B5001FAD58 /* AppDelegate.swift */,
 				F2C0607B246566B5001FAD58 /* SceneDelegate.swift */,
 				F2C0607F246566B5001FAD58 /* Main.storyboard */,
-				F2C06082246566B7001FAD58 /* Assets.xcassets */,
+				F28098C6246B0D2E0060693D /* Assets.xcassets */,
 				F22F858924669BC200493BB6 /* setting.png */,
 				F2C06084246566B7001FAD58 /* LaunchScreen.storyboard */,
 				F2C06087246566B7001FAD58 /* Info.plist */,
@@ -334,12 +351,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F28098C3246B02A80060693D /* EvilEmpire-4BBVK.ttf in Resources */,
 				F27454F8246A76470037A8BA /* incorrectsound.mp3 in Resources */,
 				F27454F6246A74660037A8BA /* correctsound.wav in Resources */,
 				F27454F4246A72F80037A8BA /* bgmusic.mp3 in Resources */,
 				F22F858A24669BC200493BB6 /* setting.png in Resources */,
 				F2C06086246566B7001FAD58 /* LaunchScreen.storyboard in Resources */,
-				F2C06083246566B7001FAD58 /* Assets.xcassets in Resources */,
+				F28098C5246B02C00060693D /* SnesItalic-vmAPZ.ttf in Resources */,
+				F28098C7246B0D2E0060693D /* Assets.xcassets in Resources */,
 				F2C06081246566B5001FAD58 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,6 +436,7 @@
 				F2A6E68B2466FF5600970D1B /* BoardCollectionViewFlowLayout.swift in Sources */,
 				F2A6E6912467029300970D1B /* LevelModel.swift in Sources */,
 				8C6EC7442467DE8E00612802 /* ZPopup.swift in Sources */,
+				F28098BD246AE2410060693D /* GameSettingManager.swift in Sources */,
 				F2C0607C246566B5001FAD58 /* SceneDelegate.swift in Sources */,
 				F2A6E68D2466FF5600970D1B /* BoardDataSource.swift in Sources */,
 				F2A6E68C2466FF5600970D1B /* BoardCollectionView.swift in Sources */,

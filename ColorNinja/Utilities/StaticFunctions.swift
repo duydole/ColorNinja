@@ -12,3 +12,10 @@ import UIKit
 func ColorRGB(_ red: CGFloat, _ green: CGFloat,_ blue: CGFloat ) -> UIColor {
     return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: 1)
 }
+
+func printAllFamilyFonts() {
+    for family in UIFont.familyNames.sorted() {
+        let names = UIFont.fontNames(forFamilyName: family)
+        print("Family: \(family) Font Names: \(names)")
+    }
+}
