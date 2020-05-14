@@ -7,6 +7,17 @@
 		<string>SnesItalic-vmAPZ.ttf</string>
 		<string>EvilEmpire-4BBVK.ttf</string>
 	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>zalo</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>zalo-3798956987156040112</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
