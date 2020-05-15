@@ -16,29 +16,37 @@ class ZaloSDKApiWrapper: NSObject {
 
     public static let sharedInstance = ZaloSDKApiWrapper()
     
-    public func zaloUserId() -> String{
+    private override init() {
+        super.init()
+    }
+    
+    public func zaloUserId() -> String {
         return ZaloSDK.sharedInstance().zaloUserId() ?? ""
     }
     
-    public func zaloOauthcode() -> String{
+    public func zaloOauthcode() -> String {
         return ZaloSDK.sharedInstance().zaloOauthCode() ?? ""
     }
     
-    public func login(withZalo fromController: UIViewController?, type: ZAZaloSDKAuthenType) {
+    
+    public func isAuthen() -> Bool? {
+        return (ZaloSDK.sharedInstance()?.isAuthenticatedZalo(completionHandler: { (response) in
+            //
+        }))
+    }
+    
+    public func login(withZalo fromController: UIViewController?, type: ZAZaloSDKAuthenType, callback: @escaping (_ success: Bool)->()) {
         ZaloSDK.sharedInstance().authenticateZalo(with: type, parentController: fromController, handler: { (response) in
             if response?.errorCode != Int(kZaloSDKErrorCodeNoneError.rawValue) {
-                print("phuccc")
+                callback(false)
                 return
             }
-            var dic = Dictionary<String, Any>()
-            dic["uid"] = response?.userId
-            dic["oauthCode"] = response?.oauthCode
-            
+            callback(true)
         })
     }
     
     
-    public func loadZaloUserProfile() {
+    public func loadZaloUserProfile(callback: @escaping (ZaloUserSwift?)->()) {
         ZaloSDK.sharedInstance().getZaloUserProfile(callback: { (response) in
             /// check responseData is ZOProfileResponseObject: vì có case crash zaloSDK trả ra ZOGraphResponseObject.
             guard let responseData = response,
@@ -49,11 +57,10 @@ class ZaloSDKApiWrapper: NSObject {
             {
                 if let data = responseData.data {
                     let user = ZaloUserSwift.currentUserFromZaloSDK(data)
-                    
+                    callback(user)
                 }
             }
         })
-        
     }
     
     public func loadZaloFriend(_ offset: Int, count: Int) {

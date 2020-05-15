@@ -62,11 +62,13 @@ class ColorStore {
         } else if level < 10 {
             degreeOfChange = 40
         } else if level < 15 {
+            degreeOfChange = 35
+        } else if level < 20 {
             degreeOfChange = 30
         } else if level < 20 {
-            degreeOfChange = 20
+            degreeOfChange = 25
         } else {
-            degreeOfChange = 10
+            degreeOfChange = 20
         }
         
         // Random đổi R, G hay B

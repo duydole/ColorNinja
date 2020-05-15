@@ -11,10 +11,13 @@
 		8C2C727C2467A79700883388 /* RankingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C727B2467A79700883388 /* RankingTableView.swift */; };
 		8C2C72802467A7CC00883388 /* RankingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C727F2467A7CC00883388 /* RankingTableViewCell.swift */; };
 		8C2C72822467ACD300883388 /* RankingCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C72812467ACD300883388 /* RankingCellModel.swift */; };
+		8C34F005246E914600E156FD /* ZaloService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C34F004246E914600E156FD /* ZaloService.swift */; };
 		8C5FA0B9246AE6F4005D33E0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5FA0B8246AE6F4005D33E0 /* LoginViewController.swift */; };
 		8C6EC7442467DE8E00612802 /* ZPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EC7432467DE8E00612802 /* ZPopup.swift */; };
 		8C6EC7492467E3C100612802 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EC7482467E3C100612802 /* PopupViewController.swift */; };
 		8C73DB8D246AA8E40095FE8A /* ZaloSDKApiWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C73DB8C246AA8E40095FE8A /* ZaloSDKApiWrapper.swift */; };
+		8C7ABAB6246D5AE900063AE4 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7ABAB5246D5AE900063AE4 /* Utils.swift */; };
+		8C8BA174246E707900A73046 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8BA173246E707900A73046 /* UIImageView+Extension.swift */; };
 		8CC6DB40246B8D380017B60A /* ZaloUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC6DB3F246B8D380017B60A /* ZaloUser.swift */; };
 		8CC6DB42246B8E160017B60A /* Dictionary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC6DB41246B8E160017B60A /* Dictionary+Extension.swift */; };
 		8CC6DB44246B8E470017B60A /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC6DB43246B8E470017B60A /* Collection+Extension.swift */; };
@@ -48,9 +51,7 @@
 		F2A6E68E2466FF5600970D1B /* ColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6E6892466FF5600970D1B /* ColorCollectionViewCell.swift */; };
 		F2A6E6912467029300970D1B /* LevelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6E6902467029300970D1B /* LevelModel.swift */; };
 		F2C0607A246566B5001FAD58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C06079246566B5001FAD58 /* AppDelegate.swift */; };
-		F2C0607C246566B5001FAD58 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C0607B246566B5001FAD58 /* SceneDelegate.swift */; };
 		F2C0607E246566B5001FAD58 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C0607D246566B5001FAD58 /* HomeViewController.swift */; };
-		F2C06081246566B5001FAD58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2C0607F246566B5001FAD58 /* Main.storyboard */; };
 		F2C06086246566B7001FAD58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2C06084246566B7001FAD58 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -62,10 +63,13 @@
 		8C2C727B2467A79700883388 /* RankingTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingTableView.swift; sourceTree = "<group>"; };
 		8C2C727F2467A7CC00883388 /* RankingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingTableViewCell.swift; sourceTree = "<group>"; };
 		8C2C72812467ACD300883388 /* RankingCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingCellModel.swift; sourceTree = "<group>"; };
+		8C34F004246E914600E156FD /* ZaloService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZaloService.swift; sourceTree = "<group>"; };
 		8C5FA0B8246AE6F4005D33E0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8C6EC7432467DE8E00612802 /* ZPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZPopup.swift; sourceTree = "<group>"; };
 		8C6EC7482467E3C100612802 /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
 		8C73DB8C246AA8E40095FE8A /* ZaloSDKApiWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZaloSDKApiWrapper.swift; sourceTree = "<group>"; };
+		8C7ABAB5246D5AE900063AE4 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		8C8BA173246E707900A73046 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		8CC6DB3F246B8D380017B60A /* ZaloUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZaloUser.swift; sourceTree = "<group>"; };
 		8CC6DB41246B8E160017B60A /* Dictionary+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extension.swift"; sourceTree = "<group>"; };
 		8CC6DB43246B8E470017B60A /* Collection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
@@ -99,9 +103,7 @@
 		F2A6E6902467029300970D1B /* LevelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelModel.swift; sourceTree = "<group>"; };
 		F2C06076246566B5001FAD58 /* ColorNinja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorNinja.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2C06079246566B5001FAD58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F2C0607B246566B5001FAD58 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F2C0607D246566B5001FAD58 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		F2C06080246566B5001FAD58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F2C06085246566B7001FAD58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F2C06087246566B7001FAD58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -126,16 +128,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		8C2C72792467A6ED00883388 /* Rank */ = {
-			isa = PBXGroup;
-			children = (
-				8C2C727D2467A7A500883388 /* Subviews */,
-				8C2C727B2467A79700883388 /* RankingTableView.swift */,
-				8C2C72812467ACD300883388 /* RankingCellModel.swift */,
-			);
-			path = Rank;
-			sourceTree = "<group>";
-		};
 		8C2C727D2467A7A500883388 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,23 +139,15 @@
 		8C5FA0B7246AE693005D33E0 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				8C5FA0B8246AE6F4005D33E0 /* LoginViewController.swift */,
 			);
 			path = Login;
-			sourceTree = "<group>";
-		};
-		8C6EC7472467E38900612802 /* Popup */ = {
-			isa = PBXGroup;
-			children = (
-				8C6EC7432467DE8E00612802 /* ZPopup.swift */,
-				8C6EC7482467E3C100612802 /* PopupViewController.swift */,
-			);
-			path = Popup;
 			sourceTree = "<group>";
 		};
 		8C73DB8A246AA8C20095FE8A /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				8CC6DB45246B8F940017B60A /* Common */,
+				F27454F0246A718E0037A8BA /* MusicComponent */,
 				8C73DB8B246AA8C90095FE8A /* Zalo */,
 			);
 			path = Core;
@@ -172,9 +156,9 @@
 		8C73DB8B246AA8C90095FE8A /* Zalo */ = {
 			isa = PBXGroup;
 			children = (
-				8C5FA0B8246AE6F4005D33E0 /* LoginViewController.swift */,
 				8C73DB8C246AA8E40095FE8A /* ZaloSDKApiWrapper.swift */,
 				8CC6DB3F246B8D380017B60A /* ZaloUser.swift */,
+				8C34F004246E914600E156FD /* ZaloService.swift */,
 			);
 			path = Zalo;
 			sourceTree = "<group>";
@@ -182,11 +166,55 @@
 		8CC6DB45246B8F940017B60A /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				F22F85622465A33300493BB6 /* Utilities */,
+				F2347612246726BA004C8363 /* Model */,
+				F23476362468518B004C8363 /* CustomButton */,
 				8CC6DB41246B8E160017B60A /* Dictionary+Extension.swift */,
 				8CC6DB43246B8E470017B60A /* Collection+Extension.swift */,
 				8CC6DB46246B8FA90017B60A /* Date+Extension.swift */,
+				8C7ABAB5246D5AE900063AE4 /* Utils.swift */,
+				8C8BA173246E707900A73046 /* UIImageView+Extension.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		8CD602FF246ED82800003447 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				F2C0607D246566B5001FAD58 /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		8CD60300246ED83100003447 /* PlayingGame */ = {
+			isa = PBXGroup;
+			children = (
+				F22F85692465B55400493BB6 /* PlayingGameViewController.swift */,
+				F2A6E6842466FF5600970D1B /* Board */,
+			);
+			path = PlayingGame;
+			sourceTree = "<group>";
+		};
+		8CD60301246ED84E00003447 /* Popup */ = {
+			isa = PBXGroup;
+			children = (
+				8C6EC7432467DE8E00612802 /* ZPopup.swift */,
+				8C6EC7482467E3C100612802 /* PopupViewController.swift */,
+				F234763224680D75004C8363 /* GameSettingPopup.swift */,
+				F2347630246809C5004C8363 /* GameOverPopup.swift */,
+			);
+			path = Popup;
+			sourceTree = "<group>";
+		};
+		8CD60302246ED85300003447 /* Ranking */ = {
+			isa = PBXGroup;
+			children = (
+				8C2C72772467A58C00883388 /* RankingViewController.swift */,
+				8C2C727B2467A79700883388 /* RankingTableView.swift */,
+				8C2C72812467ACD300883388 /* RankingCellModel.swift */,
+				8C2C727D2467A7A500883388 /* Subviews */,
+			);
+			path = Ranking;
 			sourceTree = "<group>";
 		};
 		9ABBD60AE1D01816F1BBF25E /* Pods */ = {
@@ -198,26 +226,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		F22F85602465A31B00493BB6 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				F23476362468518B004C8363 /* CustomButton */,
-				8C6EC7472467E38900612802 /* Popup */,
-				8C2C72792467A6ED00883388 /* Rank */,
-				F2A6E6842466FF5600970D1B /* Board */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		F22F85612465A32500493BB6 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				8CD60302246ED85300003447 /* Ranking */,
+				8CD60301246ED84E00003447 /* Popup */,
+				8CD60300246ED83100003447 /* PlayingGame */,
+				8CD602FF246ED82800003447 /* Home */,
 				8C5FA0B7246AE693005D33E0 /* Login */,
-				F2C0607D246566B5001FAD58 /* HomeViewController.swift */,
-				F22F85692465B55400493BB6 /* PlayingGameViewController.swift */,
-				F2347630246809C5004C8363 /* GameOverPopup.swift */,
-				F234763224680D75004C8363 /* GameSettingPopup.swift */,
-				8C2C72772467A58C00883388 /* RankingViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -324,15 +340,10 @@
 			children = (
 				F28098BB246AE2060060693D /* Manager */,
 				F28098BA246AE1EF0060693D /* Resouces */,
-				F27454F0246A718E0037A8BA /* MusicComponent */,
+				8CC6DB45246B8F940017B60A /* Common */,
 				8C73DB8A246AA8C20095FE8A /* Core */,
-				F2347612246726BA004C8363 /* Model */,
-				F22F85622465A33300493BB6 /* Utilities */,
 				F22F85612465A32500493BB6 /* ViewControllers */,
-				F22F85602465A31B00493BB6 /* Views */,
 				F2C06079246566B5001FAD58 /* AppDelegate.swift */,
-				F2C0607B246566B5001FAD58 /* SceneDelegate.swift */,
-				F2C0607F246566B5001FAD58 /* Main.storyboard */,
 				F28098C6246B0D2E0060693D /* Assets.xcassets */,
 				F22F858924669BC200493BB6 /* setting.png */,
 				F2C06084246566B7001FAD58 /* LaunchScreen.storyboard */,
@@ -409,7 +420,6 @@
 				F2C06086246566B7001FAD58 /* LaunchScreen.storyboard in Resources */,
 				F28098C5246B02C00060693D /* SnesItalic-vmAPZ.ttf in Resources */,
 				F28098C7246B0D2E0060693D /* Assets.xcassets in Resources */,
-				F2C06081246566B5001FAD58 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,6 +483,8 @@
 				F2A6E68A2466FF5600970D1B /* LevelStore.swift in Sources */,
 				8CC6DB44246B8E470017B60A /* Collection+Extension.swift in Sources */,
 				8CC6DB42246B8E160017B60A /* Dictionary+Extension.swift in Sources */,
+				8C8BA174246E707900A73046 /* UIImageView+Extension.swift in Sources */,
+				8C7ABAB6246D5AE900063AE4 /* Utils.swift in Sources */,
 				F22F85882466940900493BB6 /* StaticFunctions.swift in Sources */,
 				F234763324680D75004C8363 /* GameSettingPopup.swift in Sources */,
 				F22F85682465AF2100493BB6 /* ZButton.swift in Sources */,
@@ -491,26 +503,18 @@
 				F2A6E6912467029300970D1B /* LevelModel.swift in Sources */,
 				8C6EC7442467DE8E00612802 /* ZPopup.swift in Sources */,
 				F28098BD246AE2410060693D /* GameSettingManager.swift in Sources */,
-				F2C0607C246566B5001FAD58 /* SceneDelegate.swift in Sources */,
 				F2A6E68D2466FF5600970D1B /* BoardDataSource.swift in Sources */,
 				8CC6DB40246B8D380017B60A /* ZaloUser.swift in Sources */,
 				8C73DB8D246AA8E40095FE8A /* ZaloSDKApiWrapper.swift in Sources */,
 				F2A6E68C2466FF5600970D1B /* BoardCollectionView.swift in Sources */,
 				F234761124671FE1004C8363 /* ColorCellModel.swift in Sources */,
+				8C34F005246E914600E156FD /* ZaloService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		F2C0607F246566B5001FAD58 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F2C06080246566B5001FAD58 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		F2C06084246566B7001FAD58 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

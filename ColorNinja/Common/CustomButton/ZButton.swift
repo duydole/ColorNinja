@@ -27,9 +27,5 @@ class ZButton: UIButton {
         self.titleLabel!.font = UIFont.systemFont(ofSize: Constants.HomeScreen.buttonFontSize, weight: .bold)
         let buttonSize : CGSize = self.sizeThatFits(Constants.Screen.size)
         self.layer.cornerRadius = buttonSize.height/2
-        
-        self.snp.makeConstraints { (make) in
-            make.width.equalTo(Constants.HomeScreen.buttonWidth)
-        }
     }
 }

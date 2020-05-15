@@ -27,6 +27,7 @@ struct Constants {
         static let appName = "Color Ninja"
         static let appNameColor : UIColor = .white
         static let iconWidth : CGFloat = 200
+        static let avatarWidth : CGFloat = 100
         static let standardPadding : CGFloat = 10
         static let appNameLabelHeight : CGFloat = 50
         static let appNameFontSize : CGFloat = 50
