@@ -30,3 +30,7 @@ public func showMiniLoading(onView view: UIView) {
     SVProgressHUD.setContainerView(view)
     SVProgressHUD.show()
 }
+
+public func hideLoading() {
+    SVProgressHUD.dismiss()
+}

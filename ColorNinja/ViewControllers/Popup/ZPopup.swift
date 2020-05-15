@@ -17,7 +17,7 @@ class ZPopup: NSObject {
     class func showPopup() {
         
         ZPopup.popupWindow = UIWindow(frame: UIScreen.main.bounds)
-        ZPopup.popupWindow.backgroundColor = .darkGray
+        ZPopup.popupWindow.backgroundColor = .clear
         ZPopup.popupWindow.windowLevel = .statusBar
         
         // make popup view
@@ -26,11 +26,11 @@ class ZPopup: NSObject {
         popUpView.layer.cornerRadius = 9
         popUpView.backgroundColor = .white
         ZPopup.popupWindow.addSubview(popUpView)
-//        popUpView.snp.makeConstraints { (make) in
-//            make.center.equalToSuperview()
-//            make.width.equalTo(300)
-//            make.height.equalTo(400)
-//        }
+        popUpView.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+            make.width.equalTo(300)
+            make.height.equalTo(400)
+        }
         ZPopup.popupWindow.makeKeyAndVisible()
         print("")
     }

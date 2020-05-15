@@ -27,7 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if ZaloService.sharedInstance.isLoginZalo() {
             homeVC.modalPresentationStyle = .fullScreen
-            loginVC.present(homeVC, animated: true, completion: nil)
+            showMiniLoading(onView: loginVC.view)
+            loginVC.present(homeVC, animated: true) {
+                hideLoading()
+            }
         }
         
 //        Thread.sleep(forTimeInterval: 1.0)
