@@ -27,7 +27,8 @@ class HomeViewController: BaseViewController {
     
     // MARK: Setup views
     
-    private func setupViews() {
+    override func setupViews() {
+        super.setupViews()
         
         self.setupBackgroundImage()
         self.addAvatarView()
@@ -35,9 +36,9 @@ class HomeViewController: BaseViewController {
         self.addStartButton()
         self.addStart2PlayersButton()
         self.addRankingButton()
-        
-        // Admob
+        #if !DEBUG
         self.setupBannerAd()
+        #endif
     }
     
     private func setupBackgroundImage() {

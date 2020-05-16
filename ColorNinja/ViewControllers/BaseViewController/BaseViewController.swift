@@ -12,6 +12,7 @@ import UIKit
 class BaseViewController : UIViewController {
     
     var exitButton : UIButton!
+    var settingButton : UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +21,12 @@ class BaseViewController : UIViewController {
     
     override func loadView() {
         super.loadView()
+        self.setupViews()
+    }
+    
+    func setupViews() {
         self.setupExitButton()
+        self.setupSettingButton()
     }
     
     private func setupExitButton() {
@@ -36,7 +42,26 @@ class BaseViewController : UIViewController {
         }
     }
     
+    private func setupSettingButton() {
+        settingButton = UIButton()
+        self.view.addSubview(settingButton)
+        settingButton.setImage(UIImage(named: Constants.GameScreen.settingImageName)?.withRenderingMode(.alwaysTemplate), for: .normal)
+        settingButton.addTarget(self, action: #selector(didTapSettingButton), for: .touchUpInside)
+        settingButton.imageView?.tintColor = Constants.GameScreen.buttonTintColor
+        settingButton.snp.makeConstraints { (make) in
+            make.width.height.equalTo(Constants.GameScreen.settingButtonWidth)
+            make.top.equalTo(Constants.GameScreen.topInset)
+            make.leading.equalTo(Constants.GameScreen.leftInset)
+        }
+    }
+
     @objc private func didTapExitButton() {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func didTapSettingButton() {        
+        let gameSettingPopup = GameSettingPopup()
+        gameSettingPopup.modalPresentationStyle = .overCurrentContext
+        self.present(gameSettingPopup, animated: false, completion: nil)
     }
 }

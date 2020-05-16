@@ -13,7 +13,6 @@ import AudioToolbox
 
 class PlayingGameViewController : BaseViewController {
     
-    var settingButton : UIButton!
     var levelCountLabel : UILabel!
     var appImage : UIImageView!
     var remainTimeLabel : UILabel!
@@ -34,7 +33,6 @@ class PlayingGameViewController : BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,34 +85,18 @@ class PlayingGameViewController : BaseViewController {
     
     // MARK: - Setup views
     
-    private func setupViews() {
-        self.setupSettingButton()
+    override func setupViews() {
+        super.setupViews()
+        
         self.setupLabelsContainer()
         self.setupLevelViews()
         self.setupAppImageView()
         self.setupTimerView()
         self.setupCollectionViews()
-        
-        // ReadyView
-        self.setupReadyView()
-        
-        // CollectionView
+        self.setupReadyView()        
         self.setupBoardCollectionView()
     }
-    
-    private func setupSettingButton() {
-        settingButton = UIButton()
-        self.view.addSubview(settingButton)
-        settingButton.setImage(UIImage(named: Constants.GameScreen.settingImageName)?.withRenderingMode(.alwaysTemplate), for: .normal)
-        settingButton.addTarget(self, action: #selector(didTapSettingButton), for: .touchUpInside)
-        settingButton.imageView?.tintColor = Constants.GameScreen.buttonTintColor
-        settingButton.snp.makeConstraints { (make) in
-            make.width.height.equalTo(Constants.GameScreen.settingButtonWidth)
-            make.top.equalTo(Constants.GameScreen.topInset)
-            make.leading.equalTo(Constants.GameScreen.leftInset)
-        }
-    }
-        
+            
     private func setupLabelsContainer() {
         labelsContainer = UIView()
         self.view.addSubview(labelsContainer)
@@ -323,7 +305,8 @@ class PlayingGameViewController : BaseViewController {
 
     // MARK: - Event handler
     
-    @objc private func didTapSettingButton() {
+    @objc override func didTapSettingButton() {
+        
         // PauseTimer
         self.pauseGame()
         
@@ -335,7 +318,7 @@ class PlayingGameViewController : BaseViewController {
             self.resumeGame()
         }
     }
-    
+
     // MARK: - Handle Audio
     
     private func vibrateDevice() {
