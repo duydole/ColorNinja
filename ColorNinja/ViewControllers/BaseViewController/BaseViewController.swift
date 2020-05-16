@@ -59,7 +59,7 @@ class BaseViewController : UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @objc func didTapSettingButton() {        
+    @objc func didTapSettingButton() {
         let gameSettingPopup = GameSettingPopup()
         gameSettingPopup.modalPresentationStyle = .overCurrentContext
         self.present(gameSettingPopup, animated: false, completion: nil)

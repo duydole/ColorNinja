@@ -11,19 +11,13 @@ import UIKit
 import CoreGraphics
 import AudioToolbox
 
-class PlayingGameViewController : BaseViewController {
+class SinglePlayerViewController : BaseGameViewController {
     
     var levelCountLabel : UILabel!
     var appImage : UIImageView!
     var remainTimeLabel : UILabel!
-    var labelsContainer : UIView!
-    var readyLabel : UILabel!
-    var readyListString : [String] = ["3","2","1","Go!"]
     
     var remainingTime : TimeInterval = 2.0
-    var boardContainer : UIView!
-    var boardCollectionView : BoardCollectionView!
-    let boardDataSource: BoardDataSource = BoardDataSource()
     var shrinkCell : Bool = true
     var timer : Timer!
     
@@ -53,25 +47,6 @@ class PlayingGameViewController : BaseViewController {
     
     // MARK: - Handle Animations
     
-    private func animationReadyView(index: Int, completion: ((Bool) -> ())? ) {
-        
-        if index > self.readyListString.count - 1 {
-            completion!(true)
-            return
-        }
-        
-        self.readyLabel.text = readyListString[index]
-        UIView.animate(withDuration: 0.35, delay: 0.0, options: .curveEaseInOut, animations: {
-            self.readyLabel.alpha = 1.0
-            self.readyLabel.transform = CGAffineTransform(scaleX: 0.4, y: 0.4)
-        }) { (success) in
-            Thread.sleep(forTimeInterval: 0.3)
-            self.readyLabel.transform = CGAffineTransform(scaleX: 1/0.4, y: 1/0.4)
-            self.readyLabel.alpha = 0.0
-            self.animationReadyView(index: index + 1, completion: completion)
-        }
-    }
-    
     private func zoomX2LabelAnimation(label: UILabel, text: String) {
         label.text = text
         UIView.animate(withDuration: 0.2, animations: {
@@ -88,26 +63,12 @@ class PlayingGameViewController : BaseViewController {
     override func setupViews() {
         super.setupViews()
         
-        self.setupLabelsContainer()
         self.setupLevelViews()
         self.setupAppImageView()
         self.setupTimerView()
         self.setupCollectionViews()
-        self.setupReadyView()        
-        self.setupBoardCollectionView()
     }
-            
-    private func setupLabelsContainer() {
-        labelsContainer = UIView()
-        self.view.addSubview(labelsContainer)
-        labelsContainer.snp.makeConstraints { (make) in
-            make.top.equalTo(settingButton.snp.bottom).offset(Constants.GameScreen.LabelsContainer.margins.top)
-            make.leading.equalTo(Constants.GameScreen.LabelsContainer.margins.left)
-            make.trailing.equalTo(-Constants.GameScreen.LabelsContainer.margins.right)
-            make.height.equalTo(Constants.GameScreen.LabelsContainer.height)
-        }
-    }
-    
+
     private func setupLevelViews() {
         
         // Level
@@ -116,22 +77,22 @@ class PlayingGameViewController : BaseViewController {
         levelLabel.textAlignment = .center
         levelLabel.textColor = Constants.GameScreen.LabelsContainer.textColor
         levelLabel.font = UIFont.systemFont(ofSize: Constants.GameScreen.LabelsContainer.fontSize, weight: .bold)
-        labelsContainer.addSubview(levelLabel)
+        topContainer.addSubview(levelLabel)
         levelLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(labelsContainer)
-            make.leading.equalTo(labelsContainer)
+            make.top.equalTo(topContainer)
+            make.leading.equalTo(topContainer)
         }
         
         // Level Count
         levelCountLabel = UILabel()
-        labelsContainer.addSubview(levelCountLabel)
+        topContainer.addSubview(levelCountLabel)
         levelCountLabel.text = "1"
         levelCountLabel.textAlignment = .center
         levelCountLabel.textColor = .white
         levelCountLabel.font = UIFont.systemFont(ofSize: Constants.GameScreen.LabelsContainer.fontSize, weight: .bold)
         levelCountLabel.snp.makeConstraints { (make) in
             make.top.equalTo(levelLabel.snp.bottom)
-            make.leading.equalTo(labelsContainer)
+            make.leading.equalTo(topContainer)
             make.centerX.equalTo(levelLabel.snp.centerX)
         }
     }
@@ -148,15 +109,15 @@ class PlayingGameViewController : BaseViewController {
         timeLabel.textAlignment = .center
         timeLabel.textColor = Constants.GameScreen.LabelsContainer.textColor
         timeLabel.font = UIFont.systemFont(ofSize: Constants.GameScreen.LabelsContainer.fontSize, weight: .bold)
-        labelsContainer.addSubview(timeLabel)
+        topContainer.addSubview(timeLabel)
         timeLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(labelsContainer)
-            make.trailing.equalTo(labelsContainer)
+            make.top.equalTo(topContainer)
+            make.trailing.equalTo(topContainer)
         }
         
         // Remain Time
         remainTimeLabel = UILabel()
-        labelsContainer.addSubview(remainTimeLabel)
+        topContainer.addSubview(remainTimeLabel)
         remainTimeLabel.text = self.currentRemainTimeString()
         remainTimeLabel.textColor = .white
         remainTimeLabel.font = UIFont.systemFont(ofSize: Constants.GameScreen.LabelsContainer.fontSize, weight: .bold)
@@ -168,46 +129,6 @@ class PlayingGameViewController : BaseViewController {
     
     private func setupCollectionViews() {
         
-    }
-    
-    private func setupReadyView() {
-        readyLabel = UILabel()
-        self.view.addSubview(readyLabel)
-        readyLabel.textAlignment = .center
-        readyLabel.textColor = Constants.GameScreen.ReadyView.textColor
-        readyLabel.font = UIFont.systemFont(ofSize: Constants.GameScreen.ReadyView.fontSize, weight: .heavy)
-        readyLabel.alpha = 0.0
-        readyLabel.snp.makeConstraints { (make) in
-            make.center.equalTo(self.view)
-        }
-    }
-    
-    private func setupBoardCollectionView() {
-        
-        // Container
-        boardContainer = UIView()
-        self.view.addSubview(boardContainer)
-        boardContainer.snp.makeConstraints { (make) in
-            make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(self.labelsContainer.snp.bottom)
-        }
-        
-        // Board
-        let flowLayout = BoardCollectionViewFlowLayout()
-        flowLayout.minimumInteritemSpacing = 0.0
-        flowLayout.minimumLineSpacing = Constants.GameScreen.BoardCollectionView.spacingBetweenCells
-        boardCollectionView = BoardCollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        boardContainer.addSubview(boardCollectionView)
-        boardCollectionView.alpha = 0.0
-        boardCollectionView.backgroundColor = .clear
-        boardCollectionView.dataSource = boardDataSource
-        boardCollectionView.delegate = self
-        boardCollectionView.register(ColorCollectionViewCell.self, forCellWithReuseIdentifier: Constants.GameScreen.BoardCollectionView.cellId)
-        let boardWidth = Constants.GameScreen.BoardCollectionView.boardWidth
-        boardCollectionView.snp.makeConstraints { (make) in
-            make.center.equalToSuperview()
-            make.width.height.equalTo(boardWidth)
-        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -342,7 +263,7 @@ class PlayingGameViewController : BaseViewController {
 
 // MARK: - CollectionView Delegate
 
-extension PlayingGameViewController : UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension SinglePlayerViewController {
     
     // MARK: - Delegate
     
@@ -389,7 +310,7 @@ extension PlayingGameViewController : UICollectionViewDelegate, UICollectionView
 
 // MARK: - GameOverPopup Delegate
 
-extension PlayingGameViewController: GameOverPopupDelegate {
+extension SinglePlayerViewController: GameOverPopupDelegate {
     
     func didTapGoHomeButton() {
         self.dismiss(animated: false, completion: nil)

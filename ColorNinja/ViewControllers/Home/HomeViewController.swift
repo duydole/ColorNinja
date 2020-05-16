@@ -131,7 +131,7 @@ class HomeViewController: BaseViewController {
     // MARK: Action handler
     
     @objc private func didTapStartButton() {
-        let gameVC = PlayingGameViewController()
+        let gameVC = SinglePlayerViewController()
         gameVC.modalPresentationStyle = .fullScreen
         self.present(gameVC, animated: false, completion: nil)
     }
