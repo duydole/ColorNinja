@@ -14,7 +14,8 @@ class LoginViewController: UIViewController {
     
     let iconImageView: UIImageView = UIImageView()
     let appNameLabel: UILabel = UILabel()
-    let startGuestButton: UIButton = UIButton()
+    let singlePlayerButton: UIButton = UIButton()
+    let multiPlayerButton: UIButton = UIButton()
     let loginButton: UIButton = UIButton()
     
     override func viewDidLoad() {
@@ -27,51 +28,67 @@ class LoginViewController: UIViewController {
     private func setupViews() {
         self.view.backgroundColor = Constants.HomeScreen.backgroundColor
         
-        self.addAppIconView()
         self.addAppNameLabel()
-        self.addStartGuestButton()
-        self.addLoginButton()
-        
+        self.addAppIconView()
+        self.add1PlayerButton()
+        self.add2PlayerButton()
+    }
+    
+    private func addAppNameLabel() {
+        self.view.addSubview(appNameLabel)
+        appNameLabel.text = Constants.HomeScreen.appName
+        appNameLabel.textAlignment = NSTextAlignment.center
+        appNameLabel.font = UIFont(name: Font.squirk, size: 60)
+        appNameLabel.textColor = Constants.HomeScreen.appNameColor
+        appNameLabel.makeShadow()
+        appNameLabel.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(150)
+        }
     }
     
     private func addAppIconView() {
         iconImageView.image = UIImage(named: Constants.HomeScreen.ninjaImageName)
         self.view.addSubview(iconImageView)
         iconImageView.snp.makeConstraints { (make) in
-            make.top.equalTo(Constants.HomeScreen.paddingTopOfIcon)
+            make.top.equalTo(appNameLabel.snp.bottom).offset(20)
             make.width.height.equalTo(Constants.HomeScreen.iconWidth)
             make.centerX.equalTo(self.view)
         }
     }
     
-    private func addAppNameLabel() {
-        self.view.addSubview(appNameLabel)
-        appNameLabel.snp.makeConstraints { (make) in
-            make.height.equalTo(Constants.HomeScreen.appNameLabelHeight)
-            make.centerX.equalTo(self.view)
-            make.bottom.equalTo(iconImageView).offset(Constants.HomeScreen.appNameLabelHeight + Constants.HomeScreen.standardPadding)
+    private func add1PlayerButton() {
+        singlePlayerButton.setTitle("1 Player", for: .normal)
+        singlePlayerButton.backgroundColor = .black
+        singlePlayerButton.titleLabel!.font = UIFont(name: Font.squirk, size: 30)
+        singlePlayerButton.layer.cornerRadius = 13
+        singlePlayerButton.makeShadow()
+        self.view.addSubview(singlePlayerButton)
+        singlePlayerButton.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(iconImageView.snp.bottom).offset(100)
+            make.width.equalTo(227)
+            make.height.equalTo(52)
         }
         
-        appNameLabel.text = Constants.HomeScreen.appName
-        appNameLabel.textAlignment = NSTextAlignment.center
-        appNameLabel.font = appNameLabel.font.withSize(Constants.HomeScreen.appNameFontSize)
-        appNameLabel.textColor = Constants.HomeScreen.appNameColor
+        singlePlayerButton.addTarget(self, action: #selector(didTapSinglePlayerButton), for: .touchUpInside)
     }
-    
-    private func addStartGuestButton() {
-        startGuestButton.setTitle("Guest", for: .normal)
-        startGuestButton.backgroundColor = .orange
-        startGuestButton.titleLabel!.font = UIFont.systemFont(ofSize: 30, weight: .bold)
-        startGuestButton.layer.cornerRadius = 30
-        self.view.addSubview(startGuestButton)
-        startGuestButton.snp.makeConstraints { (make) in
-            make.centerX.equalTo(self.view)
-            make.top.equalTo(appNameLabel.snp.bottom).offset(100)
-            make.width.equalTo(280)
-            make.height.equalTo(60)
+
+    private func add2PlayerButton() {
+        multiPlayerButton.setTitle("2 Player", for: .normal)
+        multiPlayerButton.backgroundColor = .black
+        multiPlayerButton.titleLabel!.font = UIFont(name: Font.squirk, size: 30)
+        multiPlayerButton.layer.cornerRadius = 13
+        multiPlayerButton.makeShadow()
+        self.view.addSubview(multiPlayerButton)
+        multiPlayerButton.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(singlePlayerButton.snp.bottom).offset(20)
+            make.width.equalTo(singlePlayerButton.snp.width)
+            make.height.equalTo(52)
         }
         
-        startGuestButton.addTarget(self, action: #selector(didTapStartButton), for: .touchUpInside)
+        multiPlayerButton.addTarget(self, action: #selector(didTapMultiPlayerButton), for: .touchUpInside)
     }
     
     private func addLoginButton() {
@@ -82,7 +99,7 @@ class LoginViewController: UIViewController {
         self.view.addSubview(loginButton)
         loginButton.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.top.equalTo(startGuestButton.snp.bottom).offset(30)
+            make.top.equalTo(singlePlayerButton.snp.bottom).offset(30)
             make.width.equalTo(280)
             make.height.equalTo(60)
         }
@@ -113,7 +130,6 @@ class LoginViewController: UIViewController {
         }
     }
     
-    
     @objc private func didTapProfile() {
 //        ZaloSDKApiWrapper.sharedInstance.loadZaloUserProfile()
     }
@@ -125,6 +141,17 @@ class LoginViewController: UIViewController {
         ZaloSDKApiWrapper.sharedInstance.shareFeedZalo(feed, andParentVC: self)
     }
     
+    @objc private func didTapSinglePlayerButton() {
+        let gameVC = SinglePlayerViewController()
+        gameVC.modalPresentationStyle = .fullScreen
+        self.present(gameVC, animated: false, completion: nil)
+    }
+   
+    @objc private func didTapMultiPlayerButton() {
+        let multiPlayerVC = MultiPlayerViewController()
+        multiPlayerVC.modalPresentationStyle = .fullScreen
+        self.present(multiPlayerVC, animated: false, completion: nil)
+    }
 }
 
 

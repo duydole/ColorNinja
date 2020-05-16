@@ -35,6 +35,7 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Squirk-RMvV.ttf</string>
 		<string>SnesItalic-vmAPZ.ttf</string>
 		<string>EvilEmpire-4BBVK.ttf</string>
 	</array>

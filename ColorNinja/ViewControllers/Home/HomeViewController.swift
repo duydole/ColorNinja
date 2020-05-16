@@ -123,11 +123,7 @@ class HomeViewController: BaseViewController {
             make.height.equalTo(100)
         }
     }
-        
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-        
+                
     // MARK: Action handler
     
     @objc private func didTapStartButton() {

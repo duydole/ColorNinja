@@ -25,6 +25,12 @@ class MultiPlayerViewController : BaseGameViewController {
         super.viewDidLoad()
         client = ClientSocket(connectWithHost: "119.82.135.105", port: 8080)
         client.delegate = self
+        
+
+//        // Test
+        LevelStore.shared.setColorForAllLevels()
+        currentLevel = LevelStore.shared.allLevels[0]
+        showCurrentLevel()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -96,18 +102,23 @@ class MultiPlayerViewController : BaseGameViewController {
     // MARK: - Communication with Server
     
     private func requirePlayerKeyFromServer(_ json: Dictionary<String, Any>) {
-        print("duydl: Send to server PlayerKey")
-        let data: Dictionary = [
-            "type": "get_key",
-            "key": UUID().uuidString
-        ]
-        let encoder = JSONEncoder()
-        if let jsonData = try? encoder.encode(data) {
-            if let jsonString = String(data: jsonData, encoding: .utf8) {
-                let message = jsonString + " "
-                client.sendToServer(message: message)
-            }
-        }
+        
+        let jsonString = "{\"type\":\(ClientSendType.SendRequiredKey.rawValue),\"key\":\"\(UUID().uuidString)\"} "
+        client.sendToServer(message: jsonString)
+
+//        let dic: Dictionary<String, Any> = [
+//            "type": ServerRespondeType.RequirePlayerKey.rawValue,
+//            "key": UUID().uuidString
+//        ]
+//
+//
+//        let encoder = JSONEncoder()
+//        if let jsonData = try? encoder.encode(data) {
+//            if let jsonString = String(data: jsonData, encoding: .utf8) {
+//                let message = jsonString + " "
+//                client.sendToServer(message: message)
+//            }
+//        }
     }
     
     private func waitingAnotherPlayerFromServer(_ json: Dictionary<String, Any>) {
@@ -115,7 +126,15 @@ class MultiPlayerViewController : BaseGameViewController {
     }
     
     private func serverSendBoardGame(_ json: Dictionary<String, Any>) {
-        self.startAnimationReadyView(withList: ["Matched", "3", "2", "1", "Go"], completion: nil)
+        self.startAnimationReadyView(withList: ["Matched", "3", "2", "1", "Go"]) { (done) in
+            self.currentLevel  = self.jsonToLevelModel(json)
+            self.showCurrentLevel()
+        }
+    }
+    
+    
+    private func jsonToLevelModel(_ json: Dictionary<String, Any>) -> LevelModel {
+        return LevelModel(levelIndex: 1)
     }
 }
 

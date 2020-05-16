@@ -23,7 +23,13 @@ class LevelModel {
     
     let numberOfRows : Int
     
-    var cellWidth : CGFloat = 0
+    lazy var cellWidth : CGFloat = {
+        let N: CGFloat = CGFloat(self.numberOfRows)
+        let spacing: CGFloat = Constants.GameScreen.BoardCollectionView.spacingBetweenCells
+        let boardWidth: CGFloat = Constants.GameScreen.BoardCollectionView.boardWidth
+        let itemWidth = (boardWidth - (N - 1) * spacing) / N
+        return itemWidth
+    }()
     
     var mainColor : UIColor!
     

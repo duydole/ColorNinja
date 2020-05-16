@@ -8,11 +8,22 @@
 
 import Foundation
 
-enum ServerRespondeType {
-    case Unknown
-    case RequirePlayerKey
-    case WaitingAnotherPlayer
-    case BoardGame
+enum ServerRespondeType: Int {
+    case UnknownRequest = -5
+    case UnknownRequestAfterConnect = -4
+    case RoundExpried = -3
+    case PlayerExist = -2
+    case ErrorKey = -1
+    case WaitingAnotherPlayer = 1
+    case RequirePlayerKey = 2
+    case BoardGame = 4
+}
+
+enum ClientSendType: Int {
+    case Win = 0
+    case Loose = 1
+    case SendRequiredKey = 2
+    case CloseConnect = 3
 }
 
 protocol ClientDelegate {
@@ -45,15 +56,27 @@ class ClientSocket : NSObject, StreamDelegate {
     // MARK: - Public methods
     
     func respondeTypeOf(json: Dictionary<String, Any>) -> ServerRespondeType {
-        let typeString = json["type"] as! String
-        if typeString == "require_key" {
-            return .RequirePlayerKey
-        } else if (typeString == "wating_player") {
+        let type = json["type"] as! Int
+        
+        if type == -5 {
+            return .UnknownRequest
+        } else if type == -4 {
             return .WaitingAnotherPlayer
-        } else if (typeString == "board_game") {
+        } else if type == -3 {
+            return .RoundExpried
+        } else if type == -2 {
+            return .PlayerExist
+        } else if type == -1 {
+            return .ErrorKey
+        } else if type == 2 {
+            return .RequirePlayerKey
+        } else if type == 1 {
+            return .WaitingAnotherPlayer
+        } else if type == 4 {
             return .BoardGame
         }
-        return .Unknown
+        
+        return .UnknownRequest
     }
     
     func sendToServer(message: String) {
@@ -66,7 +89,12 @@ class ClientSocket : NSObject, StreamDelegate {
                 return -1
             }
             print("CLIENT: \(message)")
-            return outputStream.write(pointer, maxLength: data.count)
+            if outputStream.hasSpaceAvailable {
+                return outputStream.write(pointer, maxLength: data.count)
+            } else {
+                print("duydl: OutputStream has availableSpace is NO")
+                return -1
+            }
         }
     }
     
@@ -125,8 +153,8 @@ class ClientSocket : NSObject, StreamDelegate {
                 } catch let error as NSError {
                     print(error)
                 }
-                
-                
+            } else {
+                print("duydl: Error")
             }
         }
     }

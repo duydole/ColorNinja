@@ -16,19 +16,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="applaunchimage" translatesAutoresizingMaskIntoConstraints="NO" id="v8j-dd-Usv">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchimage" translatesAutoresizingMaskIntoConstraints="NO" id="uzP-UB-STt">
                                 <rect key="frame" x="69.5" y="361" width="275" height="174"/>
-                                <color key="backgroundColor" red="0.066666666669999999" green="0.070588235289999995" blue="0.17574077069999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="174" id="kfd-Za-4KK"/>
-                                    <constraint firstAttribute="width" constant="275" id="rch-6n-87P"/>
+                                    <constraint firstAttribute="height" constant="174" id="Ddb-U8-s1x"/>
+                                    <constraint firstAttribute="width" constant="275" id="gWj-JX-XxP"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="zistudio" translatesAutoresizingMaskIntoConstraints="NO" id="Vm7-hD-IMK">
+                                <rect key="frame" x="252" y="796" width="126" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="126" id="2vO-Ez-Y4o"/>
+                                    <constraint firstAttribute="height" constant="30" id="qAx-6A-Rcj"/>
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.066666666666666666" green="0.26666666666666666" blue="0.50588235294117645" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="1" green="0.17254901960784313" blue="0.17254901960784313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="v8j-dd-Usv" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="0Xq-lu-oSd"/>
-                            <constraint firstItem="v8j-dd-Usv" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="w0x-xV-f5J"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Vm7-hD-IMK" secondAttribute="bottom" constant="36" id="1vl-X0-2xd"/>
+                            <constraint firstItem="uzP-UB-STt" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="WUP-KI-TrN"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Vm7-hD-IMK" secondAttribute="trailing" constant="36" id="ff7-vn-uRg"/>
+                            <constraint firstItem="uzP-UB-STt" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="mzs-xN-Rd3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -39,6 +47,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="applaunchimage" width="275" height="174"/>
+        <image name="launchimage" width="275" height="174"/>
+        <image name="zistudio" width="105" height="19"/>
     </resources>
 </document>

@@ -59,6 +59,7 @@
 		F2C0607A246566B5001FAD58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C06079246566B5001FAD58 /* AppDelegate.swift */; };
 		F2C0607E246566B5001FAD58 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C0607D246566B5001FAD58 /* HomeViewController.swift */; };
 		F2C06086246566B7001FAD58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2C06084246566B7001FAD58 /* LaunchScreen.storyboard */; };
+		F2EAD8542470429400B2D6B9 /* Squirk-RMvV.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F2EAD8532470429400B2D6B9 /* Squirk-RMvV.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -118,6 +119,7 @@
 		F2C0607D246566B5001FAD58 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F2C06085246566B7001FAD58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F2C06087246566B7001FAD58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2EAD8532470429400B2D6B9 /* Squirk-RMvV.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Squirk-RMvV.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,13 +201,13 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
-		8CD60300246ED83100003447 /* PlayingGame */ = {
+		8CD60300246ED83100003447 /* 1Player */ = {
 			isa = PBXGroup;
 			children = (
 				F22F85692465B55400493BB6 /* SinglePlayerViewController.swift */,
 				F2A6E6842466FF5600970D1B /* Board */,
 			);
-			path = PlayingGame;
+			path = 1Player;
 			sourceTree = "<group>";
 		};
 		8CD60301246ED84E00003447 /* Popup */ = {
@@ -246,7 +248,7 @@
 				F263FDB6246F943D00A4AB0B /* 2Player */,
 				8CD60302246ED85300003447 /* Ranking */,
 				8CD60301246ED84E00003447 /* Popup */,
-				8CD60300246ED83100003447 /* PlayingGame */,
+				8CD60300246ED83100003447 /* 1Player */,
 				8CD602FF246ED82800003447 /* Home */,
 				8C5FA0B7246AE693005D33E0 /* Login */,
 			);
@@ -344,6 +346,7 @@
 			children = (
 				F28098C4246B02C00060693D /* SnesItalic-vmAPZ.ttf */,
 				F28098C2246B02A80060693D /* EvilEmpire-4BBVK.ttf */,
+				F2EAD8532470429400B2D6B9 /* Squirk-RMvV.ttf */,
 			);
 			path = Font;
 			sourceTree = "<group>";
@@ -458,6 +461,7 @@
 				F27454F8246A76470037A8BA /* incorrectsound.mp3 in Resources */,
 				F27454F6246A74660037A8BA /* correctsound.wav in Resources */,
 				F27454F4246A72F80037A8BA /* bgmusic.mp3 in Resources */,
+				F2EAD8542470429400B2D6B9 /* Squirk-RMvV.ttf in Resources */,
 				F22F858A24669BC200493BB6 /* setting.png in Resources */,
 				F2C06086246566B7001FAD58 /* LaunchScreen.storyboard in Resources */,
 				F28098C5246B02C00060693D /* SnesItalic-vmAPZ.ttf in Resources */,

@@ -18,15 +18,13 @@ class SinglePlayerViewController : BaseGameViewController {
     var remainTimeLabel : UILabel!
     
     var remainingTime : TimeInterval = 2.0
-    var shrinkCell : Bool = true
     var timer : Timer!
-    
-    var currentLevel : LevelModel = LevelStore.shared.allLevels[0]
-    
+        
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        currentLevel = LevelStore.shared.allLevels[0]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,7 +35,6 @@ class SinglePlayerViewController : BaseGameViewController {
         
         // Animation ReadyView
         self.startAnimationReadyView(withList: ["Ready","3","2","1","Go!"]) { (done) in
-            self.currentLevel.cellWidth = self.cellWidthOfLevel(level: self.currentLevel)
             self.showCurrentLevel()
             if self.presentedViewController == nil {
                 self.startTimer()
@@ -64,8 +61,6 @@ class SinglePlayerViewController : BaseGameViewController {
         super.setupViews()
         
         self.setupViewsInTopContainer()
-        self.setupAppImageView()
-        self.setupCollectionViews()
     }
 
     private func setupViewsInTopContainer() {
@@ -105,18 +100,6 @@ class SinglePlayerViewController : BaseGameViewController {
             make.top.equalTo(timeLabel.snp.bottom)
             make.left.equalTo(timeLabel.snp.left)
         }
-    }
-    
-    private func setupAppImageView() {
-        
-    }
-    
-    private func setupCollectionViews() {
-        
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        .lightContent
     }
     
     // MARK: - Handle Timer
@@ -168,21 +151,6 @@ class SinglePlayerViewController : BaseGameViewController {
         self.present(gameOverPopup, animated: false, completion: nil)
     }
     
-    private func showCurrentLevel() {
-        
-        // Update level for DataSource
-        boardDataSource.levelModel = currentLevel
-        
-        // ReloadData
-        self.boardCollectionView.reloadData()
-        self.boardCollectionView.layoutIfNeeded()
-        
-        // ReloadItems to gain animations:
-        self.boardCollectionView.alpha = 1.0
-        self.shrinkCell = false
-        self.boardCollectionView.reloadItems(at: self.boardCollectionView.indexPathsForVisibleItems)
-    }
-    
     private func pauseGame() {
         self.pauseTimer()
     }
@@ -232,14 +200,6 @@ class SinglePlayerViewController : BaseGameViewController {
     
     // MARK: - Getter
     
-    private func cellWidthOfLevel(level: LevelModel) -> CGFloat {
-        let N: CGFloat = CGFloat(level.numberOfRows)
-        let spacing: CGFloat = Constants.GameScreen.BoardCollectionView.spacingBetweenCells
-        let boardWidth: CGFloat = Constants.GameScreen.BoardCollectionView.boardWidth
-        let itemWidth = (boardWidth - (N - 1) * spacing) / N
-        return itemWidth
-    }
-    
     private func currentRemainTimeString() -> String {
         return String(format: "%.2f", self.remainingTime)
     }
@@ -250,11 +210,6 @@ class SinglePlayerViewController : BaseGameViewController {
 extension SinglePlayerViewController {
     
     // MARK: - Delegate
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemWidth = currentLevel.cellWidth
-        return shrinkCell ? .zero : CGSize(width: itemWidth, height: itemWidth)
-    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
@@ -283,7 +238,6 @@ extension SinglePlayerViewController {
         // Update current LevelModel
         let nextLevel = LevelStore.shared.allLevels[currentLevel.levelIndex + 1]
         currentLevel = nextLevel
-        nextLevel.cellWidth = self.cellWidthOfLevel(level: nextLevel)
         
         // Update LevelCount
         self.zoomX2LabelAnimation(label: levelCountLabel, text: "\(nextLevel.levelIndex + 1)")

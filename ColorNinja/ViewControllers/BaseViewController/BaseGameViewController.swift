@@ -18,7 +18,13 @@ class BaseGameViewController : BaseViewController {
     var topContainer : UIView!
     var boardCollectionView : BoardCollectionView!
     let boardDataSource: BoardDataSource = BoardDataSource()
-        
+    var currentLevel : LevelModel!
+    var shrinkCell : Bool = true
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
+
     // MARK: - Public APIs
     
     func startAnimationReadyView(withList listString:[String], completion: ((Bool) -> ())?) {
@@ -47,7 +53,7 @@ class BaseGameViewController : BaseViewController {
             make.center.equalTo(self.view)
         }
     }
-        
+    
     private func setupBoardContainer() {
         
         // Container
@@ -108,11 +114,31 @@ class BaseGameViewController : BaseViewController {
             self.animationReadyView(index: index + 1, completion: completion)
         }
     }
+    
+    // MARK: - GameFlow
+    
+    func showCurrentLevel() {
+        
+        // Update level for DataSource
+        boardDataSource.levelModel = currentLevel
+        
+        // ReloadData
+        self.boardCollectionView.reloadData()
+        self.boardCollectionView.layoutIfNeeded()
+        
+        // ReloadItems to gain animations:
+        self.boardCollectionView.alpha = 1.0
+        self.shrinkCell = false
+        self.boardCollectionView.reloadItems(at: self.boardCollectionView.indexPathsForVisibleItems)
+    }
 }
 
 
 // MARK: - CollectionView Delegate
 
 extension BaseGameViewController : UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let itemWidth = currentLevel.cellWidth
+        return shrinkCell ? .zero : CGSize(width: itemWidth, height: itemWidth)
+    }
 }

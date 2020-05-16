@@ -11,6 +11,7 @@ import UIKit
 
 struct Font {
     static let snesitalic = "SNES-Italic"
+    static let squirk = "Squirk"
 }
 
 struct Constants {
@@ -23,17 +24,17 @@ struct Constants {
     
     struct HomeScreen {
         static let paddingTopOfIcon : CGFloat = Size.statusBarHeight + 100
-        static let ninjaImageName = "ninjaicon"
+        static let ninjaImageName = "appicon"
         static let appName = "Color Ninja"
         static let appNameColor : UIColor = .white
-        static let iconWidth : CGFloat = 200
+        static let iconWidth : CGFloat = 100
         static let avatarWidth : CGFloat = 100
         static let standardPadding : CGFloat = 10
         static let appNameLabelHeight : CGFloat = 50
         static let appNameFontSize : CGFloat = 50
         static let buttonFontSize : CGFloat = 40
         static let buttonWidth : CGFloat = 200
-        static let backgroundColor = NiceColor.backgroundColor1
+        static let backgroundColor = ColorRGB(255, 44, 44)
     }
     
     struct GameScreen {
