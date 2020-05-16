@@ -74,11 +74,7 @@ class SinglePlayerViewController : BaseGameViewController {
         let paddingLeftRight: CGFloat = 30
         
         // Level
-        let levelLabel = UILabel()
-        levelLabel.text = "LEVEL"
-        levelLabel.textAlignment = .center
-        levelLabel.textColor = Constants.GameScreen.LabelsContainer.textColor
-        levelLabel.font = UIFont.systemFont(ofSize: Constants.GameScreen.LabelsContainer.fontSize, weight: .bold)
+        let levelLabel = ViewCreator.createTitleLabelForTopContainer(text: "LEVEL")
         topContainer.addSubview(levelLabel)
         levelLabel.snp.makeConstraints { (make) in
             make.top.equalTo(paddingTop)
@@ -86,12 +82,8 @@ class SinglePlayerViewController : BaseGameViewController {
         }
         
         // Level Count
-        levelCountLabel = UILabel()
+        levelCountLabel = ViewCreator.createSubTitleLabelForTopContainer(text: "1")
         topContainer.addSubview(levelCountLabel)
-        levelCountLabel.text = "1"
-        levelCountLabel.textAlignment = .center
-        levelCountLabel.textColor = .white
-        levelCountLabel.font = UIFont.systemFont(ofSize: Constants.GameScreen.LabelsContainer.fontSize, weight: .bold)
         levelCountLabel.snp.makeConstraints { (make) in
             make.top.equalTo(levelLabel.snp.bottom)
             make.leading.equalTo(topContainer)
@@ -99,27 +91,20 @@ class SinglePlayerViewController : BaseGameViewController {
         }
         
         // Time
-          let timeLabel = UILabel()
-          timeLabel.text = "TIME"
-          timeLabel.textAlignment = .center
-          timeLabel.textColor = Constants.GameScreen.LabelsContainer.textColor
-          timeLabel.font = UIFont.systemFont(ofSize: Constants.GameScreen.LabelsContainer.fontSize, weight: .bold)
-          topContainer.addSubview(timeLabel)
-          timeLabel.snp.makeConstraints { (make) in
-              make.top.equalTo(paddingTop)
-              make.trailing.equalTo(-paddingLeftRight)
-          }
-          
-          // Remain Time
-          remainTimeLabel = UILabel()
-          topContainer.addSubview(remainTimeLabel)
-          remainTimeLabel.text = self.currentRemainTimeString()
-          remainTimeLabel.textColor = .white
-          remainTimeLabel.font = UIFont.systemFont(ofSize: Constants.GameScreen.LabelsContainer.fontSize, weight: .bold)
-          remainTimeLabel.snp.makeConstraints { (make) in
-              make.top.equalTo(timeLabel.snp.bottom)
-              make.left.equalTo(timeLabel.snp.left)
-          }
+        let timeLabel = ViewCreator.createTitleLabelForTopContainer(text: "TIME")
+        topContainer.addSubview(timeLabel)
+        timeLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(paddingTop)
+            make.trailing.equalTo(-paddingLeftRight)
+        }
+        
+        // Remaing Time
+        remainTimeLabel = ViewCreator.createSubTitleLabelForTopContainer(text: self.currentRemainTimeString())
+        topContainer.addSubview(remainTimeLabel)
+        remainTimeLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(timeLabel.snp.bottom)
+            make.left.equalTo(timeLabel.snp.left)
+        }
     }
     
     private func setupAppImageView() {

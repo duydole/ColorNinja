@@ -70,6 +70,11 @@ class ClientSocket : NSObject, StreamDelegate {
         }
     }
     
+    func close() {
+        inputStream.close()
+        outputStream.close()
+    }
+    
     // MARK: - Private methods
     
     private func setupNetworkCommunication() {
