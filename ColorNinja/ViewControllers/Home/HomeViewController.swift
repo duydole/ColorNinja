@@ -15,6 +15,7 @@ class HomeViewController: UIViewController {
     let avatarView: UIImageView = UIImageView()
     let nameLabel: UILabel = UILabel()
     let startButton: ZButton = ZButton()
+    let start2PButton: ZButton = ZButton()
     let rankingButton: ZButton = ZButton()
     private var exitButton: UIButton!
     var adBannerView: GADBannerView!
@@ -26,19 +27,20 @@ class HomeViewController: UIViewController {
     }
     
     // MARK: Setup views
+    
     private func setupViews() {
         
         self.setupBackgroundImage()
         self.addAvatarView()
         self.addNameLabel()
         self.addStartButton()
+        self.addStart2PlayersButton()
         self.addRankingButton()
         self.setupExitButton()
         
         // Admob
         self.setupBannerAd()
     }
-    
     
     private func setupBackgroundImage() {
         //let bgImageView : UIImageView = UIImageView(frame: self.view.bounds)
@@ -85,12 +87,24 @@ class HomeViewController: UIViewController {
         
         startButton.addTarget(self, action: #selector(didTapStartButton), for: .touchUpInside)
     }
+    
+    private func addStart2PlayersButton() {
+        start2PButton.setTitle("2P", for: .normal)
+        self.view.addSubview(start2PButton)
+        start2PButton.snp.makeConstraints { (make) in
+            make.centerX.equalTo(self.view)
+            make.top.equalTo(startButton.snp.bottom).offset(30)
+            make.width.equalTo(Constants.HomeScreen.buttonWidth)
+        }
+        
+        start2PButton.addTarget(self, action: #selector(didTapStart2PlayerButton), for: .touchUpInside)
+    }
 
     private func addRankingButton() {
         rankingButton.setTitle("RANK", for: .normal)
         self.view.addSubview(rankingButton)
         rankingButton.snp.makeConstraints { (make) in
-            make.top.equalTo(startButton.snp.bottom).offset(30)
+            make.top.equalTo(start2PButton.snp.bottom).offset(30)
             make.centerX.equalToSuperview()
             make.width.equalTo(Constants.HomeScreen.buttonWidth)
         }
@@ -134,6 +148,10 @@ class HomeViewController: UIViewController {
         let gameVC = PlayingGameViewController()
         gameVC.modalPresentationStyle = .fullScreen
         self.present(gameVC, animated: false, completion: nil)
+    }
+
+    @objc private func didTapStart2PlayerButton() {
+        
     }
     
     @objc private func didTapRankingButton() {
