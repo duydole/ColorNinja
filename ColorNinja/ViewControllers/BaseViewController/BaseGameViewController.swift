@@ -11,19 +11,22 @@ import UIKit
 
 class BaseGameViewController : BaseViewController {
     
-    var readyListString : [String] {
-        return ["3","2","1","Go!"]
-    }
+    private var readyListString : [String] = ["Default"]
     
     var readyLabel: UILabel!
     var boardContainer: UIView!
     var topContainer : UIView!
     var boardCollectionView : BoardCollectionView!
     let boardDataSource: BoardDataSource = BoardDataSource()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
+        
+    // MARK: - Public APIs
+    
+    func startAnimationReadyView(withList listString:[String], completion: ((Bool) -> ())?) {
+        readyListString = listString
+        self.animationReadyView(index: 0, completion: completion)
     }
+    
+    // MARK: - SetupViews
     
     override func setupViews() {
         super.setupViews()
@@ -44,26 +47,7 @@ class BaseGameViewController : BaseViewController {
             make.center.equalTo(self.view)
         }
     }
-    
-    func animationReadyView(index: Int, completion: ((Bool) -> ())? ) {
         
-        if index > self.readyListString.count - 1 {
-            completion!(true)
-            return
-        }
-        
-        self.readyLabel.text = readyListString[index]
-        UIView.animate(withDuration: 0.35, delay: 0.0, options: .curveEaseInOut, animations: {
-            self.readyLabel.alpha = 1.0
-            self.readyLabel.transform = CGAffineTransform(scaleX: 0.4, y: 0.4)
-        }) { (success) in
-            Thread.sleep(forTimeInterval: 0.3)
-            self.readyLabel.transform = CGAffineTransform(scaleX: 1/0.4, y: 1/0.4)
-            self.readyLabel.alpha = 0.0
-            self.animationReadyView(index: index + 1, completion: completion)
-        }
-    }
-    
     private func setupBoardContainer() {
         
         // Container
@@ -96,13 +80,34 @@ class BaseGameViewController : BaseViewController {
         topContainer = UIView()
         self.view.addSubview(topContainer)
         topContainer.snp.makeConstraints { (make) in
-            make.top.equalTo(settingButton.snp.bottom).offset(Constants.GameScreen.LabelsContainer.margins.top)
-            make.leading.equalTo(Constants.GameScreen.LabelsContainer.margins.left)
-            make.trailing.equalTo(-Constants.GameScreen.LabelsContainer.margins.right)
+            make.top.equalTo(settingButton.snp.bottom)
+            make.leading.trailing.equalToSuperview()
             make.height.equalTo(Constants.GameScreen.LabelsContainer.height)
         }
     }
     
+    // MARK: - Support animations
+    
+    private func animationReadyView(index: Int, completion: ((Bool) -> ())? ) {
+        
+        if index > self.readyListString.count - 1 {
+            if let completion = completion {
+                completion(true)
+            }
+            return
+        }
+        
+        self.readyLabel.text = readyListString[index]
+        UIView.animate(withDuration: 0.35, delay: 0.0, options: .curveEaseInOut, animations: {
+            self.readyLabel.alpha = 1.0
+            self.readyLabel.transform = CGAffineTransform(scaleX: 0.4, y: 0.4)
+        }) { (success) in
+            Thread.sleep(forTimeInterval: 0.3)
+            self.readyLabel.transform = CGAffineTransform(scaleX: 1/0.4, y: 1/0.4)
+            self.readyLabel.alpha = 0.0
+            self.animationReadyView(index: index + 1, completion: completion)
+        }
+    }
 }
 
 

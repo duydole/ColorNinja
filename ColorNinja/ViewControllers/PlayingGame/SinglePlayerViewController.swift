@@ -36,7 +36,7 @@ class SinglePlayerViewController : BaseGameViewController {
     override func viewDidAppear(_ animated: Bool) {
         
         // Animation ReadyView
-        self.animationReadyView(index: 0) { (done) in
+        self.startAnimationReadyView(withList: ["Ready","3","2","1","Go!"]) { (done) in
             self.currentLevel.cellWidth = self.cellWidthOfLevel(level: self.currentLevel)
             self.showCurrentLevel()
             if self.presentedViewController == nil {
@@ -63,13 +63,15 @@ class SinglePlayerViewController : BaseGameViewController {
     override func setupViews() {
         super.setupViews()
         
-        self.setupLevelViews()
+        self.setupViewsInTopContainer()
         self.setupAppImageView()
-        self.setupTimerView()
         self.setupCollectionViews()
     }
 
-    private func setupLevelViews() {
+    private func setupViewsInTopContainer() {
+        
+        let paddingTop: CGFloat = 20
+        let paddingLeftRight: CGFloat = 30
         
         // Level
         let levelLabel = UILabel()
@@ -79,8 +81,8 @@ class SinglePlayerViewController : BaseGameViewController {
         levelLabel.font = UIFont.systemFont(ofSize: Constants.GameScreen.LabelsContainer.fontSize, weight: .bold)
         topContainer.addSubview(levelLabel)
         levelLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(topContainer)
-            make.leading.equalTo(topContainer)
+            make.top.equalTo(paddingTop)
+            make.leading.equalTo(paddingLeftRight)
         }
         
         // Level Count
@@ -95,36 +97,33 @@ class SinglePlayerViewController : BaseGameViewController {
             make.leading.equalTo(topContainer)
             make.centerX.equalTo(levelLabel.snp.centerX)
         }
+        
+        // Time
+          let timeLabel = UILabel()
+          timeLabel.text = "TIME"
+          timeLabel.textAlignment = .center
+          timeLabel.textColor = Constants.GameScreen.LabelsContainer.textColor
+          timeLabel.font = UIFont.systemFont(ofSize: Constants.GameScreen.LabelsContainer.fontSize, weight: .bold)
+          topContainer.addSubview(timeLabel)
+          timeLabel.snp.makeConstraints { (make) in
+              make.top.equalTo(paddingTop)
+              make.trailing.equalTo(-paddingLeftRight)
+          }
+          
+          // Remain Time
+          remainTimeLabel = UILabel()
+          topContainer.addSubview(remainTimeLabel)
+          remainTimeLabel.text = self.currentRemainTimeString()
+          remainTimeLabel.textColor = .white
+          remainTimeLabel.font = UIFont.systemFont(ofSize: Constants.GameScreen.LabelsContainer.fontSize, weight: .bold)
+          remainTimeLabel.snp.makeConstraints { (make) in
+              make.top.equalTo(timeLabel.snp.bottom)
+              make.left.equalTo(timeLabel.snp.left)
+          }
     }
     
     private func setupAppImageView() {
         
-    }
-    
-    private func setupTimerView() {
-        
-        // Time
-        let timeLabel = UILabel()
-        timeLabel.text = "TIME"
-        timeLabel.textAlignment = .center
-        timeLabel.textColor = Constants.GameScreen.LabelsContainer.textColor
-        timeLabel.font = UIFont.systemFont(ofSize: Constants.GameScreen.LabelsContainer.fontSize, weight: .bold)
-        topContainer.addSubview(timeLabel)
-        timeLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(topContainer)
-            make.trailing.equalTo(topContainer)
-        }
-        
-        // Remain Time
-        remainTimeLabel = UILabel()
-        topContainer.addSubview(remainTimeLabel)
-        remainTimeLabel.text = self.currentRemainTimeString()
-        remainTimeLabel.textColor = .white
-        remainTimeLabel.font = UIFont.systemFont(ofSize: Constants.GameScreen.LabelsContainer.fontSize, weight: .bold)
-        remainTimeLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(timeLabel.snp.bottom)
-            make.left.equalTo(timeLabel.snp.left)
-        }
     }
     
     private func setupCollectionViews() {

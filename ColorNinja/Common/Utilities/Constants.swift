@@ -51,15 +51,15 @@ struct Constants {
         struct LabelsContainer {
             static let fontSize : CGFloat = 25
             static let textColor : UIColor = LytoColor.labelColorInGame
-            static let height : CGFloat = 80
+            static let height : CGFloat = 100
             static let padding : UIEdgeInsets = UIEdgeInsets(top: 10,
                                                             left: 10,
                                                             bottom: 10,
                                                             right: 10)
-            static let margins : UIEdgeInsets = UIEdgeInsets(top: 50,
-                                                             left: 50,
-                                                             bottom: 50,
-                                                             right: 50)
+            static let margins : UIEdgeInsets = UIEdgeInsets(top: 0,
+                                                             left: 0,
+                                                             bottom: 0,
+                                                             right: 0)
         }
         
         struct ReadyView {
