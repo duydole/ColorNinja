@@ -12,11 +12,10 @@ import RxSwift
 
 class LoginViewController: UIViewController {
     
-    let iconImageView: UIImageView = UIImageView()
-    let appNameLabel: UILabel = UILabel()
-    let singlePlayerButton: UIButton = UIButton()
-    let multiPlayerButton: UIButton = UIButton()
-    let loginButton: UIButton = UIButton()
+    var iconImageView: UIImageView!
+    var appNameLabel: UILabel!
+    var singlePlayerButton: UIButton!
+    var multiPlayerButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,19 +34,21 @@ class LoginViewController: UIViewController {
     }
     
     private func addAppNameLabel() {
-        self.view.addSubview(appNameLabel)
+        appNameLabel = UILabel()
         appNameLabel.text = Constants.HomeScreen.appName
         appNameLabel.textAlignment = NSTextAlignment.center
         appNameLabel.font = UIFont(name: Font.squirk, size: 60)
         appNameLabel.textColor = Constants.HomeScreen.appNameColor
         appNameLabel.makeShadow()
+        self.view.addSubview(appNameLabel)
         appNameLabel.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
             make.top.equalTo(150)
         }
-    }
+}
     
     private func addAppIconView() {
+        iconImageView = UIImageView()
         iconImageView.image = UIImage(named: Constants.HomeScreen.ninjaImageName)
         self.view.addSubview(iconImageView)
         iconImageView.snp.makeConstraints { (make) in
@@ -58,6 +59,7 @@ class LoginViewController: UIViewController {
     }
     
     private func add1PlayerButton() {
+        singlePlayerButton = UIButton()
         singlePlayerButton.setTitle("1 Player", for: .normal)
         singlePlayerButton.backgroundColor = .black
         singlePlayerButton.titleLabel!.font = UIFont(name: Font.squirk, size: 30)
@@ -75,6 +77,7 @@ class LoginViewController: UIViewController {
     }
 
     private func add2PlayerButton() {
+        multiPlayerButton = UIButton()
         multiPlayerButton.setTitle("2 Player", for: .normal)
         multiPlayerButton.backgroundColor = .black
         multiPlayerButton.titleLabel!.font = UIFont(name: Font.squirk, size: 30)
@@ -91,32 +94,11 @@ class LoginViewController: UIViewController {
         multiPlayerButton.addTarget(self, action: #selector(didTapMultiPlayerButton), for: .touchUpInside)
     }
     
-    private func addLoginButton() {
-        loginButton.setTitle("Login via Zalo", for: .normal)
-        loginButton.backgroundColor = .orange
-        loginButton.titleLabel!.font = UIFont.systemFont(ofSize: 30, weight: .bold)
-        loginButton.layer.cornerRadius = 30
-        self.view.addSubview(loginButton)
-        loginButton.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(singlePlayerButton.snp.bottom).offset(30)
-            make.width.equalTo(280)
-            make.height.equalTo(60)
-        }
-        self.loginButton.addTarget(self, action: #selector(didTapLoginButton), for: .touchUpInside)
-    }
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
     // MARK: Action handler
-    
-    @objc private func didTapStartButton() {
-        let homeVC = HomeViewController()
-        homeVC.modalPresentationStyle = .fullScreen
-        self.present(homeVC, animated: true, completion: nil)
-    }
     
     @objc private func didTapLoginButton() {
         ZaloSDKApiWrapper.sharedInstance.login(withZalo: self, type: ZAZAloSDKAuthenTypeViaZaloAppAndWebView) {  [weak self] (success) in
@@ -131,12 +113,11 @@ class LoginViewController: UIViewController {
     }
     
     @objc private func didTapProfile() {
-//        ZaloSDKApiWrapper.sharedInstance.loadZaloUserProfile()
+        //ZaloSDKApiWrapper.sharedInstance.loadZaloUserProfile()
     }
     
     @objc private func didTapgetfriend() {
-        
-        //            ZaloSDKApiWrapper.sharedInstance.loadZaloFriend(0, count: 500)
+        //ZaloSDKApiWrapper.sharedInstance.loadZaloFriend(0, count: 500)
         let feed = ZOFeed(link: "https://www.google.com.vn/", appName: "ColorNinja", message: "message", others: nil)
         ZaloSDKApiWrapper.sharedInstance.shareFeedZalo(feed, andParentVC: self)
     }
@@ -153,5 +134,3 @@ class LoginViewController: UIViewController {
         self.present(multiPlayerVC, animated: false, completion: nil)
     }
 }
-
-

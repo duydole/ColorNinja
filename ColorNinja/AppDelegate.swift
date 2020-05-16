@@ -33,8 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-//        Thread.sleep(forTimeInterval: 1.0)
-        
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         GameMusicPlayer.shared.startBackgroundMusic()
 
