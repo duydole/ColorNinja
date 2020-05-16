@@ -10,14 +10,13 @@ import UIKit
 import SnapKit
 import GoogleMobileAds
 
-class HomeViewController: UIViewController {
+class HomeViewController: BaseViewController {
     
     let avatarView: UIImageView = UIImageView()
     let nameLabel: UILabel = UILabel()
     let startButton: ZButton = ZButton()
     let start2PButton: ZButton = ZButton()
     let rankingButton: ZButton = ZButton()
-    private var exitButton: UIButton!
     var adBannerView: GADBannerView!
     
     override func viewDidLoad() {
@@ -36,7 +35,6 @@ class HomeViewController: UIViewController {
         self.addStartButton()
         self.addStart2PlayersButton()
         self.addRankingButton()
-        self.setupExitButton()
         
         // Admob
         self.setupBannerAd()
@@ -124,20 +122,7 @@ class HomeViewController: UIViewController {
             make.height.equalTo(100)
         }
     }
-    
-    private func setupExitButton() {
-        self.exitButton = UIButton()
-        self.view.addSubview(exitButton)
-        exitButton.setImage(UIImage(named: Constants.GameScreen.exitImageName)?.withRenderingMode(.alwaysTemplate), for: .normal)
-        exitButton.addTarget(self, action: #selector(didTapExitButton), for: .touchUpInside)
-        exitButton.imageView?.tintColor = Constants.GameScreen.buttonTintColor
-        exitButton.snp.makeConstraints { (make) in
-            make.width.height.equalTo(Constants.GameScreen.exitButtonWidth * 0.75)
-            make.top.equalTo(Constants.GameScreen.topInset)
-            make.right.equalTo(-Constants.GameScreen.rightInset)
-        }
-    }
-    
+        
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -151,7 +136,9 @@ class HomeViewController: UIViewController {
     }
 
     @objc private func didTapStart2PlayerButton() {
-        
+        let multiPlayerVC = MultiPlayerViewController()
+        multiPlayerVC.modalPresentationStyle = .fullScreen
+        self.present(multiPlayerVC, animated: false, completion: nil)
     }
     
     @objc private func didTapRankingButton() {
@@ -161,15 +148,7 @@ class HomeViewController: UIViewController {
             //
         }
     }
-    
-    @objc private func didTapExitButton() {
-        if ZaloService.sharedInstance.isLoginZalo() {
-            self.logout()
-            return
-        }
-        self.dismiss(animated: true, completion: nil)
-    }
-    
+        
     private func logout() {
         let alert = UIAlertController(title: "Thông báo", message: "Bạn có muốn đăng xuất tài khoản Zalo?", preferredStyle: UIAlertController.Style.actionSheet)
         

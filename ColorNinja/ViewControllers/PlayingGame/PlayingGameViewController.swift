@@ -11,10 +11,9 @@ import UIKit
 import CoreGraphics
 import AudioToolbox
 
-class PlayingGameViewController : UIViewController {
+class PlayingGameViewController : BaseViewController {
     
     var settingButton : UIButton!
-    var exitButton : UIButton!
     var levelCountLabel : UILabel!
     var appImage : UIImageView!
     var remainTimeLabel : UILabel!
@@ -35,7 +34,6 @@ class PlayingGameViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Constants.GameScreen.backgroundColor
         self.setupViews()
     }
     
@@ -91,7 +89,6 @@ class PlayingGameViewController : UIViewController {
     
     private func setupViews() {
         self.setupSettingButton()
-        self.setupExitButton()
         self.setupLabelsContainer()
         self.setupLevelViews()
         self.setupAppImageView()
@@ -117,20 +114,7 @@ class PlayingGameViewController : UIViewController {
             make.leading.equalTo(Constants.GameScreen.leftInset)
         }
     }
-    
-    private func setupExitButton() {
-        exitButton = UIButton()
-        self.view.addSubview(exitButton)
-        exitButton.setImage(UIImage(named: Constants.GameScreen.exitImageName)?.withRenderingMode(.alwaysTemplate), for: .normal)
-        exitButton.addTarget(self, action: #selector(didTapExitButton), for: .touchUpInside)
-        exitButton.imageView?.tintColor = Constants.GameScreen.buttonTintColor
-        exitButton.snp.makeConstraints { (make) in
-            make.width.height.equalTo(Constants.GameScreen.exitButtonWidth)
-            make.top.equalTo(Constants.GameScreen.topInset)
-            make.trailing.equalTo(-Constants.GameScreen.rightInset)
-        }
-    }
-    
+        
     private func setupLabelsContainer() {
         labelsContainer = UIView()
         self.view.addSubview(labelsContainer)
@@ -350,10 +334,6 @@ class PlayingGameViewController : UIViewController {
         gameSettingPopup.didDismissPopUp = {
             self.resumeGame()
         }
-    }
-    
-    @objc private func didTapExitButton() {
-        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Handle Audio

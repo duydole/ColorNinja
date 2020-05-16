@@ -36,6 +36,8 @@
 		F234763324680D75004C8363 /* GameSettingPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F234763224680D75004C8363 /* GameSettingPopup.swift */; };
 		F2347635246836D7004C8363 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2347634246836D7004C8363 /* UIColor+Extension.swift */; };
 		F2347638246851A5004C8363 /* ButtonWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2347637246851A5004C8363 /* ButtonWithImage.swift */; };
+		F263FDB8246F945A00A4AB0B /* MultiPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F263FDB7246F945A00A4AB0B /* MultiPlayerViewController.swift */; };
+		F263FDBB246F950000A4AB0B /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F263FDBA246F950000A4AB0B /* BaseViewController.swift */; };
 		F27454F2246A71A40037A8BA /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27454F1246A71A40037A8BA /* MusicPlayer.swift */; };
 		F27454F4246A72F80037A8BA /* bgmusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F27454F3246A72F80037A8BA /* bgmusic.mp3 */; };
 		F27454F6246A74660037A8BA /* correctsound.wav in Resources */ = {isa = PBXBuildFile; fileRef = F27454F5246A74660037A8BA /* correctsound.wav */; };
@@ -87,6 +89,8 @@
 		F234763224680D75004C8363 /* GameSettingPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettingPopup.swift; sourceTree = "<group>"; };
 		F2347634246836D7004C8363 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		F2347637246851A5004C8363 /* ButtonWithImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWithImage.swift; sourceTree = "<group>"; };
+		F263FDB7246F945A00A4AB0B /* MultiPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPlayerViewController.swift; sourceTree = "<group>"; };
+		F263FDBA246F950000A4AB0B /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		F27454F1246A71A40037A8BA /* MusicPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
 		F27454F3246A72F80037A8BA /* bgmusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bgmusic.mp3; sourceTree = "<group>"; };
 		F27454F5246A74660037A8BA /* correctsound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = correctsound.wav; sourceTree = "<group>"; };
@@ -229,6 +233,8 @@
 		F22F85612465A32500493BB6 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				F263FDB9246F94F400A4AB0B /* BaseViewController */,
+				F263FDB6246F943D00A4AB0B /* 2Player */,
 				8CD60302246ED85300003447 /* Ranking */,
 				8CD60301246ED84E00003447 /* Popup */,
 				8CD60300246ED83100003447 /* PlayingGame */,
@@ -266,6 +272,22 @@
 				F2347637246851A5004C8363 /* ButtonWithImage.swift */,
 			);
 			path = CustomButton;
+			sourceTree = "<group>";
+		};
+		F263FDB6246F943D00A4AB0B /* 2Player */ = {
+			isa = PBXGroup;
+			children = (
+				F263FDB7246F945A00A4AB0B /* MultiPlayerViewController.swift */,
+			);
+			path = 2Player;
+			sourceTree = "<group>";
+		};
+		F263FDB9246F94F400A4AB0B /* BaseViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F263FDBA246F950000A4AB0B /* BaseViewController.swift */,
+			);
+			path = BaseViewController;
 			sourceTree = "<group>";
 		};
 		F27454F0246A718E0037A8BA /* MusicComponent */ = {
@@ -483,6 +505,7 @@
 				F2A6E68A2466FF5600970D1B /* LevelStore.swift in Sources */,
 				8CC6DB44246B8E470017B60A /* Collection+Extension.swift in Sources */,
 				8CC6DB42246B8E160017B60A /* Dictionary+Extension.swift in Sources */,
+				F263FDB8246F945A00A4AB0B /* MultiPlayerViewController.swift in Sources */,
 				8C8BA174246E707900A73046 /* UIImageView+Extension.swift in Sources */,
 				8C7ABAB6246D5AE900063AE4 /* Utils.swift in Sources */,
 				F22F85882466940900493BB6 /* StaticFunctions.swift in Sources */,
@@ -497,6 +520,7 @@
 				F2C0607A246566B5001FAD58 /* AppDelegate.swift in Sources */,
 				F27454F2246A71A40037A8BA /* MusicPlayer.swift in Sources */,
 				8C2C72782467A58C00883388 /* RankingViewController.swift in Sources */,
+				F263FDBB246F950000A4AB0B /* BaseViewController.swift in Sources */,
 				F2347638246851A5004C8363 /* ButtonWithImage.swift in Sources */,
 				8CC6DB47246B8FA90017B60A /* Date+Extension.swift in Sources */,
 				F2A6E68B2466FF5600970D1B /* BoardCollectionViewFlowLayout.swift in Sources */,
