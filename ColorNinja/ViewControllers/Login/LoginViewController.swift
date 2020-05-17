@@ -16,6 +16,7 @@ class LoginViewController: UIViewController {
     var appNameLabel: UILabel!
     var singlePlayerButton: UIButton!
     var multiPlayerButton: UIButton!
+    var bestScoreLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,7 @@ class LoginViewController: UIViewController {
         self.addAppIconView()
         self.add1PlayerButton()
         self.add2PlayerButton()
+        self.addBestScoreLabel()
     }
     
     private func addAppNameLabel() {
@@ -92,6 +94,19 @@ class LoginViewController: UIViewController {
         }
         
         multiPlayerButton.addTarget(self, action: #selector(didTapMultiPlayerButton), for: .touchUpInside)
+    }
+    
+    private func addBestScoreLabel() {
+        bestScoreLabel = UILabel()
+        bestScoreLabel.text = "Your best score is 23"
+        bestScoreLabel.textAlignment = NSTextAlignment.center
+        bestScoreLabel.font = UIFont(name: Font.squirk, size: 30)
+        bestScoreLabel.textColor = .white
+        self.view.addSubview(bestScoreLabel)
+        bestScoreLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(multiPlayerButton.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
+        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

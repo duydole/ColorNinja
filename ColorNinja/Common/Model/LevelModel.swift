@@ -45,6 +45,15 @@ class LevelModel {
         correctIndex = Int.random(in: 0...numberOfRows*numberOfRows-1)
     }
     
+    // ServerModel -> LevelModel
+    init(levelIndex: Int, numberOfRows: Int, mainColor: UIColor, correctIndex: Int, RGBIndexWillBeChanged: Int) {
+        self.levelIndex = levelIndex
+        self.numberOfRows = numberOfRows
+        self.mainColor = mainColor
+        self.correctColor = ColorStore.shared.generateRandomSameSameColor(rootColot: mainColor, level: levelIndex, RGBIndexWillBeChanged: RGBIndexWillBeChanged)
+        self.correctIndex = correctIndex
+    }
+    
     func setRandomColor() {
         let pairOfColor : (UIColor, UIColor) = ColorStore.shared.getPairOfColorRandom(levelOfDifficult: self.levelIndex)
         mainColor = pairOfColor.0

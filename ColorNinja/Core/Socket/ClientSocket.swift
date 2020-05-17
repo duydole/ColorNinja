@@ -16,14 +16,14 @@ enum ServerRespondeType: Int {
     case ErrorKey = -1
     case WaitingAnotherPlayer = 1
     case RequirePlayerKey = 2
-    case BoardGame = 4
+    case LevelResult = 4
+    case BoardGame = 5
 }
 
 enum ClientSendType: Int {
     case Win = 0
-    case Loose = 1
     case SendRequiredKey = 2
-    case CloseConnect = 3
+    case Loose = 3
 }
 
 protocol ClientDelegate {
@@ -73,6 +73,8 @@ class ClientSocket : NSObject, StreamDelegate {
         } else if type == 1 {
             return .WaitingAnotherPlayer
         } else if type == 4 {
+            return .LevelResult
+        } else if type == 5 {
             return .BoardGame
         }
         

@@ -45,11 +45,13 @@ class GameOverPopup: PopupViewController {
     }
 
     @objc private func didTapReplayButton() {
+        #if !DEBUG
         if interstitial.isReady {
             interstitial.present(fromRootViewController: self)
         } else {
             assert(true, "Ads is not ready")
         }
+        #endif
     }
     
     // MARK: - Setup Views

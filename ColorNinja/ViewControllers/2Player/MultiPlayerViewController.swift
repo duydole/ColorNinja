@@ -20,17 +20,14 @@ class MultiPlayerViewController : BaseGameViewController {
     var currenLevelLabel: UILabel!
     
     // MARK: - Life cycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         client = ClientSocket(connectWithHost: "119.82.135.105", port: 8080)
         client.delegate = self
         
-
-//        // Test
-        LevelStore.shared.setColorForAllLevels()
+        // Work round
         currentLevel = LevelStore.shared.allLevels[0]
-        showCurrentLevel()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -64,7 +61,7 @@ class MultiPlayerViewController : BaseGameViewController {
             make.top.equalTo(player1Title.snp.bottom).offset(paddingTop/2)
             make.centerX.equalTo(player1Title)
         }
-
+        
         // Level
         let levelTitle = ViewCreator.createTitleLabelForTopContainer(text: "LEVEL")
         topContainer.addSubview(levelTitle)
@@ -96,29 +93,13 @@ class MultiPlayerViewController : BaseGameViewController {
             make.top.equalTo(player2Title.snp.bottom).offset(paddingTop/2)
             make.centerX.equalTo(player2Title)
         }
-    
+        
     }
     
-    // MARK: - Communication with Server
+    // MARK: - Server Responde
     
     private func requirePlayerKeyFromServer(_ json: Dictionary<String, Any>) {
-        
-        let jsonString = "{\"type\":\(ClientSendType.SendRequiredKey.rawValue),\"key\":\"\(UUID().uuidString)\"} "
-        client.sendToServer(message: jsonString)
-
-//        let dic: Dictionary<String, Any> = [
-//            "type": ServerRespondeType.RequirePlayerKey.rawValue,
-//            "key": UUID().uuidString
-//        ]
-//
-//
-//        let encoder = JSONEncoder()
-//        if let jsonData = try? encoder.encode(data) {
-//            if let jsonString = String(data: jsonData, encoding: .utf8) {
-//                let message = jsonString + " "
-//                client.sendToServer(message: message)
-//            }
-//        }
+        self.sendRequiredKeyMessage()
     }
     
     private func waitingAnotherPlayerFromServer(_ json: Dictionary<String, Any>) {
@@ -126,15 +107,79 @@ class MultiPlayerViewController : BaseGameViewController {
     }
     
     private func serverSendBoardGame(_ json: Dictionary<String, Any>) {
-        self.startAnimationReadyView(withList: ["Matched", "3", "2", "1", "Go"]) { (done) in
-            self.currentLevel  = self.jsonToLevelModel(json)
-            self.showCurrentLevel()
+        
+        let boardGameInfo = json["boardGame"] as! Dictionary<String, Any>
+        let levelIndex: Int = boardGameInfo["round"] as! Int
+        currenLevelLabel.text = levelCountString()
+        
+        if levelIndex == 1 {
+            self.startAnimationReadyView(withList: ["Matched", "3", "2", "1", "Go!"]) { (done) in
+                self.currentLevel  = self.jsonToLevelModel(json)
+                self.showCurrentLevel()
+            }
+        } else {
+            self.boardCollectionView.alpha = 0
+            shrinkCell = true
+            self.startAnimationReadyView(withList: ["Next"]) { (done) in
+                self.boardCollectionView.alpha = 1
+                self.currentLevel  = self.jsonToLevelModel(json)
+                self.showCurrentLevel()
+            }
         }
     }
     
+    // MARK: - Send Message to Server
+    
+    private func sendRequiredKeyMessage() {
+        let jsonString = "{\"type\":\(ClientSendType.SendRequiredKey.rawValue),\"keyPlayer\":\"\(player1.id)\"} "
+        client.sendToServer(message: jsonString)
+    }
+    
+    private func sendWinMessage() {
+        let jsonString = "{\"type\":\(ClientSendType.Win.rawValue),\"round\":\(currentLevel.levelIndex)} "
+        client.sendToServer(message: jsonString)
+    }
+    
+    private func sendLooseMessage() {
+        let jsonString = "{\"type\":\(ClientSendType.Loose.rawValue)} "
+        client.sendToServer(message: jsonString)
+    }
+    
+    // MARK: - Board Delegate
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if indexPath.item == currentLevel.correctIndex {
+            if GameSettingManager.shared.allowEffectSound {
+                GameMusicPlayer.shared.playCorrectSound()
+            }
+            sendWinMessage()
+        } else {
+            if GameSettingManager.shared.allowEffectSound {
+                GameMusicPlayer.shared.playInCorrectSound()
+            }
+        }
+    }
+    
+    // MARK: - Other
     
     private func jsonToLevelModel(_ json: Dictionary<String, Any>) -> LevelModel {
-        return LevelModel(levelIndex: 1)
+        let boardGameInfo = json["boardGame"] as! Dictionary<String, Any>
+        let levelIndex: Int = boardGameInfo["round"] as! Int
+        let mainColorIndex: Int = boardGameInfo["color"] as! Int
+        let correctIndex: Int = boardGameInfo["index"] as! Int
+        let numberOfRows = boardGameInfo["sizeBoard"] as! Int
+        let mainColor = ColorStore.shared.allColors[mainColorIndex]
+        let RGBIndexWillBeChanged = boardGameInfo["secondColor"] as! Int
+        return LevelModel(levelIndex: levelIndex,
+                          numberOfRows: numberOfRows,
+                          mainColor: mainColor,
+                          correctIndex: correctIndex,
+                          RGBIndexWillBeChanged: RGBIndexWillBeChanged)
+    }
+    
+    private func levelCountString() -> String {
+        return "\(currentLevel.levelIndex+1)/30"
     }
 }
 
