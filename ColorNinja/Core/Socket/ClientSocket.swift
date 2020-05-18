@@ -21,9 +21,10 @@ enum ServerRespondeType: Int {
 }
 
 enum ClientSendType: Int {
-    case Win = 0
+    case WinLevel = 0
     case SendRequiredKey = 2
-    case Loose = 3
+    case LooseLevel = 3
+    case StopGame = 4
 }
 
 protocol ClientDelegate {

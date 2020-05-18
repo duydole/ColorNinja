@@ -92,6 +92,13 @@ struct Constants {
         static let navigationBarHeight: CGFloat = 70
     }
     
+    struct InputUserNamePopup {
+        static let width = 250
+        static let height = 80
+        static let contentSize = CGSize(width: Constants.InputUserNamePopup.width, height: Constants.InputUserNamePopup.height)
+        static let cornerRadius: CGFloat = 15
+    }
+    
     struct PopupViewController {
         static let defaultCornerRadius: CGFloat = 16
     }

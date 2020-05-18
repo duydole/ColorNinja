@@ -60,6 +60,7 @@
 		F2C0607E246566B5001FAD58 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C0607D246566B5001FAD58 /* HomeViewController.swift */; };
 		F2C06086246566B7001FAD58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2C06084246566B7001FAD58 /* LaunchScreen.storyboard */; };
 		F2EAD8542470429400B2D6B9 /* Squirk-RMvV.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F2EAD8532470429400B2D6B9 /* Squirk-RMvV.ttf */; };
+		F2EAD8562471381F00B2D6B9 /* InputUserNamePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EAD8552471381F00B2D6B9 /* InputUserNamePopup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -120,6 +121,7 @@
 		F2C06085246566B7001FAD58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F2C06087246566B7001FAD58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F2EAD8532470429400B2D6B9 /* Squirk-RMvV.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Squirk-RMvV.ttf"; sourceTree = "<group>"; };
+		F2EAD8552471381F00B2D6B9 /* InputUserNamePopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputUserNamePopup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +219,7 @@
 				8C6EC7482467E3C100612802 /* PopupViewController.swift */,
 				F234763224680D75004C8363 /* GameSettingPopup.swift */,
 				F2347630246809C5004C8363 /* GameOverPopup.swift */,
+				F2EAD8552471381F00B2D6B9 /* InputUserNamePopup.swift */,
 			);
 			path = Popup;
 			sourceTree = "<group>";
@@ -545,6 +548,7 @@
 				F2A6E68E2466FF5600970D1B /* ColorCollectionViewCell.swift in Sources */,
 				F2C0607A246566B5001FAD58 /* AppDelegate.swift in Sources */,
 				F27454F2246A71A40037A8BA /* MusicPlayer.swift in Sources */,
+				F2EAD8562471381F00B2D6B9 /* InputUserNamePopup.swift in Sources */,
 				8C2C72782467A58C00883388 /* RankingViewController.swift in Sources */,
 				F263FDBB246F950000A4AB0B /* BaseViewController.swift in Sources */,
 				F2347638246851A5004C8363 /* ButtonWithImage.swift in Sources */,

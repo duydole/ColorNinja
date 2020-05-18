@@ -13,7 +13,7 @@ class MultiPlayerViewController : BaseGameViewController {
     
     private var client: ClientSocket!
     private var player1 = PlayerModel(name: "You")
-    private var player2 = PlayerModel(name: "Nam")
+    private var player2 = PlayerModel(name: "Friend")
     
     var player1Point: UILabel!
     var player2Point: UILabel!
@@ -23,15 +23,20 @@ class MultiPlayerViewController : BaseGameViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        client = ClientSocket(connectWithHost: "119.82.135.105", port: 8080)
-        client.delegate = self
-        
-        // Work round
-        currentLevel = LevelStore.shared.allLevels[0]
+        self.setupClientSocket()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         client.close()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+    }
+    
+    private func setupClientSocket() {
+        client = ClientSocket(connectWithHost: "119.82.135.105", port: 8080)
+        client.delegate = self
     }
     
     // MARK: - Setup views
@@ -103,45 +108,56 @@ class MultiPlayerViewController : BaseGameViewController {
     }
     
     private func waitingAnotherPlayerFromServer(_ json: Dictionary<String, Any>) {
-        print("duydl: Waiting another player")
+        print("duydl: WAITING ANOTHER PLAYER!")
     }
     
     private func serverSendBoardGame(_ json: Dictionary<String, Any>) {
         
         let boardGameInfo = json["boardGame"] as! Dictionary<String, Any>
         let levelIndex: Int = boardGameInfo["round"] as! Int
-        currenLevelLabel.text = levelCountString()
+        let listStringAnimation = levelIndex == 1 ? ["Matched", "3", "2", "1", "Go!"] : ["Next"]
+    
+        if levelIndex > 1 {
+            let isOwnerWin = json["isPreviosWinner"] as! Bool
+            if isOwnerWin {
+                player1.currentPoint += 1
+                player1Point.text = "\(player1.currentPoint)"
+            } else {
+                player2.currentPoint += 1
+                player2Point.text = "\(player2.currentPoint)"
+            }
+        }
         
-        if levelIndex == 1 {
-            self.startAnimationReadyView(withList: ["Matched", "3", "2", "1", "Go!"]) { (done) in
-                self.currentLevel  = self.jsonToLevelModel(json)
-                self.showCurrentLevel()
-            }
-        } else {
-            self.boardCollectionView.alpha = 0
-            shrinkCell = true
-            self.startAnimationReadyView(withList: ["Next"]) { (done) in
-                self.boardCollectionView.alpha = 1
-                self.currentLevel  = self.jsonToLevelModel(json)
-                self.showCurrentLevel()
-            }
+        currenLevelLabel.text = levelCountString()
+        self.boardCollectionView.alpha = 0
+        shrinkCell = true
+        self.startAnimationReadyView(withList: listStringAnimation) { (done) in
+            self.boardCollectionView.alpha = 1
+            self.currentLevel  = self.jsonToLevelModel(json)
+            self.showCurrentLevel()
         }
     }
     
     // MARK: - Send Message to Server
     
     private func sendRequiredKeyMessage() {
-        let jsonString = "{\"type\":\(ClientSendType.SendRequiredKey.rawValue),\"keyPlayer\":\"\(player1.id)\"} "
+        // [type: keyPlayer: username:]
+        let jsonString = "{\"type\":\(ClientSendType.SendRequiredKey.rawValue),\"keyPlayer\":\"\(player1.id)\",\"username\":\(player1.name)} "
         client.sendToServer(message: jsonString)
     }
     
     private func sendWinMessage() {
-        let jsonString = "{\"type\":\(ClientSendType.Win.rawValue),\"round\":\(currentLevel.levelIndex)} "
+        let jsonString = "{\"type\":\(ClientSendType.WinLevel.rawValue),\"round\":\(currentLevel.levelIndex)} "
         client.sendToServer(message: jsonString)
     }
     
     private func sendLooseMessage() {
-        let jsonString = "{\"type\":\(ClientSendType.Loose.rawValue)} "
+        let jsonString = "{\"type\":\(ClientSendType.LooseLevel.rawValue)} "
+        client.sendToServer(message: jsonString)
+    }
+    
+    private func requireServerStopGame() {
+        let jsonString = "{\"type\":\(ClientSendType.StopGame.rawValue)} "
         client.sendToServer(message: jsonString)
     }
     

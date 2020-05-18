@@ -18,13 +18,17 @@ class BaseGameViewController : BaseViewController {
     var topContainer : UIView!
     var boardCollectionView : BoardCollectionView!
     let boardDataSource: BoardDataSource = BoardDataSource()
-    var currentLevel : LevelModel!
+    var currentLevel : LevelModel = LevelModel(levelIndex: 0)
     var shrinkCell : Bool = true
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
     // MARK: - Public APIs
     
     func startAnimationReadyView(withList listString:[String], completion: ((Bool) -> ())?) {
