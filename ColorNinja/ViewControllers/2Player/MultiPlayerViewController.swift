@@ -8,22 +8,28 @@
 
 import Foundation
 import UIKit
+    
+let MAX_LEVEL: Int = 30
 
 class MultiPlayerViewController : BaseGameViewController {
     
-    private var client: ClientSocket!
-    private var player1 = PlayerModel(name: "You")
-    private var player2 = PlayerModel(name: "Friend")
+    var client: ClientSocket!
+    var player1 = PlayerModel(name: "You")
+    var player2 = PlayerModel(name: "----")
+    var player1Title: UILabel!
+    var player2Title: UILabel!
     
     var player1Point: UILabel!
     var player2Point: UILabel!
     var currenLevelLabel: UILabel!
+    var statusLabel: UILabel!
     
     // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupClientSocket()
+        self.showWaitingCompetitorLabel()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -39,11 +45,16 @@ class MultiPlayerViewController : BaseGameViewController {
         client.delegate = self
     }
     
+    private func showWaitingCompetitorLabel() {
+        statusLabel.text = "Finding..."
+    }
+    
     // MARK: - Setup views
     
     override func setupViews() {
         super.setupViews()
         self.setupTopContainer()
+        self.setupStatusLabel()
     }
     
     func setupTopContainer() {
@@ -52,7 +63,7 @@ class MultiPlayerViewController : BaseGameViewController {
         let paddingLR = 30
         
         // Player 1
-        let player1Title = ViewCreator.createTitleLabelForTopContainer(text: player1.name)
+        player1Title = ViewCreator.createTitleLabelForTopContainer(text: player1.name)
         topContainer.addSubview(player1Title)
         player1Title.snp.makeConstraints { (make) in
             make.top.equalTo(paddingTop)
@@ -76,7 +87,7 @@ class MultiPlayerViewController : BaseGameViewController {
         }
         
         // LevelCount
-        currenLevelLabel = ViewCreator.createSubTitleLabelForTopContainer(text: "0/30")
+        currenLevelLabel = ViewCreator.createSubTitleLabelForTopContainer(text: "0/\(MAX_LEVEL)")
         topContainer.addSubview(currenLevelLabel)
         currenLevelLabel.snp.makeConstraints { (make) in
             make.top.equalTo(levelTitle.snp.bottom).offset(paddingTop/2)
@@ -84,7 +95,7 @@ class MultiPlayerViewController : BaseGameViewController {
         }
         
         // Player 2
-        let player2Title = ViewCreator.createTitleLabelForTopContainer(text: player2.name)
+        player2Title = ViewCreator.createTitleLabelForTopContainer(text: player2.name)
         topContainer.addSubview(player2Title)
         player2Title.snp.makeConstraints { (make) in
             make.top.equalTo(paddingTop)
@@ -99,6 +110,16 @@ class MultiPlayerViewController : BaseGameViewController {
             make.centerX.equalTo(player2Title)
         }
         
+    }
+    
+    func setupStatusLabel() {
+        statusLabel = UILabel()
+        statusLabel.textColor = .yellow
+        statusLabel.font = UIFont.systemFont(ofSize: 23, weight: .bold)
+        view.addSubview(statusLabel)
+        statusLabel.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+        }
     }
     
     // MARK: - Server Responde
@@ -116,9 +137,9 @@ class MultiPlayerViewController : BaseGameViewController {
         let boardGameInfo = json["boardGame"] as! Dictionary<String, Any>
         let levelIndex: Int = boardGameInfo["round"] as! Int
         let listStringAnimation = levelIndex == 1 ? ["Matched", "3", "2", "1", "Go!"] : ["Next"]
-    
+        
         if levelIndex > 1 {
-            let isOwnerWin = json["isPreviosWinner"] as! Bool
+            let isOwnerWin = json["isPreviousWinner"] as! Bool
             if isOwnerWin {
                 player1.currentPoint += 1
                 player1Point.text = "\(player1.currentPoint)"
@@ -128,9 +149,17 @@ class MultiPlayerViewController : BaseGameViewController {
             }
         }
         
+        
+        if levelIndex == MAX_LEVEL + 1 {
+            requireServerStopGame()
+            return
+        }
+        
         currenLevelLabel.text = levelCountString()
         self.boardCollectionView.alpha = 0
         shrinkCell = true
+        
+        
         self.startAnimationReadyView(withList: listStringAnimation) { (done) in
             self.boardCollectionView.alpha = 1
             self.currentLevel  = self.jsonToLevelModel(json)
@@ -138,10 +167,52 @@ class MultiPlayerViewController : BaseGameViewController {
         }
     }
     
+    private func serverSendMatchedInfo(_ json: Dictionary<String, Any>) {
+        let usernames = json["key_usernames"] as! Dictionary<String, String>
+        for id in usernames.keys {
+            if id != player1.id {
+                player2Title.text = usernames[id]
+                player2.id = id
+                player2.name = player2Title.text!
+            }
+        }
+        
+        self.statusLabel.isHidden = true
+    }
+    
+    private func serverSendLevelResult(_ json: Dictionary<String, Any>) {
+        
+        let winnerName = player1.currentPoint > player2.currentPoint ? player1.name : player2.name
+        let looserName = player1.currentPoint < player2.currentPoint ? player1.name : player2.name
+        
+      let alert = UIAlertController(title: "GameOver", message: "\(winnerName) won, \(looserName) is too slow!", preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+          switch action.style {
+          case .default:
+              print("default")
+              
+          case .cancel:
+              print("cancel")
+              
+          case .destructive:
+              print("destructive")
+              
+          default:
+              print("duydl: Default style")
+              
+          }}))
+      self.present(alert, animated: true, completion: nil)
+    }
+    
+    func serverSendRoomInfo(_ json: Dictionary<String, Any>) {
+        
+    }
+    
     // MARK: - Send Message to Server
     
-    private func sendRequiredKeyMessage() {
+    func sendRequiredKeyMessage() {
         // [type: keyPlayer: username:]
+        // NOTE: name không đc chưa dấu cách
         let jsonString = "{\"type\":\(ClientSendType.SendRequiredKey.rawValue),\"keyPlayer\":\"\(player1.id)\",\"username\":\(player1.name)} "
         client.sendToServer(message: jsonString)
     }
@@ -152,7 +223,7 @@ class MultiPlayerViewController : BaseGameViewController {
     }
     
     private func sendLooseMessage() {
-        let jsonString = "{\"type\":\(ClientSendType.LooseLevel.rawValue)} "
+        let jsonString = "{\"type\":\(ClientSendType.LooseLevel.rawValue),\"round\":\(currentLevel.levelIndex)} "
         client.sendToServer(message: jsonString)
     }
     
@@ -174,6 +245,7 @@ class MultiPlayerViewController : BaseGameViewController {
             if GameSettingManager.shared.allowEffectSound {
                 GameMusicPlayer.shared.playInCorrectSound()
             }
+            sendLooseMessage()
         }
     }
     
@@ -195,7 +267,7 @@ class MultiPlayerViewController : BaseGameViewController {
     }
     
     private func levelCountString() -> String {
-        return "\(currentLevel.levelIndex+1)/30"
+        return "\(currentLevel.levelIndex+1)/\(MAX_LEVEL)"
     }
 }
 
@@ -208,11 +280,17 @@ extension MultiPlayerViewController : ClientDelegate {
         
         switch serverRespondeType {
         case .RequirePlayerKey:
-            self.requirePlayerKeyFromServer(json)
+            requirePlayerKeyFromServer(json)
         case .WaitingAnotherPlayer:
-            self.waitingAnotherPlayerFromServer(json)
+            waitingAnotherPlayerFromServer(json)
         case .BoardGame:
-            self.serverSendBoardGame(json)
+            serverSendBoardGame(json)
+        case .MatchedInfo:
+            serverSendMatchedInfo(json)
+        case .LevelResult:
+            serverSendLevelResult(json)
+        case .RoomInfo:
+            serverSendRoomInfo(json)
         default:
             print("duydl: UNKNOW MESSAGE TYPE OF SERVER")
         }

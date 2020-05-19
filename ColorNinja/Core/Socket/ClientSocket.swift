@@ -18,13 +18,16 @@ enum ServerRespondeType: Int {
     case RequirePlayerKey = 2
     case LevelResult = 4
     case BoardGame = 5
+    case MatchedInfo = 6
+    case RoomInfo = 7
 }
 
 enum ClientSendType: Int {
     case WinLevel = 0
-    case SendRequiredKey = 2
+    case SendRequiredKey = 2    // auto ghép cặp
     case LooseLevel = 3
     case StopGame = 4
+    case SendRequiredKeyGroupMode = 7   // tạo phòng
 }
 
 protocol ClientDelegate {
@@ -77,6 +80,10 @@ class ClientSocket : NSObject, StreamDelegate {
             return .LevelResult
         } else if type == 5 {
             return .BoardGame
+        } else if type == 6 {
+            return .MatchedInfo
+        } else if type == 7 {
+            return .RoomInfo
         }
         
         return .UnknownRequest

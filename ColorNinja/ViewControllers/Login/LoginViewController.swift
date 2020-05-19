@@ -10,54 +10,24 @@ import UIKit
 import ZaloSDK
 import RxSwift
 
-class LoginViewController: UIViewController {
+class LoginViewController: BaseHomeViewController {
     
-    var iconImageView: UIImageView!
-    var appNameLabel: UILabel!
     var singlePlayerButton: UIButton!
     var multiPlayerButton: UIButton!
     var bestScoreLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupViews()
     }
     
     // MARK: Setup views
     
-    private func setupViews() {
-        self.view.backgroundColor = Constants.HomeScreen.backgroundColor
+    override func setupViews() {
+        super.setupViews()
         
-        self.addAppNameLabel()
-        self.addAppIconView()
         self.add1PlayerButton()
         self.add2PlayerButton()
         self.addBestScoreLabel()
-    }
-    
-    private func addAppNameLabel() {
-        appNameLabel = UILabel()
-        appNameLabel.text = Constants.HomeScreen.appName
-        appNameLabel.textAlignment = NSTextAlignment.center
-        appNameLabel.font = UIFont(name: Font.squirk, size: 60)
-        appNameLabel.textColor = Constants.HomeScreen.appNameColor
-        appNameLabel.makeShadow()
-        self.view.addSubview(appNameLabel)
-        appNameLabel.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(150)
-        }
-}
-    
-    private func addAppIconView() {
-        iconImageView = UIImageView()
-        iconImageView.image = UIImage(named: Constants.HomeScreen.ninjaImageName)
-        self.view.addSubview(iconImageView)
-        iconImageView.snp.makeConstraints { (make) in
-            make.top.equalTo(appNameLabel.snp.bottom).offset(20)
-            make.width.height.equalTo(Constants.HomeScreen.iconWidth)
-            make.centerX.equalTo(self.view)
-        }
     }
     
     private func add1PlayerButton() {
@@ -144,8 +114,8 @@ class LoginViewController: UIViewController {
     }
    
     @objc private func didTapMultiPlayerButton() {
-        let multiPlayerVC = MultiPlayerViewController()
-        multiPlayerVC.modalPresentationStyle = .fullScreen
-        self.present(multiPlayerVC, animated: false, completion: nil)
+        let createRoomVC = CreateRoomViewController()
+        createRoomVC.modalPresentationStyle = .fullScreen
+        self.present(createRoomVC, animated: true, completion: nil)
     }
 }

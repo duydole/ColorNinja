@@ -14,6 +14,17 @@ struct Font {
     static let squirk = "Squirk"
 }
 
+struct Color {
+    struct Zalo {
+        static let blue1 = ColorRGB(0,174,255)      // màu xanh đậm zalo
+        static let blue2 = ColorRGB(3, 142, 241)    // màu xanh nhạt zalo
+    }
+    struct Facebook {
+        static let loginButton = ColorRGB(60, 102, 196)
+    }
+    
+}
+
 struct Constants {
     
     struct Screen {
