@@ -12,7 +12,7 @@
 		8C2C72802467A7CC00883388 /* RankingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C727F2467A7CC00883388 /* RankingTableViewCell.swift */; };
 		8C2C72822467ACD300883388 /* RankingCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C72812467ACD300883388 /* RankingCellModel.swift */; };
 		8C34F005246E914600E156FD /* ZaloService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C34F004246E914600E156FD /* ZaloService.swift */; };
-		8C5FA0B9246AE6F4005D33E0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5FA0B8246AE6F4005D33E0 /* LoginViewController.swift */; };
+		8C5FA0B9246AE6F4005D33E0 /* HomeViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5FA0B8246AE6F4005D33E0 /* HomeViewController2.swift */; };
 		8C5FFEE92472E84500D9FA5E /* AppDelegateDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5FFEE82472E84500D9FA5E /* AppDelegateDispatcher.swift */; };
 		8C5FFEEB2472E87E00D9FA5E /* BaseAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5FFEEA2472E87E00D9FA5E /* BaseAppDelegate.swift */; };
 		8C5FFEED2472E8B500D9FA5E /* ZaloSDKAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5FFEEC2472E8B500D9FA5E /* ZaloSDKAppDelegate.swift */; };
@@ -80,7 +80,7 @@
 		8C2C727F2467A7CC00883388 /* RankingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingTableViewCell.swift; sourceTree = "<group>"; };
 		8C2C72812467ACD300883388 /* RankingCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingCellModel.swift; sourceTree = "<group>"; };
 		8C34F004246E914600E156FD /* ZaloService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZaloService.swift; sourceTree = "<group>"; };
-		8C5FA0B8246AE6F4005D33E0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		8C5FA0B8246AE6F4005D33E0 /* HomeViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController2.swift; sourceTree = "<group>"; };
 		8C5FFEE82472E84500D9FA5E /* AppDelegateDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateDispatcher.swift; sourceTree = "<group>"; };
 		8C5FFEEA2472E87E00D9FA5E /* BaseAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAppDelegate.swift; sourceTree = "<group>"; };
 		8C5FFEEC2472E8B500D9FA5E /* ZaloSDKAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZaloSDKAppDelegate.swift; sourceTree = "<group>"; };
@@ -171,7 +171,7 @@
 		8C5FA0B7246AE693005D33E0 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				8C5FA0B8246AE6F4005D33E0 /* LoginViewController.swift */,
+				8C5FA0B8246AE6F4005D33E0 /* HomeViewController2.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -575,7 +575,7 @@
 				F22F8584246679DA00493BB6 /* Size.swift in Sources */,
 				8C6EC7492467E3C100612802 /* PopupViewController.swift in Sources */,
 				F2347635246836D7004C8363 /* UIColor+Extension.swift in Sources */,
-				8C5FA0B9246AE6F4005D33E0 /* LoginViewController.swift in Sources */,
+				8C5FA0B9246AE6F4005D33E0 /* HomeViewController2.swift in Sources */,
 				F263FDC0246F9FB600A4AB0B /* BaseGameViewController.swift in Sources */,
 				F22F856A2465B55400493BB6 /* SinglePlayerViewController.swift in Sources */,
 				8C2C72802467A7CC00883388 /* RankingTableViewCell.swift in Sources */,

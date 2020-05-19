@@ -10,7 +10,7 @@ import UIKit
 import ZaloSDK
 import RxSwift
 
-class LoginViewController: BaseHomeViewController {
+class HomeViewController2: BaseHomeViewController {
     
     var singlePlayerButton: UIButton!
     var multiPlayerButton: UIButton!
