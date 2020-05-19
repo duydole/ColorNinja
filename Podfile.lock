@@ -1,4 +1,18 @@
 PODS:
+  - FBSDKCoreKit (7.0.0):
+    - FBSDKCoreKit/Basics (= 7.0.0)
+    - FBSDKCoreKit/Core (= 7.0.0)
+  - FBSDKCoreKit/Basics (7.0.0)
+  - FBSDKCoreKit/Core (7.0.0):
+    - FBSDKCoreKit/Basics
+  - FBSDKLoginKit (7.0.0):
+    - FBSDKLoginKit/Login (= 7.0.0)
+  - FBSDKLoginKit/Login (7.0.0):
+    - FBSDKCoreKit (~> 7.0.0)
+  - FBSDKShareKit (7.0.0):
+    - FBSDKShareKit/Share (= 7.0.0)
+  - FBSDKShareKit/Share (7.0.0):
+    - FBSDKCoreKit (~> 7.0.0)
   - Google-Mobile-Ads-SDK (7.59.0):
     - GoogleAppMeasurement (~> 6.0)
   - GoogleAppMeasurement (6.4.2):
@@ -46,6 +60,9 @@ PODS:
     - ZaloSDK/Core
 
 DEPENDENCIES:
+  - FBSDKCoreKit
+  - FBSDKLoginKit
+  - FBSDKShareKit
   - Google-Mobile-Ads-SDK
   - RxCocoa (~> 5)
   - RxSwift (~> 5)
@@ -55,6 +72,9 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - FBSDKCoreKit
+    - FBSDKLoginKit
+    - FBSDKShareKit
     - Google-Mobile-Ads-SDK
     - GoogleAppMeasurement
     - GoogleUtilities
@@ -68,6 +88,9 @@ SPEC REPOS:
     - ZaloSDK
 
 SPEC CHECKSUMS:
+  FBSDKCoreKit: 8ad31cd09f793d1d7e84cf20fd6cebfe80ad318d
+  FBSDKLoginKit: 5d1e321dc45ab1fa09198b77fc17c32a06f008c0
+  FBSDKShareKit: 7ec93bf49516a91513d64863f54121155bbd7f78
   Google-Mobile-Ads-SDK: 118217ac8b80e28aabe0c00aedab1cd885857776
   GoogleAppMeasurement: 2253e99c1f22638cf234c059144660c338ad76c3
   GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
@@ -80,6 +103,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   ZaloSDK: a0d05ee0c2308b6bc83babe86ce2fa33b4f44cb0
 
-PODFILE CHECKSUM: 66859aab7538d4626956c97632639a22d5a68223
+PODFILE CHECKSUM: 11f3e920f94ee90e68bd5bb09bb1c767c83aa1bd
 
 COCOAPODS: 1.8.4

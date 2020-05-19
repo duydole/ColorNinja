@@ -13,6 +13,11 @@
 		8C2C72822467ACD300883388 /* RankingCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C72812467ACD300883388 /* RankingCellModel.swift */; };
 		8C34F005246E914600E156FD /* ZaloService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C34F004246E914600E156FD /* ZaloService.swift */; };
 		8C5FA0B9246AE6F4005D33E0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5FA0B8246AE6F4005D33E0 /* LoginViewController.swift */; };
+		8C5FFEE92472E84500D9FA5E /* AppDelegateDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5FFEE82472E84500D9FA5E /* AppDelegateDispatcher.swift */; };
+		8C5FFEEB2472E87E00D9FA5E /* BaseAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5FFEEA2472E87E00D9FA5E /* BaseAppDelegate.swift */; };
+		8C5FFEED2472E8B500D9FA5E /* ZaloSDKAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5FFEEC2472E8B500D9FA5E /* ZaloSDKAppDelegate.swift */; };
+		8C5FFEEF2472E8D800D9FA5E /* FacebookSDKAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5FFEEE2472E8D800D9FA5E /* FacebookSDKAppDelegate.swift */; };
+		8C6350A924735C8C00ADAB01 /* FacebookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6350A824735C8C00ADAB01 /* FacebookService.swift */; };
 		8C6EC7442467DE8E00612802 /* ZPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EC7432467DE8E00612802 /* ZPopup.swift */; };
 		8C6EC7492467E3C100612802 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EC7482467E3C100612802 /* PopupViewController.swift */; };
 		8C73DB8D246AA8E40095FE8A /* ZaloSDKApiWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C73DB8C246AA8E40095FE8A /* ZaloSDKApiWrapper.swift */; };
@@ -73,6 +78,11 @@
 		8C2C72812467ACD300883388 /* RankingCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingCellModel.swift; sourceTree = "<group>"; };
 		8C34F004246E914600E156FD /* ZaloService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZaloService.swift; sourceTree = "<group>"; };
 		8C5FA0B8246AE6F4005D33E0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		8C5FFEE82472E84500D9FA5E /* AppDelegateDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateDispatcher.swift; sourceTree = "<group>"; };
+		8C5FFEEA2472E87E00D9FA5E /* BaseAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAppDelegate.swift; sourceTree = "<group>"; };
+		8C5FFEEC2472E8B500D9FA5E /* ZaloSDKAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZaloSDKAppDelegate.swift; sourceTree = "<group>"; };
+		8C5FFEEE2472E8D800D9FA5E /* FacebookSDKAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookSDKAppDelegate.swift; sourceTree = "<group>"; };
+		8C6350A824735C8C00ADAB01 /* FacebookService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookService.swift; sourceTree = "<group>"; };
 		8C6EC7432467DE8E00612802 /* ZPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZPopup.swift; sourceTree = "<group>"; };
 		8C6EC7482467E3C100612802 /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
 		8C73DB8C246AA8E40095FE8A /* ZaloSDKApiWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZaloSDKApiWrapper.swift; sourceTree = "<group>"; };
@@ -160,12 +170,33 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		8C5FFECF2472E7E200D9FA5E /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				F2C06079246566B5001FAD58 /* AppDelegate.swift */,
+				8C5FFEE82472E84500D9FA5E /* AppDelegateDispatcher.swift */,
+				8C5FFEEA2472E87E00D9FA5E /* BaseAppDelegate.swift */,
+				8C5FFEEC2472E8B500D9FA5E /* ZaloSDKAppDelegate.swift */,
+				8C5FFEEE2472E8D800D9FA5E /* FacebookSDKAppDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		8C6350AA24735CA700ADAB01 /* Facebook */ = {
+			isa = PBXGroup;
+			children = (
+				8C6350A824735C8C00ADAB01 /* FacebookService.swift */,
+			);
+			path = Facebook;
+			sourceTree = "<group>";
+		};
 		8C73DB8A246AA8C20095FE8A /* Core */ = {
 			isa = PBXGroup;
 			children = (
 				F263FDBC246F992500A4AB0B /* Socket */,
 				F27454F0246A718E0037A8BA /* MusicComponent */,
 				8C73DB8B246AA8C90095FE8A /* Zalo */,
+				8C6350AA24735CA700ADAB01 /* Facebook */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -386,12 +417,12 @@
 		F2C06078246566B5001FAD58 /* ColorNinja */ = {
 			isa = PBXGroup;
 			children = (
+				8C5FFECF2472E7E200D9FA5E /* AppDelegate */,
 				F28098BB246AE2060060693D /* Manager */,
 				F28098BA246AE1EF0060693D /* Resouces */,
 				8CC6DB45246B8F940017B60A /* Common */,
 				8C73DB8A246AA8C20095FE8A /* Core */,
 				F22F85612465A32500493BB6 /* ViewControllers */,
-				F2C06079246566B5001FAD58 /* AppDelegate.swift */,
 				F28098C6246B0D2E0060693D /* Assets.xcassets */,
 				F22F858924669BC200493BB6 /* setting.png */,
 				F2C06084246566B7001FAD58 /* LaunchScreen.storyboard */,
@@ -523,6 +554,7 @@
 			files = (
 				F2347631246809C5004C8363 /* GameOverPopup.swift in Sources */,
 				8C2C72822467ACD300883388 /* RankingCellModel.swift in Sources */,
+				8C6350A924735C8C00ADAB01 /* FacebookService.swift in Sources */,
 				F22F8584246679DA00493BB6 /* Size.swift in Sources */,
 				8C6EC7492467E3C100612802 /* PopupViewController.swift in Sources */,
 				F2347635246836D7004C8363 /* UIColor+Extension.swift in Sources */,
@@ -538,6 +570,8 @@
 				8C7ABAB6246D5AE900063AE4 /* Utils.swift in Sources */,
 				F22F85882466940900493BB6 /* StaticFunctions.swift in Sources */,
 				F234763324680D75004C8363 /* GameSettingPopup.swift in Sources */,
+				8C5FFEED2472E8B500D9FA5E /* ZaloSDKAppDelegate.swift in Sources */,
+				8C5FFEE92472E84500D9FA5E /* AppDelegateDispatcher.swift in Sources */,
 				F22F85682465AF2100493BB6 /* ZButton.swift in Sources */,
 				F22F85642465A34900493BB6 /* Constants.swift in Sources */,
 				8C2C727C2467A79700883388 /* RankingTableView.swift in Sources */,
@@ -550,6 +584,7 @@
 				F27454F2246A71A40037A8BA /* MusicPlayer.swift in Sources */,
 				F2EAD8562471381F00B2D6B9 /* InputUserNamePopup.swift in Sources */,
 				8C2C72782467A58C00883388 /* RankingViewController.swift in Sources */,
+				8C5FFEEF2472E8D800D9FA5E /* FacebookSDKAppDelegate.swift in Sources */,
 				F263FDBB246F950000A4AB0B /* BaseViewController.swift in Sources */,
 				F2347638246851A5004C8363 /* ButtonWithImage.swift in Sources */,
 				8CC6DB47246B8FA90017B60A /* Date+Extension.swift in Sources */,
@@ -565,6 +600,7 @@
 				F2A6E68C2466FF5600970D1B /* BoardCollectionView.swift in Sources */,
 				F234761124671FE1004C8363 /* ColorCellModel.swift in Sources */,
 				8C34F005246E914600E156FD /* ZaloService.swift in Sources */,
+				8C5FFEEB2472E87E00D9FA5E /* BaseAppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
