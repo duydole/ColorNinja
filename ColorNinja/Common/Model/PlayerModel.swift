@@ -13,6 +13,7 @@ class PlayerModel {
     var id: String = UUID().uuidString
     var name: String = "Unknown"
     var currentPoint: Int = 0
+    var maxPoint: Int = 0
     
     init(name: String, id: String) {
         self.id = id

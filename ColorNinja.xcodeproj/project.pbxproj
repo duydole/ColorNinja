@@ -66,7 +66,8 @@
 		F2C06086246566B7001FAD58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2C06084246566B7001FAD58 /* LaunchScreen.storyboard */; };
 		F2D862372474330E006D3FD4 /* BaseHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D862362474330E006D3FD4 /* BaseHomeViewController.swift */; };
 		F2D862392474332C006D3FD4 /* RoomGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D862382474332C006D3FD4 /* RoomGameViewController.swift */; };
-		F2D8623C24743353006D3FD4 /* CreateRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D8623B24743353006D3FD4 /* CreateRoomViewController.swift */; };
+		F2D8623C24743353006D3FD4 /* LoginAsGuestViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D8623B24743353006D3FD4 /* LoginAsGuestViewcontroller.swift */; };
+		F2D8623E2474343E006D3FD4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D8623D2474343E006D3FD4 /* LoginViewController.swift */; };
 		F2EAD8542470429400B2D6B9 /* Squirk-RMvV.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F2EAD8532470429400B2D6B9 /* Squirk-RMvV.ttf */; };
 		F2EAD8562471381F00B2D6B9 /* InputUserNamePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EAD8552471381F00B2D6B9 /* InputUserNamePopup.swift */; };
 /* End PBXBuildFile section */
@@ -135,7 +136,8 @@
 		F2C06087246566B7001FAD58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F2D862362474330E006D3FD4 /* BaseHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseHomeViewController.swift; sourceTree = "<group>"; };
 		F2D862382474332C006D3FD4 /* RoomGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoomGameViewController.swift; path = 2Player/RoomGameViewController.swift; sourceTree = "<group>"; };
-		F2D8623B24743353006D3FD4 /* CreateRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateRoomViewController.swift; sourceTree = "<group>"; };
+		F2D8623B24743353006D3FD4 /* LoginAsGuestViewcontroller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginAsGuestViewcontroller.swift; sourceTree = "<group>"; };
+		F2D8623D2474343E006D3FD4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		F2EAD8532470429400B2D6B9 /* Squirk-RMvV.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Squirk-RMvV.ttf"; sourceTree = "<group>"; };
 		F2EAD8552471381F00B2D6B9 /* InputUserNamePopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputUserNamePopup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -172,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				8C5FA0B8246AE6F4005D33E0 /* HomeViewController2.swift */,
+				F2D8623D2474343E006D3FD4 /* LoginViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -443,7 +446,7 @@
 		F2D8623A24743353006D3FD4 /* UserNameInputViewController */ = {
 			isa = PBXGroup;
 			children = (
-				F2D8623B24743353006D3FD4 /* CreateRoomViewController.swift */,
+				F2D8623B24743353006D3FD4 /* LoginAsGuestViewcontroller.swift */,
 			);
 			path = UserNameInputViewController;
 			sourceTree = "<group>";
@@ -594,11 +597,12 @@
 				F22F85642465A34900493BB6 /* Constants.swift in Sources */,
 				8C2C727C2467A79700883388 /* RankingTableView.swift in Sources */,
 				F2C0607E246566B5001FAD58 /* HomeViewController.swift in Sources */,
+				F2D8623E2474343E006D3FD4 /* LoginViewController.swift in Sources */,
 				F2AB0F56246FD07600FE7FDA /* ViewCreator.swift in Sources */,
 				F23476142467B4D0004C8363 /* ColorStore.swift in Sources */,
 				F22F85662465A71E00493BB6 /* UIView+Extension.swift in Sources */,
 				F2A6E68E2466FF5600970D1B /* ColorCollectionViewCell.swift in Sources */,
-				F2D8623C24743353006D3FD4 /* CreateRoomViewController.swift in Sources */,
+				F2D8623C24743353006D3FD4 /* LoginAsGuestViewcontroller.swift in Sources */,
 				F2C0607A246566B5001FAD58 /* AppDelegate.swift in Sources */,
 				F27454F2246A71A40037A8BA /* MusicPlayer.swift in Sources */,
 				F2D862392474332C006D3FD4 /* RoomGameViewController.swift in Sources */,

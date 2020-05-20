@@ -17,8 +17,10 @@ class GameSettingManager {
         return !GameMusicPlayer.shared.isMuteMainSound
     }
     var ownerUserName: String?
+    var userModel: PlayerModel!
     
     private init() {
         allowEffectSound = true
+        userModel = PlayerModel(name: "Unkown")
     }
 }

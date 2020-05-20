@@ -109,6 +109,8 @@ class LoginViewController: UIViewController {
     }
     
     @objc private func didTapLoginAsGuestButton() {
-        
+        let createRoomVC = LoginAsGuestViewcontroller()
+        createRoomVC.modalPresentationStyle = .fullScreen
+        self.present(createRoomVC, animated: false, completion: nil)
     }
 }
