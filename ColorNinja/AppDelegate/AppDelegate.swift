@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let homeVC = HomeViewController()
-        let loginVC = HomeViewController2()
+        let loginVC = LoginViewController()
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = loginVC
         window?.makeKeyAndVisible()
