@@ -12,9 +12,10 @@ import RxSwift
 
 class HomeViewController2: BaseHomeViewController {
     
-    var singlePlayerButton: UIButton!
-    var multiPlayerButton: UIButton!
-    var bestScoreLabel: UILabel!
+    private var singlePlayerButton: UIButton!
+    private var multiPlayerButton: UIButton!
+    private var bestScoreLabel: UILabel!
+    private var userNameButton: ButtonWithImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,9 +26,24 @@ class HomeViewController2: BaseHomeViewController {
     override func setupViews() {
         super.setupViews()
         
-        self.add1PlayerButton()
-        self.add2PlayerButton()
-        self.addBestScoreLabel()
+        addUserNameButton()
+        add1PlayerButton()
+        add2PlayerButton()
+        addBestScoreLabel()
+    }
+    
+    private func addUserNameButton() {
+        userNameButton = ButtonWithImage()
+        view.addSubview(userNameButton)
+        userNameButton.imageView.image = UIImage(named: "usericon")
+        userNameButton.titleLabel.text = GameSettingManager.shared.userModel.name
+        userNameButton.spacing = 5
+        userNameButton.snp.makeConstraints { (make) in
+            make.width.equalTo(130)
+            make.height.equalTo(40)
+            make.top.equalTo(Size.statusBarHeight+10)
+            make.leading.equalTo(20)
+        }
     }
     
     private func add1PlayerButton() {
@@ -114,8 +130,6 @@ class HomeViewController2: BaseHomeViewController {
     }
    
     @objc private func didTapMultiPlayerButton() {
-        let createRoomVC = LoginAsGuestViewcontroller()
-        createRoomVC.modalPresentationStyle = .fullScreen
-        self.present(createRoomVC, animated: true, completion: nil)
+        
     }
 }
