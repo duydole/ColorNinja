@@ -106,8 +106,8 @@ class GameOverPopup: PopupViewController {
         
         // GoHome
         goHomeButton = ButtonWithImage()
-        goHomeButton.titleText = "Home"
-        goHomeButton.image = UIImage(named: "homeicon")
+        goHomeButton.titleLabel.text = "Home"
+        goHomeButton.imageView.image = UIImage(named: "homeicon")
         goHomeButton.layer.cornerRadius = 25
         goHomeButton.backgroundColor = .orange
         goHomeButton.makeShadow()
@@ -121,8 +121,8 @@ class GameOverPopup: PopupViewController {
         
         // PlayAgain
         replayButton = ButtonWithImage()
-        replayButton.titleText = "Replay"
-        replayButton.image = UIImage(named: "replayicon")
+        replayButton.titleLabel.text = "Replay"
+        replayButton.imageView.image = UIImage(named: "replayicon")
         replayButton.backgroundColor = .orange
         replayButton.layer.cornerRadius = 25
         replayButton.makeShadow()
