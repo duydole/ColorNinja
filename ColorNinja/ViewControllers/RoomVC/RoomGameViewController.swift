@@ -40,7 +40,7 @@ class RoomGameViewController: MultiPlayerViewController {
 
     override func serverSendRoomInfo(_ json: Dictionary<String, Any>) {
         let groupId = json["groupId"] as! String
-        roomIdLabel.text = "Room Id: " + groupId
+        updateRoomId(id: groupId.toInt())
         showStatus(message: "Share your RoomId to your friend! :))")
     }
     
@@ -48,8 +48,7 @@ class RoomGameViewController: MultiPlayerViewController {
         if roomId == -1 {
             super.requirePlayerKeyFromServer(json)
         } else {
-            // Join Existed Room
-            sendJoinRoomRequestToServer()
+            joinExistedRoom()
         }
     }
     
@@ -63,5 +62,16 @@ class RoomGameViewController: MultiPlayerViewController {
     func sendJoinRoomRequestToServer() {
         let jsonString = "{\"type\":\(ClientSendType.SendRequiredKeyGroupMode.rawValue),\"keyPlayer\":\"\(player1.id)\",\"username\":\(player1.name),\"groupId\":\"\(roomId.toString())\"} "
         client.sendToServer(message: jsonString)
+    }
+    
+    // MARK: Private
+    
+    private func joinExistedRoom() {
+        updateRoomId(id: roomId)
+        sendJoinRoomRequestToServer()
+    }
+    
+    private func updateRoomId(id: Int) {
+        roomIdLabel.text = "Room Id: \(id)"
     }
 }
