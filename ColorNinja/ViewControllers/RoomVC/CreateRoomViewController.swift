@@ -112,7 +112,18 @@ class CreateRoomViewController: BaseViewController {
     @objc func didTapJoinRoomButton() {
         let popup = JoinRoomPopup()
         popup.tapDarkLayerToDismiss = true
+        popup.dismissInterval = 0.2
+        popup.delegate = self
         popup.modalPresentationStyle = .overCurrentContext
         self.present(popup, animated: false, completion: nil)
+    }
+}
+
+extension CreateRoomViewController: JoinRoomPopupDelegate {
+    func didDismissWithRoomId(roomId: Int) {
+        let homeVC = RoomGameViewController()
+        homeVC.roomId = roomId
+        homeVC.modalPresentationStyle = .fullScreen
+        present(homeVC, animated: false, completion: nil)
     }
 }

@@ -35,21 +35,36 @@ class RoomGameViewController: MultiPlayerViewController {
             make.centerX.equalToSuperview()
         }
     }
+    
+    private func showWaitingInRoomStatus() {
+        showStatus(message: "Share RoomId \(roomId) to your friend :D")
+    }
             
     // MARK: Server responde
 
     override func serverSendRoomInfo(_ json: Dictionary<String, Any>) {
+        super.serverSendRoomInfo(json)
+        
         let groupId = json["groupId"] as! String
-        updateRoomId(id: groupId.toInt())
-        showStatus(message: "Share your RoomId to your friend! :))")
+        roomId = groupId.toInt()
+        updateRoomId(id: roomId)
+        showWaitingInRoomStatus()
     }
     
     override func requirePlayerKeyFromServer(_ json: Dictionary<String, Any>) {
+        super.requirePlayerKeyFromServer(json)
+        
         if roomId == -1 {
             super.requirePlayerKeyFromServer(json)
         } else {
             joinExistedRoom()
         }
+    }
+    
+    override func serverSendRoomIsNotExisted(_ json: Dictionary<String, Any>) {
+        super.serverSendRoomIsNotExisted(json)
+        showAlertWithMessage(message: "Room is not existed. You are in new room with id \(roomId)")
+        dismiss(animated: true, completion: nil)
     }
     
     // MARK: Client send to server

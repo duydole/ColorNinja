@@ -26,8 +26,10 @@ class PopupViewController: UIViewController {
     
     var didDismissPopUp: (() -> Void)?
     
+    var dismissInterval: TimeInterval = 0.3
+    
     func dismissPopUp() {
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: dismissInterval, animations: {
             self.contentView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
         }) { (success) in
             self.darkLayer.backgroundColor = .clear

@@ -209,6 +209,10 @@ class MultiPlayerViewController : BaseGameViewController {
         
     }
     
+    func serverSendRoomIsNotExisted(_ json: Dictionary<String, Any>) {
+        
+    }
+    
     // MARK: - Send Message to Server
     
     func sendRequiredKeyMessage() {
@@ -292,6 +296,8 @@ extension MultiPlayerViewController : ClientDelegate {
             serverSendLevelResult(json)
         case .RoomInfo:
             serverSendRoomInfo(json)
+        case .RoomIsNotExisted:
+            serverSendRoomIsNotExisted(json)
         default:
             showAlertWithMessage(message: json["message"] as! String)
             print("duydl: UNKNOW MESSAGE TYPE OF SERVER")

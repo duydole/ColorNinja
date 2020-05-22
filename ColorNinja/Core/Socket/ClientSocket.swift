@@ -9,6 +9,7 @@
 import Foundation
 
 enum ServerRespondeType: Int {
+    case RoomIsNotExisted = -9
     case UnknownRequest = -5
     case UnknownRequestAfterConnect = -4
     case RoundExpried = -3
@@ -84,6 +85,8 @@ class ClientSocket : NSObject, StreamDelegate {
             return .MatchedInfo
         } else if type == 7 {
             return .RoomInfo
+        } else if type == -9 {
+            return .RoomIsNotExisted
         }
         
         return .UnknownRequest

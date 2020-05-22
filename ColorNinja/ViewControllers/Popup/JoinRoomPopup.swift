@@ -9,11 +9,16 @@
 import Foundation
 import UIKit
 
+protocol JoinRoomPopupDelegate {
+    func didDismissWithRoomId(roomId: Int) -> Void
+}
+
 class JoinRoomPopup: PopupViewController {
     
     private var goButton: UIButton!
     private var textField: UITextField!
-    
+    var delegate: JoinRoomPopupDelegate?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -63,20 +68,50 @@ class JoinRoomPopup: PopupViewController {
     }
     
     @objc private func didTapGoButton() {
-        if let username = textField.text {
-            if username != "" {
-                
-                // Open homeVC
-                let homeVC = RoomGameViewController()
-                homeVC.roomId = textField.text!.toInt()
-                homeVC.modalPresentationStyle = .fullScreen
-                self.present(homeVC, animated: false, completion: nil)
-            } else {
-                let alert = UIAlertController(title: "Warning", message: "Please input Room Id! Thanks!", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-            }
+        
+        // Validate TextField
+        guard let roomIdString = textField.text else {
+            return
+        }
+        
+        if roomIdString.isEmpty {
+            showAlertWithMessage(message: "Please input your RoomId. Thanks.")
+            return
+        }
+        
+        if !isValidRoomId(roomIdString: roomIdString) {
+            showAlertWithMessage(message: "Please input valid RoomId. Thanks.")
+            return
+        }
+        
+        if roomIdString.toInt() > 999 {
+            showAlertWithMessage(message: "Please input RoomId less than 999. Thanks.")
+            return
+        }
+        
+        /* Send RoomID to Delegate */
+        dismissPopUp()
+        didDismissPopUp = {
+            self.delegate?.didDismissWithRoomId(roomId: roomIdString.toInt())
         }
     }
+        
+    func isValidRoomId(roomIdString: String) -> Bool {
+        if roomIdString == "0" {
+            return true
+        }
+        
+        if roomIdString.toInt() == 0 {
+            return false
+        }
+        
+        return true
+    }
     
+    func showAlertWithMessage(message: String) {
+        let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+
+    }
 }
