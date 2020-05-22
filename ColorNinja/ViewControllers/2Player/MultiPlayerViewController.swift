@@ -14,7 +14,7 @@ let MAX_LEVEL: Int = 30
 class MultiPlayerViewController : BaseGameViewController {
     
     var client: ClientSocket!
-    var player1 = PlayerModel(name: "You")
+    var player1 = GameSettingManager.shared.userModel!
     var player2 = PlayerModel(name: "----")
     var player1Title: UILabel!
     var player2Title: UILabel!
@@ -29,7 +29,6 @@ class MultiPlayerViewController : BaseGameViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupClientSocket()
-        self.showWaitingCompetitorLabel()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -45,16 +44,17 @@ class MultiPlayerViewController : BaseGameViewController {
         client.delegate = self
     }
     
-    private func showWaitingCompetitorLabel() {
-        statusLabel.text = "Finding..."
+    func showStatus(message: String) {
+        statusLabel.isHidden = false
+        statusLabel.text = message
     }
     
     // MARK: - Setup views
     
     override func setupViews() {
         super.setupViews()
-        self.setupTopContainer()
-        self.setupStatusLabel()
+        setupTopContainer()
+        setupStatusLabel()
     }
     
     func setupTopContainer() {
@@ -124,11 +124,12 @@ class MultiPlayerViewController : BaseGameViewController {
     
     // MARK: - Server Responde
     
-    private func requirePlayerKeyFromServer(_ json: Dictionary<String, Any>) {
+    func requirePlayerKeyFromServer(_ json: Dictionary<String, Any>) {
         self.sendRequiredKeyMessage()
     }
     
     private func waitingAnotherPlayerFromServer(_ json: Dictionary<String, Any>) {
+        showStatus(message: "Waiting random matching...")
         print("duydl: WAITING ANOTHER PLAYER!")
     }
     
@@ -292,6 +293,7 @@ extension MultiPlayerViewController : ClientDelegate {
         case .RoomInfo:
             serverSendRoomInfo(json)
         default:
+            showAlertWithMessage(message: json["message"] as! String)
             print("duydl: UNKNOW MESSAGE TYPE OF SERVER")
         }
     }

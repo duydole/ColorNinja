@@ -130,6 +130,8 @@ class HomeViewController2: BaseHomeViewController {
     }
    
     @objc private func didTapMultiPlayerButton() {
-        
+        let vc = CreateRoomViewController()
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: false, completion: nil)
     }
 }

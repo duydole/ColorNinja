@@ -41,6 +41,8 @@
 		F234763324680D75004C8363 /* GameSettingPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F234763224680D75004C8363 /* GameSettingPopup.swift */; };
 		F2347635246836D7004C8363 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2347634246836D7004C8363 /* UIColor+Extension.swift */; };
 		F2347638246851A5004C8363 /* ButtonWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2347637246851A5004C8363 /* ButtonWithImage.swift */; };
+		F260CA622476C63500D00348 /* CreateRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F260CA612476C63500D00348 /* CreateRoomViewController.swift */; };
+		F260CA642476DFBF00D00348 /* JoinRoomPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F260CA632476DFBF00D00348 /* JoinRoomPopup.swift */; };
 		F263FDB8246F945A00A4AB0B /* MultiPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F263FDB7246F945A00A4AB0B /* MultiPlayerViewController.swift */; };
 		F263FDBB246F950000A4AB0B /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F263FDBA246F950000A4AB0B /* BaseViewController.swift */; };
 		F263FDBE246F993500A4AB0B /* ClientSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = F263FDBD246F993500A4AB0B /* ClientSocket.swift */; };
@@ -109,6 +111,8 @@
 		F234763224680D75004C8363 /* GameSettingPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettingPopup.swift; sourceTree = "<group>"; };
 		F2347634246836D7004C8363 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		F2347637246851A5004C8363 /* ButtonWithImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWithImage.swift; sourceTree = "<group>"; };
+		F260CA612476C63500D00348 /* CreateRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoomViewController.swift; sourceTree = "<group>"; };
+		F260CA632476DFBF00D00348 /* JoinRoomPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomPopup.swift; sourceTree = "<group>"; };
 		F263FDB7246F945A00A4AB0B /* MultiPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPlayerViewController.swift; sourceTree = "<group>"; };
 		F263FDBA246F950000A4AB0B /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		F263FDBD246F993500A4AB0B /* ClientSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientSocket.swift; sourceTree = "<group>"; };
@@ -135,7 +139,7 @@
 		F2C06085246566B7001FAD58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F2C06087246566B7001FAD58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F2D862362474330E006D3FD4 /* BaseHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseHomeViewController.swift; sourceTree = "<group>"; };
-		F2D862382474332C006D3FD4 /* RoomGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoomGameViewController.swift; path = 2Player/RoomGameViewController.swift; sourceTree = "<group>"; };
+		F2D862382474332C006D3FD4 /* RoomGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomGameViewController.swift; sourceTree = "<group>"; };
 		F2D8623B24743353006D3FD4 /* LoginAsGuestViewcontroller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginAsGuestViewcontroller.swift; sourceTree = "<group>"; };
 		F2D8623D2474343E006D3FD4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		F2EAD8532470429400B2D6B9 /* Squirk-RMvV.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Squirk-RMvV.ttf"; sourceTree = "<group>"; };
@@ -260,6 +264,7 @@
 				F234763224680D75004C8363 /* GameSettingPopup.swift */,
 				F2347630246809C5004C8363 /* GameOverPopup.swift */,
 				F2EAD8552471381F00B2D6B9 /* InputUserNamePopup.swift */,
+				F260CA632476DFBF00D00348 /* JoinRoomPopup.swift */,
 			);
 			path = Popup;
 			sourceTree = "<group>";
@@ -287,8 +292,8 @@
 		F22F85612465A32500493BB6 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				F260CA602476C5E700D00348 /* RoomVC */,
 				F2D8623A24743353006D3FD4 /* UserNameInputViewController */,
-				F2D862382474332C006D3FD4 /* RoomGameViewController.swift */,
 				F263FDB9246F94F400A4AB0B /* BaseViewController */,
 				F263FDB6246F943D00A4AB0B /* 2Player */,
 				8CD60302246ED85300003447 /* Ranking */,
@@ -330,6 +335,15 @@
 				F2347637246851A5004C8363 /* ButtonWithImage.swift */,
 			);
 			path = CustomButton;
+			sourceTree = "<group>";
+		};
+		F260CA602476C5E700D00348 /* RoomVC */ = {
+			isa = PBXGroup;
+			children = (
+				F2D862382474332C006D3FD4 /* RoomGameViewController.swift */,
+				F260CA612476C63500D00348 /* CreateRoomViewController.swift */,
+			);
+			path = RoomVC;
 			sourceTree = "<group>";
 		};
 		F263FDB6246F943D00A4AB0B /* 2Player */ = {
@@ -585,6 +599,7 @@
 				F2A6E68A2466FF5600970D1B /* LevelStore.swift in Sources */,
 				8CC6DB44246B8E470017B60A /* Collection+Extension.swift in Sources */,
 				8CC6DB42246B8E160017B60A /* Dictionary+Extension.swift in Sources */,
+				F260CA622476C63500D00348 /* CreateRoomViewController.swift in Sources */,
 				F263FDB8246F945A00A4AB0B /* MultiPlayerViewController.swift in Sources */,
 				F2D862372474330E006D3FD4 /* BaseHomeViewController.swift in Sources */,
 				8C8BA174246E707900A73046 /* UIImageView+Extension.swift in Sources */,
@@ -593,6 +608,7 @@
 				F234763324680D75004C8363 /* GameSettingPopup.swift in Sources */,
 				8C5FFEED2472E8B500D9FA5E /* ZaloSDKAppDelegate.swift in Sources */,
 				8C5FFEE92472E84500D9FA5E /* AppDelegateDispatcher.swift in Sources */,
+				F260CA642476DFBF00D00348 /* JoinRoomPopup.swift in Sources */,
 				F22F85682465AF2100493BB6 /* ZButton.swift in Sources */,
 				F22F85642465A34900493BB6 /* Constants.swift in Sources */,
 				8C2C727C2467A79700883388 /* RankingTableView.swift in Sources */,
@@ -769,7 +785,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = duydl.com;
+				PRODUCT_BUNDLE_IDENTIFIER = duydl.comk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -789,7 +805,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = duydl.com;
+				PRODUCT_BUNDLE_IDENTIFIER = duydl.comk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

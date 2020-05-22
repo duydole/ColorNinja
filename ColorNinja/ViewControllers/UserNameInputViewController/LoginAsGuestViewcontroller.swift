@@ -34,7 +34,7 @@ class LoginAsGuestViewcontroller: UIViewController {
         view.addSubview(container)
         container.snp.makeConstraints { (make) in
             make.width.equalToSuperview().multipliedBy(0.7)
-            make.height.equalTo(200)
+            make.height.equalTo(120)
             make.center.equalToSuperview()
         }
     }
@@ -65,8 +65,8 @@ class LoginAsGuestViewcontroller: UIViewController {
         
         container.addSubview(textField)
         textField.snp.makeConstraints { (make) in
-            make.width.equalToSuperview()
-            make.height.equalTo(55)
+            make.width.centerX.top.equalToSuperview()
+            make.height.equalTo(60)
         }
     }
     
@@ -80,8 +80,7 @@ class LoginAsGuestViewcontroller: UIViewController {
         container.addSubview(goButton)
         goButton.snp.makeConstraints { (make) in
             make.top.equalTo(textField.snp.bottom).offset(20)
-            make.height.equalTo(52)
-            make.width.equalToSuperview()
+            make.width.height.centerX.equalTo(textField)
         }
         goButton.addTarget(self, action: #selector(didTapGoButton), for: .touchUpInside)
     }

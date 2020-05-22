@@ -53,7 +53,6 @@ class ButtonWithImage: UIView {
         }
         
         // title
-        titleLabel.textColor = .white
         self.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(buttonPadding.top)

@@ -36,6 +36,13 @@ class BaseGameViewController : BaseViewController {
         self.animationReadyView(index: 0, completion: completion)
     }
     
+    func showAlertWithMessage(message: String) {
+        let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+
+    }
+    
     // MARK: - SetupViews
     
     override func setupViews() {
