@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let homeVC = HomeViewController()
+        let homeVC = HomeViewController2()
         let loginVC = LoginViewController()
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = loginVC
@@ -31,6 +31,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             loginVC.present(homeVC, animated: true) {
                 hideLoading()
             }
+        }
+        
+        
+        // Check logined guest user:
+        let username = OwnerInfo.shared.getUsername()
+        if !username.isEmpty {
+            homeVC.modalPresentationStyle = .fullScreen
+            loginVC.present(homeVC, animated: true, completion: nil)
         }
         
         GADMobileAds.sharedInstance().start(completionHandler: nil)

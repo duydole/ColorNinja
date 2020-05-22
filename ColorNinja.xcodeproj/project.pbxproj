@@ -51,6 +51,7 @@
 		F27454F4246A72F80037A8BA /* bgmusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F27454F3246A72F80037A8BA /* bgmusic.mp3 */; };
 		F27454F6246A74660037A8BA /* correctsound.wav in Resources */ = {isa = PBXBuildFile; fileRef = F27454F5246A74660037A8BA /* correctsound.wav */; };
 		F27454F8246A76470037A8BA /* incorrectsound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F27454F7246A76460037A8BA /* incorrectsound.mp3 */; };
+		F275A104247832590077E42F /* OwnerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F275A103247832590077E42F /* OwnerInfo.swift */; };
 		F28098BD246AE2410060693D /* GameSettingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28098BC246AE2410060693D /* GameSettingManager.swift */; };
 		F28098C3246B02A80060693D /* EvilEmpire-4BBVK.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F28098C2246B02A80060693D /* EvilEmpire-4BBVK.ttf */; };
 		F28098C5246B02C00060693D /* SnesItalic-vmAPZ.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F28098C4246B02C00060693D /* SnesItalic-vmAPZ.ttf */; };
@@ -120,6 +121,7 @@
 		F27454F3246A72F80037A8BA /* bgmusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bgmusic.mp3; sourceTree = "<group>"; };
 		F27454F5246A74660037A8BA /* correctsound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = correctsound.wav; sourceTree = "<group>"; };
 		F27454F7246A76460037A8BA /* incorrectsound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = incorrectsound.mp3; sourceTree = "<group>"; };
+		F275A103247832590077E42F /* OwnerInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerInfo.swift; sourceTree = "<group>"; };
 		F28098BC246AE2410060693D /* GameSettingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettingManager.swift; sourceTree = "<group>"; };
 		F28098C2246B02A80060693D /* EvilEmpire-4BBVK.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "EvilEmpire-4BBVK.ttf"; sourceTree = "<group>"; };
 		F28098C4246B02C00060693D /* SnesItalic-vmAPZ.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SnesItalic-vmAPZ.ttf"; sourceTree = "<group>"; };
@@ -394,6 +396,7 @@
 				F23476132467B4D0004C8363 /* ColorStore.swift */,
 				F2A6E6852466FF5600970D1B /* LevelStore.swift */,
 				F28098BC246AE2410060693D /* GameSettingManager.swift */,
+				F275A103247832590077E42F /* OwnerInfo.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -613,6 +616,7 @@
 				F2D8623E2474343E006D3FD4 /* LoginViewController.swift in Sources */,
 				F2AB0F56246FD07600FE7FDA /* ViewCreator.swift in Sources */,
 				F23476142467B4D0004C8363 /* ColorStore.swift in Sources */,
+				F275A104247832590077E42F /* OwnerInfo.swift in Sources */,
 				F22F85662465A71E00493BB6 /* UIView+Extension.swift in Sources */,
 				F2A6E68E2466FF5600970D1B /* ColorCollectionViewCell.swift in Sources */,
 				F2D8623C24743353006D3FD4 /* LoginAsGuestViewcontroller.swift in Sources */,

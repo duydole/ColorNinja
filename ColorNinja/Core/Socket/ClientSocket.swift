@@ -9,6 +9,7 @@
 import Foundation
 
 enum ServerRespondeType: Int {
+    case CompetitorOutRoom = -11
     case RoomIsNotExisted = -9
     case UnknownRequest = -5
     case UnknownRequestAfterConnect = -4
@@ -87,6 +88,8 @@ class ClientSocket : NSObject, StreamDelegate {
             return .RoomInfo
         } else if type == -9 {
             return .RoomIsNotExisted
+        } else if type == -11 {
+            return .CompetitorOutRoom
         }
         
         return .UnknownRequest

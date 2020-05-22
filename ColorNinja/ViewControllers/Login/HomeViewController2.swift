@@ -21,6 +21,10 @@ class HomeViewController2: BaseHomeViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        bestScoreLabel.text = "Your best score is \(OwnerInfo.shared.getMaxScore())"
+    }
+    
     // MARK: Setup views
     
     override func setupViews() {
@@ -36,7 +40,8 @@ class HomeViewController2: BaseHomeViewController {
         userNameButton = ButtonWithImage()
         view.addSubview(userNameButton)
         userNameButton.imageView.image = UIImage(named: "usericon")
-        userNameButton.titleLabel.text = GameSettingManager.shared.userModel.name
+        userNameButton.titleLabel.text = OwnerInfo.shared.getUsername()
+        userNameButton.titleLabel.textColor = .white
         userNameButton.spacing = 5
         userNameButton.snp.makeConstraints { (make) in
             make.width.equalTo(130)
@@ -84,7 +89,7 @@ class HomeViewController2: BaseHomeViewController {
     
     private func addBestScoreLabel() {
         bestScoreLabel = UILabel()
-        bestScoreLabel.text = "Your best score is 23"
+        bestScoreLabel.text = "Your best score is \(OwnerInfo.shared.getMaxScore())"
         bestScoreLabel.textAlignment = NSTextAlignment.center
         bestScoreLabel.font = UIFont(name: Font.squirk, size: 30)
         bestScoreLabel.textColor = .white

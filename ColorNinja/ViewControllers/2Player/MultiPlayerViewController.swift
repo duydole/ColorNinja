@@ -14,7 +14,7 @@ let MAX_LEVEL: Int = 30
 class MultiPlayerViewController : BaseGameViewController {
     
     var client: ClientSocket!
-    var player1 = GameSettingManager.shared.userModel!
+    var player1 = PlayerModel(name: OwnerInfo.shared.getUsername())
     var player2 = PlayerModel(name: "----")
     var player1Title: UILabel!
     var player2Title: UILabel!
@@ -213,6 +213,10 @@ class MultiPlayerViewController : BaseGameViewController {
         
     }
     
+    func serverSendCompetitorOutRoom(_ json: Dictionary<String, Any>) {
+        showAlertWithMessage(message: json["message"] as! String)
+    }
+    
     // MARK: - Send Message to Server
     
     func sendRequiredKeyMessage() {
@@ -298,6 +302,8 @@ extension MultiPlayerViewController : ClientDelegate {
             serverSendRoomInfo(json)
         case .RoomIsNotExisted:
             serverSendRoomIsNotExisted(json)
+        case .CompetitorOutRoom:
+            serverSendCompetitorOutRoom(json)
         default:
             showAlertWithMessage(message: json["message"] as! String)
             print("duydl: UNKNOW MESSAGE TYPE OF SERVER")

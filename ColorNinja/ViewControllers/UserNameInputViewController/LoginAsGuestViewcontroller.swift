@@ -92,21 +92,39 @@ class LoginAsGuestViewcontroller: UIViewController {
     }
     
     @objc private func didTapGoButton() {
-        if let username = textField.text {
-            if username != "" {
-                
-                // Save username
-                GameSettingManager.shared.userModel.name = username
         
-                // Open homeVC
-                let homeVC = HomeViewController2()
-                homeVC.modalPresentationStyle = .fullScreen
-                self.present(homeVC, animated: false, completion: nil)
-            } else {
-                let alert = UIAlertController(title: "Warning", message: "Please input your username! Thanks!", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-            }
+        guard let username = textField.text else {
+            return
         }
+        
+        if username.isEmpty {
+            showAlertWithMessage(message: "Please input your username. Thanks.")
+            return
+        }
+        
+        if !isValidUsername(userName: username) {
+            showAlertWithMessage(message: "Please input valid usernmae. Thanks.")
+            return
+        }
+        
+        // Save username
+        OwnerInfo.shared.updateUserName(newusername: username)
+        
+        // Open homeVC
+        let homeVC = HomeViewController2()
+        homeVC.modalPresentationStyle = .fullScreen
+        self.present(homeVC, animated: false, completion: nil)
+        
+    }
+    
+    private func isValidUsername(userName: String) -> Bool {
+        return true
+    }
+    
+    private func showAlertWithMessage(message: String) {
+        let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+
     }
 }

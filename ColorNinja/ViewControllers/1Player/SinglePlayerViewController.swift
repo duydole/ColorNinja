@@ -144,6 +144,12 @@ class SinglePlayerViewController : BaseGameViewController {
         // StopTimer
         self.stopTimer()
         
+        // Update Max Score
+        let resultScored = currentLevel.levelIndex + 1
+        if resultScored > OwnerInfo.shared.getMaxScore() {
+            OwnerInfo.shared.updateMaxScore(newMaxScore: resultScored)
+        }
+        
         // Show Popup GameOver
         let gameOverPopup = GameOverPopup()
         gameOverPopup.modalPresentationStyle = .overCurrentContext

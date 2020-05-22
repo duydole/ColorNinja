@@ -43,8 +43,7 @@ class RoomGameViewController: MultiPlayerViewController {
     // MARK: Server responde
 
     override func serverSendRoomInfo(_ json: Dictionary<String, Any>) {
-        super.serverSendRoomInfo(json)
-        
+        // Donot call super
         let groupId = json["groupId"] as! String
         roomId = groupId.toInt()
         updateRoomId(id: roomId)
@@ -52,8 +51,7 @@ class RoomGameViewController: MultiPlayerViewController {
     }
     
     override func requirePlayerKeyFromServer(_ json: Dictionary<String, Any>) {
-        super.requirePlayerKeyFromServer(json)
-        
+        // Donot call super
         if roomId == -1 {
             super.requirePlayerKeyFromServer(json)
         } else {
@@ -62,9 +60,12 @@ class RoomGameViewController: MultiPlayerViewController {
     }
     
     override func serverSendRoomIsNotExisted(_ json: Dictionary<String, Any>) {
-        super.serverSendRoomIsNotExisted(json)
-        showAlertWithMessage(message: "Room is not existed. You are in new room with id \(roomId)")
-        dismiss(animated: true, completion: nil)
+        // Donot call super
+        let alert = UIAlertController(title: "Warning", message: "Room \(roomId) is not existed", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     // MARK: Client send to server
