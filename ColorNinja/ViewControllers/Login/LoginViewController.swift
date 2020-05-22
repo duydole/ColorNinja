@@ -48,6 +48,7 @@ class LoginViewController: UIViewController {
         loginWithZaloButton.buttonPadding = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         loginWithZaloButton.spacing = 10
         loginWithZaloButton.titleLabel.text = "Login with Zalo"
+        loginWithZaloButton.titleLabel.textColor = .white
         loginWithZaloButton.imageView.image = UIImage(named: "zalologo")
         loginWithZaloButton.imageView.layer.cornerRadius = 8
         loginWithZaloButton.imageView.layer.masksToBounds = true
@@ -57,7 +58,7 @@ class LoginViewController: UIViewController {
         loginWithZaloButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapLoginWithZaloButton))
         container.addSubview(loginWithZaloButton)
         loginWithZaloButton.snp.makeConstraints { (make) in
-            make.width.top.equalToSuperview()
+            make.width.top.centerX.equalToSuperview()
             make.height.equalTo(buttonHeight)
         }
         
@@ -66,6 +67,7 @@ class LoginViewController: UIViewController {
         loginWithFBButton.buttonPadding = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         loginWithFBButton.spacing = 10
         loginWithFBButton.titleLabel.text = "Login with Facebook"
+        loginWithFBButton.titleLabel.textColor = .white
         loginWithFBButton.imageView.image = UIImage(named: "fblogo")
         loginWithFBButton.imageView.layer.cornerRadius = 8
         loginWithFBButton.imageView.layer.masksToBounds = true
@@ -84,6 +86,7 @@ class LoginViewController: UIViewController {
         loginAsGuestButton.buttonPadding = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         loginAsGuestButton.spacing = 10
         loginAsGuestButton.titleLabel.text = "Play game as guest"
+        loginAsGuestButton.titleLabel.textColor = .white
         loginAsGuestButton.imageView.image = UIImage(named: "usericon")
         loginAsGuestButton.imageView.layer.cornerRadius = 8
         loginAsGuestButton.imageView.layer.masksToBounds = true
