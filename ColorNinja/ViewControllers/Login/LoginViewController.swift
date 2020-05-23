@@ -11,11 +11,12 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    private var usernameTextField: UITextField!
     private var loginWithZaloButton: ButtonWithImage!
     private var loginWithFBButton: ButtonWithImage!
     private var loginAsGuestButton: ButtonWithImage!
     
-    // MARK: - Life Cycle
+    // MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +24,7 @@ class LoginViewController: UIViewController {
         view.backgroundColor = .white
     }
     
-    // MARK: - Setup Views
+    // MARK: Setup Views
     
     private func setupViews() {
         setupButtons()
@@ -33,9 +34,9 @@ class LoginViewController: UIViewController {
         
         // Container
         let container = UIView()
-        let containerHeight: CGFloat = 220
-        let padding: CGFloat = 20
-        let buttonHeight = (containerHeight - 2*padding)/3
+        let containerHeight: CGFloat = 300
+        let padding: CGFloat = 10
+        let buttonHeight = (containerHeight - 4*padding)/5
         view.addSubview(container)
         container.snp.makeConstraints { (make) in
             make.width.equalToSuperview().multipliedBy(0.7)
@@ -43,65 +44,56 @@ class LoginViewController: UIViewController {
             make.center.equalToSuperview()
         }
         
-        // Login with Zalo
-        loginWithZaloButton = ButtonWithImage()
-        loginWithZaloButton.buttonPadding = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        loginWithZaloButton.spacing = 10
-        loginWithZaloButton.titleLabel.text = "Login with Zalo"
-        loginWithZaloButton.titleLabel.textColor = .white
-        loginWithZaloButton.imageView.image = UIImage(named: "zalologo")
-        loginWithZaloButton.imageView.layer.cornerRadius = 8
-        loginWithZaloButton.imageView.layer.masksToBounds = true
-        loginWithZaloButton.layer.cornerRadius = 12
-        loginWithZaloButton.backgroundColor = Color.Zalo.blue2
-        loginWithZaloButton.makeShadow()
-        loginWithZaloButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapLoginWithZaloButton))
-        container.addSubview(loginWithZaloButton)
-        loginWithZaloButton.snp.makeConstraints { (make) in
+        // Username
+        usernameTextField = ViewCreator.createSimpleTextField(placeholderText: "Your username")
+        container.addSubview(usernameTextField)
+        usernameTextField.snp.makeConstraints { (make) in
             make.width.top.centerX.equalToSuperview()
             make.height.equalTo(buttonHeight)
         }
         
+        // login as guest
+        loginAsGuestButton = ViewCreator.createButtonImageInLoginVC(image: UIImage(named: "usericon")!, title: "Play game as guest", backgroundColor: Color.Facebook.loginButton)
+        loginAsGuestButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapLoginAsGuestButton))
+        loginAsGuestButton.backgroundColor = ColorRGB(255, 18, 18)
+        container.addSubview(loginAsGuestButton)
+        loginAsGuestButton.snp.makeConstraints { (make) in
+            make.centerX.width.equalToSuperview()
+            make.height.equalTo(buttonHeight)
+            make.top.equalTo(usernameTextField.snp.bottom).offset(padding)
+        }
+        
+        // OR Label
+        let orLabel = UILabel()
+        orLabel.text = "OR"
+        orLabel.font = UIFont.systemFont(ofSize: 25, weight: .heavy)
+        container.addSubview(orLabel)
+        orLabel.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.height.equalTo(buttonHeight)
+            make.top.equalTo(loginAsGuestButton.snp.bottom).offset(padding)
+        }
+
+        // Login with Zalo
+        loginWithZaloButton = ViewCreator.createButtonImageInLoginVC(image: UIImage(named: "zalologo")!, title: "Login with Zalo", backgroundColor: Color.Zalo.blue2)
+        loginWithZaloButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapLoginWithZaloButton))
+        container.addSubview(loginWithZaloButton)
+        loginWithZaloButton.snp.makeConstraints { (make) in
+            make.width.height.centerX.equalTo(loginAsGuestButton)
+            make.top.equalTo(orLabel.snp.bottom).offset(padding)
+        }
+
         // login with facebook
-        loginWithFBButton = ButtonWithImage()
-        loginWithFBButton.buttonPadding = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        loginWithFBButton.spacing = 10
-        loginWithFBButton.titleLabel.text = "Login with Facebook"
-        loginWithFBButton.titleLabel.textColor = .white
-        loginWithFBButton.imageView.image = UIImage(named: "fblogo")
-        loginWithFBButton.imageView.layer.cornerRadius = 8
-        loginWithFBButton.imageView.layer.masksToBounds = true
-        loginWithFBButton.layer.cornerRadius = 12
-        loginWithFBButton.backgroundColor = Color.Facebook.loginButton
-        loginWithFBButton.makeShadow()
+        loginWithFBButton = ViewCreator.createButtonImageInLoginVC(image: UIImage(named: "fblogo")!, title: "Login with Facebook", backgroundColor: Color.Facebook.loginButton)
         loginWithFBButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapLoginWithFacebookButton))
         container.addSubview(loginWithFBButton)
         loginWithFBButton.snp.makeConstraints { (make) in
             make.width.height.centerX.equalTo(loginWithZaloButton)
-            make.top.equalTo(loginWithZaloButton.snp.bottom).offset(20)
-        }
-        
-        // login as guest
-        loginAsGuestButton = ButtonWithImage()
-        loginAsGuestButton.buttonPadding = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        loginAsGuestButton.spacing = 10
-        loginAsGuestButton.titleLabel.text = "Play game as guest"
-        loginAsGuestButton.titleLabel.textColor = .white
-        loginAsGuestButton.imageView.image = UIImage(named: "usericon")
-        loginAsGuestButton.imageView.layer.cornerRadius = 8
-        loginAsGuestButton.imageView.layer.masksToBounds = true
-        loginAsGuestButton.layer.cornerRadius = 12
-        loginAsGuestButton.backgroundColor = ColorRGB(255, 18, 18)
-        loginAsGuestButton.makeShadow()
-        loginAsGuestButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapLoginAsGuestButton))
-        container.addSubview(loginAsGuestButton)
-        loginAsGuestButton.snp.makeConstraints { (make) in
-            make.width.height.centerX.equalTo(loginWithFBButton)
-            make.top.equalTo(loginWithFBButton.snp.bottom).offset(20)
+            make.top.equalTo(loginWithZaloButton.snp.bottom).offset(padding)
         }
     }
     
-    // MARK: - Handle Events
+    // MARK: Handle Events
     
     @objc private func didTapLoginWithZaloButton() {
         
@@ -112,8 +104,39 @@ class LoginViewController: UIViewController {
     }
     
     @objc private func didTapLoginAsGuestButton() {
-        let createRoomVC = LoginAsGuestViewcontroller()
-        createRoomVC.modalPresentationStyle = .fullScreen
-        self.present(createRoomVC, animated: false, completion: nil)
+        guard let username = usernameTextField.text else {
+            return
+        }
+        
+        if username.isEmpty {
+            showAlertWithMessage(message: "Please input your username. Thanks.")
+            return
+        }
+        
+        if !isValidUsername(userName: username) {
+            showAlertWithMessage(message: "Please input valid usernmae. Thanks.")
+            return
+        }
+        
+        // Save username
+        OwnerInfo.shared.updateUserName(newusername: username)
+        
+        // Open homeVC
+        let homeVC = HomeViewController2()
+        homeVC.modalPresentationStyle = .fullScreen
+        self.present(homeVC, animated: false, completion: nil)
+    }
+    
+    // MARK: Helper
+    
+    private func isValidUsername(userName: String) -> Bool {
+        return true
+    }
+    
+    private func showAlertWithMessage(message: String) {
+        let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+
     }
 }

@@ -69,7 +69,6 @@
 		F2C06086246566B7001FAD58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2C06084246566B7001FAD58 /* LaunchScreen.storyboard */; };
 		F2D862372474330E006D3FD4 /* BaseHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D862362474330E006D3FD4 /* BaseHomeViewController.swift */; };
 		F2D862392474332C006D3FD4 /* RoomGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D862382474332C006D3FD4 /* RoomGameViewController.swift */; };
-		F2D8623C24743353006D3FD4 /* LoginAsGuestViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D8623B24743353006D3FD4 /* LoginAsGuestViewcontroller.swift */; };
 		F2D8623E2474343E006D3FD4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D8623D2474343E006D3FD4 /* LoginViewController.swift */; };
 		F2EAD8542470429400B2D6B9 /* Squirk-RMvV.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F2EAD8532470429400B2D6B9 /* Squirk-RMvV.ttf */; };
 /* End PBXBuildFile section */
@@ -141,7 +140,6 @@
 		F2C06087246566B7001FAD58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F2D862362474330E006D3FD4 /* BaseHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseHomeViewController.swift; sourceTree = "<group>"; };
 		F2D862382474332C006D3FD4 /* RoomGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomGameViewController.swift; sourceTree = "<group>"; };
-		F2D8623B24743353006D3FD4 /* LoginAsGuestViewcontroller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginAsGuestViewcontroller.swift; sourceTree = "<group>"; };
 		F2D8623D2474343E006D3FD4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		F2EAD8532470429400B2D6B9 /* Squirk-RMvV.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Squirk-RMvV.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -292,7 +290,6 @@
 			isa = PBXGroup;
 			children = (
 				F260CA602476C5E700D00348 /* RoomVC */,
-				F2D8623A24743353006D3FD4 /* UserNameInputViewController */,
 				F263FDB9246F94F400A4AB0B /* BaseViewController */,
 				F263FDB6246F943D00A4AB0B /* 2Player */,
 				8CD60302246ED85300003447 /* Ranking */,
@@ -457,14 +454,6 @@
 			path = ColorNinja;
 			sourceTree = "<group>";
 		};
-		F2D8623A24743353006D3FD4 /* UserNameInputViewController */ = {
-			isa = PBXGroup;
-			children = (
-				F2D8623B24743353006D3FD4 /* LoginAsGuestViewcontroller.swift */,
-			);
-			path = UserNameInputViewController;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -619,7 +608,6 @@
 				F275A104247832590077E42F /* OwnerInfo.swift in Sources */,
 				F22F85662465A71E00493BB6 /* UIView+Extension.swift in Sources */,
 				F2A6E68E2466FF5600970D1B /* ColorCollectionViewCell.swift in Sources */,
-				F2D8623C24743353006D3FD4 /* LoginAsGuestViewcontroller.swift in Sources */,
 				F2C0607A246566B5001FAD58 /* AppDelegate.swift in Sources */,
 				F27454F2246A71A40037A8BA /* MusicPlayer.swift in Sources */,
 				F2D862392474332C006D3FD4 /* RoomGameViewController.swift in Sources */,
