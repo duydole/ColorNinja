@@ -17,7 +17,7 @@ class SinglePlayerViewController : BaseGameViewController {
     var appImage : UIImageView!
     var remainTimeLabel : UILabel!
     
-    var remainingTime : TimeInterval = 2.0
+    var remainingTime : TimeInterval = Constants.GameSetting.maxRemainTime
     var timer : Timer!
         
     // MARK: - Life Cycle

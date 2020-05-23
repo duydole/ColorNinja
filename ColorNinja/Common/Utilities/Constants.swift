@@ -88,7 +88,7 @@ struct Constants {
     
     struct GameSetting {
         static let maxLevelCount = 100
-        static let maxRemainTime = 5.0
+        static let maxRemainTime = 2.0
     }
     
     struct GameOverPopup {

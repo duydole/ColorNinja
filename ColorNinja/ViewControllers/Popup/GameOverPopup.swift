@@ -17,6 +17,13 @@ protocol GameOverPopupDelegate {
 
 class GameOverPopup: PopupViewController {
     
+    static let kCornerRadius: CGFloat = 10
+    static let kContentPadding: CGFloat = 10
+    static let kbuttonPadding: UIEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    static let kImageButtonSpacing: CGFloat = 10
+    static let kButtonCornerRadius: CGFloat = 10
+    
+    
     var goHomeButton: ButtonWithImage!
     var replayButton: ButtonWithImage!
     var gameOverDelegate: GameOverPopupDelegate?
@@ -33,10 +40,10 @@ class GameOverPopup: PopupViewController {
     }
     
     override var cornerRadius: CGFloat {
-        return 30
+        return GameOverPopup.kCornerRadius
     }
     
-    // MARK: - Event Handlers
+    // MARK: Event Handlers
     
     @objc private func didTapGoHomeButton() {
         self.dismiss(animated: false) {
@@ -46,15 +53,14 @@ class GameOverPopup: PopupViewController {
 
     @objc private func didTapReplayButton() {
         #if !DEBUG
-        if interstitial.isReady {
-            interstitial.present(fromRootViewController: self)
-        } else {
-            assert(true, "Ads is not ready")
-        }
+        showFullScreenAd()
         #endif
+        self.dismiss(animated: false) {
+            self.gameOverDelegate?.didTapReplayButton()
+        }
     }
     
-    // MARK: - Setup Views
+    // MARK: Setup Views
     
     private func setupViews() {
         self.setupGameOverViews()
@@ -68,20 +74,21 @@ class GameOverPopup: PopupViewController {
         // Container
         let container = UIView()
         container.backgroundColor = .orange
-        container.layer.cornerRadius = 30
+        container.layer.cornerRadius = GameOverPopup.kCornerRadius
         container.makeShadow()
-        self.contentView.addSubview(container)
+        contentView.addSubview(container)
         container.snp.makeConstraints { (make) in
-            make.top.leading.equalTo(20)
-            make.trailing.equalTo(-20)
-            make.height.equalTo(100)
+            make.top.leading.equalTo(GameOverPopup.kContentPadding)
+            make.trailing.equalTo(-GameOverPopup.kContentPadding)
+            make.height.equalToSuperview().multipliedBy(0.2)
         }
         
         // Label GameOver
         let gameOverLabel = UILabel()
         gameOverLabel.text = "GAME OVER"
+        gameOverLabel.adjustsFontSizeToFitWidth = true
         gameOverLabel.textColor = .white
-        gameOverLabel.font = UIFont.systemFont(ofSize: 45, weight: .bold)
+        gameOverLabel.font = UIFont.systemFont(ofSize: 30, weight: .bold)
         container.addSubview(gameOverLabel)
         gameOverLabel.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
@@ -96,19 +103,22 @@ class GameOverPopup: PopupViewController {
         
         // Container
         let container = UIView()
-        //container.backgroundColor = .red
         contentView.addSubview(container)
         container.snp.makeConstraints { (make) in
-            make.trailing.bottom.equalTo(-20)
-            make.leading.equalTo(20)
-            make.height.equalTo(50)
+            make.trailing.bottom.equalTo(-GameOverPopup.kContentPadding)
+            make.leading.equalTo(GameOverPopup.kContentPadding)
+            make.height.equalToSuperview().multipliedBy(0.12)
         }
         
         // GoHome
         goHomeButton = ButtonWithImage()
+        goHomeButton.buttonPadding = GameOverPopup.kbuttonPadding
+        goHomeButton.spacing = GameOverPopup.kImageButtonSpacing
         goHomeButton.titleLabel.text = "Home"
+        goHomeButton.titleLabel.adjustsFontSizeToFitWidth = true
+        goHomeButton.titleLabel.textAlignment = .center
         goHomeButton.imageView.image = UIImage(named: "homeicon")
-        goHomeButton.layer.cornerRadius = 25
+        goHomeButton.layer.cornerRadius = GameOverPopup.kButtonCornerRadius
         goHomeButton.backgroundColor = .orange
         goHomeButton.makeShadow()
         goHomeButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapGoHomeButton))
@@ -121,10 +131,14 @@ class GameOverPopup: PopupViewController {
         
         // PlayAgain
         replayButton = ButtonWithImage()
+        replayButton.buttonPadding = GameOverPopup.kbuttonPadding
+        replayButton.spacing = GameOverPopup.kImageButtonSpacing
         replayButton.titleLabel.text = "Replay"
+        replayButton.titleLabel.adjustsFontSizeToFitWidth = true
+        replayButton.titleLabel.textAlignment = .center
         replayButton.imageView.image = UIImage(named: "replayicon")
         replayButton.backgroundColor = .orange
-        replayButton.layer.cornerRadius = 25
+        replayButton.layer.cornerRadius = GameOverPopup.kButtonCornerRadius
         replayButton.makeShadow()
         replayButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapReplayButton))
         container.addSubview(replayButton)
@@ -140,6 +154,16 @@ class GameOverPopup: PopupViewController {
         interstitial.delegate = self
         let request = GADRequest()
         interstitial.load(request)
+    }
+    
+    // MARK: Other
+    
+    private func showFullScreenAd() {
+        if interstitial.isReady {
+            interstitial.present(fromRootViewController: self)
+        } else {
+            assert(true, "Ads is not ready")
+        }
     }
 }
 
