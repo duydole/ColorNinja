@@ -39,7 +39,7 @@ class JoinRoomPopup: PopupViewController {
         textField.borderStyle = .roundedRect;
         textField.placeholder = "Enter RoomId";
         textField.autocorrectionType = .no
-        textField.keyboardType = .default
+        textField.keyboardType = .decimalPad
         textField.returnKeyType = .done
         textField.clearButtonMode = .whileEditing
         textField.contentVerticalAlignment = .center
