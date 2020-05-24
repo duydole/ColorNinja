@@ -41,6 +41,9 @@
 		F234763324680D75004C8363 /* GameSettingPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F234763224680D75004C8363 /* GameSettingPopup.swift */; };
 		F2347635246836D7004C8363 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2347634246836D7004C8363 /* UIColor+Extension.swift */; };
 		F2347638246851A5004C8363 /* ButtonWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2347637246851A5004C8363 /* ButtonWithImage.swift */; };
+		F24E4348247A5C5E00FBA7B1 /* DataBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24E4347247A5C5E00FBA7B1 /* DataBaseService.swift */; };
+		F24E434A247A5CC300FBA7B1 /* UserRankingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24E4349247A5CC300FBA7B1 /* UserRankingModel.swift */; };
+		F24E4366247A802900FBA7B1 /* CharacterSet+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24E4365247A802900FBA7B1 /* CharacterSet+Extension.swift */; };
 		F260CA622476C63500D00348 /* CreateRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F260CA612476C63500D00348 /* CreateRoomViewController.swift */; };
 		F260CA642476DFBF00D00348 /* JoinRoomPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F260CA632476DFBF00D00348 /* JoinRoomPopup.swift */; };
 		F263FDB8246F945A00A4AB0B /* MultiPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F263FDB7246F945A00A4AB0B /* MultiPlayerViewController.swift */; };
@@ -110,6 +113,9 @@
 		F234763224680D75004C8363 /* GameSettingPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettingPopup.swift; sourceTree = "<group>"; };
 		F2347634246836D7004C8363 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		F2347637246851A5004C8363 /* ButtonWithImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWithImage.swift; sourceTree = "<group>"; };
+		F24E4347247A5C5E00FBA7B1 /* DataBaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseService.swift; sourceTree = "<group>"; };
+		F24E4349247A5CC300FBA7B1 /* UserRankingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRankingModel.swift; sourceTree = "<group>"; };
+		F24E4365247A802900FBA7B1 /* CharacterSet+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterSet+Extension.swift"; sourceTree = "<group>"; };
 		F260CA612476C63500D00348 /* CreateRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoomViewController.swift; sourceTree = "<group>"; };
 		F260CA632476DFBF00D00348 /* JoinRoomPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomPopup.swift; sourceTree = "<group>"; };
 		F263FDB7246F945A00A4AB0B /* MultiPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPlayerViewController.swift; sourceTree = "<group>"; };
@@ -228,7 +234,6 @@
 				F22F85622465A33300493BB6 /* Utilities */,
 				F2347612246726BA004C8363 /* Model */,
 				F23476362468518B004C8363 /* CustomButton */,
-				8CC6DB41246B8E160017B60A /* Dictionary+Extension.swift */,
 				8CC6DB43246B8E470017B60A /* Collection+Extension.swift */,
 				8CC6DB46246B8FA90017B60A /* Date+Extension.swift */,
 				8C7ABAB5246D5AE900063AE4 /* Utils.swift */,
@@ -310,6 +315,8 @@
 				F22F85872466940900493BB6 /* StaticFunctions.swift */,
 				F2347634246836D7004C8363 /* UIColor+Extension.swift */,
 				F2AB0F55246FD07600FE7FDA /* ViewCreator.swift */,
+				8CC6DB41246B8E160017B60A /* Dictionary+Extension.swift */,
+				F24E4365247A802900FBA7B1 /* CharacterSet+Extension.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -331,6 +338,15 @@
 				F2347637246851A5004C8363 /* ButtonWithImage.swift */,
 			);
 			path = CustomButton;
+			sourceTree = "<group>";
+		};
+		F24E4346247A5C3F00FBA7B1 /* DataAccess */ = {
+			isa = PBXGroup;
+			children = (
+				F24E4347247A5C5E00FBA7B1 /* DataBaseService.swift */,
+				F24E4349247A5CC300FBA7B1 /* UserRankingModel.swift */,
+			);
+			path = DataAccess;
 			sourceTree = "<group>";
 		};
 		F260CA602476C5E700D00348 /* RoomVC */ = {
@@ -440,6 +456,7 @@
 		F2C06078246566B5001FAD58 /* ColorNinja */ = {
 			isa = PBXGroup;
 			children = (
+				F24E4346247A5C3F00FBA7B1 /* DataAccess */,
 				8C5FFECF2472E7E200D9FA5E /* AppDelegate */,
 				F28098BB246AE2060060693D /* Manager */,
 				F28098BA246AE1EF0060693D /* Resouces */,
@@ -575,6 +592,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F24E434A247A5CC300FBA7B1 /* UserRankingModel.swift in Sources */,
 				F2347631246809C5004C8363 /* GameOverPopup.swift in Sources */,
 				8C2C72822467ACD300883388 /* RankingCellModel.swift in Sources */,
 				8C6350A924735C8C00ADAB01 /* FacebookService.swift in Sources */,
@@ -602,6 +620,7 @@
 				F22F85642465A34900493BB6 /* Constants.swift in Sources */,
 				8C2C727C2467A79700883388 /* RankingTableView.swift in Sources */,
 				F2C0607E246566B5001FAD58 /* HomeViewController.swift in Sources */,
+				F24E4348247A5C5E00FBA7B1 /* DataBaseService.swift in Sources */,
 				F2D8623E2474343E006D3FD4 /* LoginViewController.swift in Sources */,
 				F2AB0F56246FD07600FE7FDA /* ViewCreator.swift in Sources */,
 				F23476142467B4D0004C8363 /* ColorStore.swift in Sources */,
@@ -626,6 +645,7 @@
 				8CC6DB40246B8D380017B60A /* ZaloUser.swift in Sources */,
 				8C73DB8D246AA8E40095FE8A /* ZaloSDKApiWrapper.swift in Sources */,
 				F2A6E68C2466FF5600970D1B /* BoardCollectionView.swift in Sources */,
+				F24E4366247A802900FBA7B1 /* CharacterSet+Extension.swift in Sources */,
 				F234761124671FE1004C8363 /* ColorCellModel.swift in Sources */,
 				8C34F005246E914600E156FD /* ZaloService.swift in Sources */,
 				8C5FFEEB2472E87E00D9FA5E /* BaseAppDelegate.swift in Sources */,
