@@ -10,11 +10,14 @@ import Foundation
 
 let kUserNameKey = "kUserName"
 let kMaxScoreKey = "kMaxScoreKey"
+let kUserIdKey = "kUserIdKey"
 
 class OwnerInfo {
     
     static let shared = OwnerInfo()
-
+    
+    let userId: String!
+    
     // MARK: Public
     
     func updateUserName(newusername: String) {
@@ -38,14 +41,26 @@ class OwnerInfo {
     // MARK: Private
     
     private var userName: String = ""
-    private var maxScore: Int
+    private var maxScore: Int = 0
     private let userDefault = UserDefaults.standard
 
     private init() {
+        
+        // Load cached username
         if let userName = userDefault.string(forKey: kUserNameKey) {
             self.userName = userName
         }
+        
+        // Load maxScore
         let maxScore = userDefault.integer(forKey: kMaxScoreKey)
         self.maxScore = maxScore
+        
+        // Load userId
+        if let userId = userDefault.string(forKey: kUserIdKey) {
+            self.userId = userId
+        } else {
+            self.userId = UUID().uuidString
+            userDefault.set(userId,forKey: kUserIdKey)
+        }
     }
 }

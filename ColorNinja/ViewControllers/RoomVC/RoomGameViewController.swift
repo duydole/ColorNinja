@@ -71,12 +71,12 @@ class RoomGameViewController: MultiPlayerViewController {
     // MARK: Client send to server
     
     override func sendRequiredKeyMessage() {
-        let jsonString = "{\"type\":\(ClientSendType.SendRequiredKeyGroupMode.rawValue),\"keyPlayer\":\"\(player1.id)\",\"username\":\(player1.name)} "
+        let jsonString = "{\"type\":\(ClientSendType.SendRequiredKeyGroupMode.rawValue),\"keyPlayer\":\"\(player1.userId)\",\"username\":\(player1.username)} "
         client.sendToServer(message: jsonString)
     }
     
     func sendJoinRoomRequestToServer() {
-        let jsonString = "{\"type\":\(ClientSendType.SendRequiredKeyGroupMode.rawValue),\"keyPlayer\":\"\(player1.id)\",\"username\":\(player1.name),\"groupId\":\"\(roomId.toString())\"} "
+        let jsonString = "{\"type\":\(ClientSendType.SendRequiredKeyGroupMode.rawValue),\"keyPlayer\":\"\(player1.userId)\",\"username\":\(player1.username),\"groupId\":\"\(roomId.toString())\"} "
         client.sendToServer(message: jsonString)
     }
     

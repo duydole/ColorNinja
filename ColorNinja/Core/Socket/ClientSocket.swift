@@ -180,6 +180,11 @@ class ClientSocket : NSObject, StreamDelegate {
         return String(bytesNoCopy: buffer, length: length, encoding: .utf8, freeWhenDone: false)
     }
     
+    private func didReceivedErrorFromServer() {
+        let json = ["type":999, "message": "Server Error."] as [String : Any]
+        delegate.didReceiveJson(json: json)
+    }
+    
     // MARK: - Stream Delegate
     
     func stream(_ aStream: Stream, handle eventCode: Stream.Event) {
@@ -191,6 +196,7 @@ class ClientSocket : NSObject, StreamDelegate {
             inputStream.close()
             print("new message received")
         case .errorOccurred:
+            didReceivedErrorFromServer()
             print("error occurred")
         case .hasSpaceAvailable:
             print("Có thể gửi message cho Server")

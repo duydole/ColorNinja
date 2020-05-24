@@ -63,7 +63,7 @@
 		F2A6E68E2466FF5600970D1B /* ColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6E6892466FF5600970D1B /* ColorCollectionViewCell.swift */; };
 		F2A6E6912467029300970D1B /* LevelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6E6902467029300970D1B /* LevelModel.swift */; };
 		F2AB0F56246FD07600FE7FDA /* ViewCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AB0F55246FD07600FE7FDA /* ViewCreator.swift */; };
-		F2AB0F58246FD31B00FE7FDA /* PlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AB0F57246FD31B00FE7FDA /* PlayerModel.swift */; };
+		F2AB0F58246FD31B00FE7FDA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AB0F57246FD31B00FE7FDA /* User.swift */; };
 		F2C0607A246566B5001FAD58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C06079246566B5001FAD58 /* AppDelegate.swift */; };
 		F2C0607E246566B5001FAD58 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C0607D246566B5001FAD58 /* HomeViewController.swift */; };
 		F2C06086246566B7001FAD58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2C06084246566B7001FAD58 /* LaunchScreen.storyboard */; };
@@ -132,7 +132,7 @@
 		F2A6E6892466FF5600970D1B /* ColorCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCollectionViewCell.swift; sourceTree = "<group>"; };
 		F2A6E6902467029300970D1B /* LevelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelModel.swift; sourceTree = "<group>"; };
 		F2AB0F55246FD07600FE7FDA /* ViewCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCreator.swift; sourceTree = "<group>"; };
-		F2AB0F57246FD31B00FE7FDA /* PlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerModel.swift; sourceTree = "<group>"; };
+		F2AB0F57246FD31B00FE7FDA /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F2C06076246566B5001FAD58 /* ColorNinja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorNinja.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2C06079246566B5001FAD58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2C0607D246566B5001FAD58 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -319,7 +319,7 @@
 			children = (
 				F2A6E6902467029300970D1B /* LevelModel.swift */,
 				F234761024671FE1004C8363 /* ColorCellModel.swift */,
-				F2AB0F57246FD31B00FE7FDA /* PlayerModel.swift */,
+				F2AB0F57246FD31B00FE7FDA /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -616,7 +616,7 @@
 				F263FDBB246F950000A4AB0B /* BaseViewController.swift in Sources */,
 				F2347638246851A5004C8363 /* ButtonWithImage.swift in Sources */,
 				8CC6DB47246B8FA90017B60A /* Date+Extension.swift in Sources */,
-				F2AB0F58246FD31B00FE7FDA /* PlayerModel.swift in Sources */,
+				F2AB0F58246FD31B00FE7FDA /* User.swift in Sources */,
 				F263FDBE246F993500A4AB0B /* ClientSocket.swift in Sources */,
 				F2A6E68B2466FF5600970D1B /* BoardCollectionViewFlowLayout.swift in Sources */,
 				F2A6E6912467029300970D1B /* LevelModel.swift in Sources */,

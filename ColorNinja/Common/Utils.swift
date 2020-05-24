@@ -26,7 +26,12 @@ public func hideLoading() {
 }
 
 public func scaledValue(_ value: CGFloat,_ baseWidth: CGFloat = 414) -> CGFloat {
-    let multiplier = UIScreen.main.bounds.width / baseWidth
+    var multiplier = UIScreen.main.bounds.width / baseWidth
+    
+    if multiplier > 1.2 {
+        multiplier = 1.2
+    }
+    
     let scaled = value * multiplier
     
     return scaled.rounded()

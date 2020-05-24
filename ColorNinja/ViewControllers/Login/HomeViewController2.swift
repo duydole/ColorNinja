@@ -16,8 +16,13 @@ class HomeViewController2: BaseHomeViewController {
     private var singlePlayerButton: UIButton!
     private var multiPlayerButton: UIButton!
     private var bestScoreLabel: UILabel!
-    private var stackView: UIStackView!
-    var adBannerView: GADBannerView!
+    private var adBannerView: GADBannerView!
+    private var bottomBar: UIView!
+    
+    // BottomBar
+    private var rateUsButton: UIButton!
+    private var muteButton: UIButton!
+    private var rankingButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +38,8 @@ class HomeViewController2: BaseHomeViewController {
         super.setupViews()
         
         settingMidContainer()
-        settingBottomContainer()
+        setupBannerAd()
+        setupBottomBar()
     }
     
     private func settingMidContainer() {
@@ -88,11 +94,7 @@ class HomeViewController2: BaseHomeViewController {
             make.centerX.equalToSuperview()
         }
     }
-    
-    private func settingBottomContainer() {
-        setupBannerAd()
-    }
-    
+        
     private func setupBannerAd() {
         adBannerView = GADBannerView()
         adBannerView.rootViewController = self
@@ -108,6 +110,56 @@ class HomeViewController2: BaseHomeViewController {
             make.bottom.equalTo(scaledValue(-bottomPadding))
             make.leading.equalTo(scaledValue(padding))
             make.height.equalTo(scaledValue(adHeight))
+        }
+    }
+    
+    // MARK: Setup BottomBar
+    
+    private func setupBottomBar() {
+        
+        let buttonSpacing: CGFloat = scaledValue(30)
+        let spacingWithAd: CGFloat = scaledValue(20)
+        let bottomBarHeight: CGFloat = scaledValue(50)
+        
+        // Container
+        bottomBar = UIView()
+        view.addSubview(bottomBar)
+        bottomBar.snp.makeConstraints { (make) in
+            make.width.centerX.equalTo(adBannerView)
+            make.height.equalTo(bottomBarHeight)
+            make.bottom.equalTo(adBannerView.snp.top).offset(-spacingWithAd)
+        }
+        
+        
+        // RateUs
+        rateUsButton = UIButton()
+        rateUsButton.setImage(UIImage(named:"staricon")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        rateUsButton.imageView?.tintColor = .white
+        bottomBar.addSubview(rateUsButton)
+        rateUsButton.snp.makeConstraints { (make) in
+            make.height.equalToSuperview()
+            make.width.equalTo(rateUsButton.snp.height)
+            make.center.equalToSuperview()
+        }
+        
+        // MuteButton
+        muteButton = UIButton()
+        muteButton.setImage(UIImage(named:"muteicon")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        muteButton.imageView?.tintColor = .white
+        bottomBar.addSubview(muteButton)
+        muteButton.snp.makeConstraints { (make) in
+            make.centerY.width.height.equalTo(rateUsButton)
+            make.trailing.equalTo(rateUsButton.snp.leading).offset(scaledValue(-buttonSpacing))
+        }
+        
+        // RankingButton
+        rankingButton = UIButton()
+        rankingButton.setImage(UIImage(named:"rankingicon")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        rankingButton.imageView?.tintColor = .white
+        bottomBar.addSubview(rankingButton)
+        rankingButton.snp.makeConstraints { (make) in
+            make.centerY.width.height.equalTo(rateUsButton)
+            make.leading.equalTo(rateUsButton.snp.trailing).offset(scaledValue(buttonSpacing))
         }
     }
     

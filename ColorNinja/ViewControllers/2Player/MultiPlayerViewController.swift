@@ -14,15 +14,20 @@ let MAX_LEVEL: Int = 30
 class MultiPlayerViewController : BaseGameViewController {
     
     var client: ClientSocket!
-    var player1 = PlayerModel(name: OwnerInfo.shared.getUsername())
-    var player2 = PlayerModel(name: "----")
-    var player1Title: UILabel!
-    var player2Title: UILabel!
+    var player1 = User(userId: OwnerInfo.shared.userId, username: OwnerInfo.shared.getUsername())
+    var player2 = User(username: "----")
     
-    var player1Point: UILabel!
-    var player2Point: UILabel!
-    var currenLevelLabel: UILabel!
-    var statusLabel: UILabel!
+    private var player1Title: UILabel!
+    private var player2Title: UILabel!
+    
+    private var player1Point: UILabel!
+    private var player2Point: UILabel!
+    
+    private var currenLevelLabel: UILabel!
+    private var statusLabel: UILabel!
+    
+    private var p1Score: CGFloat = 0
+    private var p2Score: CGFloat = 0
     
     // MARK: - Life cycle
     
@@ -63,7 +68,7 @@ class MultiPlayerViewController : BaseGameViewController {
         let paddingLR = 30
         
         // Player 1
-        player1Title = ViewCreator.createTitleLabelForTopContainer(text: player1.name)
+        player1Title = ViewCreator.createTitleLabelForTopContainer(text: player1.username)
         topContainer.addSubview(player1Title)
         player1Title.snp.makeConstraints { (make) in
             make.top.equalTo(paddingTop)
@@ -95,7 +100,7 @@ class MultiPlayerViewController : BaseGameViewController {
         }
         
         // Player 2
-        player2Title = ViewCreator.createTitleLabelForTopContainer(text: player2.name)
+        player2Title = ViewCreator.createTitleLabelForTopContainer(text: player2.username)
         topContainer.addSubview(player2Title)
         player2Title.snp.makeConstraints { (make) in
             make.top.equalTo(paddingTop)
@@ -142,11 +147,11 @@ class MultiPlayerViewController : BaseGameViewController {
         if levelIndex > 1 {
             let isOwnerWin = json["isPreviousWinner"] as! Bool
             if isOwnerWin {
-                player1.currentPoint += 1
-                player1Point.text = "\(player1.currentPoint)"
+                p1Score += 1
+                player1Point.text = "\(p1Score)"
             } else {
-                player2.currentPoint += 1
-                player2Point.text = "\(player2.currentPoint)"
+                p2Score += 1
+                player2Point.text = "\(p2Score)"
             }
         }
         
@@ -171,10 +176,10 @@ class MultiPlayerViewController : BaseGameViewController {
     private func serverSendMatchedInfo(_ json: Dictionary<String, Any>) {
         let usernames = json["key_usernames"] as! Dictionary<String, String>
         for id in usernames.keys {
-            if id != player1.id {
+            if id != player1.userId {
                 player2Title.text = usernames[id]
-                player2.id = id
-                player2.name = player2Title.text!
+                player2.userId = id
+                player2.username = player2Title.text!
             }
         }
         
@@ -183,8 +188,8 @@ class MultiPlayerViewController : BaseGameViewController {
     
     private func serverSendLevelResult(_ json: Dictionary<String, Any>) {
         
-        let winnerName = player1.currentPoint > player2.currentPoint ? player1.name : player2.name
-        let looserName = player1.currentPoint < player2.currentPoint ? player1.name : player2.name
+        let winnerName = p1Score > p2Score ? player1.username : player2.username
+        let looserName = p1Score < p2Score ? player1.username : player2.username
         
       let alert = UIAlertController(title: "GameOver", message: "\(winnerName) won, \(looserName) is too slow!", preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
@@ -222,7 +227,7 @@ class MultiPlayerViewController : BaseGameViewController {
     func sendRequiredKeyMessage() {
         // [type: keyPlayer: username:]
         // NOTE: name không đc chưa dấu cách
-        let jsonString = "{\"type\":\(ClientSendType.SendRequiredKey.rawValue),\"keyPlayer\":\"\(player1.id)\",\"username\":\(player1.name)} "
+        let jsonString = "{\"type\":\(ClientSendType.SendRequiredKey.rawValue),\"keyPlayer\":\"\(player1.userId)\",\"username\":\(player1.username)} "
         client.sendToServer(message: jsonString)
     }
     
