@@ -8,7 +8,8 @@
 
 import UIKit
 import ZaloSDK
-import RxSwift
+import GoogleMobileAds
+
 
 class HomeViewController2: BaseHomeViewController {
     
@@ -16,6 +17,7 @@ class HomeViewController2: BaseHomeViewController {
     private var multiPlayerButton: UIButton!
     private var bestScoreLabel: UILabel!
     private var stackView: UIStackView!
+    var adBannerView: GADBannerView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +32,11 @@ class HomeViewController2: BaseHomeViewController {
     override func setupViews() {
         super.setupViews()
         
+        settingMidContainer()
+        settingBottomContainer()
+    }
+    
+    private func settingMidContainer() {
         add1PlayerButton()
         add2PlayerButton()
         addBestScoreLabel()
@@ -79,6 +86,28 @@ class HomeViewController2: BaseHomeViewController {
         bestScoreLabel.snp.makeConstraints { (make) in
             make.top.equalTo(multiPlayerButton.snp.bottom).offset(scaledValue(20))
             make.centerX.equalToSuperview()
+        }
+    }
+    
+    private func settingBottomContainer() {
+        setupBannerAd()
+    }
+    
+    private func setupBannerAd() {
+        adBannerView = GADBannerView()
+        adBannerView.rootViewController = self
+        adBannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        adBannerView.load(GADRequest())
+        view.addSubview(adBannerView)
+        
+        let padding: CGFloat = 10
+        let adHeight: CGFloat = 70
+        let bottomPadding = safeAreaBottom() > 0 ? safeAreaBottom() : padding
+        adBannerView.snp.makeConstraints { (make) in
+            make.trailing.equalTo(scaledValue(-padding))
+            make.bottom.equalTo(scaledValue(-bottomPadding))
+            make.leading.equalTo(scaledValue(padding))
+            make.height.equalTo(scaledValue(adHeight))
         }
     }
     
