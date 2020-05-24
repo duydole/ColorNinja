@@ -8,7 +8,19 @@
 
 import Foundation
 
-//MARK: - Dictionary
+
+extension Dictionary {
+    func percentEncoded() -> Data? {
+        return map { key, value in
+            let escapedKey = "\(key)".addingPercentEncoding(withAllowedCharacters: .urlQueryValueAllowed) ?? ""
+            let escapedValue = "\(value)".addingPercentEncoding(withAllowedCharacters: .urlQueryValueAllowed) ?? ""
+            return escapedKey + "=" + escapedValue
+        }
+        .joined(separator: "&")
+        .data(using: .utf8)
+    }
+}
+
 extension Dictionary {
     public func int(forKey: Key, defaultValue: Int) -> Int {
         guard let value = self[forKey] else {

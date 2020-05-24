@@ -20,6 +20,7 @@ class RankingViewController: UIViewController {
     private var rankingData: [RankingCellModel] = []
 
     // MARK: Life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,8 +28,8 @@ class RankingViewController: UIViewController {
         self.prepareData()
     }
 
-    
     // MARK: Setup views
+    
     private func setupView() {
         self.view.backgroundColor = Constants.GameScreen.backgroundColor
         
@@ -168,16 +169,27 @@ class RankingViewController: UIViewController {
     }
     
     private func prepareData() {
-        let testData1 = RankingCellModel(ranking: 1, name: "Kim Thi", avatarURL: "avatar", record: 50, type: .top1)
-        let testData2 = RankingCellModel(ranking: 2, name: "Do Huu Phuc", avatarURL: "steve_profile", record: 45, type: .top2)
-        let testData3 = RankingCellModel(ranking: 3, name: "Con Cho Le Duy", avatarURL: "zuck_profile", record: 40, type: .top3)
-        let testData4 = RankingCellModel(ranking: 4, name: "Nguyen Van A", avatarURL: "hillary_profile", record: 35)
-        let testData5 = RankingCellModel(ranking: 5, name: "Nguyen Van B", avatarURL: "avatar", record: 30)
-        let testData6 = RankingCellModel(ranking: 6, name: "TEST", avatarURL: "avatar", record: 20)
         
-        self.rankingData = [testData1, testData2, testData3, testData4, testData5, testData6]
-        
-        self.rankingView.setRankingData(rankingData: self.rankingData)
+        DataBaseService.shared.loadLeaderBoardUsers { (users,error)  in
+            
+            if let error = error {
+                print("duydl: Error \(error)")
+                return
+            }
+            
+            if let users = users {
+                if users.count == 0 {
+                    return
+                }
+                
+                for i in 0...users.count - 1 {
+                    self.rankingData.append(RankingCellModel(ranking: i, name: users[i].username, avatarURL: "", record: users[i].bestscore))
+                }
+                DispatchQueue.main.async {
+                  self.rankingView.setRankingData(rankingData: self.rankingData)
+                }
+            }
+        }
     }
     
     // MARK: Hanlde event

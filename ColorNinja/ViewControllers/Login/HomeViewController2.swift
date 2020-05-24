@@ -29,7 +29,7 @@ class HomeViewController2: BaseHomeViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        bestScoreLabel.text = "Your best score is \(OwnerInfo.shared.getMaxScore())"
+        bestScoreLabel.text = "Your best score is \(OwnerInfo.shared.getBestScore())"
     }
     
     // MARK: Setup views
@@ -84,7 +84,7 @@ class HomeViewController2: BaseHomeViewController {
     
     private func addBestScoreLabel() {
         bestScoreLabel = UILabel()
-        bestScoreLabel.text = "Your best score is \(OwnerInfo.shared.getMaxScore())"
+        bestScoreLabel.text = "Your best score is \(OwnerInfo.shared.getBestScore())"
         bestScoreLabel.textAlignment = NSTextAlignment.center
         bestScoreLabel.font = UIFont(name: Font.squirk, size: scaledValue(30))
         bestScoreLabel.textColor = .white
@@ -135,6 +135,7 @@ class HomeViewController2: BaseHomeViewController {
         rateUsButton = UIButton()
         rateUsButton.setImage(UIImage(named:"staricon")?.withRenderingMode(.alwaysTemplate), for: .normal)
         rateUsButton.imageView?.tintColor = .white
+        rateUsButton.addTarget(self, action: #selector(didTapRateUsButton), for: .touchUpInside)
         bottomBar.addSubview(rateUsButton)
         rateUsButton.snp.makeConstraints { (make) in
             make.height.equalToSuperview()
@@ -146,6 +147,7 @@ class HomeViewController2: BaseHomeViewController {
         muteButton = UIButton()
         muteButton.setImage(UIImage(named:"muteicon")?.withRenderingMode(.alwaysTemplate), for: .normal)
         muteButton.imageView?.tintColor = .white
+        muteButton.addTarget(self, action: #selector(didTapMuteButton), for: .touchUpInside)
         bottomBar.addSubview(muteButton)
         muteButton.snp.makeConstraints { (make) in
             make.centerY.width.height.equalTo(rateUsButton)
@@ -156,6 +158,7 @@ class HomeViewController2: BaseHomeViewController {
         rankingButton = UIButton()
         rankingButton.setImage(UIImage(named:"rankingicon")?.withRenderingMode(.alwaysTemplate), for: .normal)
         rankingButton.imageView?.tintColor = .white
+        rankingButton.addTarget(self, action: #selector(didTapRankingButton), for: .touchUpInside)
         bottomBar.addSubview(rankingButton)
         rankingButton.snp.makeConstraints { (make) in
             make.centerY.width.height.equalTo(rateUsButton)
@@ -201,5 +204,19 @@ class HomeViewController2: BaseHomeViewController {
         let vc = CreateRoomViewController()
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: false, completion: nil)
+    }
+    
+    @objc private func didTapRateUsButton() {
+        
+    }
+    
+    @objc private func didTapMuteButton() {
+        
+    }
+    
+    @objc private func didTapRankingButton() {
+        let rankingVC = RankingViewController()
+        rankingVC.modalPresentationStyle = .fullScreen
+        present(rankingVC, animated: true, completion: nil)
     }
 }

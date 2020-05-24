@@ -104,6 +104,7 @@ class LoginViewController: UIViewController {
     }
     
     @objc private func didTapLoginAsGuestButton() {
+        
         guard let username = usernameTextField.text else {
             return
         }
@@ -120,6 +121,14 @@ class LoginViewController: UIViewController {
         
         // Save username
         OwnerInfo.shared.updateUserName(newusername: username)
+        
+        // Insert DB:
+        DataBaseService.shared.insertUserToDB(user: OwnerInfo.shared) { (success, error) in
+            if error != nil {
+                assertionFailure()
+                return
+            }
+        }
         
         // Open homeVC
         let homeVC = HomeViewController2()
