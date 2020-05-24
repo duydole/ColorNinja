@@ -15,7 +15,7 @@ class HomeViewController2: BaseHomeViewController {
     private var singlePlayerButton: UIButton!
     private var multiPlayerButton: UIButton!
     private var bestScoreLabel: UILabel!
-    private var userNameButton: ButtonWithImage!
+    private var stackView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,40 +30,24 @@ class HomeViewController2: BaseHomeViewController {
     override func setupViews() {
         super.setupViews()
         
-        addUserNameButton()
         add1PlayerButton()
         add2PlayerButton()
         addBestScoreLabel()
     }
-    
-    private func addUserNameButton() {
-        userNameButton = ButtonWithImage()
-        view.addSubview(userNameButton)
-        userNameButton.imageView.image = UIImage(named: "usericon")
-        userNameButton.titleLabel.text = OwnerInfo.shared.getUsername()
-        userNameButton.titleLabel.textColor = .white
-        userNameButton.spacing = 5
-        userNameButton.snp.makeConstraints { (make) in
-            make.width.equalTo(130)
-            make.height.equalTo(40)
-            make.top.equalTo(Size.statusBarHeight+10)
-            make.leading.equalTo(20)
-        }
-    }
-    
+        
     private func add1PlayerButton() {
         singlePlayerButton = UIButton()
         singlePlayerButton.setTitle("1 Player", for: .normal)
         singlePlayerButton.backgroundColor = .black
-        singlePlayerButton.titleLabel!.font = UIFont(name: Font.squirk, size: 30)
+        singlePlayerButton.titleLabel!.font = UIFont(name: Font.squirk, size: scaledValue(30))
         singlePlayerButton.layer.cornerRadius = 13
         singlePlayerButton.makeShadow()
-        self.view.addSubview(singlePlayerButton)
+        midContainer.addSubview(singlePlayerButton)
         singlePlayerButton.snp.makeConstraints { (make) in
+            make.top.equalTo(scaledValue(50))
             make.centerX.equalToSuperview()
-            make.top.equalTo(iconImageView.snp.bottom).offset(100)
-            make.width.equalTo(227)
-            make.height.equalTo(52)
+            make.width.equalTo(scaledValue(227))
+            make.height.equalTo(scaledValue(52))
         }
         
         singlePlayerButton.addTarget(self, action: #selector(didTapSinglePlayerButton), for: .touchUpInside)
@@ -73,15 +57,13 @@ class HomeViewController2: BaseHomeViewController {
         multiPlayerButton = UIButton()
         multiPlayerButton.setTitle("2 Player", for: .normal)
         multiPlayerButton.backgroundColor = .black
-        multiPlayerButton.titleLabel!.font = UIFont(name: Font.squirk, size: 30)
+        multiPlayerButton.titleLabel!.font = UIFont(name: Font.squirk, size: scaledValue(30))
         multiPlayerButton.layer.cornerRadius = 13
         multiPlayerButton.makeShadow()
-        self.view.addSubview(multiPlayerButton)
+        midContainer.addSubview(multiPlayerButton)
         multiPlayerButton.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(singlePlayerButton.snp.bottom).offset(20)
-            make.width.equalTo(singlePlayerButton.snp.width)
-            make.height.equalTo(52)
+            make.width.height.centerX.equalTo(singlePlayerButton)
+            make.top.equalTo(singlePlayerButton.snp.bottom).offset(scaledValue(20))
         }
         
         multiPlayerButton.addTarget(self, action: #selector(didTapMultiPlayerButton), for: .touchUpInside)
@@ -91,11 +73,11 @@ class HomeViewController2: BaseHomeViewController {
         bestScoreLabel = UILabel()
         bestScoreLabel.text = "Your best score is \(OwnerInfo.shared.getMaxScore())"
         bestScoreLabel.textAlignment = NSTextAlignment.center
-        bestScoreLabel.font = UIFont(name: Font.squirk, size: 30)
+        bestScoreLabel.font = UIFont(name: Font.squirk, size: scaledValue(30))
         bestScoreLabel.textColor = .white
-        self.view.addSubview(bestScoreLabel)
+        midContainer.addSubview(bestScoreLabel)
         bestScoreLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(multiPlayerButton.snp.bottom).offset(20)
+            make.top.equalTo(multiPlayerButton.snp.bottom).offset(scaledValue(20))
             make.centerX.equalToSuperview()
         }
     }

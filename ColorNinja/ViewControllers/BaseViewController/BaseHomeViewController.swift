@@ -11,8 +11,17 @@ import UIKit
 
 class BaseHomeViewController: UIViewController {
     
+    // NavigationBar
+    var fakeNavigationbar: UIView!
+    var userNameButton: ButtonWithImage!
+
+    // TopContainer
+    var topContainer: UIView!
     var iconImageView: UIImageView!
     var appNameLabel: UILabel!
+    
+    // MidContainer
+    var midContainer: UIView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,32 +30,95 @@ class BaseHomeViewController: UIViewController {
     }
     
     func setupViews() {
-        self.addAppNameLabel()
-        self.addAppIconView()
+        addFakeNavigationBar()
+        addTopContainer()
+        addUserNameButton()
+        addAppNameLabel()
+        addAppIconView()
+        
+        addMidContainer()
     }
     
+    // MARK: Fake NavigationBar
+    
+    private func addFakeNavigationBar() {
+        fakeNavigationbar = UIView()
+        view.addSubview(fakeNavigationbar)
+        fakeNavigationbar.snp.makeConstraints { (make) in
+            make.top.equalTo(Size.statusBarHeight)
+            make.width.equalToSuperview()
+            make.height.equalTo(scaledValue(40))
+            make.centerX.equalToSuperview()
+        }
+    }
+    
+    private func addUserNameButton() {
+        userNameButton = ButtonWithImage()
+        fakeNavigationbar.addSubview(userNameButton)
+        userNameButton.imageView.image = UIImage(named: "usericon")
+        userNameButton.titleLabel.text = OwnerInfo.shared.getUsername()
+        userNameButton.titleLabel.textColor = .white
+        userNameButton.spacing = scaledValue(5)
+        userNameButton.snp.makeConstraints { (make) in
+            make.width.equalTo(scaledValue(130))
+            make.height.equalTo(scaledValue(40))
+            make.leading.equalTo(scaledValue(20))
+            make.centerY.equalToSuperview()
+        }
+    }
+
+    // MARK: Top Container
+    
+    private func addTopContainer() {
+        topContainer = UIView()
+        view.addSubview(topContainer)
+        topContainer.snp.makeConstraints { (make) in
+            make.width.equalToSuperview()
+            make.top.equalTo(fakeNavigationbar.snp.bottom)
+            make.height.equalToSuperview().multipliedBy(0.3)
+            make.centerX.equalToSuperview()
+        }
+    }
+            
     private func addAppNameLabel() {
         appNameLabel = UILabel()
-        appNameLabel.text = Constants.HomeScreen.appName
+        appNameLabel.text = "COLOR NINJA"
         appNameLabel.textAlignment = NSTextAlignment.center
-        appNameLabel.font = UIFont(name: Font.squirk, size: 60)
+        appNameLabel.font = UIFont(name: Font.squirk, size: scaledValue(60))
+        appNameLabel.adjustsFontSizeToFitWidth = true
         appNameLabel.textColor = Constants.HomeScreen.appNameColor
         appNameLabel.makeShadow()
-        self.view.addSubview(appNameLabel)
+        topContainer.addSubview(appNameLabel)
         appNameLabel.snp.makeConstraints { (make) in
+            make.width.centerX.equalToSuperview().multipliedBy(0.75)
+            make.top.equalTo(fakeNavigationbar.snp.bottom)
+            make.height.equalToSuperview().multipliedBy(0.5)
             make.centerX.equalToSuperview()
-            make.top.equalTo(150)
         }
     }
     
     private func addAppIconView() {
         iconImageView = UIImageView()
         iconImageView.image = UIImage(named: Constants.HomeScreen.ninjaImageName)
-        self.view.addSubview(iconImageView)
+        topContainer.addSubview(iconImageView)
         iconImageView.snp.makeConstraints { (make) in
-            make.top.equalTo(appNameLabel.snp.bottom).offset(20)
-            make.width.height.equalTo(Constants.HomeScreen.iconWidth)
-            make.centerX.equalTo(self.view)
+            make.top.equalTo(appNameLabel.snp.bottom)
+            make.height.equalToSuperview().multipliedBy(0.5)
+            make.width.equalTo(iconImageView.snp.height)
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview().multipliedBy(0.5)
+        }
+    }
+    
+    // MARK: Mid container
+    
+    private func addMidContainer() {
+        midContainer = UIView()
+        view.addSubview(midContainer)
+        midContainer.snp.makeConstraints { (make) in
+            make.trailing.leading.equalToSuperview()
+            make.top.equalTo(topContainer.snp.bottom)
+            make.height.equalToSuperview().multipliedBy(0.3)
         }
     }
 }
