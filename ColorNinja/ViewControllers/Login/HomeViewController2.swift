@@ -120,7 +120,7 @@ class HomeViewController2: BaseHomeViewController {
         
         let buttonSpacing: CGFloat = scaledValue(30)
         let spacingWithAd: CGFloat = scaledValue(20)
-        let bottomBarHeight: CGFloat = scaledValue(50)
+        let bottomBarHeight: CGFloat = scaledValue(45)
         
         // Container
         bottomBar = UIView()
@@ -146,7 +146,7 @@ class HomeViewController2: BaseHomeViewController {
         
         // MuteButton
         muteButton = UIButton()
-        muteButton.setImage(UIImage(named:"muteicon")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        muteButton.setImage(speakerImageForCurrentMainSoundState()?.withRenderingMode(.alwaysTemplate), for: .normal)
         muteButton.imageView?.tintColor = .white
         muteButton.addTarget(self, action: #selector(didTapMuteButton), for: .touchUpInside)
         bottomBar.addSubview(muteButton)
@@ -169,6 +169,10 @@ class HomeViewController2: BaseHomeViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
+    }
+    
+    private func speakerImageForCurrentMainSoundState() -> UIImage? {
+        return GameMusicPlayer.shared.isMuteMainSound ? UIImage(named:"speakeroff") : UIImage(named:"speakeron")
     }
     
     // MARK: Action handler
@@ -212,7 +216,8 @@ class HomeViewController2: BaseHomeViewController {
     }
     
     @objc private func didTapMuteButton() {
-        
+        GameMusicPlayer.shared.toggleMainSoundState()
+        muteButton.setImage(speakerImageForCurrentMainSoundState()?.withRenderingMode(.alwaysTemplate), for: .normal)
     }
     
     @objc private func didTapRankingButton() {

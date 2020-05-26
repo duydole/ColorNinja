@@ -57,4 +57,12 @@ class GameMusicPlayer {
     func unmuteBackgroundGameMusic() {
         audioPlayer?.volume = 1.0
     }
+
+    func toggleMainSoundState() {
+        if isMuteMainSound {
+            unmuteBackgroundGameMusic()
+        } else {
+            muteBackgroundGameMusic()
+        }
+    }
 }
