@@ -26,9 +26,8 @@ class OwnerInfo {
     
     static let shared = OwnerInfo()
     
-    let userId: String!
-    var avatarUrl: String!
-    var loginType: LoginType = .Guest
+    private var userId: String!
+    var loginType: LoginType = .NotLogin
     
     var didLogin: Bool {
         get {
@@ -39,8 +38,23 @@ class OwnerInfo {
             }
         }
     }
+    var avatarUrl: String {
+        get {
+            switch loginType {
+            case .Facebook:
+                return "http://graph.facebook.com/\(userId ?? "")/picture?type=large"
+            default:
+                return defaultAvatarUrl
+            }
+        }
+    }
     
     // MARK: Public
+    
+    func updateUserId(newUserId: String) {
+        userId = newUserId
+        userDefault.set(newUserId, forKey: kUserIdKey)
+    }
     
     func updateLoginType(newLoginType: LoginType) {
         loginType = newLoginType
@@ -71,6 +85,10 @@ class OwnerInfo {
         return bestScore
     }
     
+    func getUserId() -> String {
+        return userId
+    }
+    
     // MARK: Private
     
     private var userName: String = ""
@@ -90,23 +108,23 @@ class OwnerInfo {
         
         // Load userId
         if let userId = userDefault.string(forKey: kUserIdKey) {
-            self.userId = userId
+            if userId == "" {
+                updateUserId(newUserId: UUID().uuidString)
+            } else {
+                self.userId = userId
+            }
         } else {
-            self.userId = UUID().uuidString
-            userDefault.set(userId,forKey: kUserIdKey)
+            updateUserId(newUserId: UUID().uuidString)
         }
         
         
         // Load loginType
         let loginType = userDefault.integer(forKey: kUserLoginType)
         if loginType == 0 {
-            userDefault.set(0, forKey: kUserLoginType)
+            updateLoginType(newLoginType: .NotLogin)
         } else {
             self.loginType = LoginType(rawValue: loginType) ?? LoginType.Guest
         }
-        
-        avatarUrl = defaultAvatarUrl
-        
         
         #if DEBUG
         //updateBestScore(newBestScore: 0)

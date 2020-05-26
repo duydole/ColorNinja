@@ -53,9 +53,9 @@ class DataBaseService : NSObject {
     public func insertUserToDB(user: OwnerInfo, completion: completionHandler?) {
         
         let parameters: Dictionary<String, Any> = [
-            "key": user.userId!,    // chú ý refactor chỗ này
+            "key": user.getUserId(),    // chú ý refactor chỗ này
             "username": user.getUsername(),
-            "avatar": user.avatarUrl ?? ""
+            "avatar": user.avatarUrl
         ]
         
         AF.request(registerUserUrl, method: .post, parameters:parameters).responseJSON { (response) in

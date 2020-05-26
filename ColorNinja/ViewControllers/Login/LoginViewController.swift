@@ -120,8 +120,6 @@ class LoginViewController: UIViewController {
             
             // Update UserInfo
             self.updateUserInfoFromFacebookProfile()
-            
-            // Login Success
             self.openHomeViewController()
         }
     }
@@ -144,6 +142,7 @@ class LoginViewController: UIViewController {
         
         // Save username
         OwnerInfo.shared.updateUserName(newusername: username)
+        OwnerInfo.shared.updateLoginType(newLoginType: .Guest)
         
         // Insert DB:
         DataBaseService.shared.insertUserToDB(user: OwnerInfo.shared) { (success, error) in
@@ -179,8 +178,14 @@ class LoginViewController: UIViewController {
                     
                     OwnerInfo.shared.updateUserName(newusername: username)
                     OwnerInfo.shared.updateLoginType(newLoginType: .Facebook)
+                    OwnerInfo.shared.updateUserId(newUserId: profile.userID)
+                    
+                    //completion?()
                 }
             }
+        }
+        else {
+            //completion?()
         }
     }
     

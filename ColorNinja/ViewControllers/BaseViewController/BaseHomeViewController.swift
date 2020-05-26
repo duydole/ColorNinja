@@ -14,7 +14,7 @@ class BaseHomeViewController: UIViewController {
     
     // NavigationBar
     var fakeNavigationbar: UIView!
-    var avatarView: UIView!
+    var avatarView: UIImageView!
     var usernamelabel: UILabel!
 
     // TopContainer
@@ -57,29 +57,15 @@ class BaseHomeViewController: UIViewController {
     private func addUserNameButton() {
         
         let avtWidth: CGFloat = 45
-        avatarView = UIView()
+        avatarView = UIImageView()
         avatarView.layer.cornerRadius = avtWidth/2
         avatarView.clipsToBounds = true
-        
         switch OwnerInfo.shared.loginType {
         case .Facebook:
-            let profileImageView = FBProfilePictureView()
-            profileImageView.profileID = AccessToken.current?.userID ?? ""
-            avatarView.addSubview(profileImageView)
-            profileImageView.snp.makeConstraints({ (make) in
-                make.width.height.centerX.equalToSuperview()
-            })
-            break
-        case .Guest:
-            let img = UIImage(named: "usericon")
-            let imageView = UIImageView(image: img)
-            avatarView.addSubview(imageView)
-            imageView.snp.makeConstraints({ (make) in
-                make.width.height.centerX.equalToSuperview()
-            })
-            break
+            avatarView.image = UIImage(named: "usericon")
+            avatarView.downloaded(from: OwnerInfo.shared.avatarUrl)
         default:
-            break
+            avatarView.image = UIImage(named: "usericon")
         }
         
         fakeNavigationbar.addSubview(avatarView)
