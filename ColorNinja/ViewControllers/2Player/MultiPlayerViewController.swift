@@ -14,7 +14,7 @@ let MAX_LEVEL: Int = 30
 class MultiPlayerViewController : BaseGameViewController {
     
     var client: ClientSocket!
-    var player1 = User(userId: OwnerInfo.shared.getUserId(), username: OwnerInfo.shared.getUsername())
+    var player1 = User(userId: OwnerInfo.shared.userId, username: OwnerInfo.shared.userName)
     var player2 = User(username: "----")
     
     private var player1Title: UILabel!

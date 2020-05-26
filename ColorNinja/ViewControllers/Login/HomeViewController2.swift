@@ -30,7 +30,7 @@ class HomeViewController2: BaseHomeViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
-        bestScoreLabel.text = "Your best score is \(OwnerInfo.shared.getBestScore())"
+        bestScoreLabel.text = "Your best score is \(OwnerInfo.shared.bestScore)"
     }
     
     // MARK: Setup views
@@ -85,7 +85,7 @@ class HomeViewController2: BaseHomeViewController {
     
     private func addBestScoreLabel() {
         bestScoreLabel = UILabel()
-        bestScoreLabel.text = "Your best score is \(OwnerInfo.shared.getBestScore())"
+        bestScoreLabel.text = "Your best score is \(OwnerInfo.shared.bestScore)"
         bestScoreLabel.textAlignment = NSTextAlignment.center
         bestScoreLabel.font = UIFont(name: Font.squirk, size: scaledValue(30))
         bestScoreLabel.textColor = .white

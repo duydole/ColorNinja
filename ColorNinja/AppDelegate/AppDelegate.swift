@@ -41,8 +41,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         GADMobileAds.sharedInstance().start(completionHandler: nil)
-        //GameMusicPlayer.shared.startBackgroundMusic()
-
+        #if !DEBUG
+        GameMusicPlayer.shared.startBackgroundMusic()
+        #endif
         _ = services.application(application, didFinishLaunchingWithOptions: launchOptions)
         
         return true

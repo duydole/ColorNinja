@@ -53,8 +53,8 @@ class DataBaseService : NSObject {
     public func insertUserToDB(user: OwnerInfo, completion: completionHandler?) {
         
         let parameters: Dictionary<String, Any> = [
-            "key": user.getUserId(),    // chú ý refactor chỗ này
-            "username": user.getUsername(),
+            "key": user.userId,    // chú ý refactor chỗ này
+            "username": user.userName,
             "avatar": user.avatarUrl
         ]
         

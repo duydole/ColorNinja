@@ -26,10 +26,11 @@ class OwnerInfo {
     
     static let shared = OwnerInfo()
     
-    private var userId: String!
-    var loginType: LoginType = .NotLogin
-    
-    var didLogin: Bool {
+    public private(set) var userId: String = ""
+    public private(set) var loginType: LoginType = .NotLogin
+    public private(set) var bestScore: Int = 0
+    public private(set) var userName: String = ""
+    public var didLogin: Bool {
         get {
             if loginType.rawValue != 0 {
                 return true
@@ -38,11 +39,11 @@ class OwnerInfo {
             }
         }
     }
-    var avatarUrl: String {
+    public var avatarUrl: String {
         get {
             switch loginType {
             case .Facebook:
-                return "http://graph.facebook.com/\(userId ?? "")/picture?type=large"
+                return "http://graph.facebook.com/\(userId)/picture?type=large"
             default:
                 return defaultAvatarUrl
             }
@@ -76,23 +77,9 @@ class OwnerInfo {
         bestScore = newBestScore
         userDefault.set(bestScore,forKey: kBestScoreKey)
     }
-    
-    func getUsername() -> String {
-        return userName
-    }
-    
-    func getBestScore() -> Int {
-        return bestScore
-    }
-    
-    func getUserId() -> String {
-        return userId
-    }
-    
+        
     // MARK: Private
     
-    private var userName: String = ""
-    private var bestScore: Int = 0
     private let userDefault = UserDefaults.standard
 
     private init() {
