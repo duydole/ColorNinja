@@ -8,12 +8,14 @@
 
 import Foundation
 import UIKit
+import FBSDKLoginKit
 
 class BaseHomeViewController: UIViewController {
     
     // NavigationBar
     var fakeNavigationbar: UIView!
-    var userNameButton: ButtonWithImage!
+    var avatarView: UIView!
+    var usernamelabel: UILabel!
 
     // TopContainer
     var topContainer: UIView!
@@ -47,22 +49,55 @@ class BaseHomeViewController: UIViewController {
         fakeNavigationbar.snp.makeConstraints { (make) in
             make.top.equalTo(Size.statusBarHeight)
             make.width.equalToSuperview()
-            make.height.equalTo(scaledValue(40))
+            make.height.equalTo(scaledValue(50))
             make.centerX.equalToSuperview()
         }
     }
     
     private func addUserNameButton() {
-        userNameButton = ButtonWithImage()
-        fakeNavigationbar.addSubview(userNameButton)
-        userNameButton.imageView.image = UIImage(named: "usericon")
-        userNameButton.titleLabel.text = OwnerInfo.shared.getUsername()
-        userNameButton.titleLabel.textColor = .white
-        userNameButton.spacing = scaledValue(5)
-        userNameButton.snp.makeConstraints { (make) in
-            make.width.equalTo(scaledValue(130))
-            make.height.equalTo(scaledValue(40))
+        
+        let avtWidth: CGFloat = 45
+        avatarView = UIView()
+        avatarView.layer.cornerRadius = avtWidth/2
+        avatarView.clipsToBounds = true
+        
+        switch OwnerInfo.shared.loginType {
+        case .Facebook:
+            let profileImageView = FBProfilePictureView()
+            profileImageView.profileID = AccessToken.current?.userID ?? ""
+            avatarView.addSubview(profileImageView)
+            profileImageView.snp.makeConstraints({ (make) in
+                make.width.height.centerX.equalToSuperview()
+            })
+            break
+        case .Guest:
+            let img = UIImage(named: "usericon")
+            let imageView = UIImageView(image: img)
+            avatarView.addSubview(imageView)
+            imageView.snp.makeConstraints({ (make) in
+                make.width.height.centerX.equalToSuperview()
+            })
+            break
+        default:
+            break
+        }
+        
+        fakeNavigationbar.addSubview(avatarView)
+        avatarView.snp.makeConstraints { (make) in
+            make.width.equalTo(scaledValue(avtWidth))
+            make.height.equalTo(scaledValue(avtWidth))
             make.leading.equalTo(scaledValue(20))
+            make.centerY.equalToSuperview()
+        }
+        
+        
+        // UserName
+        usernamelabel = UILabel()
+        usernamelabel.text = OwnerInfo.shared.getUsername()
+        usernamelabel.textColor = .white
+        fakeNavigationbar.addSubview(usernamelabel)
+        usernamelabel.snp.makeConstraints { (make) in
+            make.leading.equalTo(avatarView.snp.trailing).offset(10)
             make.centerY.equalToSuperview()
         }
     }

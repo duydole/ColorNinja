@@ -35,14 +35,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         // Check logined guest user:
-        let username = OwnerInfo.shared.getUsername()
-        if !username.isEmpty {
+        if OwnerInfo.shared.didLogin {
             homeVC.modalPresentationStyle = .fullScreen
             loginVC.present(homeVC, animated: true, completion: nil)
         }
         
         GADMobileAds.sharedInstance().start(completionHandler: nil)
-        GameMusicPlayer.shared.startBackgroundMusic()
+        //GameMusicPlayer.shared.startBackgroundMusic()
 
         _ = services.application(application, didFinishLaunchingWithOptions: launchOptions)
         

@@ -29,6 +29,7 @@ class HomeViewController2: BaseHomeViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
         bestScoreLabel.text = "Your best score is \(OwnerInfo.shared.getBestScore())"
     }
     

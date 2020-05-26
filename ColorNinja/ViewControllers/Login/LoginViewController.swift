@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FBSDKLoginKit
 
 class LoginViewController: UIViewController {
     
@@ -101,6 +102,28 @@ class LoginViewController: UIViewController {
     
     @objc private func didTapLoginWithFacebookButton() {
         
+        let loginManager = LoginManager()
+        loginManager.logIn(permissions: ["public_profile"], from: self) { (loginResult, error) in
+            
+            if let _ = error {
+                return
+            }
+            
+            guard let loginResult = loginResult else {
+                return
+            }
+            
+            if loginResult.isCancelled {
+                return
+            }
+            
+            
+            // Update UserInfo
+            self.updateUserInfoFromFacebookProfile()
+            
+            // Login Success
+            self.openHomeViewController()
+        }
     }
     
     @objc private func didTapLoginAsGuestButton() {
@@ -131,9 +154,34 @@ class LoginViewController: UIViewController {
         }
         
         // Open homeVC
+        openHomeViewController()
+    }
+    
+    private func openHomeViewController() {
         let homeVC = HomeViewController2()
         homeVC.modalPresentationStyle = .fullScreen
         self.present(homeVC, animated: false, completion: nil)
+    }
+    
+    private func updateUserInfoFromFacebookProfile() {
+        if let _ = AccessToken.current {
+            Profile.loadCurrentProfile { (profile, error) in
+                if let profile = Profile.current {
+                    
+                    var username = ""
+                    if let f = profile.lastName {
+                        username += f
+                    }
+                    
+                    if let l = profile.firstName {
+                        username += " \(l)"
+                    }
+                    
+                    OwnerInfo.shared.updateUserName(newusername: username)
+                    OwnerInfo.shared.updateLoginType(newLoginType: .Facebook)
+                }
+            }
+        }
     }
     
     // MARK: Helper

@@ -17,4 +17,7 @@ target 'ColorNinja' do
   pod 'FBSDKLoginKit'
   pod 'FBSDKShareKit'
 
+pod 'Alamofire', '~> 5.2'
+
+
 end

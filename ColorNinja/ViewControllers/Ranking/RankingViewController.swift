@@ -183,7 +183,7 @@ class RankingViewController: UIViewController {
                 }
                 
                 for i in 0...users.count - 1 {
-                    self.rankingData.append(RankingCellModel(ranking: i, name: users[i].username, avatarURL: "", record: users[i].bestscore))
+                    self.rankingData.append(RankingCellModel(ranking: i, name: users[i].name ?? "Default", avatarURL: "", record: users[i].bestscore))
                 }
                 DispatchQueue.main.async {
                   self.rankingView.setRankingData(rankingData: self.rankingData)

@@ -28,6 +28,7 @@
 		8CC6DB44246B8E470017B60A /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC6DB43246B8E470017B60A /* Collection+Extension.swift */; };
 		8CC6DB47246B8FA90017B60A /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC6DB46246B8FA90017B60A /* Date+Extension.swift */; };
 		D96E8CD13F30FDE723362F0D /* Pods_ColorNinja.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57F237B10E2F49C95DDF1EC4 /* Pods_ColorNinja.framework */; };
+		F21145F4247CE092005ACB50 /* LeaderBoardStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21145F3247CE092005ACB50 /* LeaderBoardStruct.swift */; };
 		F22F85642465A34900493BB6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F85632465A34900493BB6 /* Constants.swift */; };
 		F22F85662465A71E00493BB6 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F85652465A71E00493BB6 /* UIView+Extension.swift */; };
 		F22F85682465AF2100493BB6 /* ZButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F85672465AF2100493BB6 /* ZButton.swift */; };
@@ -42,7 +43,6 @@
 		F2347635246836D7004C8363 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2347634246836D7004C8363 /* UIColor+Extension.swift */; };
 		F2347638246851A5004C8363 /* ButtonWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2347637246851A5004C8363 /* ButtonWithImage.swift */; };
 		F24E4348247A5C5E00FBA7B1 /* DataBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24E4347247A5C5E00FBA7B1 /* DataBaseService.swift */; };
-		F24E434A247A5CC300FBA7B1 /* UserRankingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24E4349247A5CC300FBA7B1 /* UserRankingModel.swift */; };
 		F24E4366247A802900FBA7B1 /* CharacterSet+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24E4365247A802900FBA7B1 /* CharacterSet+Extension.swift */; };
 		F260CA622476C63500D00348 /* CreateRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F260CA612476C63500D00348 /* CreateRoomViewController.swift */; };
 		F260CA642476DFBF00D00348 /* JoinRoomPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F260CA632476DFBF00D00348 /* JoinRoomPopup.swift */; };
@@ -100,6 +100,7 @@
 		8CC6DB41246B8E160017B60A /* Dictionary+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extension.swift"; sourceTree = "<group>"; };
 		8CC6DB43246B8E470017B60A /* Collection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
 		8CC6DB46246B8FA90017B60A /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		F21145F3247CE092005ACB50 /* LeaderBoardStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderBoardStruct.swift; sourceTree = "<group>"; };
 		F22F85632465A34900493BB6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F22F85652465A71E00493BB6 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		F22F85672465AF2100493BB6 /* ZButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZButton.swift; sourceTree = "<group>"; };
@@ -114,7 +115,6 @@
 		F2347634246836D7004C8363 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		F2347637246851A5004C8363 /* ButtonWithImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWithImage.swift; sourceTree = "<group>"; };
 		F24E4347247A5C5E00FBA7B1 /* DataBaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseService.swift; sourceTree = "<group>"; };
-		F24E4349247A5CC300FBA7B1 /* UserRankingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRankingModel.swift; sourceTree = "<group>"; };
 		F24E4365247A802900FBA7B1 /* CharacterSet+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterSet+Extension.swift"; sourceTree = "<group>"; };
 		F260CA612476C63500D00348 /* CreateRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoomViewController.swift; sourceTree = "<group>"; };
 		F260CA632476DFBF00D00348 /* JoinRoomPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomPopup.swift; sourceTree = "<group>"; };
@@ -344,7 +344,7 @@
 			isa = PBXGroup;
 			children = (
 				F24E4347247A5C5E00FBA7B1 /* DataBaseService.swift */,
-				F24E4349247A5CC300FBA7B1 /* UserRankingModel.swift */,
+				F21145F3247CE092005ACB50 /* LeaderBoardStruct.swift */,
 			);
 			path = DataAccess;
 			sourceTree = "<group>";
@@ -592,7 +592,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F24E434A247A5CC300FBA7B1 /* UserRankingModel.swift in Sources */,
 				F2347631246809C5004C8363 /* GameOverPopup.swift in Sources */,
 				8C2C72822467ACD300883388 /* RankingCellModel.swift in Sources */,
 				8C6350A924735C8C00ADAB01 /* FacebookService.swift in Sources */,
@@ -634,6 +633,7 @@
 				8C5FFEEF2472E8D800D9FA5E /* FacebookSDKAppDelegate.swift in Sources */,
 				F263FDBB246F950000A4AB0B /* BaseViewController.swift in Sources */,
 				F2347638246851A5004C8363 /* ButtonWithImage.swift in Sources */,
+				F21145F4247CE092005ACB50 /* LeaderBoardStruct.swift in Sources */,
 				8CC6DB47246B8FA90017B60A /* Date+Extension.swift in Sources */,
 				F2AB0F58246FD31B00FE7FDA /* User.swift in Sources */,
 				F263FDBE246F993500A4AB0B /* ClientSocket.swift in Sources */,
@@ -793,7 +793,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = duydl.comk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.duydl.colorninja;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -813,7 +813,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = duydl.comk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.duydl.colorninja;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

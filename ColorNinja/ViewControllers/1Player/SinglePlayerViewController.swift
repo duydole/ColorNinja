@@ -148,11 +148,7 @@ class SinglePlayerViewController : BaseGameViewController {
         let resultScored = currentLevel.levelIndex + 1
         if resultScored > OwnerInfo.shared.getBestScore() {
             OwnerInfo.shared.updateBestScore(newBestScore: resultScored)
-            DataBaseService.shared.updateBestScoreForUser(user: OwnerInfo.shared) { (success, error) in
-                if error != nil {
-                    assertionFailure()
-                }
-            }
+            DataBaseService.shared.updateBestScoreForUser(userid: OwnerInfo.shared.userId, newBestScore: resultScored, completion: nil)
         }
         
         // Show Popup GameOver
