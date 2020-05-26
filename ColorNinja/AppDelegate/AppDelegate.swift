@@ -21,8 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let homeVC = HomeViewController2()
         let loginVC = LoginViewController()
+        let naviVC = UINavigationController(rootViewController: loginVC)
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = loginVC
+        window?.rootViewController = naviVC
         window?.makeKeyAndVisible()
         
         if ZaloService.sharedInstance.isLoginZalo() {
@@ -33,11 +34,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        
-        // Check logined guest user:
+        // Check didLogin or not
         if OwnerInfo.shared.didLogin {
-            homeVC.modalPresentationStyle = .fullScreen
-            loginVC.present(homeVC, animated: true, completion: nil)
+            naviVC.pushViewController(homeVC, animated: false)
         }
         
         GADMobileAds.sharedInstance().start(completionHandler: nil)
