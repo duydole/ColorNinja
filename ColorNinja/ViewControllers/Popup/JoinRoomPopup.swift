@@ -25,7 +25,7 @@ class JoinRoomPopup: PopupViewController {
     }
     
     override var contentSize: CGSize {
-        return CGSize(width: 200, height: 200)
+        return CGSize(width: scaledValue(200), height: scaledValue(200))
     }
     
     override var cornerRadius: CGFloat {

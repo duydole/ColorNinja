@@ -23,12 +23,17 @@ class GameOverPopup: PopupViewController {
     static let kImageButtonSpacing: CGFloat = 10
     static let kButtonCornerRadius: CGFloat = 10
     
+    public var delegate: GameOverPopupDelegate?
+    public var resultModel: ResultGameModel = ResultGameModel()
     
-    var goHomeButton: ButtonWithImage!
-    var replayButton: ButtonWithImage!
-    var gameOverDelegate: GameOverPopupDelegate?
+    private var goHomeButton: ButtonWithImage!
+    private var replayButton: ButtonWithImage!
+    private var looseLevelLabel: UILabel!
+    private var rankedLabel: UILabel!
+    private var bestLevelLabel: UILabel!
+    private var gameOverContainer: UIView!
     
-    var interstitial: GADInterstitial!
+    private var interstitial: GADInterstitial!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +41,7 @@ class GameOverPopup: PopupViewController {
     }
     
     override var contentSize: CGSize {
-        return Constants.GameOverPopup.contentSize
+        return CGSize(width: scaledValue(320), height: scaledValue(370))
     }
     
     override var cornerRadius: CGFloat {
@@ -47,7 +52,7 @@ class GameOverPopup: PopupViewController {
     
     @objc private func didTapGoHomeButton() {
         self.dismiss(animated: false) {
-            self.gameOverDelegate?.didTapGoHomeButton()
+            self.delegate?.didTapGoHomeButton()
         }
     }
 
@@ -56,28 +61,30 @@ class GameOverPopup: PopupViewController {
         showFullScreenAd()
         #endif
         self.dismiss(animated: false) {
-            self.gameOverDelegate?.didTapReplayButton()
+            self.delegate?.didTapReplayButton()
         }
     }
     
     // MARK: Setup Views
     
     private func setupViews() {
-        self.setupGameOverViews()
-        self.setupGameResult()
-        self.setupButtons()
-        self.setupFullScreenAds()
+        setupGameOverViews()
+        setupGameResult()
+        setupButtons()
+        setupFullScreenAds()
+        
+        setupResultsView()
     }
     
     private func setupGameOverViews() {
         
         // Container
-        let container = UIView()
-        container.backgroundColor = .orange
-        container.layer.cornerRadius = GameOverPopup.kCornerRadius
-        container.makeShadow()
-        contentView.addSubview(container)
-        container.snp.makeConstraints { (make) in
+        gameOverContainer = UIView()
+        gameOverContainer.backgroundColor = .orange
+        gameOverContainer.layer.cornerRadius = GameOverPopup.kCornerRadius
+        gameOverContainer.makeShadow()
+        contentView.addSubview(gameOverContainer)
+        gameOverContainer.snp.makeConstraints { (make) in
             make.top.leading.equalTo(GameOverPopup.kContentPadding)
             make.trailing.equalTo(-GameOverPopup.kContentPadding)
             make.height.equalToSuperview().multipliedBy(0.2)
@@ -88,8 +95,9 @@ class GameOverPopup: PopupViewController {
         gameOverLabel.text = "GAME OVER"
         gameOverLabel.adjustsFontSizeToFitWidth = true
         gameOverLabel.textColor = .white
-        gameOverLabel.font = UIFont.systemFont(ofSize: 30, weight: .bold)
-        container.addSubview(gameOverLabel)
+        gameOverLabel.font = UIFont(name: Font.squirk, size: scaledValue(50))
+        gameOverLabel.makeShadow()
+        gameOverContainer.addSubview(gameOverLabel)
         gameOverLabel.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
         }
@@ -114,10 +122,14 @@ class GameOverPopup: PopupViewController {
         goHomeButton = ButtonWithImage()
         goHomeButton.buttonPadding = GameOverPopup.kbuttonPadding
         goHomeButton.spacing = GameOverPopup.kImageButtonSpacing
-        goHomeButton.titleLabel.text = "Home"
+        goHomeButton.titleLabel.text = "HOME"
         goHomeButton.titleLabel.adjustsFontSizeToFitWidth = true
         goHomeButton.titleLabel.textAlignment = .center
-        goHomeButton.imageView.image = UIImage(named: "homeicon")
+        goHomeButton.titleLabel.textColor = .white
+        goHomeButton.titleLabel.makeShadow()
+        goHomeButton.titleLabel.font = UIFont(name: Font.squirk, size: scaledValue(30))
+        goHomeButton.imageView.image = UIImage(named: "homeicon")?.withRenderingMode(.alwaysTemplate)
+        goHomeButton.imageView.tintColor = .white
         goHomeButton.layer.cornerRadius = GameOverPopup.kButtonCornerRadius
         goHomeButton.backgroundColor = .orange
         goHomeButton.makeShadow()
@@ -133,10 +145,14 @@ class GameOverPopup: PopupViewController {
         replayButton = ButtonWithImage()
         replayButton.buttonPadding = GameOverPopup.kbuttonPadding
         replayButton.spacing = GameOverPopup.kImageButtonSpacing
-        replayButton.titleLabel.text = "Replay"
+        replayButton.titleLabel.text = "REPLAY"
         replayButton.titleLabel.adjustsFontSizeToFitWidth = true
         replayButton.titleLabel.textAlignment = .center
-        replayButton.imageView.image = UIImage(named: "replayicon")
+        replayButton.titleLabel.textColor = .white
+        replayButton.titleLabel.makeShadow()
+        replayButton.titleLabel.font = UIFont(name: Font.squirk, size: scaledValue(30))
+        replayButton.imageView.image = UIImage(named: "replayicon")?.withRenderingMode(.alwaysTemplate)
+        replayButton.imageView.tintColor = .white
         replayButton.backgroundColor = .orange
         replayButton.layer.cornerRadius = GameOverPopup.kButtonCornerRadius
         replayButton.makeShadow()
@@ -154,6 +170,39 @@ class GameOverPopup: PopupViewController {
         interstitial.delegate = self
         let request = GADRequest()
         interstitial.load(request)
+    }
+    
+    private func setupResultsView() {
+        
+        // LooseLevel
+        looseLevelLabel = UILabel()
+        looseLevelLabel.text = "Level: \(resultModel.score)"
+        looseLevelLabel.font = UIFont(name: Font.squirk, size: scaledValue(45))
+        contentView.addSubview(looseLevelLabel)
+        looseLevelLabel.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(gameOverContainer.snp.bottom).offset(scaledValue(20))
+        }
+        
+        // Rank
+        rankedLabel = UILabel()
+        rankedLabel.text = "Rank: \(resultModel.user.rank)"
+        rankedLabel.font = UIFont(name: Font.squirk, size: scaledValue(40))
+        contentView.addSubview(rankedLabel)
+        rankedLabel.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(looseLevelLabel.snp.bottom).offset(scaledValue(20))
+        }
+        
+        // BestScore
+        bestLevelLabel = UILabel()
+        bestLevelLabel.text = "Your Best Score: \(resultModel.user.bestScore)"
+        bestLevelLabel.font = UIFont(name: Font.squirk, size: scaledValue(35))
+        contentView.addSubview(bestLevelLabel)
+        bestLevelLabel.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(rankedLabel.snp.bottom).offset(scaledValue(30))
+        }
     }
     
     // MARK: Other
@@ -174,6 +223,6 @@ extension GameOverPopup : GADInterstitialDelegate {
     
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {
         self.dismissPopUp()
-        self.gameOverDelegate?.didTapReplayButton()
+        self.delegate?.didTapReplayButton()
     }
 }

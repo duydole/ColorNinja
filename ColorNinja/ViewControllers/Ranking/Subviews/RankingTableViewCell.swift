@@ -101,14 +101,10 @@ class RankingTableViewCell: UITableViewCell {
             self.rankingLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         }
         
-        if let image = UIImage(named: cellObject.avatarURL) {
-            self.imgAvatar.image = image
-        }
+        self.imgAvatar.setImageWithLink(from: cellObject.avatarURL)
     }
     
-    
-    static public func heightForCell(cellObject: RankingCellModel, indexPath: IndexPath, tableView: UITableView) -> CGFloat
-    {
+    static public func heightForCell(cellObject: RankingCellModel, indexPath: IndexPath, tableView: UITableView) -> CGFloat {
         return 50;
     }
 }

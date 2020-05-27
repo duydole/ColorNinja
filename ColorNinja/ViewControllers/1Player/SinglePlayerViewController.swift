@@ -154,7 +154,7 @@ class SinglePlayerViewController : BaseGameViewController {
         // Show Popup GameOver
         let gameOverPopup = GameOverPopup()
         gameOverPopup.modalPresentationStyle = .overCurrentContext
-        gameOverPopup.gameOverDelegate = self
+        gameOverPopup.delegate = self
         self.present(gameOverPopup, animated: false, completion: nil)
     }
     

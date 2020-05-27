@@ -26,8 +26,8 @@ class MultiPlayerViewController : BaseGameViewController {
     private var currenLevelLabel: UILabel!
     private var statusLabel: UILabel!
     
-    private var p1Score: CGFloat = 0
-    private var p2Score: CGFloat = 0
+    private var p1Score: Int = 0
+    private var p2Score: Int = 0
     
     // MARK: - Life cycle
     
@@ -309,6 +309,8 @@ extension MultiPlayerViewController : ClientDelegate {
             serverSendRoomIsNotExisted(json)
         case .CompetitorOutRoom:
             serverSendCompetitorOutRoom(json)
+        case .RoundExpried:
+            break
         default:
             showAlertWithMessage(message: json["message"] as! String)
             print("duydl: UNKNOW MESSAGE TYPE OF SERVER")

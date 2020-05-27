@@ -13,7 +13,7 @@ fileprivate let kUserNameKey = "kUserName"
 fileprivate let kBestScoreKey = "kBestScoreKey"
 fileprivate let kUserIdKey = "kUserIdKey"
 fileprivate let kUserLoginType = "kUserLoginType"
-fileprivate let defaultAvatarUrl = "https://cdn1.iconfinder.com/data/icons/foxy-universal-circle-glyph/24/circle-round-userinterface-people-account-person-profile-512.png"
+fileprivate let defaultAvatarUrl = "https://cdn1.iconfinder.com/data/icons/ninja-things-1/720/ninja-background-512.png"
 
 enum LoginType: Int {
     case NotLogin = 0

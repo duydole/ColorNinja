@@ -33,43 +33,41 @@ class RankingViewController: UIViewController {
     private func setupView() {
         self.view.backgroundColor = Constants.GameScreen.backgroundColor
         
-        self.setupTableView()
         self.setupExitButton()
         
         self.setTitleLabel()
         self.setupAvatarView()
         self.setupInfoView()
-
+        self.setupTableView()
     }
     
     private func setTitleLabel() {
-        self.titleLabel = UILabel()
-        self.view.addSubview(self.titleLabel)
-        self.titleLabel.snp.makeConstraints { (make) in
+        titleLabel = UILabel()
+        view.addSubview(self.titleLabel)
+        titleLabel.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.height.equalTo(50)
-            make.width.equalTo(200)
-            make.top.equalTo(Size.statusBarHeight + 50)
+            make.height.equalTo(scaledValue(50))
+            make.width.equalTo(scaledValue(200))
+            make.top.equalTo(Size.statusBarHeight + scaledValue(50))
         }
-        self.titleLabel.textAlignment = .center
-        self.titleLabel.text = "LEADERBOARD"
-        self.titleLabel.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
-        self.titleLabel.textColor = .white
+        titleLabel.textAlignment = .center
+        titleLabel.text = "LEADERBOARD"
+        titleLabel.font = UIFont.systemFont(ofSize: scaledValue(24), weight: .semibold)
+        titleLabel.textColor = .white
     }
     
     private func setupAvatarView() {
         self.avatarView = UIImageView()
         self.view.addSubview(self.avatarView)
         
-        self.avatarView.image = UIImage(named: "avatar")
-        self.avatarView.layer.cornerRadius = 40
+        self.avatarView.setImageWithLink(from: OwnerInfo.shared.avatarUrl)
+        self.avatarView.layer.cornerRadius = scaledValue(40)
         self.avatarView.clipsToBounds = true
         
-        
         self.avatarView.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().offset(20)
-            make.width.height.equalTo(80)
-            make.top.equalTo(self.titleLabel.snp.bottom).offset(50)
+            make.left.equalToSuperview().offset(scaledValue(20))
+            make.width.height.equalTo(scaledValue(80))
+            make.top.equalTo(self.titleLabel.snp.bottom).offset(scaledValue(20))
         }
     }
     
@@ -88,7 +86,7 @@ class RankingViewController: UIViewController {
         keyInfo1.textColor = Constants.GameScreen.LabelsContainer.textColor
         keyInfo1.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         let keyInfo2 = UILabel()
-        keyInfo2.text = "MY BEST RECORD"
+        keyInfo2.text = "MY BEST SCORE"
         keyInfo2.textColor = Constants.GameScreen.LabelsContainer.textColor
         keyInfo2.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         
@@ -99,7 +97,7 @@ class RankingViewController: UIViewController {
         valueInfo1.textAlignment = .right
         
         let valueInfo2 = UILabel()
-        valueInfo2.text = "21"
+        valueInfo2.text = "\(OwnerInfo.shared.bestScore)"
         valueInfo2.textColor = .white
         valueInfo2.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         valueInfo2.textAlignment = .right
@@ -148,10 +146,10 @@ class RankingViewController: UIViewController {
         self.rankingView.clipsToBounds = true
         
         self.rankingView.snp.makeConstraints { (make) in
-            make.bottom.equalToSuperview().offset(-80)
-            make.left.equalToSuperview().offset(15)
-            make.right.equalToSuperview().offset(-15)
-            make.height.equalTo(400)
+            make.bottom.equalToSuperview().offset(-safeAreaBottom() + scaledValue(-15))
+            make.left.equalToSuperview().offset(scaledValue(15))
+            make.right.equalToSuperview().offset(scaledValue(-15))
+            make.top.equalTo(avatarView.snp.bottom).offset(50)
         }
     }
     
@@ -183,10 +181,19 @@ class RankingViewController: UIViewController {
                 }
                 
                 for i in 0...users.count - 1 {
-                    self.rankingData.append(RankingCellModel(ranking: i, name: users[i].name ?? "Default", avatarURL: "", record: users[i].bestscore))
+                    var type = TopPlayerType.normal
+                    if i == 0 {
+                        type = .top1
+                    } else if i == 1 {
+                        type = .top2
+                    } else if i == 2 {
+                        type = .top3
+                    }
+                    
+                    self.rankingData.append(RankingCellModel(ranking: i+1, name: users[i].name ?? "Default", avatarURL: OwnerInfo.shared.avatarUrl, record: users[i].bestscore, type: type))
                 }
                 DispatchQueue.main.async {
-                  self.rankingView.setRankingData(rankingData: self.rankingData)
+                    self.rankingView.setRankingData(rankingData: self.rankingData)
                 }
             }
         }

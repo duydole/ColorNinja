@@ -23,6 +23,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         view.backgroundColor = .white
+        navigationController?.navigationBar.isHidden = true
     }
     
     // MARK: Setup Views

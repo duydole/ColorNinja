@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import Foundation
+import AlamofireImage
 
 extension UIImageView {
     
@@ -36,5 +37,15 @@ extension UIImageView {
     public func downloaded(from link: String, contentMode mode: UIView.ContentMode = .scaleAspectFit) {
         guard let url = URL(string: link) else { return }
         downloaded(from: url, contentMode: mode)
+    }
+    
+    public func setImageWithLink(from link: String) {
+        AF.request(link).responseImage { (response) in
+            if let image = response.value {
+                DispatchQueue.main.async {
+                    self.image = image
+                }
+            }
+        }
     }
 }

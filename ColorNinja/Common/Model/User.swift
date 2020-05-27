@@ -14,11 +14,13 @@ class User {
     public var username: String
     public var avatarUrl: String?
     public var bestScore: Int
+    public var rank: Int
     
-    init(userId: String = UUID().uuidString, username: String = "Unkown", avatarUrl: String = "", bestScore: Int = 0) {
+    init(userId: String = UUID().uuidString, username: String = "Unkown", avatarUrl: String = "", bestScore: Int = 0, rank: Int = 0) {
         self.userId = userId
         self.username = username
         self.avatarUrl = avatarUrl
         self.bestScore = bestScore
+        self.rank = rank
     }
 }

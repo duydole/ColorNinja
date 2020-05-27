@@ -56,22 +56,26 @@ class BaseHomeViewController: UIViewController {
     
     private func addUserNameButton() {
         
-        let avtWidth: CGFloat = 45
+        let avtWidth: CGFloat = scaledValue(45)
         avatarView = UIImageView()
         avatarView.layer.cornerRadius = avtWidth/2
         avatarView.clipsToBounds = true
         switch OwnerInfo.shared.loginType {
         case .Facebook:
             avatarView.image = UIImage(named: "usericon")
-            avatarView.downloaded(from: OwnerInfo.shared.avatarUrl)
+            avatarView.setImageWithLink(from: OwnerInfo.shared.avatarUrl)
         default:
             avatarView.image = UIImage(named: "usericon")
         }
         
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapAvatarView))
+        avatarView.isUserInteractionEnabled = true
+        avatarView.addGestureRecognizer(tapGestureRecognizer)
+        
         fakeNavigationbar.addSubview(avatarView)
         avatarView.snp.makeConstraints { (make) in
-            make.width.equalTo(scaledValue(avtWidth))
-            make.height.equalTo(scaledValue(avtWidth))
+            make.width.equalTo(avtWidth)
+            make.height.equalTo(avtWidth)
             make.leading.equalTo(scaledValue(20))
             make.centerY.equalToSuperview()
         }
@@ -141,5 +145,10 @@ class BaseHomeViewController: UIViewController {
             make.top.equalTo(topContainer.snp.bottom)
             make.height.equalToSuperview().multipliedBy(0.3)
         }
+    }
+    
+    // MARK: Event
+    @objc func didTapAvatarView() {
+        self.navigationController?.popViewController(animated: true)
     }
 }

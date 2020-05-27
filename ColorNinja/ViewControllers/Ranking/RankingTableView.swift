@@ -24,14 +24,12 @@ class RankingTableView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     private func setupView() {
         
         self.backgroundColor = Constants.GameScreen.forcegroundColor
         self.rankingTableView = UITableView()
         
         self.rankingTableView.backgroundColor = Constants.GameScreen.forcegroundColor
-        
         self.rankingTableView.delegate = self
         self.rankingTableView.dataSource = self
         self.addSubview(self.rankingTableView)
@@ -43,7 +41,6 @@ class RankingTableView: UIView {
         
         self.rankingTableView.separatorStyle = .none
         self.rankingTableView.allowsSelection = false
-        //         self.tableView.tableFooterView = UIView()
     }
     
     public func setRankingData(rankingData: [RankingCellModel]) {
@@ -54,6 +51,7 @@ class RankingTableView: UIView {
 }
 
 extension RankingTableView: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         self.rankingData.count
     }
@@ -64,7 +62,7 @@ extension RankingTableView: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         let cellObject = rankingData[indexPath.row]
-        cell .shouldUpdateCell(cellObject: cellObject)
+        cell.shouldUpdateCell(cellObject: cellObject)
         return cell
     }
     
@@ -92,18 +90,18 @@ extension RankingTableView: UITableViewDelegate, UITableViewDataSource {
         rankingLabel.textAlignment = .center
         rankingLabel.text = "NO"
         rankingLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        rankingLabel.textColor = Constants.GameScreen.LabelsContainer.textColor
+        rankingLabel.textColor = .white
         
         let nameLabel = UILabel()
         nameLabel.text = "NAME"
         nameLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        nameLabel.textColor = Constants.GameScreen.LabelsContainer.textColor
+        nameLabel.textColor = .white
         
         let recordLabel = UILabel()
         recordLabel.textAlignment = .center
-        recordLabel.text = "BEST RECORD"
+        recordLabel.text = "BEST SCORE"
         recordLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        recordLabel.textColor = Constants.GameScreen.LabelsContainer.textColor
+        recordLabel.textColor = .white
         headerView.addSubview(rankingLabel)
         headerView.addSubview(nameLabel)
         headerView.addSubview(recordLabel)

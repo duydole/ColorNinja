@@ -50,6 +50,7 @@
 		F263FDBB246F950000A4AB0B /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F263FDBA246F950000A4AB0B /* BaseViewController.swift */; };
 		F263FDBE246F993500A4AB0B /* ClientSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = F263FDBD246F993500A4AB0B /* ClientSocket.swift */; };
 		F263FDC0246F9FB600A4AB0B /* BaseGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F263FDBF246F9FB600A4AB0B /* BaseGameViewController.swift */; };
+		F27288ED247EAD0F00330CFC /* ResultGameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27288EC247EAD0F00330CFC /* ResultGameModel.swift */; };
 		F27454F2246A71A40037A8BA /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27454F1246A71A40037A8BA /* MusicPlayer.swift */; };
 		F27454F4246A72F80037A8BA /* bgmusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F27454F3246A72F80037A8BA /* bgmusic.mp3 */; };
 		F27454F6246A74660037A8BA /* correctsound.wav in Resources */ = {isa = PBXBuildFile; fileRef = F27454F5246A74660037A8BA /* correctsound.wav */; };
@@ -122,6 +123,7 @@
 		F263FDBA246F950000A4AB0B /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		F263FDBD246F993500A4AB0B /* ClientSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientSocket.swift; sourceTree = "<group>"; };
 		F263FDBF246F9FB600A4AB0B /* BaseGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseGameViewController.swift; sourceTree = "<group>"; };
+		F27288EC247EAD0F00330CFC /* ResultGameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultGameModel.swift; sourceTree = "<group>"; };
 		F27454F1246A71A40037A8BA /* MusicPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
 		F27454F3246A72F80037A8BA /* bgmusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bgmusic.mp3; sourceTree = "<group>"; };
 		F27454F5246A74660037A8BA /* correctsound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = correctsound.wav; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 				F2A6E6902467029300970D1B /* LevelModel.swift */,
 				F234761024671FE1004C8363 /* ColorCellModel.swift */,
 				F2AB0F57246FD31B00FE7FDA /* User.swift */,
+				F27288EC247EAD0F00330CFC /* ResultGameModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -602,6 +605,7 @@
 				F263FDC0246F9FB600A4AB0B /* BaseGameViewController.swift in Sources */,
 				F22F856A2465B55400493BB6 /* SinglePlayerViewController.swift in Sources */,
 				8C2C72802467A7CC00883388 /* RankingTableViewCell.swift in Sources */,
+				F27288ED247EAD0F00330CFC /* ResultGameModel.swift in Sources */,
 				F2A6E68A2466FF5600970D1B /* LevelStore.swift in Sources */,
 				8CC6DB44246B8E470017B60A /* Collection+Extension.swift in Sources */,
 				8CC6DB42246B8E160017B60A /* Dictionary+Extension.swift in Sources */,
