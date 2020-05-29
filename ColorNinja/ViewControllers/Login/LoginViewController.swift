@@ -48,6 +48,7 @@ class LoginViewController: UIViewController {
         
         // Username
         usernameTextField = ViewCreator.createSimpleTextField(placeholderText: "Your username")
+        usernameTextField.delegate = self
         container.addSubview(usernameTextField)
         usernameTextField.snp.makeConstraints { (make) in
             make.width.top.centerX.equalToSuperview()
@@ -201,5 +202,25 @@ class LoginViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
 
+    }
+}
+
+
+fileprivate let MAX_LENGTH = 20
+extension LoginViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        guard let text = textField.text else {
+            return false
+        }
+        
+        let oldLength = text.count
+        let replacementLength = string.count
+        let rangeLength = range.length;
+        let newLength = oldLength - rangeLength + replacementLength
+        let returnkey = string.range(of: "\n")?.lowerBound != nil
+        
+        return newLength <= MAX_LENGTH || returnkey;
     }
 }
