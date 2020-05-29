@@ -12,8 +12,8 @@ class ResultGameModel {
     public var user: User
     public var score: Int
     
-    init() {
-        user = User()
-        score = 0
+    init(user: User, score: Int) {
+        self.user = user
+        self.score = score
     }
 }

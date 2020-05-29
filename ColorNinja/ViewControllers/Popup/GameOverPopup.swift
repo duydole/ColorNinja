@@ -24,7 +24,7 @@ class GameOverPopup: PopupViewController {
     static let kButtonCornerRadius: CGFloat = 10
     
     public var delegate: GameOverPopupDelegate?
-    public var resultModel: ResultGameModel = ResultGameModel()
+    public var resultModel: ResultGameModel = ResultGameModel(user: User(), score: 0)
     
     private var goHomeButton: ButtonWithImage!
     private var replayButton: ButtonWithImage!

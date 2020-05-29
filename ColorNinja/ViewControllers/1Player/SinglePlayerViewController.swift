@@ -155,6 +155,8 @@ class SinglePlayerViewController : BaseGameViewController {
         let gameOverPopup = GameOverPopup()
         gameOverPopup.modalPresentationStyle = .overCurrentContext
         gameOverPopup.delegate = self
+        let user = User(userId: OwnerInfo.shared.userId, username: OwnerInfo.shared.userName, avatarUrl: "", bestScore: OwnerInfo.shared.bestScore, rank: 0)
+        gameOverPopup.resultModel = ResultGameModel(user: user, score: resultScored)
         self.present(gameOverPopup, animated: false, completion: nil)
     }
     
