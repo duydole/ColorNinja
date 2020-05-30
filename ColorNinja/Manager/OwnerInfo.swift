@@ -30,6 +30,7 @@ class OwnerInfo {
     public private(set) var loginType: LoginType = .NotLogin
     public private(set) var bestScore: Int = 0
     public private(set) var userName: String = ""
+    public private(set) var rank: Int = -1
     public var didLogin: Bool {
         get {
             if loginType.rawValue != 0 {
@@ -77,7 +78,15 @@ class OwnerInfo {
         bestScore = newBestScore
         userDefault.set(bestScore,forKey: kBestScoreKey)
     }
-        
+    
+    func updateUserRank(newRank: Int) {
+        rank = newRank
+    }
+    
+    func toUser() -> User {
+        return User(userId: self.userId, username: self.userName, avatarUrl: self.avatarUrl, bestScore: self.bestScore, rank: self.rank)
+    }
+    
     // MARK: Private
     
     private let userDefault = UserDefaults.standard

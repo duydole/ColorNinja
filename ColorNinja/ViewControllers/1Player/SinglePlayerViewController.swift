@@ -148,16 +148,30 @@ class SinglePlayerViewController : BaseGameViewController {
         let resultScored = currentLevel.levelIndex + 1
         if resultScored > OwnerInfo.shared.bestScore {
             OwnerInfo.shared.updateBestScore(newBestScore: resultScored)
-            DataBaseService.shared.updateBestScoreForUser(userid: OwnerInfo.shared.userId, newBestScore: resultScored, completion: nil)
+            DataBaseService.shared.updateBestScoreForUser(userid: OwnerInfo.shared.userId, newBestScore: resultScored) { (success, error) in
+                guard let _ = error else { return }
+                self.getRankAndShowGameOverPopup()
+            }
+        } else {
+            getRankAndShowGameOverPopup()
         }
-        
-        // Show Popup GameOver
-        let gameOverPopup = GameOverPopup()
-        gameOverPopup.modalPresentationStyle = .overCurrentContext
-        gameOverPopup.delegate = self
-        let user = User(userId: OwnerInfo.shared.userId, username: OwnerInfo.shared.userName, avatarUrl: "", bestScore: OwnerInfo.shared.bestScore, rank: 0)
-        gameOverPopup.resultModel = ResultGameModel(user: user, score: resultScored)
-        self.present(gameOverPopup, animated: false, completion: nil)
+    }
+    
+    private func getRankAndShowGameOverPopup() {
+        DataBaseService.shared.loadUserRank(user: OwnerInfo.shared.toUser()) { (rank) in
+            if rank != -1 {
+                OwnerInfo.shared.updateUserRank(newRank: rank)
+                DispatchQueue.main.async {
+                    // Show Popup GameOver
+                    let gameOverPopup = GameOverPopup()
+                    gameOverPopup.modalPresentationStyle = .overCurrentContext
+                    let user = OwnerInfo.shared.toUser()
+                    gameOverPopup.resultModel = ResultGameModel(user: user, score: self.currentLevel.levelIndex + 1)
+                    gameOverPopup.delegate = self
+                    self.present(gameOverPopup, animated: false, completion: nil)
+                }
+            }
+        }
     }
     
     private func pauseGame() {
