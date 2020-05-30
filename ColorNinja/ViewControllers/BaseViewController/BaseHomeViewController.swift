@@ -83,7 +83,7 @@ class BaseHomeViewController: UIViewController {
         
         // UserName
         usernamelabel = UILabel()
-        usernamelabel.text = OwnerInfo.shared.userName
+        usernamelabel.text = getRealNameWithoutPlus(name: OwnerInfo.shared.userName)
         usernamelabel.textColor = .white
         fakeNavigationbar.addSubview(usernamelabel)
         usernamelabel.snp.makeConstraints { (make) in

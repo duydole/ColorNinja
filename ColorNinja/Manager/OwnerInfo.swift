@@ -64,14 +64,18 @@ class OwnerInfo {
     }
     
     func updateUserName(newusername: String) {
-        userName = newusername
         
-        // If existed
+        // UpdateMemory
+        let parsedUserName = newusername.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
+        userName = parsedUserName
+        
+        // UpdateDB
         if let _ = userDefault.string(forKey: kUserNameKey) {
-            DataBaseService.shared.updateUserNameForUser(userid: OwnerInfo.shared.userId, newUsername: newusername, completion: nil)
+            DataBaseService.shared.updateUserNameForUser(userid: OwnerInfo.shared.userId, newUsername: userName, completion: nil)
         }
         
-        userDefault.set(newusername,forKey: kUserNameKey)
+        // Update LocalDisk
+        userDefault.set(userName,forKey: kUserNameKey)
     }
     
     func updateBestScore(newBestScore: Int) {

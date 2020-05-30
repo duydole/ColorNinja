@@ -14,7 +14,7 @@ let MAX_LEVEL: Int = 30
 class MultiPlayerViewController : BaseGameViewController {
     
     var client: ClientSocket!
-    var player1 = User(userId: OwnerInfo.shared.userId, username: OwnerInfo.shared.userName)
+    var player1 = OwnerInfo.shared.toUser()
     var player2 = User(username: "----")
     
     private var player1Title: UILabel!
@@ -69,7 +69,7 @@ class MultiPlayerViewController : BaseGameViewController {
         let maxUserNameLabelWidth = scaledValue(100)
         
         // Player 1
-        player1Title = ViewCreator.createTitleLabelForTopContainer(text: player1.username)
+        player1Title = ViewCreator.createTitleLabelForTopContainer(text: getRealNameWithoutPlus(name: player1.username))
         topContainer.addSubview(player1Title)
         player1Title.snp.makeConstraints { (make) in
             make.top.equalTo(paddingTop)
@@ -103,7 +103,7 @@ class MultiPlayerViewController : BaseGameViewController {
         }
         
         // Player 2
-        player2Title = ViewCreator.createTitleLabelForTopContainer(text: player2.username)
+        player2Title = ViewCreator.createTitleLabelForTopContainer(text: getRealNameWithoutPlus(name: player2.username))
         topContainer.addSubview(player2Title)
         player2Title.snp.makeConstraints { (make) in
             make.top.equalTo(paddingTop)
@@ -181,7 +181,7 @@ class MultiPlayerViewController : BaseGameViewController {
         let usernames = json["key_usernames"] as! Dictionary<String, String>
         for id in usernames.keys {
             if id != player1.userId {
-                player2Title.text = usernames[id]
+                player2Title.text = getRealNameWithoutPlus(name: usernames[id] ?? "")
                 player2.userId = id
                 player2.username = player2Title.text!
             }
@@ -192,8 +192,8 @@ class MultiPlayerViewController : BaseGameViewController {
     
     private func serverSendLevelResult(_ json: Dictionary<String, Any>) {
         
-        let winnerName = p1Score > p2Score ? player1.username : player2.username
-        let looserName = p1Score < p2Score ? player1.username : player2.username
+        let winnerName = getRealNameWithoutPlus(name: p1Score > p2Score ? player1.username : player2.username)
+        let looserName = getRealNameWithoutPlus(name: p1Score < p2Score ? player1.username : player2.username)
         
       let alert = UIAlertController(title: "GameOver", message: "\(winnerName) won, \(looserName) is too slow!", preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in

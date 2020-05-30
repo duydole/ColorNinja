@@ -19,3 +19,7 @@ func printAllFamilyFonts() {
         print("Family: \(family) Font Names: \(names)")
     }
 }
+
+func getRealNameWithoutPlus(name: String) -> String {
+    return name.replacingOccurrences(of: "+", with: " ", options: .literal, range: nil)
+}
