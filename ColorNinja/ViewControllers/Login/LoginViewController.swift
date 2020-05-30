@@ -160,8 +160,7 @@ class LoginViewController: UIViewController {
     
     private func openHomeViewController() {
         let homeVC = HomeViewController2()
-        homeVC.modalPresentationStyle = .fullScreen
-        self.present(homeVC, animated: false, completion: nil)
+        self.navigationController?.pushViewController(homeVC, animated: true)
     }
     
     private func updateUserInfoFromFacebookProfile() {
