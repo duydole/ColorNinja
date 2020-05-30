@@ -13,6 +13,8 @@ class GameMusicPlayer {
     
     static let shared = GameMusicPlayer()
     
+    private var _mute = false
+    
     var audioPlayer: AVAudioPlayer?
     
     var isMuteMainSound: Bool {
@@ -27,6 +29,7 @@ class GameMusicPlayer {
                 guard let audioPlayer = audioPlayer else { return }
                 audioPlayer.numberOfLoops = -1
                 audioPlayer.prepareToPlay()
+                if _mute { muteBackgroundGameMusic() }
                 audioPlayer.play()
             } catch {
                 print(error)
@@ -51,10 +54,12 @@ class GameMusicPlayer {
     }
     
     func muteBackgroundGameMusic() {
+        _mute = true
         audioPlayer?.volume = 0.0
     }
     
     func unmuteBackgroundGameMusic() {
+        _mute = false
         audioPlayer?.volume = 1.0
     }
 

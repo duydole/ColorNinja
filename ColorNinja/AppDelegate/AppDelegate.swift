@@ -38,14 +38,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if OwnerInfo.shared.didLogin {
             naviVC.pushViewController(homeVC, animated: false)
         }
-        
-        GADMobileAds.sharedInstance().start(completionHandler: nil)
-        GameMusicPlayer.shared.startBackgroundMusic()
-        _ = services.application(application, didFinishLaunchingWithOptions: launchOptions)
-        
+
         #if DEBUG
         GameMusicPlayer.shared.muteBackgroundGameMusic()
         #endif
+        GameMusicPlayer.shared.startBackgroundMusic()
+        
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
+        _ = services.application(application, didFinishLaunchingWithOptions: launchOptions)
         
         return true
     }
