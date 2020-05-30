@@ -126,9 +126,20 @@ class OwnerInfo {
             self.loginType = LoginType(rawValue: loginType) ?? LoginType.Guest
         }
         
+        // LoadRanking of currentUser
+        _loadOwnerRank()
+        
         #if DEBUG
         //updateBestScore(newBestScore: 0)
         //updateLoginType(newLoginType: .NotLogin)
         #endif
+    }
+    
+    private func _loadOwnerRank() {
+        DataBaseService.shared.loadUserRank(user: self.toUser()) { (rank) in
+            if rank != -1 {
+                self.updateUserRank(newRank: rank)
+            }
+        }
     }
 }

@@ -91,7 +91,7 @@ class RankingViewController: UIViewController {
         keyInfo2.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         
         let valueInfo1 = UILabel()
-        valueInfo1.text = "100"
+        valueInfo1.text = "\(OwnerInfo.shared.rank)"
         valueInfo1.textColor = .white
         valueInfo1.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         valueInfo1.textAlignment = .right
