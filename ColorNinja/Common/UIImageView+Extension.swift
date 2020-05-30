@@ -45,6 +45,10 @@ extension UIImageView {
                 DispatchQueue.main.async {
                     self.image = image
                 }
+            } else {
+                DispatchQueue.main.async {
+                    self.image = UIImage(named: "defaultAvatar")
+                }
             }
         }
     }

@@ -59,10 +59,10 @@ class BaseHomeViewController: UIViewController {
         avatarView.clipsToBounds = true
         switch OwnerInfo.shared.loginType {
         case .Facebook:
-            avatarView.image = UIImage(named: "usericon")
-            avatarView.setImageWithLink(from: OwnerInfo.shared.avatarUrl)
+            avatarView.image = UIImage(named: "defaultAvatar")
+            avatarView.setImageWithLink(from: OwnerInfo.shared.avatarUrl ?? "")
         default:
-            avatarView.image = UIImage(named: "usericon")
+            avatarView.image = UIImage(named: "defaultAvatar")
         }
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapAvatarViewOrUserNameLabel))
@@ -184,7 +184,14 @@ class BaseHomeViewController: UIViewController {
     }
     
     @objc func didTapSignOutButton() {
-        navigationController?.popViewController(animated: true)
+        let alert = UIAlertController(title: "Log out", message: "Do you want to log out?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Log out", style: .default, handler: { (action) in
+            self.navigationController?.popViewController(animated: true)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
 }
 

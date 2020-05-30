@@ -13,7 +13,6 @@ fileprivate let kUserNameKey = "kUserName"
 fileprivate let kBestScoreKey = "kBestScoreKey"
 fileprivate let kUserIdKey = "kUserIdKey"
 fileprivate let kUserLoginType = "kUserLoginType"
-fileprivate let defaultAvatarUrl = "https://cdn1.iconfinder.com/data/icons/ninja-things-1/720/ninja-background-512.png"
 
 enum LoginType: Int {
     case NotLogin = 0
@@ -40,13 +39,13 @@ class OwnerInfo {
             }
         }
     }
-    public var avatarUrl: String {
+    public var avatarUrl: String? {
         get {
             switch loginType {
             case .Facebook:
                 return "http://graph.facebook.com/\(userId)/picture?type=large"
             default:
-                return defaultAvatarUrl
+                return nil
             }
         }
     }
