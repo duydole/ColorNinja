@@ -34,6 +34,8 @@ struct UserRank: Decodable {
     let bestscore: Int
     let numWinGame: Int
     let numLooseGame: Int
+    let avatarUrl: String
+    var rank: Int = 0
 
   enum CodingKeys: String, CodingKey {
     case id = "key"
@@ -41,5 +43,6 @@ struct UserRank: Decodable {
     case bestscore = "bestscore"
     case numWinGame = "numWinGame"
     case numLooseGame = "numLooseGame"
+    case avatarUrl = "avatar"
   }
 }

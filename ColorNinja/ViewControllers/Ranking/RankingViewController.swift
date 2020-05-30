@@ -60,10 +60,9 @@ class RankingViewController: UIViewController {
         self.avatarView = UIImageView()
         self.view.addSubview(self.avatarView)
         
+        self.avatarView.image = UIImage(named: "defaultAvatar")
         if let avtUrl = OwnerInfo.shared.avatarUrl {
             self.avatarView.setImageWithLink(from: avtUrl)
-        } else {
-            self.avatarView.image = UIImage(named: "defaultAvatar")
         }
         
         self.avatarView.layer.cornerRadius = scaledValue(40)
@@ -186,16 +185,10 @@ class RankingViewController: UIViewController {
                 }
                 
                 for i in 0...users.count - 1 {
-                    var type = TopPlayerType.normal
-                    if i == 0 {
-                        type = .top1
-                    } else if i == 1 {
-                        type = .top2
-                    } else if i == 2 {
-                        type = .top3
-                    }
-                    
-                    self.rankingData.append(RankingCellModel(ranking: i+1, name: users[i].name ?? "Default", avatarURL: OwnerInfo.shared.avatarUrl ?? "", record: users[i].bestscore, type: type))
+                  
+                    var user = users[i]
+                    user.rank = i + 1
+                    self.rankingData.append(RankingCellModel(userRank: user))
                 }
                 DispatchQueue.main.async {
                     self.rankingView.setRankingData(rankingData: self.rankingData)

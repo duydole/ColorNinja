@@ -37,15 +37,24 @@ class RankingCellModel: NSObject {
     public var ranking: Int = 0
     public var record: Int = 0
     public var name: String = ""
-    public var avatarURL: String = ""
+    public var avatarURL: String?
     public var playerType: TopPlayerType = .normal
+    public var id: String!
     
-    public init(ranking: Int, name: String, avatarURL: String, record: Int, type: TopPlayerType = .normal) {
-        self.ranking = ranking
-        self.name = name
-        self.avatarURL = avatarURL
-        self.record = record
-        self.playerType = type
+    
+    public init(userRank: UserRank) {
+        ranking = userRank.rank
+        record = userRank.bestscore
+        name = userRank.name ?? "Default"
+        avatarURL = userRank.avatarUrl
+        if ranking == 1 {
+            playerType = .top1
+        } else if ranking == 2 {
+            playerType = .top2
+        } else if ranking == 3 {
+            playerType = .top3
+        }
+        id = userRank.id
     }
-    
+
 }

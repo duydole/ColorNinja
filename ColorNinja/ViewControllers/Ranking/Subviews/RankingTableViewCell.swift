@@ -93,7 +93,7 @@ class RankingTableViewCell: UITableViewCell {
     
     public func shouldUpdateCell(cellObject: RankingCellModel) {
         self.rankingLabel.text = "\(cellObject.ranking)"
-        self.nameLabel.text = cellObject.name
+        self.nameLabel.text = getRealNameWithoutPlus(name: cellObject.name)
         self.recordLabel.text = "\(cellObject.record)"
         self.rankingLabel.textColor = cellObject.playerType.colorTitle
         
@@ -101,7 +101,10 @@ class RankingTableViewCell: UITableViewCell {
             self.rankingLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         }
         
-        self.imgAvatar.setImageWithLink(from: cellObject.avatarURL)
+        self.imgAvatar.image = UIImage(named: "defaultAvatar")
+        if let avatarUrl = cellObject.avatarURL {
+            self.imgAvatar.setImageWithLink(from: avatarUrl)
+        }
     }
     
     static public func heightForCell(cellObject: RankingCellModel, indexPath: IndexPath, tableView: UITableView) -> CGFloat {

@@ -122,6 +122,15 @@ class LoginViewController: UIViewController {
             
             // Update UserInfo
             self.updateUserInfoFromFacebookProfile()
+            
+            // Insert DB:
+            DataBaseService.shared.insertUserToDB(user: OwnerInfo.shared) { (success, error) in
+                if error != nil {
+                    assertionFailure()
+                    return
+                }
+            }
+            
             self.openHomeViewController()
         }
     }
@@ -180,7 +189,7 @@ class LoginViewController: UIViewController {
                     OwnerInfo.shared.updateUserName(newusername: username)
                     OwnerInfo.shared.updateLoginType(newLoginType: .Facebook)
                     OwnerInfo.shared.updateUserId(newUserId: profile.userID)
-                    
+                    DataBaseService.shared.updateAvatarForUser(userid: OwnerInfo.shared.userId, newAvatarUrl: OwnerInfo.shared.avatarUrl ?? "", completion: nil)
                     //completion?()
                 }
             }

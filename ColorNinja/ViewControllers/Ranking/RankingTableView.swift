@@ -63,6 +63,9 @@ extension RankingTableView: UITableViewDelegate, UITableViewDataSource {
         }
         let cellObject = rankingData[indexPath.row]
         cell.shouldUpdateCell(cellObject: cellObject)
+        if cellObject.id == OwnerInfo.shared.userId {
+            cell.contentView.backgroundColor = ColorRGB(55, 55, 55)
+        }
         return cell
     }
     

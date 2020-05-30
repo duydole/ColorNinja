@@ -68,7 +68,7 @@ class DataBaseService : NSObject {
         let parameters: Dictionary<String, Any> = [
             "key": user.userId,    // chú ý refactor chỗ này
             "username": user.userName,
-            "avatar": user.avatarUrl
+            "avatar": user.avatarUrl ?? ""
         ]
         
         AF.request(registerUserUrl, method: .post, parameters:parameters).responseJSON { (response) in
@@ -110,13 +110,35 @@ class DataBaseService : NSObject {
         ]
         
         AF.request(updateUserDataUrl, method: .post, parameters:parameters).responseJSON { (response) in
-            let response: JSON = response.value as! JSON
-            guard let error: Int = response["error"] as? Int else { return }
-            if error < 0 {
-                print("duydl: SERVER: \(response["message"] ?? "Something Error")")
-                return
+            
+            if let json = response.value as! JSON? {
+                guard let error: Int = json["error"] as? Int else { return }
+                if error < 0 {
+                    print("duydl: SERVER: \(json["message"] ?? "Something Error")")
+                    return
+                }
+                completion?(true,nil)
             }
-            completion?(true,nil)
         }
     }
+
+    public func updateAvatarForUser(userid: String, newAvatarUrl: String, completion: completionHandler?) {
+        let parameters: Dictionary<String, Any> = [
+            "key": userid,
+            "avatar":newAvatarUrl,
+            "type":UpdateUserType.AvatarUrl.rawValue
+        ]
+        AF.request(updateUserDataUrl, method: .post, parameters:parameters).responseJSON { (response) in
+            
+            if let json = response.value as! JSON? {
+                guard let error: Int = json["error"] as? Int else { return }
+                if error < 0 {
+                    print("duydl: SERVER: \(json["message"] ?? "Something Error")")
+                    return
+                }
+                completion?(true,nil)
+            }
+        }
+    }
+
 }
