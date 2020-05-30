@@ -149,7 +149,10 @@ class SinglePlayerViewController : BaseGameViewController {
         if resultScored > OwnerInfo.shared.bestScore {
             OwnerInfo.shared.updateBestScore(newBestScore: resultScored)
             DataBaseService.shared.updateBestScoreForUser(userid: OwnerInfo.shared.userId, newBestScore: resultScored) { (success, error) in
-                guard let _ = error else { return }
+                if let _ = error {
+                    return
+                }
+                
                 self.getRankAndShowGameOverPopup()
             }
         } else {
