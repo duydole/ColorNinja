@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+fileprivate let buttonWidth = scaledValue(35)
+
 class BaseViewController : UIViewController {
     
     var exitButton : UIButton!
@@ -34,9 +36,9 @@ class BaseViewController : UIViewController {
         self.view.addSubview(exitButton)
         exitButton.setImage(UIImage(named: Constants.GameScreen.exitImageName)?.withRenderingMode(.alwaysTemplate), for: .normal)
         exitButton.addTarget(self, action: #selector(didTapExitButton), for: .touchUpInside)
-        exitButton.imageView?.tintColor = Constants.GameScreen.buttonTintColor
+        exitButton.imageView?.tintColor = .white
         exitButton.snp.makeConstraints { (make) in
-            make.width.height.equalTo(Constants.GameScreen.exitButtonWidth)
+            make.width.height.equalTo(buttonWidth)
             make.top.equalTo(Constants.GameScreen.topInset)
             make.trailing.equalTo(-Constants.GameScreen.rightInset)
         }
@@ -47,9 +49,9 @@ class BaseViewController : UIViewController {
         self.view.addSubview(settingButton)
         settingButton.setImage(UIImage(named: Constants.GameScreen.settingImageName)?.withRenderingMode(.alwaysTemplate), for: .normal)
         settingButton.addTarget(self, action: #selector(didTapSettingButton), for: .touchUpInside)
-        settingButton.imageView?.tintColor = Constants.GameScreen.buttonTintColor
+        settingButton.imageView?.tintColor = .white
         settingButton.snp.makeConstraints { (make) in
-            make.width.height.equalTo(Constants.GameScreen.settingButtonWidth)
+            make.width.height.equalTo(buttonWidth)
             make.top.equalTo(Constants.GameScreen.topInset)
             make.leading.equalTo(Constants.GameScreen.leftInset)
         }

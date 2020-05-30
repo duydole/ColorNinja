@@ -16,12 +16,13 @@ class BaseHomeViewController: UIViewController {
     var fakeNavigationbar: UIView!
     var avatarView: UIImageView!
     var usernamelabel: UILabel!
+    var signOutButton: UIImageView!
+
 
     // TopContainer
     var topContainer: UIView!
     var iconImageView: UIImageView!
     var appNameLabel: UILabel!
-    var signOutButton: UIImageView!
     
     // MidContainer
     var midContainer: UIView!
@@ -131,7 +132,7 @@ class BaseHomeViewController: UIViewController {
     
     private func addAppIconView() {
         iconImageView = UIImageView()
-        iconImageView.image = UIImage(named: Constants.HomeScreen.ninjaImageName)
+        iconImageView.image = UIImage(named: "appiconhome")
         topContainer.addSubview(iconImageView)
         iconImageView.snp.makeConstraints { (make) in
             make.top.equalTo(appNameLabel.snp.bottom)
@@ -144,12 +145,12 @@ class BaseHomeViewController: UIViewController {
     
     private func addSignoutImageView() {
         
-        let signoutWidth = scaledValue(30)
+        let signoutWidth = scaledValue(40)
         let paddingRight = scaledValue(20)
         
         signOutButton = UIImageView()
-        signOutButton.image = UIImage(named: "signout")?.withRenderingMode(.alwaysTemplate)
-        signOutButton.tintColor = .black
+        signOutButton.image = UIImage(named: "logouticon")?.withRenderingMode(.alwaysTemplate)
+        signOutButton.tintColor = .white
         fakeNavigationbar.addSubview(signOutButton)
         signOutButton.snp.makeConstraints { (make) in
             make.right.equalTo(-paddingRight)
