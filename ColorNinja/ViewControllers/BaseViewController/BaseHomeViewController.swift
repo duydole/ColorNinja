@@ -21,6 +21,7 @@ class BaseHomeViewController: UIViewController {
     var topContainer: UIView!
     var iconImageView: UIImageView!
     var appNameLabel: UILabel!
+    var signOutButton: UIImageView!
     
     // MidContainer
     var midContainer: UIView!
@@ -34,10 +35,6 @@ class BaseHomeViewController: UIViewController {
     func setupViews() {
         addFakeNavigationBar()
         addTopContainer()
-        addUserNameButton()
-        addAppNameLabel()
-        addAppIconView()
-        
         addMidContainer()
     }
     
@@ -107,6 +104,12 @@ class BaseHomeViewController: UIViewController {
             make.height.equalToSuperview().multipliedBy(0.3)
             make.centerX.equalToSuperview()
         }
+        
+        // Add subviews of TopContainer
+        addUserNameButton()
+        addAppNameLabel()
+        addAppIconView()
+        addSignoutImageView()
     }
             
     private func addAppNameLabel() {
@@ -139,6 +142,26 @@ class BaseHomeViewController: UIViewController {
         }
     }
     
+    private func addSignoutImageView() {
+        
+        let signoutWidth = scaledValue(30)
+        let paddingRight = scaledValue(20)
+        
+        signOutButton = UIImageView()
+        signOutButton.image = UIImage(named: "signout")?.withRenderingMode(.alwaysTemplate)
+        signOutButton.tintColor = .black
+        fakeNavigationbar.addSubview(signOutButton)
+        signOutButton.snp.makeConstraints { (make) in
+            make.right.equalTo(-paddingRight)
+            make.centerY.equalToSuperview()
+            make.width.height.equalTo(signoutWidth)
+        }
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapSignOutButton))
+        signOutButton.isUserInteractionEnabled = true
+        signOutButton.addGestureRecognizer(tap)
+    }
+    
     // MARK: Mid container
     
     private func addMidContainer() {
@@ -158,6 +181,10 @@ class BaseHomeViewController: UIViewController {
         popup.modalPresentationStyle = .overCurrentContext
         popup.delegate = self
         self.present(popup, animated: false, completion: nil)
+    }
+    
+    @objc func didTapSignOutButton() {
+        navigationController?.popViewController(animated: true)
     }
 }
 
