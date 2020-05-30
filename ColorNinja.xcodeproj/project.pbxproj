@@ -51,6 +51,7 @@
 		F263FDBE246F993500A4AB0B /* ClientSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = F263FDBD246F993500A4AB0B /* ClientSocket.swift */; };
 		F263FDC0246F9FB600A4AB0B /* BaseGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F263FDBF246F9FB600A4AB0B /* BaseGameViewController.swift */; };
 		F27288ED247EAD0F00330CFC /* ResultGameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27288EC247EAD0F00330CFC /* ResultGameModel.swift */; };
+		F27312D9248235F200B9ADCF /* ChangeUserNamePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27312D8248235F200B9ADCF /* ChangeUserNamePopup.swift */; };
 		F27454F2246A71A40037A8BA /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27454F1246A71A40037A8BA /* MusicPlayer.swift */; };
 		F27454F4246A72F80037A8BA /* bgmusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F27454F3246A72F80037A8BA /* bgmusic.mp3 */; };
 		F27454F6246A74660037A8BA /* correctsound.wav in Resources */ = {isa = PBXBuildFile; fileRef = F27454F5246A74660037A8BA /* correctsound.wav */; };
@@ -124,6 +125,7 @@
 		F263FDBD246F993500A4AB0B /* ClientSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientSocket.swift; sourceTree = "<group>"; };
 		F263FDBF246F9FB600A4AB0B /* BaseGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseGameViewController.swift; sourceTree = "<group>"; };
 		F27288EC247EAD0F00330CFC /* ResultGameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultGameModel.swift; sourceTree = "<group>"; };
+		F27312D8248235F200B9ADCF /* ChangeUserNamePopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeUserNamePopup.swift; sourceTree = "<group>"; };
 		F27454F1246A71A40037A8BA /* MusicPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
 		F27454F3246A72F80037A8BA /* bgmusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bgmusic.mp3; sourceTree = "<group>"; };
 		F27454F5246A74660037A8BA /* correctsound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = correctsound.wav; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				F234763224680D75004C8363 /* GameSettingPopup.swift */,
 				F2347630246809C5004C8363 /* GameOverPopup.swift */,
 				F260CA632476DFBF00D00348 /* JoinRoomPopup.swift */,
+				F27312D8248235F200B9ADCF /* ChangeUserNamePopup.swift */,
 			);
 			path = Popup;
 			sourceTree = "<group>";
@@ -600,6 +603,7 @@
 				8C6350A924735C8C00ADAB01 /* FacebookService.swift in Sources */,
 				F22F8584246679DA00493BB6 /* Size.swift in Sources */,
 				8C6EC7492467E3C100612802 /* PopupViewController.swift in Sources */,
+				F27312D9248235F200B9ADCF /* ChangeUserNamePopup.swift in Sources */,
 				F2347635246836D7004C8363 /* UIColor+Extension.swift in Sources */,
 				8C5FA0B9246AE6F4005D33E0 /* HomeViewController2.swift in Sources */,
 				F263FDC0246F9FB600A4AB0B /* BaseGameViewController.swift in Sources */,

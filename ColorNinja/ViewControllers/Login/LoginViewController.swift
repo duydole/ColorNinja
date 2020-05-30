@@ -138,7 +138,7 @@ class LoginViewController: UIViewController {
         }
         
         if !isValidUsername(userName: username) {
-            showAlertWithMessage(message: "Please input valid usernmae. Thanks.")
+            showAlertWithMessage(message: "Please input valid username. Thanks.")
             return
         }
         
@@ -205,7 +205,7 @@ class LoginViewController: UIViewController {
 }
 
 
-fileprivate let MAX_LENGTH = 20
+let MAX_USERNAME_LENGTH: Int = 20
 extension LoginViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -220,6 +220,6 @@ extension LoginViewController: UITextFieldDelegate {
         let newLength = oldLength - rangeLength + replacementLength
         let returnkey = string.range(of: "\n")?.lowerBound != nil
         
-        return newLength <= MAX_LENGTH || returnkey;
+        return newLength <= MAX_USERNAME_LENGTH || returnkey;
     }
 }

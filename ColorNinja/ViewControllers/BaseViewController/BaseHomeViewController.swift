@@ -68,7 +68,7 @@ class BaseHomeViewController: UIViewController {
             avatarView.image = UIImage(named: "usericon")
         }
         
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapAvatarView))
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapAvatarViewOrUserNameLabel))
         avatarView.isUserInteractionEnabled = true
         avatarView.addGestureRecognizer(tapGestureRecognizer)
         
@@ -85,6 +85,10 @@ class BaseHomeViewController: UIViewController {
         usernamelabel = UILabel()
         usernamelabel.text = getRealNameWithoutPlus(name: OwnerInfo.shared.userName)
         usernamelabel.textColor = .white
+        let tapUserName = UITapGestureRecognizer(target: self, action: #selector(didTapAvatarViewOrUserNameLabel))
+        usernamelabel.isUserInteractionEnabled = true
+        usernamelabel.addGestureRecognizer(tapUserName)
+
         fakeNavigationbar.addSubview(usernamelabel)
         usernamelabel.snp.makeConstraints { (make) in
             make.leading.equalTo(avatarView.snp.trailing).offset(10)
@@ -148,7 +152,20 @@ class BaseHomeViewController: UIViewController {
     }
     
     // MARK: Event
-    @objc func didTapAvatarView() {
-        self.navigationController?.popViewController(animated: true)
+    
+    @objc func didTapAvatarViewOrUserNameLabel() {
+        let popup = ChangeUserNamePopup()
+        popup.modalPresentationStyle = .overCurrentContext
+        popup.delegate = self
+        self.present(popup, animated: false, completion: nil)
+    }
+}
+
+extension BaseHomeViewController: ChangeUserNamePopupDelegate {
+    func didDismissPopupWithNewUserName(newUserName: String) {
+        if newUserName != OwnerInfo.shared.userName {
+            OwnerInfo.shared.updateUserName(newusername: newUserName)
+            usernamelabel.text = getRealNameWithoutPlus(name: newUserName)
+        }
     }
 }
