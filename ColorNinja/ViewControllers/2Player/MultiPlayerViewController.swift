@@ -66,6 +66,7 @@ class MultiPlayerViewController : BaseGameViewController {
         
         let paddingTop = 20
         let paddingLR = 30
+        let maxUserNameLabelWidth = scaledValue(100)
         
         // Player 1
         player1Title = ViewCreator.createTitleLabelForTopContainer(text: player1.username)
@@ -73,6 +74,7 @@ class MultiPlayerViewController : BaseGameViewController {
         player1Title.snp.makeConstraints { (make) in
             make.top.equalTo(paddingTop)
             make.leading.equalTo(paddingLR)
+            make.width.equalTo(maxUserNameLabelWidth)
         }
         
         // Point of P1
@@ -85,9 +87,10 @@ class MultiPlayerViewController : BaseGameViewController {
         
         // Level
         let levelTitle = ViewCreator.createTitleLabelForTopContainer(text: "LEVEL")
+        levelTitle.font = UIFont.systemFont(ofSize: scaledValue(25), weight: .bold)
         topContainer.addSubview(levelTitle)
         levelTitle.snp.makeConstraints { (make) in
-            make.top.equalTo(paddingTop)
+            make.bottom.equalTo(player1Title)
             make.centerX.equalToSuperview()
         }
         
@@ -105,6 +108,7 @@ class MultiPlayerViewController : BaseGameViewController {
         player2Title.snp.makeConstraints { (make) in
             make.top.equalTo(paddingTop)
             make.trailing.equalTo(-paddingLR)
+            make.width.equalTo(maxUserNameLabelWidth)
         }
         
         // Point of P2

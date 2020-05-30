@@ -17,7 +17,7 @@ class ViewCreator {
         label.text = text
         label.textAlignment = .center
         label.textColor = Constants.GameScreen.LabelsContainer.textColor
-        label.font = UIFont.systemFont(ofSize: Constants.GameScreen.LabelsContainer.fontSize, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: scaledValue(20), weight: .bold)
         return label
     }
     
