@@ -54,7 +54,6 @@ class ViewCreator {
         return button
     }
     
-    
     // Tạo simple textfield
     static func createSimpleTextField(placeholderText: String) -> UITextField {
         let textField = UITextField()
@@ -68,5 +67,27 @@ class ViewCreator {
         textField.textAlignment = .center
         
         return textField
+    }
+
+
+    /**
+     * GAME OVER POP UP
+     */
+    static func createButtonInGameOverPopup(image: UIImage?, title: String) -> ButtonWithImage {
+        let button = ButtonWithImage()
+        button.buttonPadding = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        button.spacing = 10.0
+        button.titleLabel.text = title
+        button.titleLabel.adjustsFontSizeToFitWidth = true
+        button.titleLabel.textAlignment = .center
+        button.titleLabel.textColor = .white
+        button.titleLabel.font = UIFont(name: Font.squirk, size: scaledValue(30))
+        button.imageView.image = image?.withRenderingMode(.alwaysTemplate)
+        button.imageView.tintColor = .white
+        button.layer.cornerRadius = GameOverPopup.kButtonCornerRadius
+        button.backgroundColor = .orange
+        button.makeShadow()
+        
+        return button
     }
 }

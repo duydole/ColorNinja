@@ -119,46 +119,21 @@ class GameOverPopup: PopupViewController {
         }
         
         // GoHome
-        goHomeButton = ButtonWithImage()
-        goHomeButton.buttonPadding = GameOverPopup.kbuttonPadding
-        goHomeButton.spacing = GameOverPopup.kImageButtonSpacing
-        goHomeButton.titleLabel.text = "HOME"
-        goHomeButton.titleLabel.adjustsFontSizeToFitWidth = true
-        goHomeButton.titleLabel.textAlignment = .center
-        goHomeButton.titleLabel.textColor = .white
-        goHomeButton.titleLabel.font = UIFont(name: Font.squirk, size: scaledValue(30))
-        goHomeButton.imageView.image = UIImage(named: "homeicon")?.withRenderingMode(.alwaysTemplate)
-        goHomeButton.imageView.tintColor = .white
-        goHomeButton.layer.cornerRadius = GameOverPopup.kButtonCornerRadius
-        goHomeButton.backgroundColor = .orange
-        goHomeButton.makeShadow()
+        goHomeButton = ViewCreator.createButtonInGameOverPopup(image: UIImage(named: "homeicon"), title: "HOME")
         goHomeButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapGoHomeButton))
         container.addSubview(goHomeButton)
         goHomeButton.snp.makeConstraints { (make) in
             make.width.equalToSuperview().multipliedBy(0.47)
-            make.leading.top.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.left.top.bottom.equalToSuperview()
         }
         
         // PlayAgain
-        replayButton = ButtonWithImage()
-        replayButton.buttonPadding = GameOverPopup.kbuttonPadding
-        replayButton.spacing = GameOverPopup.kImageButtonSpacing
-        replayButton.titleLabel.text = "REPLAY"
-        replayButton.titleLabel.adjustsFontSizeToFitWidth = true
-        replayButton.titleLabel.textAlignment = .center
-        replayButton.titleLabel.textColor = .white
-        replayButton.titleLabel.font = UIFont(name: Font.squirk, size: scaledValue(30))
-        replayButton.imageView.image = UIImage(named: "replayicon")?.withRenderingMode(.alwaysTemplate)
-        replayButton.imageView.tintColor = .white
-        replayButton.backgroundColor = .orange
-        replayButton.layer.cornerRadius = GameOverPopup.kButtonCornerRadius
+        replayButton = ViewCreator.createButtonInGameOverPopup(image: UIImage(named: "replayicon"), title: "REPLAY")
         replayButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapReplayButton))
         container.addSubview(replayButton)
         replayButton.snp.makeConstraints { (make) in
             make.width.equalToSuperview().multipliedBy(0.47)
-            make.top.equalToSuperview()
-            make.trailing.bottom.equalToSuperview()
+            make.top.right.bottom.equalToSuperview()
         }
     }
     
