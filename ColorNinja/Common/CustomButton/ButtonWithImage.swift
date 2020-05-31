@@ -55,10 +55,9 @@ class ButtonWithImage: UIView {
         // title
         self.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(buttonPadding.top)
-            make.leading.equalTo(imageView.snp.trailing).offset(spacing)
-            make.bottom.equalTo(-buttonPadding.bottom)
-            make.trailing.equalTo(-buttonPadding.right)
+            make.bottom.equalTo(imageView)
+            make.left.equalTo(imageView.snp.right).offset(spacing)
+            make.right.equalTo(-buttonPadding.right)
         }
     }
 }

@@ -12,6 +12,7 @@ import UIKit
 struct Font {
     static let snesitalic = "SNES-Italic"
     static let squirk = "Squirk"
+    static let dincondenseBold = "DINCondensed-Bold"
 }
 
 struct Color {

@@ -26,6 +26,7 @@ class HomeViewController2: BaseHomeViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //printAllFamilyFonts()
     }
     
     override func viewWillAppear(_ animated: Bool) {

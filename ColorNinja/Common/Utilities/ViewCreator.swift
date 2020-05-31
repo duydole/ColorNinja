@@ -75,16 +75,16 @@ class ViewCreator {
      */
     static func createButtonInGameOverPopup(image: UIImage?, title: String) -> ButtonWithImage {
         let button = ButtonWithImage()
-        button.buttonPadding = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        button.spacing = 10.0
+        button.buttonPadding = UIEdgeInsets(top: 7, left: 7, bottom: 7, right: 7)
+        button.spacing = 7.0
         button.titleLabel.text = title
         button.titleLabel.adjustsFontSizeToFitWidth = true
         button.titleLabel.textAlignment = .center
         button.titleLabel.textColor = .white
-        button.titleLabel.font = UIFont(name: Font.squirk, size: scaledValue(30))
+        button.titleLabel.font = UIFont(name: Font.dincondenseBold, size: scaledValue(20))
         button.imageView.image = image?.withRenderingMode(.alwaysTemplate)
         button.imageView.tintColor = .white
-        button.layer.cornerRadius = GameOverPopup.kButtonCornerRadius
+        button.layer.cornerRadius = 7.0
         button.backgroundColor = .orange
         button.makeShadow()
         

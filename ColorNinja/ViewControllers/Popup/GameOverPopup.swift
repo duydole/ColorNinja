@@ -19,20 +19,23 @@ class GameOverPopup: PopupViewController {
     
     static let kCornerRadius: CGFloat = 10
     static let kContentPadding: CGFloat = 10
-    static let kbuttonPadding: UIEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-    static let kImageButtonSpacing: CGFloat = 10
-    static let kButtonCornerRadius: CGFloat = 10
     
+    // MARK: Public
     public var delegate: GameOverPopupDelegate?
     public var resultModel: ResultGameModel = ResultGameModel(user: User(), score: 0)
-    
+
+    // MARK: Private
     private var goHomeButton: ButtonWithImage!
     private var replayButton: ButtonWithImage!
+    private var watchAdsButton: ButtonWithImage!
+    
     private var looseLevelLabel: UILabel!
     private var rankedLabel: UILabel!
     private var bestLevelLabel: UILabel!
     private var gameOverContainer: UIView!
     
+    // MARK: Ads
+    private var rewardedAd: GADRewardedAd?
     private var interstitial: GADInterstitial!
 
     override func viewDidLoad() {
@@ -41,7 +44,7 @@ class GameOverPopup: PopupViewController {
     }
     
     override var contentSize: CGSize {
-        return CGSize(width: scaledValue(320), height: scaledValue(370))
+        return CGSize(width: scaledValue(330), height: scaledValue(370))
     }
     
     override var cornerRadius: CGFloat {
@@ -57,21 +60,23 @@ class GameOverPopup: PopupViewController {
     }
 
     @objc private func didTapReplayButton() {
-        #if !DEBUG
         showFullScreenAd()
-        #endif
-        self.dismiss(animated: false) {
-            self.delegate?.didTapReplayButton()
+    }
+    
+    @objc private func didTapWatchAdsButton() {
+        if rewardedAd?.isReady == true {
+           rewardedAd?.present(fromRootViewController: self, delegate:self)
         }
     }
     
     // MARK: Setup Views
     
     private func setupViews() {
+        setupAds()
+
         setupGameOverViews()
         setupGameResult()
         setupButtons()
-        setupFullScreenAds()
         
         setupResultsView()
     }
@@ -118,12 +123,14 @@ class GameOverPopup: PopupViewController {
             make.height.equalToSuperview().multipliedBy(0.12)
         }
         
+        let buttonWidthRatio = 0.32
+        
         // GoHome
         goHomeButton = ViewCreator.createButtonInGameOverPopup(image: UIImage(named: "homeicon"), title: "HOME")
         goHomeButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapGoHomeButton))
         container.addSubview(goHomeButton)
         goHomeButton.snp.makeConstraints { (make) in
-            make.width.equalToSuperview().multipliedBy(0.47)
+            make.width.equalToSuperview().multipliedBy(buttonWidthRatio)
             make.left.top.bottom.equalToSuperview()
         }
         
@@ -132,16 +139,38 @@ class GameOverPopup: PopupViewController {
         replayButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapReplayButton))
         container.addSubview(replayButton)
         replayButton.snp.makeConstraints { (make) in
-            make.width.equalToSuperview().multipliedBy(0.47)
+            make.width.equalToSuperview().multipliedBy(buttonWidthRatio)
+            make.centerX.centerY.equalToSuperview()
+            make.height.equalTo(goHomeButton)
+        }
+        
+        // Watch Ads
+        watchAdsButton = ViewCreator.createButtonInGameOverPopup(image: UIImage(named: "adsicon"), title: "+2S")
+        watchAdsButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapWatchAdsButton))
+        container.addSubview(watchAdsButton)
+        watchAdsButton.snp.makeConstraints { (make) in
+            make.width.equalToSuperview().multipliedBy(buttonWidthRatio)
             make.top.right.bottom.equalToSuperview()
         }
     }
     
-    private func setupFullScreenAds() {
+    private func setupAds() {
+        
+        // FullScreen
         interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
         interstitial.delegate = self
         let request = GADRequest()
         interstitial.load(request)
+        
+        //RewardAds:
+        rewardedAd = GADRewardedAd(adUnitID: "ca-app-pub-3940256099942544/1712485313")
+        rewardedAd?.load(GADRequest()) { error in
+          if let _ = error {
+            assertionFailure()
+          } else {
+            // Ad successfully loaded.
+          }
+        }
     }
     
     private func setupResultsView() {
@@ -149,17 +178,17 @@ class GameOverPopup: PopupViewController {
         // LooseLevel
         looseLevelLabel = UILabel()
         looseLevelLabel.text = "Score: \(resultModel.score)"
-        looseLevelLabel.font = UIFont(name: Font.squirk, size: scaledValue(45))
+        looseLevelLabel.font = UIFont(name: Font.dincondenseBold, size: scaledValue(50))
         contentView.addSubview(looseLevelLabel)
         looseLevelLabel.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.top.equalTo(gameOverContainer.snp.bottom).offset(scaledValue(20))
+            make.top.equalTo(gameOverContainer.snp.bottom).offset(scaledValue(30))
         }
         
         // Rank
         rankedLabel = UILabel()
         rankedLabel.text = "Rank: \(resultModel.user.rank)"
-        rankedLabel.font = UIFont(name: Font.squirk, size: scaledValue(40))
+        rankedLabel.font = UIFont(name: Font.dincondenseBold, size: scaledValue(45))
         contentView.addSubview(rankedLabel)
         rankedLabel.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
@@ -169,11 +198,11 @@ class GameOverPopup: PopupViewController {
         // BestScore
         bestLevelLabel = UILabel()
         bestLevelLabel.text = "Best Score: \(resultModel.user.bestScore)"
-        bestLevelLabel.font = UIFont(name: Font.squirk, size: scaledValue(35))
+        bestLevelLabel.font = UIFont(name: Font.dincondenseBold, size: scaledValue(40))
         contentView.addSubview(bestLevelLabel)
         bestLevelLabel.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.top.equalTo(rankedLabel.snp.bottom).offset(scaledValue(30))
+            make.top.equalTo(rankedLabel.snp.bottom).offset(scaledValue(25))
         }
     }
     
@@ -189,12 +218,19 @@ class GameOverPopup: PopupViewController {
 }
 
 
-// MARK: - Delegate FullScreen
+// MARK: FullScreenAds delegate
 
-extension GameOverPopup : GADInterstitialDelegate {
+extension GameOverPopup: GADInterstitialDelegate {
     
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {
         self.dismissPopUp()
         self.delegate?.didTapReplayButton()
+    }
+}
+
+// MARK: RewardAds delegate
+extension GameOverPopup: GADRewardedAdDelegate {
+    func rewardedAd(_ rewardedAd: GADRewardedAd, userDidEarn reward: GADAdReward) {
+        
     }
 }
