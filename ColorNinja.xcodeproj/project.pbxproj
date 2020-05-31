@@ -97,7 +97,7 @@
 		8C6EC7482467E3C100612802 /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
 		8C73DB8C246AA8E40095FE8A /* ZaloSDKApiWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZaloSDKApiWrapper.swift; sourceTree = "<group>"; };
 		8C7ABAB5246D5AE900063AE4 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		8C8BA173246E707900A73046 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		8C8BA173246E707900A73046 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIImageView+Extension.swift"; path = "../UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		8CC6DB3F246B8D380017B60A /* ZaloUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZaloUser.swift; sourceTree = "<group>"; };
 		8CC6DB41246B8E160017B60A /* Dictionary+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extension.swift"; sourceTree = "<group>"; };
 		8CC6DB43246B8E470017B60A /* Collection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
@@ -238,10 +238,6 @@
 				F22F85622465A33300493BB6 /* Utilities */,
 				F2347612246726BA004C8363 /* Model */,
 				F23476362468518B004C8363 /* CustomButton */,
-				8CC6DB43246B8E470017B60A /* Collection+Extension.swift */,
-				8CC6DB46246B8FA90017B60A /* Date+Extension.swift */,
-				8C7ABAB5246D5AE900063AE4 /* Utils.swift */,
-				8C8BA173246E707900A73046 /* UIImageView+Extension.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -314,13 +310,17 @@
 		F22F85622465A33300493BB6 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				8C7ABAB5246D5AE900063AE4 /* Utils.swift */,
 				F22F85632465A34900493BB6 /* Constants.swift */,
 				F22F85652465A71E00493BB6 /* UIView+Extension.swift */,
 				F22F8583246679DA00493BB6 /* Size.swift */,
 				F22F85872466940900493BB6 /* StaticFunctions.swift */,
 				F2347634246836D7004C8363 /* UIColor+Extension.swift */,
 				F2AB0F55246FD07600FE7FDA /* ViewCreator.swift */,
+				8CC6DB43246B8E470017B60A /* Collection+Extension.swift */,
 				8CC6DB41246B8E160017B60A /* Dictionary+Extension.swift */,
+				8CC6DB46246B8FA90017B60A /* Date+Extension.swift */,
+				8C8BA173246E707900A73046 /* UIImageView+Extension.swift */,
 				F24E4365247A802900FBA7B1 /* CharacterSet+Extension.swift */,
 			);
 			path = Utilities;

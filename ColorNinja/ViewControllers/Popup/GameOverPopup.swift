@@ -126,7 +126,6 @@ class GameOverPopup: PopupViewController {
         goHomeButton.titleLabel.adjustsFontSizeToFitWidth = true
         goHomeButton.titleLabel.textAlignment = .center
         goHomeButton.titleLabel.textColor = .white
-        goHomeButton.titleLabel.makeShadow()
         goHomeButton.titleLabel.font = UIFont(name: Font.squirk, size: scaledValue(30))
         goHomeButton.imageView.image = UIImage(named: "homeicon")?.withRenderingMode(.alwaysTemplate)
         goHomeButton.imageView.tintColor = .white
@@ -149,13 +148,11 @@ class GameOverPopup: PopupViewController {
         replayButton.titleLabel.adjustsFontSizeToFitWidth = true
         replayButton.titleLabel.textAlignment = .center
         replayButton.titleLabel.textColor = .white
-        replayButton.titleLabel.makeShadow()
         replayButton.titleLabel.font = UIFont(name: Font.squirk, size: scaledValue(30))
         replayButton.imageView.image = UIImage(named: "replayicon")?.withRenderingMode(.alwaysTemplate)
         replayButton.imageView.tintColor = .white
         replayButton.backgroundColor = .orange
         replayButton.layer.cornerRadius = GameOverPopup.kButtonCornerRadius
-        replayButton.makeShadow()
         replayButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapReplayButton))
         container.addSubview(replayButton)
         replayButton.snp.makeConstraints { (make) in
@@ -176,7 +173,7 @@ class GameOverPopup: PopupViewController {
         
         // LooseLevel
         looseLevelLabel = UILabel()
-        looseLevelLabel.text = "Level: \(resultModel.score)"
+        looseLevelLabel.text = "Score: \(resultModel.score)"
         looseLevelLabel.font = UIFont(name: Font.squirk, size: scaledValue(45))
         contentView.addSubview(looseLevelLabel)
         looseLevelLabel.snp.makeConstraints { (make) in
@@ -196,7 +193,7 @@ class GameOverPopup: PopupViewController {
         
         // BestScore
         bestLevelLabel = UILabel()
-        bestLevelLabel.text = "Your Best Score: \(resultModel.user.bestScore)"
+        bestLevelLabel.text = "Best Score: \(resultModel.user.bestScore)"
         bestLevelLabel.font = UIFont(name: Font.squirk, size: scaledValue(35))
         contentView.addSubview(bestLevelLabel)
         bestLevelLabel.snp.makeConstraints { (make) in
