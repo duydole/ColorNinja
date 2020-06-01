@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "speakeron.png",
+      "filename" : "speakeron@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "speakeron@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "speakeron@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
