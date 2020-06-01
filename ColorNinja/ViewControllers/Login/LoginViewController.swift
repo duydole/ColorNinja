@@ -56,7 +56,7 @@ class LoginViewController: UIViewController {
         }
         
         // login as guest
-        loginAsGuestButton = ViewCreator.createButtonImageInLoginVC(image: UIImage(named: "usericon")!, title: "Play game as guest", backgroundColor: Color.Facebook.loginButton)
+        loginAsGuestButton = ViewCreator.createButtonImageInLoginVC(image: UIImage(named: "defaultAvatar")!, title: "Play game as guest", backgroundColor: Color.Facebook.loginButton)
         loginAsGuestButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapLoginAsGuestButton))
         loginAsGuestButton.backgroundColor = ColorRGB(255, 18, 18)
         container.addSubview(loginAsGuestButton)
