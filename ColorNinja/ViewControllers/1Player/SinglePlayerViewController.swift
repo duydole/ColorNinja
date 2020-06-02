@@ -13,9 +13,10 @@ import AudioToolbox
 
 class SinglePlayerViewController : BaseGameViewController {
     
-    var levelCountLabel : UILabel!
-    var appImage : UIImageView!
-    var remainTimeLabel : UILabel!
+    private var levelCountLabel : UILabel!
+    private var appImage : UIImageView!
+    private var remainTimeLabel : UILabel!
+    private var didResumeWithRewards: Bool = false
     
     var remainingTime : TimeInterval = Constants.GameSetting.maxRemainTime
     var timer : Timer!
@@ -170,6 +171,9 @@ class SinglePlayerViewController : BaseGameViewController {
                 DispatchQueue.main.async {
                     // Show Popup GameOver
                     let gameOverPopup = GameOverPopup()
+                    if self.didResumeWithRewards {
+                        gameOverPopup.allowWatchAdsToGainReward = false
+                    }
                     gameOverPopup.modalPresentationStyle = .overCurrentContext
                     let user = OwnerInfo.shared.toUser()
                     gameOverPopup.resultModel = ResultGameModel(user: user, score: self.currentLevel.levelIndex + 1)
@@ -284,6 +288,22 @@ extension SinglePlayerViewController: GameOverPopupDelegate {
     }
     
     func didTapReplayButton() {
+        didResumeWithRewards = false    /// can watch ads to continue play game
         self.replayGame()
+    }
+    
+    func didEarnedRewardToContinuePlay(reward: Int) {
+        if reward > 0 {
+            // Cann't watch ads to earn reward anymore.
+            didResumeWithRewards = true
+            
+            // Reset lại View
+            remainingTime = Double(reward)
+            self.remainTimeLabel.text = self.currentRemainTimeString()
+            
+            self.resumeGame()
+        } else {
+            self.dismiss(animated: false, completion: nil)
+        }
     }
 }

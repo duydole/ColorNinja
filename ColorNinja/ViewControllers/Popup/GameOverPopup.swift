@@ -10,9 +10,13 @@ import Foundation
 import UIKit
 import GoogleMobileAds
 
+
+let rewardForEachAds: Int = 5 /// numb of seconds user gained each ads.
+
 protocol GameOverPopupDelegate {
     func didTapReplayButton() -> Void
     func didTapGoHomeButton() -> Void
+    func didEarnedRewardToContinuePlay(reward: Int) -> Void
 }
 
 class GameOverPopup: PopupViewController {
@@ -23,8 +27,11 @@ class GameOverPopup: PopupViewController {
     // MARK: Public
     public var delegate: GameOverPopupDelegate?
     public var resultModel: ResultGameModel = ResultGameModel(user: User(), score: 0)
-
-    // MARK: Private
+    public var allowWatchAdsToGainReward = true
+    
+    // MARK: Private Views
+    private var earnedReward: Int = 0
+    
     private var goHomeButton: ButtonWithImage!
     private var replayButton: ButtonWithImage!
     private var watchAdsButton: ButtonWithImage!
@@ -68,6 +75,11 @@ class GameOverPopup: PopupViewController {
     }
     
     @objc private func didTapWatchAdsButton() {
+        if !allowWatchAdsToGainReward {
+            /// Not allow to watch ads
+            return
+        }
+        
         if rewardedAd?.isReady == true {
            rewardedAd?.present(fromRootViewController: self, delegate:self)
         }
@@ -149,7 +161,7 @@ class GameOverPopup: PopupViewController {
         }
         
         // Watch Ads
-        watchAdsButton = ViewCreator.createButtonInGameOverPopup(image: UIImage(named: "adsicon"), title: "+2S")
+        watchAdsButton = ViewCreator.createButtonInGameOverPopup(image: UIImage(named: "adsicon"), title: "+\(rewardForEachAds)s")
         watchAdsButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapWatchAdsButton))
         container.addSubview(watchAdsButton)
         watchAdsButton.snp.makeConstraints { (make) in
@@ -161,12 +173,20 @@ class GameOverPopup: PopupViewController {
     private func setupAds() {
         
         // FullScreen
+        loadFullScreenAds()
+        
+        //RewardAds:
+        loadRewardAds()
+    }
+    
+    private func loadFullScreenAds() {
         interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
         interstitial.delegate = self
         let request = GADRequest()
         interstitial.load(request)
-        
-        //RewardAds:
+    }
+    
+    private func loadRewardAds() {
         rewardedAd = GADRewardedAd(adUnitID: "ca-app-pub-3940256099942544/1712485313")
         rewardedAd?.load(GADRequest()) { error in
           if let _ = error {
@@ -224,6 +244,11 @@ class GameOverPopup: PopupViewController {
         self.dismissPopUp()
         self.delegate?.didTapReplayButton()
     }
+    
+    private func _dismissAndSendRewardEventToDelegate() {
+        dismissPopUp()
+        delegate?.didEarnedRewardToContinuePlay(reward: earnedReward)
+    }
 }
 
 
@@ -238,7 +263,30 @@ extension GameOverPopup: GADInterstitialDelegate {
 
 // MARK: RewardAds delegate
 extension GameOverPopup: GADRewardedAdDelegate {
+    /// Tells the delegate that the user earned a reward.
     func rewardedAd(_ rewardedAd: GADRewardedAd, userDidEarn reward: GADAdReward) {
-        
+        print("Reward received with currency: \(reward.type), amount \(reward.amount).")
+        earnedReward = rewardForEachAds
+    }
+    
+    /// Tells the delegate that the rewarded ad was presented.
+    func rewardedAdDidPresent(_ rewardedAd: GADRewardedAd) {
+        print("Rewarded ad presented.")
+    }
+    
+    /// Tells the delegate that the rewarded ad was dismissed.
+    func rewardedAdDidDismiss(_ rewardedAd: GADRewardedAd) {
+        if earnedReward > 0 {
+            /// Send reward to delegate
+            _dismissAndSendRewardEventToDelegate()
+        } else {
+            /// No reward
+            loadRewardAds()
+        }
+    }
+    
+    /// Tells the delegate that the rewarded ad failed to present.
+    func rewardedAd(_ rewardedAd: GADRewardedAd, didFailToPresentWithError error: Error) {
+        print("Rewarded ad failed to present.")
     }
 }
