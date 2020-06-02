@@ -36,8 +36,8 @@ class LoginViewController: UIViewController {
         
         // Container
         let container = UIView()
-        let containerHeight: CGFloat = 300
-        let padding: CGFloat = 10
+        let containerHeight: CGFloat = scaledValue(300)
+        let padding: CGFloat = scaledValue(10)
         let buttonHeight = (containerHeight - 4*padding)/5
         view.addSubview(container)
         container.snp.makeConstraints { (make) in
@@ -77,22 +77,22 @@ class LoginViewController: UIViewController {
             make.top.equalTo(loginAsGuestButton.snp.bottom).offset(padding)
         }
 
-        // Login with Zalo
-        loginWithZaloButton = ViewCreator.createButtonImageInLoginVC(image: UIImage(named: "zalologo")!, title: "Login with Zalo", backgroundColor: Color.Zalo.blue2)
-        loginWithZaloButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapLoginWithZaloButton))
-        container.addSubview(loginWithZaloButton)
-        loginWithZaloButton.snp.makeConstraints { (make) in
-            make.width.height.centerX.equalTo(loginAsGuestButton)
-            make.top.equalTo(orLabel.snp.bottom).offset(padding)
-        }
+//        // Login with Zalo
+//        loginWithZaloButton = ViewCreator.createButtonImageInLoginVC(image: UIImage(named: "zalologo")!, title: "Login with Zalo", backgroundColor: Color.Zalo.blue2)
+//        loginWithZaloButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapLoginWithZaloButton))
+//        container.addSubview(loginWithZaloButton)
+//        loginWithZaloButton.snp.makeConstraints { (make) in
+//            make.width.height.centerX.equalTo(loginAsGuestButton)
+//            make.top.equalTo(orLabel.snp.bottom).offset(padding)
+//        }
 
         // login with facebook
         loginWithFBButton = ViewCreator.createButtonImageInLoginVC(image: UIImage(named: "fblogo")!, title: "Login with Facebook", backgroundColor: Color.Facebook.loginButton)
         loginWithFBButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapLoginWithFacebookButton))
         container.addSubview(loginWithFBButton)
         loginWithFBButton.snp.makeConstraints { (make) in
-            make.width.height.centerX.equalTo(loginWithZaloButton)
-            make.top.equalTo(loginWithZaloButton.snp.bottom).offset(padding)
+            make.width.height.centerX.equalTo(loginAsGuestButton)
+            make.top.equalTo(orLabel.snp.bottom).offset(padding)
         }
     }
     
