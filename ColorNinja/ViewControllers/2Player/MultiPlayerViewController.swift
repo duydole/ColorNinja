@@ -159,7 +159,6 @@ class MultiPlayerViewController : BaseGameViewController {
             }
         }
         
-        
         if levelIndex == MAX_LEVEL + 1 {
             requireServerStopGame()
             return
@@ -169,7 +168,7 @@ class MultiPlayerViewController : BaseGameViewController {
         self.boardCollectionView.alpha = 0
         shrinkCell = true
         
-        
+        print("duydl: Start Animation Matched, 3, 2, 1")
         self.startAnimationReadyView(withList: listStringAnimation) { (done) in
             self.boardCollectionView.alpha = 1
             self.currentLevel  = self.jsonToLevelModel(json)
