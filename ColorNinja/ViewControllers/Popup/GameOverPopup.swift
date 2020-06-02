@@ -60,7 +60,11 @@ class GameOverPopup: PopupViewController {
     }
 
     @objc private func didTapReplayButton() {
-        showFullScreenAd()
+        if OwnerInfo.shared.countRoundDidPlay % 3 == 0 {
+            showFullScreenAd()
+        } else {
+            _dismissAndSendReplayEventToDelegate()
+        }
     }
     
     @objc private func didTapWatchAdsButton() {
@@ -215,6 +219,11 @@ class GameOverPopup: PopupViewController {
             assert(true, "Ads is not ready")
         }
     }
+    
+    private func _dismissAndSendReplayEventToDelegate() {
+        self.dismissPopUp()
+        self.delegate?.didTapReplayButton()
+    }
 }
 
 
@@ -223,8 +232,7 @@ class GameOverPopup: PopupViewController {
 extension GameOverPopup: GADInterstitialDelegate {
     
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {
-        self.dismissPopUp()
-        self.delegate?.didTapReplayButton()
+        _dismissAndSendReplayEventToDelegate()
     }
 }
 

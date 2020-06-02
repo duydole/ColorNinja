@@ -144,6 +144,9 @@ class SinglePlayerViewController : BaseGameViewController {
         // StopTimer
         self.stopTimer()
         
+        // Increase CountRoundDidPlay
+        OwnerInfo.shared.increaseCountRoundDidPlay()
+        
         // Update Max Score
         let resultScored = currentLevel.levelIndex + 1
         if resultScored > OwnerInfo.shared.bestScore {
