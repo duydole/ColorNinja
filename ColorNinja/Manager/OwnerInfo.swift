@@ -13,6 +13,7 @@ fileprivate let kUserNameKey = "kUserName"
 fileprivate let kBestScoreKey = "kBestScoreKey"
 fileprivate let kUserIdKey = "kUserIdKey"
 fileprivate let kUserLoginType = "kUserLoginType"
+fileprivate let kCountRoundDidPlay = "kCountRoundDidPlay"
 
 enum LoginType: Int {
     case NotLogin = 0
@@ -25,11 +26,13 @@ class OwnerInfo {
     
     static let shared = OwnerInfo()
     
+    //MARK: Readonly Prop
     public private(set) var userId: String = ""
     public private(set) var loginType: LoginType = .NotLogin
     public private(set) var bestScore: Int = 0
     public private(set) var userName: String = ""
     public private(set) var rank: Int = -1
+    public private(set) var countRoundDidPlay: Int = 0
     public var didLogin: Bool {
         get {
             if loginType.rawValue != 0 {
@@ -86,6 +89,11 @@ class OwnerInfo {
         rank = newRank
     }
     
+    func increaseCountRoundDidPlay() {
+        countRoundDidPlay += 1
+        userDefault.set(countRoundDidPlay, forKey: kCountRoundDidPlay)
+    }
+    
     func toUser() -> User {
         return User(userId: self.userId, username: self.userName, avatarUrl: self.avatarUrl, bestScore: self.bestScore, rank: self.rank)
     }
@@ -95,17 +103,21 @@ class OwnerInfo {
     private let userDefault = UserDefaults.standard
 
     private init() {
+        _loadUserInfo()
+    }
+    
+    private func _loadUserInfo() {
         
-        // Load cached username
+        // UserName
         if let userName = userDefault.string(forKey: kUserNameKey) {
             self.userName = userName
         }
-        
-        // Load bestScore
+            
+        // BestScore
         let bestscore = userDefault.integer(forKey: kBestScoreKey)
         self.bestScore = bestscore
         
-        // Load userId
+        // UserId
         if let userId = userDefault.string(forKey: kUserIdKey) {
             if userId == "" {
                 updateUserId(newUserId: UUID().uuidString)
@@ -116,8 +128,7 @@ class OwnerInfo {
             updateUserId(newUserId: UUID().uuidString)
         }
         
-        
-        // Load loginType
+        // LoginType
         let loginType = userDefault.integer(forKey: kUserLoginType)
         if loginType == 0 {
             updateLoginType(newLoginType: .NotLogin)
@@ -125,9 +136,14 @@ class OwnerInfo {
             self.loginType = LoginType(rawValue: loginType) ?? LoginType.Guest
         }
         
-        // LoadRanking of currentUser
+        // Rank
         _loadOwnerRank()
         
+        // CountRoundDidPlay
+        let countRoundDidPlay = userDefault.integer(forKey: kCountRoundDidPlay)
+        self.countRoundDidPlay = countRoundDidPlay
+        
+        // Debug only
         #if DEBUG
         //updateBestScore(newBestScore: 0)
         //updateLoginType(newLoginType: .NotLogin)
