@@ -55,8 +55,9 @@ class DataBaseService : NSObject {
             let data = json["data"] as! [String: Any]
             if let rank = data["rank"] as! Int? {
                 completion(rank)
-            }
-            completion(-1)
+            } else {
+              completion(-1)
+          }
         }
     }
     
