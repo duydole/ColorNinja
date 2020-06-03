@@ -187,6 +187,12 @@ class BaseHomeViewController: UIViewController {
   @objc func didTapSignOutButton() {
     let alert = UIAlertController(title: "Log out", message: "Do you want to log out?", preferredStyle: .alert)
     alert.addAction(UIAlertAction(title: "Log out", style: .default, handler: { (action) in
+      
+      if OwnerInfo.shared.loginType == .Facebook {
+        let loginManager = LoginManager()
+        loginManager.logOut()
+      }
+      
       self.navigationController?.popViewController(animated: true)
     }))
     alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in

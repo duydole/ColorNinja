@@ -27,6 +27,8 @@ class HomeViewController2: BaseHomeViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //printAllFamilyFonts()
+      
+      navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
