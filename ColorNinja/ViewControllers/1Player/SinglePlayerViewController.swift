@@ -13,6 +13,7 @@ import AudioToolbox
 
 class SinglePlayerViewController : BaseGameViewController {
     
+    private var lightBulbButton: UIButton!
     private var levelCountLabel : UILabel!
     private var appImage : UIImageView!
     private var remainTimeLabel : UILabel!
@@ -101,6 +102,22 @@ class SinglePlayerViewController : BaseGameViewController {
             make.top.equalTo(timeLabel.snp.bottom)
             make.left.equalTo(timeLabel.snp.left)
         }
+        
+        
+        // Add lightbulb
+        lightBulbButton = UIButton()
+        lightBulbButton.setImage(UIImage(named: "lightbulb"), for: .normal)
+        lightBulbButton.addTarget(self, action: #selector(didTapLightBubButton), for: .touchUpInside)
+        view.addSubview(lightBulbButton)
+        lightBulbButton.snp.makeConstraints { (make) in
+            make.bottom.equalTo(settingButton)
+            make.width.height.equalTo(scaledValue(50))
+            make.centerX.equalToSuperview()
+        }
+    }
+    
+    @objc func didTapLightBubButton() {
+        shakeResultCell()
     }
     
     // MARK: - Handle Timer
@@ -166,7 +183,7 @@ class SinglePlayerViewController : BaseGameViewController {
     
     private func getRankAndShowGameOverPopup() {
         DataBaseService.shared.loadUserRank(user: OwnerInfo.shared.toUser()) { (rank) in
-            if rank != -1 {
+//            if rank != -1 {
                 OwnerInfo.shared.updateUserRank(newRank: rank)
                 DispatchQueue.main.async {
                     // Show Popup GameOver
@@ -180,7 +197,7 @@ class SinglePlayerViewController : BaseGameViewController {
                     gameOverPopup.delegate = self
                     self.present(gameOverPopup, animated: false, completion: nil)
                 }
-            }
+//            }
         }
     }
     
@@ -225,6 +242,11 @@ class SinglePlayerViewController : BaseGameViewController {
         }
     }
 
+    private func shakeResultCell() {
+        let resultIndexPath = IndexPath(item: currentLevel.correctIndex, section: 0)
+        shakeCellAtIndexPath(indexPath: resultIndexPath)
+    }
+    
     // MARK: - Handle Audio
     
     private func vibrateDevice() {
@@ -259,6 +281,7 @@ extension SinglePlayerViewController {
             
             if GameSettingManager.shared.allowEffectSound {
                 self.vibrateDevice()
+                shakeCellAtIndexPath(indexPath: indexPath)
                 GameMusicPlayer.shared.playInCorrectSound()
             }
         }
@@ -276,6 +299,25 @@ extension SinglePlayerViewController {
         self.zoomX2LabelAnimation(label: levelCountLabel, text: "\(nextLevel.levelIndex + 1)")
         
         self.showCurrentLevel()
+    }
+    
+    private func shakeCellAtIndexPath(indexPath: IndexPath) {
+                
+        let cell = boardCollectionView.cellForItem(at: indexPath)
+        UIView.animate(withDuration: 0.05, animations: {
+            cell?.center.x -= 5
+        }) { (success) in
+            UIView.animate(withDuration: 0.1, animations: {
+                cell?.center.x += 10
+            }) { (success) in
+                UIView.animate(withDuration: 0.05, animations: {
+                    cell?.center.x -= 5
+                }) { (success) in
+
+                }
+            }
+        }
+        
     }
 }
 

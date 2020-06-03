@@ -80,6 +80,7 @@ class BaseGameViewController : BaseViewController {
         flowLayout.minimumInteritemSpacing = 0.0
         flowLayout.minimumLineSpacing = Constants.GameScreen.BoardCollectionView.spacingBetweenCells
         boardCollectionView = BoardCollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        boardCollectionView.clipsToBounds = false
         boardContainer.addSubview(boardCollectionView)
         boardCollectionView.alpha = 0.0
         boardCollectionView.backgroundColor = .clear

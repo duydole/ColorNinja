@@ -13,7 +13,7 @@ class BoardCollectionViewFlowLayout: UICollectionViewFlowLayout {
     
     /* initialSize of cell is Zero */
     override func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        let attributes = super.initialLayoutAttributesForAppearingItem(at: itemIndexPath)
+        let attributes = super.initialLayoutAttributesForAppearingItem(at: itemIndexPath)?.copy() as? UICollectionViewLayoutAttributes
         attributes?.transform = CGAffineTransform(scaleX: 0.0, y: 0.0)
         return attributes
     }

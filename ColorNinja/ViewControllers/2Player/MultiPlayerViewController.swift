@@ -189,11 +189,16 @@ class MultiPlayerViewController : BaseGameViewController {
         self.statusLabel.isHidden = true
     }
     
-    private func serverSendLevelResult(_ json: Dictionary<String, Any>) {
+    private func serverSendFinalResult(_ json: Dictionary<String, Any>) {
         
+        // SERVER: {"keyWinner":"BotNam2738","winnerscore":30,"scorePlayers":[{"keyPlayer":"BotNam2738","score":30},{"keyPlayer":"618BC71B-8479-4BC6-B2FA-B860159B222E","score":0}],"type":4,"message":""}
         let winnerName = getRealNameWithoutPlus(name: p1Score > p2Score ? player1.username : player2.username)
         let looserName = getRealNameWithoutPlus(name: p1Score < p2Score ? player1.username : player2.username)
         
+        let winnerScore = json["winnerscore"] as! Int
+        player1Point.text = p1Score > p2Score ? "\(winnerScore)" : "\(MAX_LEVEL - winnerScore)"
+        player2Point.text = p2Score > p1Score ? "\(winnerScore)" : "\(MAX_LEVEL - winnerScore)"
+
       let alert = UIAlertController(title: "GameOver", message: "\(winnerName) won, \(looserName) is too slow!", preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
           switch action.style {
@@ -305,7 +310,7 @@ extension MultiPlayerViewController : ClientDelegate {
         case .MatchedInfo:
             serverSendMatchedInfo(json)
         case .LevelResult:
-            serverSendLevelResult(json)
+            serverSendFinalResult(json)
         case .RoomInfo:
             serverSendRoomInfo(json)
         case .RoomIsNotExisted:
