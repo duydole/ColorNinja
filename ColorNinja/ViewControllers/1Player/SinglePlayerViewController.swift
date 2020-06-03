@@ -220,6 +220,18 @@ class SinglePlayerViewController : BaseGameViewController {
     self.resumeGame()
   }
   
+  private func goToNextLevel() {
+    
+    // Update current LevelModel
+    let nextLevel = LevelStore.shared.allLevels[currentLevel.levelIndex + 1]
+    currentLevel = nextLevel
+    
+    // Update LevelCount
+    self.zoomX2LabelAnimation(label: levelCountLabel, text: "\(nextLevel.levelIndex + 1)")
+    
+    self.showCurrentLevel()
+  }
+  
   // MARK: Event handler
   
   @objc func didTapLightBubButton() {
@@ -252,6 +264,25 @@ class SinglePlayerViewController : BaseGameViewController {
     let resultIndexPath = IndexPath(item: currentLevel.correctIndex, section: 0)
     shakeCellAtIndexPath(indexPath: resultIndexPath)
   }
+  
+  private func shakeCellAtIndexPath(indexPath: IndexPath) {
+    
+    let cell = boardCollectionView.cellForItem(at: indexPath)
+    UIView.animate(withDuration: 0.05, animations: {
+      cell?.center.x -= 5
+    }) { (success) in
+      UIView.animate(withDuration: 0.1, animations: {
+        cell?.center.x += 10
+      }) { (success) in
+        UIView.animate(withDuration: 0.05, animations: {
+          cell?.center.x -= 5
+        }) { (success) in
+          
+        }
+      }
+    }
+    
+  }
 
   // MARK: Getter
   
@@ -263,9 +294,7 @@ class SinglePlayerViewController : BaseGameViewController {
 // MARK: CollectionView Delegate
 
 extension SinglePlayerViewController {
-  
-  // MARK: Delegate
-  
+    
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     
     if indexPath.item == currentLevel.correctIndex {
@@ -286,40 +315,8 @@ extension SinglePlayerViewController {
       }
     }
   }
-  
-  // MARK: Private Methods
-  
-  private func goToNextLevel() {
-    
-    // Update current LevelModel
-    let nextLevel = LevelStore.shared.allLevels[currentLevel.levelIndex + 1]
-    currentLevel = nextLevel
-    
-    // Update LevelCount
-    self.zoomX2LabelAnimation(label: levelCountLabel, text: "\(nextLevel.levelIndex + 1)")
-    
-    self.showCurrentLevel()
-  }
-  
-  private func shakeCellAtIndexPath(indexPath: IndexPath) {
-    
-    let cell = boardCollectionView.cellForItem(at: indexPath)
-    UIView.animate(withDuration: 0.05, animations: {
-      cell?.center.x -= 5
-    }) { (success) in
-      UIView.animate(withDuration: 0.1, animations: {
-        cell?.center.x += 10
-      }) { (success) in
-        UIView.animate(withDuration: 0.05, animations: {
-          cell?.center.x -= 5
-        }) { (success) in
-          
-        }
-      }
-    }
-    
-  }
 }
+
 
 // MARK: GameOverPopup Delegate
 
