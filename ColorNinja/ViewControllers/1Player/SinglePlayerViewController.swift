@@ -11,15 +11,19 @@ import UIKit
 import CoreGraphics
 import AudioToolbox
 
+
+let INIT_REMAIN_TIME: TimeInterval = 2.0
+
 class SinglePlayerViewController : BaseGameViewController {
   
   private var lightBulbButton: UIButton!
   private var levelCountLabel : UILabel!
+  private var promptCountLable : UILabel!
   private var appImage : UIImageView!
   private var remainTimeLabel : UILabel!
   private var didResumeWithRewards: Bool = false
   
-  var remainingTime : TimeInterval = Constants.GameSetting.maxRemainTime
+  var remainingTime : TimeInterval = INIT_REMAIN_TIME
   var timer : Timer!
   
   // MARK: Life Cycle
@@ -44,6 +48,10 @@ class SinglePlayerViewController : BaseGameViewController {
     }
   }
   
+  override func viewWillDisappear(_ animated: Bool) {
+    stopTimer()
+  }
+  
   // MARK: Handle Animations
   
   private func zoomX2LabelAnimation(label: UILabel, text: String) {
@@ -62,14 +70,15 @@ class SinglePlayerViewController : BaseGameViewController {
   override func setupViews() {
     super.setupViews()
     
-    self.setupViewsInTopContainer()
+    setupViewsInTopContainer()
+    setupPromptCount()
   }
   
   private func setupViewsInTopContainer() {
     
-    let paddingTop: CGFloat = 20
-    let paddingLeftRight: CGFloat = 30
-    
+    let paddingTop: CGFloat = scaledValue(35)
+    let paddingLeftRight: CGFloat = scaledValue(30)
+        
     // Level
     let levelLabel = ViewCreator.createTitleLabelForTopContainer(text: "LEVEL")
     topContainer.addSubview(levelLabel)
@@ -110,22 +119,33 @@ class SinglePlayerViewController : BaseGameViewController {
     lightBulbButton.addTarget(self, action: #selector(didTapLightBubButton), for: .touchUpInside)
     view.addSubview(lightBulbButton)
     lightBulbButton.snp.makeConstraints { (make) in
-      make.bottom.equalTo(settingButton)
-      make.width.height.equalTo(scaledValue(50))
+      make.bottom.equalTo(levelLabel)
+      make.width.height.equalTo(scaledValue(70))
       make.centerX.equalToSuperview()
     }
   }
-    
+  
+  private func setupPromptCount() {
+    promptCountLable = ViewCreator.createSubTitleLabelForTopContainer(text: "\(OwnerInfo.shared.countPrompt)")
+    topContainer.addSubview(promptCountLable)
+    promptCountLable.snp.makeConstraints { (make) in
+      make.bottom.equalTo(levelCountLabel)
+      make.centerX.equalToSuperview()
+    }
+  }
+  
   // MARK: Handle Timer
   
   private func startTimer() {
+    weak var weakS = self
     timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { (timer) in
-      self.remainingTime -= 0.01
-      self.remainTimeLabel.text = self.currentRemainTimeString()
+      guard let weakSelf = weakS else { return }
+      weakSelf.remainingTime -= 0.01
+      weakSelf.remainTimeLabel.text = weakSelf.currentRemainTimeString()
       
       // stop timer
-      if self.remainingTime < 0.001 {
-        self.processGameOver()
+      if weakSelf.remainingTime < 0.001 {
+        weakSelf.processGameOver()
       }
     })
   }
@@ -160,6 +180,10 @@ class SinglePlayerViewController : BaseGameViewController {
     
     // Increase CountRoundDidPlay
     OwnerInfo.shared.increaseCountRoundDidPlay()
+    
+    // Increase CountPrompt
+    let curPromt = OwnerInfo.shared.countPrompt
+    OwnerInfo.shared.updateCountPrompt(newCountPrompt: curPromt + 1)
     
     // Update Max Score
     let resultScored = currentLevel.levelIndex + 1
@@ -235,7 +259,12 @@ class SinglePlayerViewController : BaseGameViewController {
   // MARK: Event handler
   
   @objc func didTapLightBubButton() {
-    shakeResultCell()
+    if OwnerInfo.shared.countPrompt > 0 && remainingTime != INIT_REMAIN_TIME {
+      let curCountPrompt = OwnerInfo.shared.countPrompt
+      OwnerInfo.shared.updateCountPrompt(newCountPrompt: curCountPrompt - 1)
+      promptCountLable.text = "\(curCountPrompt - 1)"
+      shakeResultCell()
+    }
   }
 
   @objc override func didTapSettingButton() {

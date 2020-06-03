@@ -162,7 +162,7 @@ class OwnerInfo {
   private func resetUserInfo() {
     updateBestScore(newBestScore: 0)
     updateLoginType(newLoginType: .NotLogin)
-    updateCountPrompt(newCountPrompt: 0)
+    userDefault.set(0, forKey: kCountRoundDidPlay)
   }
   
   private func _loadOwnerRank() {
