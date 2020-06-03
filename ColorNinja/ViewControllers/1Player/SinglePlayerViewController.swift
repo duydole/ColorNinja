@@ -22,7 +22,7 @@ class SinglePlayerViewController : BaseGameViewController {
   var remainingTime : TimeInterval = Constants.GameSetting.maxRemainTime
   var timer : Timer!
   
-  // MARK: - Life Cycle
+  // MARK: Life Cycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -44,7 +44,7 @@ class SinglePlayerViewController : BaseGameViewController {
     }
   }
   
-  // MARK: - Handle Animations
+  // MARK: Handle Animations
   
   private func zoomX2LabelAnimation(label: UILabel, text: String) {
     label.text = text
@@ -57,7 +57,7 @@ class SinglePlayerViewController : BaseGameViewController {
     })
   }
   
-  // MARK: - Setup views
+  // MARK: Setup views
   
   override func setupViews() {
     super.setupViews()
@@ -115,12 +115,8 @@ class SinglePlayerViewController : BaseGameViewController {
       make.centerX.equalToSuperview()
     }
   }
-  
-  @objc func didTapLightBubButton() {
-    shakeResultCell()
-  }
-  
-  // MARK: - Handle Timer
+    
+  // MARK: Handle Timer
   
   private func startTimer() {
     timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { (timer) in
@@ -151,7 +147,7 @@ class SinglePlayerViewController : BaseGameViewController {
     self.startTimer()
   }
   
-  // MARK: - Game Flow
+  // MARK: Game Flow
   
   private func processGameOver() {
     
@@ -224,8 +220,12 @@ class SinglePlayerViewController : BaseGameViewController {
     self.resumeGame()
   }
   
-  // MARK: - Event handler
+  // MARK: Event handler
   
+  @objc func didTapLightBubButton() {
+    shakeResultCell()
+  }
+
   @objc override func didTapSettingButton() {
     
     // PauseTimer
@@ -239,30 +239,32 @@ class SinglePlayerViewController : BaseGameViewController {
       self.resumeGame()
     }
   }
-  
-  private func shakeResultCell() {
-    let resultIndexPath = IndexPath(item: currentLevel.correctIndex, section: 0)
-    shakeCellAtIndexPath(indexPath: resultIndexPath)
-  }
-  
-  // MARK: - Handle Audio
+    
+  // MARK: Handle Audio
   
   private func vibrateDevice() {
     AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
   }
   
-  // MARK: - Getter
+  // MARK: Handle boardgame animation
+  
+  private func shakeResultCell() {
+    let resultIndexPath = IndexPath(item: currentLevel.correctIndex, section: 0)
+    shakeCellAtIndexPath(indexPath: resultIndexPath)
+  }
+
+  // MARK: Getter
   
   private func currentRemainTimeString() -> String {
     return String(format: "%.2f", self.remainingTime)
   }
 }
 
-// MARK: - CollectionView Delegate
+// MARK: CollectionView Delegate
 
 extension SinglePlayerViewController {
   
-  // MARK: - Delegate
+  // MARK: Delegate
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     
@@ -285,7 +287,7 @@ extension SinglePlayerViewController {
     }
   }
   
-  // MARK: - Private Methods
+  // MARK: Private Methods
   
   private func goToNextLevel() {
     
@@ -319,7 +321,7 @@ extension SinglePlayerViewController {
   }
 }
 
-// MARK: - GameOverPopup Delegate
+// MARK: GameOverPopup Delegate
 
 extension SinglePlayerViewController: GameOverPopupDelegate {
   
