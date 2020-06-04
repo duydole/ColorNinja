@@ -12,8 +12,8 @@ import GoogleMobileAds
 
 
 let rewardForEachAds: Int = 5 /// numb of seconds user gained each ads.
-let fullScreenAdUnitId = "ca-app-pub-3940256099942544/4411468910"
-let rewardAdsUnitId = "ca-app-pub-3940256099942544/1712485313"
+let fullScreenAdUnitId = "ca-app-pub-2457313692920235/3301114557"
+let rewardAdsUnitId = "ca-app-pub-2457313692920235/5356432254"
 
 protocol GameOverPopupDelegate {
   func didTapReplayButton() -> Void

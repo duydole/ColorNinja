@@ -10,7 +10,6 @@ import UIKit
 import SnapKit
 import GoogleMobileAds
 
-let bannerAdUnitId = "ca-app-pub-3940256099942544/2934735716"
 class HomeViewController: BaseViewController {
     
     let avatarView: UIImageView = UIImageView()

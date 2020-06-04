@@ -10,6 +10,7 @@ import UIKit
 import ZaloSDK
 import GoogleMobileAds
 
+let bannerAdUnitId = "ca-app-pub-2457313692920235/9322423961"
 
 class HomeViewController2: BaseHomeViewController {
     
@@ -102,7 +103,7 @@ class HomeViewController2: BaseHomeViewController {
     private func setupBannerAd() {
         adBannerView = GADBannerView()
         adBannerView.rootViewController = self
-        adBannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        adBannerView.adUnitID = bannerAdUnitId
         adBannerView.load(GADRequest())
         view.addSubview(adBannerView)
         
