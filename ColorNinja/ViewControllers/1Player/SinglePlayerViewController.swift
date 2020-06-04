@@ -191,6 +191,7 @@ class SinglePlayerViewController : BaseGameViewController {
       OwnerInfo.shared.updateBestScore(newBestScore: resultScored)
       DataBaseService.shared.updateBestScoreForUser(userid: OwnerInfo.shared.userId, newBestScore: resultScored) { (success, error) in
         if let _ = error {
+          assert(false)
           return
         }
         

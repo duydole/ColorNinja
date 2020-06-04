@@ -51,7 +51,11 @@ class DataBaseService : NSObject {
     public func loadUserRank(user: User, completion: @escaping((_ rank: Int) -> Void)) {
         let url = "\(updateUserDataUrl)?key=\(user.userId)"
         AF.request(url).responseJSON { (response) in
-            guard let json = response.value as! [String : Any]? else { return }
+            guard let json = response.value as! [String : Any]? else {
+              completion(-1)
+              return
+          }
+          
             let data = json["data"] as! [String: Any]
             if let rank = data["rank"] as! Int? {
                 completion(rank)
