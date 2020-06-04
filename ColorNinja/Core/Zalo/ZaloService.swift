@@ -6,6 +6,7 @@
 //  Copyright © 2020 Do Le Duy. All rights reserved.
 //
 
+#if !DISABLE_ZALOSDK
 import UIKit
 
 fileprivate let kUserName    = "kUserZaloName"
@@ -51,3 +52,4 @@ class ZaloService: NSObject {
         ZaloSDKApiWrapper.sharedInstance.logout()
     }
 }
+#endif

@@ -22,7 +22,9 @@ class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupViews()
+        #if !DISABLE_ZALOSDK
         self.loadData()
+        #endif
     }
     
     // MARK: Setup views
@@ -145,7 +147,8 @@ class HomeViewController: BaseViewController {
             //
         }
     }
-        
+
+    #if !DISABLE_ZALOSDK
     private func logout() {
         let alert = UIAlertController(title: "Thông báo", message: "Bạn có muốn đăng xuất tài khoản Zalo?", preferredStyle: UIAlertController.Style.actionSheet)
         
@@ -173,5 +176,6 @@ class HomeViewController: BaseViewController {
             self?.avatarView.downloaded(from: avatarUrl)
         }
     }
+    #endif
 }
 

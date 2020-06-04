@@ -180,6 +180,7 @@ class HomeViewController2: BaseHomeViewController {
     
     // MARK: Action handler
     
+    #if !DISABLE_ZALOSDK
     @objc private func didTapLoginButton() {
         ZaloSDKApiWrapper.sharedInstance.login(withZalo: self, type: ZAZAloSDKAuthenTypeViaZaloAppAndWebView) {  [weak self] (success) in
             if success {
@@ -201,6 +202,7 @@ class HomeViewController2: BaseHomeViewController {
         let feed = ZOFeed(link: "https://www.google.com.vn/", appName: "ColorNinja", message: "message", others: nil)
         ZaloSDKApiWrapper.sharedInstance.shareFeedZalo(feed, andParentVC: self)
     }
+    #endif
     
     @objc private func didTapSinglePlayerButton() {
         let gameVC = SinglePlayerViewController()

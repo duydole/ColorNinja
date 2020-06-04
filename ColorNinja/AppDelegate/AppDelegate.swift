@@ -15,7 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window : UIWindow?
     
+    #if !DISABLE_ZALOSDK
     let services = AppDelegateDispatcher()
+    #endif
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -25,14 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = naviVC
         window?.makeKeyAndVisible()
-        
-        if ZaloService.sharedInstance.isLoginZalo() {
-            homeVC.modalPresentationStyle = .fullScreen
-            showMiniLoading(onView: loginVC.view)
-            loginVC.present(homeVC, animated: true) {
-                hideLoading()
-            }
-        }
         
         // Check didLogin or not
         if OwnerInfo.shared.didLogin {
@@ -45,14 +39,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GameMusicPlayer.shared.startBackgroundMusic()
         
         GADMobileAds.sharedInstance().start(completionHandler: nil)
+        
+        #if !DISABLE_ZALOSDK
+        if ZaloService.sharedInstance.isLoginZalo() {
+            homeVC.modalPresentationStyle = .fullScreen
+            showMiniLoading(onView: loginVC.view)
+            loginVC.present(homeVC, animated: true) {
+                hideLoading()
+            }
+        }
         _ = services.application(application, didFinishLaunchingWithOptions: launchOptions)
+        #endif
         
         return true
     }
     
+    #if !DISABLE_ZALOSDK
     public func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         return services.application(app, open: url, options: options)
     }
+    #endif
     
 }
 

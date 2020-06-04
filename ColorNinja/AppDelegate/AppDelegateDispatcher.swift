@@ -6,6 +6,7 @@
 //  Copyright © 2020 Do Le Duy. All rights reserved.
 //
 
+#if !DISABLE_ZALOSDK
 import UIKit
 
 public class AppDelegateDispatcher: NSObject, UIApplicationDelegate {
@@ -90,3 +91,4 @@ public class AppDelegateDispatcher: NSObject, UIApplicationDelegate {
         }
     }
 }
+#endif

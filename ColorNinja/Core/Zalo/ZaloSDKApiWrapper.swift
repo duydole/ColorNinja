@@ -6,6 +6,7 @@
 //  Copyright © 2020 Do Le Duy. All rights reserved.
 //
 
+#if !DISABLE_ZALOSDK
 import UIKit
 import ZaloSDK
 import RxSwift
@@ -122,3 +123,4 @@ class ZaloSDKApiWrapper: NSObject {
         ZaloSDK.sharedInstance().unauthenticate()
     }
 }
+#endif

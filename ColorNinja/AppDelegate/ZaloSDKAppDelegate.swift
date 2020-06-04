@@ -6,6 +6,7 @@
 //  Copyright © 2020 Do Le Duy. All rights reserved.
 //
 
+#if !DISABLE_ZALOSDK
 import Foundation
 import ZaloSDK
 
@@ -27,3 +28,4 @@ class ZaloSDKAppDelegate: BaseAppDelegate {
         }
     }
 }
+#endif
