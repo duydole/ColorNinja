@@ -47,6 +47,7 @@ PODS:
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
   - PromisesObjC (1.2.8)
+  - ReachabilitySwift (5.0.0)
   - RxCocoa (5.1.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
@@ -69,6 +70,7 @@ DEPENDENCIES:
   - FBSDKLoginKit
   - FBSDKShareKit
   - Google-Mobile-Ads-SDK
+  - ReachabilitySwift
   - RxCocoa (~> 5)
   - RxSwift (~> 5)
   - SnapKit (~> 5.0.0)
@@ -87,6 +89,7 @@ SPEC REPOS:
     - GoogleUtilities
     - nanopb
     - PromisesObjC
+    - ReachabilitySwift
     - RxCocoa
     - RxRelay
     - RxSwift
@@ -105,6 +108,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
+  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
@@ -112,6 +116,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   ZaloSDK: a0d05ee0c2308b6bc83babe86ce2fa33b4f44cb0
 
-PODFILE CHECKSUM: 4eb9f175a29987e1d02fed344e4e112846779a62
+PODFILE CHECKSUM: d1fe12863f2bc3375bcf7697e33ebe1da158805f
 
 COCOAPODS: 1.8.4

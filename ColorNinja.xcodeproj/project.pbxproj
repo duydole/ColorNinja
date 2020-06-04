@@ -61,6 +61,7 @@
 		F28098C3246B02A80060693D /* EvilEmpire-4BBVK.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F28098C2246B02A80060693D /* EvilEmpire-4BBVK.ttf */; };
 		F28098C5246B02C00060693D /* SnesItalic-vmAPZ.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F28098C4246B02C00060693D /* SnesItalic-vmAPZ.ttf */; };
 		F28098C7246B0D2E0060693D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F28098C6246B0D2E0060693D /* Assets.xcassets */; };
+		F29AFC0E248952EF002CD0E0 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29AFC0D248952EF002CD0E0 /* NetworkManager.swift */; };
 		F2A6E68A2466FF5600970D1B /* LevelStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6E6852466FF5600970D1B /* LevelStore.swift */; };
 		F2A6E68B2466FF5600970D1B /* BoardCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6E6862466FF5600970D1B /* BoardCollectionViewFlowLayout.swift */; };
 		F2A6E68C2466FF5600970D1B /* BoardCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6E6872466FF5600970D1B /* BoardCollectionView.swift */; };
@@ -135,6 +136,7 @@
 		F28098C2246B02A80060693D /* EvilEmpire-4BBVK.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "EvilEmpire-4BBVK.ttf"; sourceTree = "<group>"; };
 		F28098C4246B02C00060693D /* SnesItalic-vmAPZ.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SnesItalic-vmAPZ.ttf"; sourceTree = "<group>"; };
 		F28098C6246B0D2E0060693D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F29AFC0D248952EF002CD0E0 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		F2A6E6852466FF5600970D1B /* LevelStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelStore.swift; sourceTree = "<group>"; };
 		F2A6E6862466FF5600970D1B /* BoardCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		F2A6E6872466FF5600970D1B /* BoardCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardCollectionView.swift; sourceTree = "<group>"; };
@@ -416,6 +418,7 @@
 				F2A6E6852466FF5600970D1B /* LevelStore.swift */,
 				F28098BC246AE2410060693D /* GameSettingManager.swift */,
 				F275A103247832590077E42F /* OwnerInfo.swift */,
+				F29AFC0D248952EF002CD0E0 /* NetworkManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -610,6 +613,7 @@
 				F22F856A2465B55400493BB6 /* SinglePlayerViewController.swift in Sources */,
 				8C2C72802467A7CC00883388 /* RankingTableViewCell.swift in Sources */,
 				F27288ED247EAD0F00330CFC /* ResultGameModel.swift in Sources */,
+				F29AFC0E248952EF002CD0E0 /* NetworkManager.swift in Sources */,
 				F2A6E68A2466FF5600970D1B /* LevelStore.swift in Sources */,
 				8CC6DB44246B8E470017B60A /* Collection+Extension.swift in Sources */,
 				8CC6DB42246B8E160017B60A /* Dictionary+Extension.swift in Sources */,
