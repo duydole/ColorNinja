@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 import GoogleMobileAds
 
+let bannerAdUnitId = "ca-app-pub-3940256099942544/2934735716"
 class HomeViewController: BaseViewController {
     
     let avatarView: UIImageView = UIImageView()
@@ -115,7 +116,7 @@ class HomeViewController: BaseViewController {
     private func setupBannerAd() {
         adBannerView = GADBannerView()
         adBannerView.rootViewController = self
-        adBannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        adBannerView.adUnitID = bannerAdUnitId
         adBannerView.load(GADRequest())
         self.view.addSubview(adBannerView)
         adBannerView.snp.makeConstraints { (make) in

@@ -358,6 +358,7 @@ extension SinglePlayerViewController: GameOverPopupDelegate {
   
   func didTapReplayButton() {
     didResumeWithRewards = false    /// can watch ads to continue play game
+    promptCountLable.text = "\(OwnerInfo.shared.countPrompt)"
     self.replayGame()
   }
   

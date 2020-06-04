@@ -34,6 +34,9 @@ class DataBaseService : NSObject {
   // MARK: Load
   
   public func loadLeaderBoardUsers(completion: @escaping (_ rankingModels: [UserRank]?, _ error: Error?) -> Void) {
+    if (noConnection()) {
+      completion([],nil)
+    }
     
     AF.request(leaderBoardUrl).validate().responseDecodable(of: LeaderBoardDBDefine.self) { (response) in
       guard let responseJSON = response.value else {
@@ -50,6 +53,11 @@ class DataBaseService : NSObject {
   }
   
   public func loadUserRank(user: User, completion: @escaping((_ rank: Int) -> Void)) {
+    
+    if (noConnection()) {
+         completion(-1)
+       }
+      
     let url = "\(updateUserDataUrl)?key=\(user.userId)"
     AF.request(url).responseJSON { (response) in
       guard let json = response.value as! [String : Any]? else {
@@ -66,10 +74,13 @@ class DataBaseService : NSObject {
     }
   }
   
-  
   // MARK: Update/Insert
   
   public func insertUserToDB(user: OwnerInfo, completion: completionHandler?) {
+    
+    if (noConnection()) {
+      completion?(false,nil)
+    }
     
     let parameters: Dictionary<String, Any> = [
       "key": user.userId,    // chú ý refactor chỗ này
@@ -91,6 +102,10 @@ class DataBaseService : NSObject {
   }
   
   public func updateBestScoreForUser(userid: String, newBestScore: Int, completion: completionHandler?) {
+    if (noConnection()) {
+      completion?(false,nil)
+    }
+
     let parameters: Dictionary<String, Any> = [
       "key": userid,
       "bestscore":newBestScore,
@@ -113,6 +128,10 @@ class DataBaseService : NSObject {
   }
   
   public func updateUserNameForUser(userid: String, newUsername: String, completion: completionHandler?) {
+    if (noConnection()) {
+      completion?(false,nil)
+    }
+
     let parameters: Dictionary<String, Any> = [
       "key": userid,
       "username":newUsername,
@@ -133,6 +152,11 @@ class DataBaseService : NSObject {
   }
   
   public func updateAvatarForUser(userid: String, newAvatarUrl: String, completion: completionHandler?) {
+
+    if (noConnection()) {
+      completion?(false,nil)
+    }
+
     let parameters: Dictionary<String, Any> = [
       "key": userid,
       "avatar":newAvatarUrl,
@@ -149,6 +173,13 @@ class DataBaseService : NSObject {
         completion?(true,nil)
       }
     }
+  }
+  
+  
+  // MARK: Private
+  
+  private func noConnection() -> Bool {
+    return !NetworkManager.shared.hasConnection
   }
   
 }
