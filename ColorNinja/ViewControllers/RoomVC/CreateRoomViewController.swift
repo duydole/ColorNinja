@@ -19,6 +19,10 @@ class CreateRoomViewController: BaseViewController {
     super.viewDidLoad()
   }
   
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
+  }
+  
   // MARK: Setup views
   
   override func setupViews() {
