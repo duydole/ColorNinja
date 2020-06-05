@@ -70,6 +70,7 @@
 		F2A6E6912467029300970D1B /* LevelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6E6902467029300970D1B /* LevelModel.swift */; };
 		F2AB0F56246FD07600FE7FDA /* ViewCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AB0F55246FD07600FE7FDA /* ViewCreator.swift */; };
 		F2AB0F58246FD31B00FE7FDA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AB0F57246FD31B00FE7FDA /* User.swift */; };
+		F2B07F29248A9C6F0019D075 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B07F28248A9C6F0019D075 /* GameKit.framework */; };
 		F2C0607A246566B5001FAD58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C06079246566B5001FAD58 /* AppDelegate.swift */; };
 		F2C0607E246566B5001FAD58 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C0607D246566B5001FAD58 /* HomeViewController.swift */; };
 		F2C06086246566B7001FAD58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2C06084246566B7001FAD58 /* LaunchScreen.storyboard */; };
@@ -145,6 +146,8 @@
 		F2A6E6902467029300970D1B /* LevelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelModel.swift; sourceTree = "<group>"; };
 		F2AB0F55246FD07600FE7FDA /* ViewCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCreator.swift; sourceTree = "<group>"; };
 		F2AB0F57246FD31B00FE7FDA /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		F2B07F28248A9C6F0019D075 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		F2B07F2A248A9CE10019D075 /* ColorNinja.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ColorNinja.entitlements; sourceTree = "<group>"; };
 		F2C06076246566B5001FAD58 /* ColorNinja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorNinja.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2C06079246566B5001FAD58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2C0607D246566B5001FAD58 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -162,6 +165,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D96E8CD13F30FDE723362F0D /* Pods_ColorNinja.framework in Frameworks */,
+				F2B07F29248A9C6F0019D075 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,6 +175,7 @@
 		2DD68138F1FAD3D7E224F3DA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F2B07F28248A9C6F0019D075 /* GameKit.framework */,
 				57F237B10E2F49C95DDF1EC4 /* Pods_ColorNinja.framework */,
 			);
 			name = Frameworks;
@@ -465,6 +470,7 @@
 		F2C06078246566B5001FAD58 /* ColorNinja */ = {
 			isa = PBXGroup;
 			children = (
+				F2B07F2A248A9CE10019D075 /* ColorNinja.entitlements */,
 				F24E4346247A5C3F00FBA7B1 /* DataAccess */,
 				8C5FFECF2472E7E200D9FA5E /* AppDelegate */,
 				F28098BB246AE2060060693D /* Manager */,
@@ -797,8 +803,10 @@
 			baseConfigurationReference = 57C86C5C019D378438E37339 /* Pods-ColorNinja.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ColorNinja/ColorNinja.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = GSDWJHQ3A4;
 				INFOPLIST_FILE = ColorNinja/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -806,6 +814,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.duydl.colorninja;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "provision-profile-colorninja";
@@ -820,8 +829,10 @@
 			baseConfigurationReference = 2EA3A6356F910FED2BED91AD /* Pods-ColorNinja.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ColorNinja/ColorNinja.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = GSDWJHQ3A4;
 				INFOPLIST_FILE = ColorNinja/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -829,6 +840,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.duydl.colorninja;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "provision-profile-colorninja";
