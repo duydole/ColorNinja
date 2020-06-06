@@ -11,6 +11,7 @@ import ZaloSDK
 import GoogleMobileAds
 
 let bannerAdUnitId = "ca-app-pub-2457313692920235/9322423961"
+let ENABLE_SHOW_ADS = true
 
 class HomeViewController2: BaseHomeViewController {
   
@@ -30,6 +31,9 @@ class HomeViewController2: BaseHomeViewController {
     //printAllFamilyFonts()
     
     navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+    
+    // Register aganin if need:
+    DataBaseService.shared.insertUserToDB(user: OwnerInfo.shared, completion: nil)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -104,7 +108,9 @@ class HomeViewController2: BaseHomeViewController {
     adBannerView = GADBannerView()
     adBannerView.rootViewController = self
     adBannerView.adUnitID = bannerAdUnitId
-    adBannerView.load(GADRequest())
+    if ENABLE_SHOW_ADS {
+      adBannerView.load(GADRequest())
+    }
     view.addSubview(adBannerView)
     
     let padding: CGFloat = 10
