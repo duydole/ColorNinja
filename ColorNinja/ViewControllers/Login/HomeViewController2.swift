@@ -222,6 +222,11 @@ class HomeViewController2: BaseHomeViewController {
   }
   
   @objc private func didTapMuteButton() {
+    
+    // Update setting
+    GameSettingManager.shared.allowMainSound.toggle()
+    
+    // Update MusicPlayer
     GameMusicPlayer.shared.toggleMainSoundState()
     muteButton.setImage(speakerImageForCurrentMainSoundState()?.withRenderingMode(.alwaysTemplate), for: .normal)
   }

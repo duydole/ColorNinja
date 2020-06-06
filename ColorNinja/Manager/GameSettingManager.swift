@@ -9,15 +9,14 @@
 import Foundation
 
 class GameSettingManager {
-    
-    static let shared = GameSettingManager()
-    
-    var allowEffectSound: Bool!
-    var allowMainSound: Bool {
-        return !GameMusicPlayer.shared.isMuteMainSound
-    }
-    
-    private init() {
-        allowEffectSound = true
-    }
+  
+  static let shared = GameSettingManager()
+  
+  public var allowEffectSound: Bool!
+  public var allowMainSound: Bool!
+  
+  private init() {
+    allowEffectSound = true
+    allowMainSound = true
+  }
 }

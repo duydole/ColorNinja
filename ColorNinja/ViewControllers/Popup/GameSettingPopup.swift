@@ -142,8 +142,10 @@ class GameSettingPopup: PopupViewController {
     
     @objc func mainSoundSwitchDidChange(_ sender: UISwitch) {
         if sender.isOn {
+          GameSettingManager.shared.allowMainSound = true
             GameMusicPlayer.shared.unmuteBackgroundGameMusic()
         } else {
+          GameSettingManager.shared.allowMainSound = false
             GameMusicPlayer.shared.muteBackgroundGameMusic()
         }
     }

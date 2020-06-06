@@ -77,14 +77,7 @@ class GameOverPopup: PopupViewController {
   }
   
   @objc private func didTapWatchAdsButton() {
-    if !allowWatchAdsToGainReward {
-      /// Not allow to watch ads
-      return
-    }
-    
-    if rewardedAd?.isReady == true {
-      rewardedAd?.present(fromRootViewController: self, delegate:self)
-    }
+    showRewardAd()
   }
   
   // MARK: Setup Views
@@ -237,9 +230,26 @@ class GameOverPopup: PopupViewController {
   
   private func showFullScreenAd() {
     if interstitial.isReady {
+      if GameSettingManager.shared.allowMainSound {
+        GameMusicPlayer.shared.muteBackgroundGameMusic()
+      }
       interstitial.present(fromRootViewController: self)
     } else {
       assert(true, "Ads is not ready")
+    }
+  }
+  
+  private func showRewardAd() {
+    if !allowWatchAdsToGainReward {
+      /// Not allow to watch ads
+      return
+    }
+    
+    if rewardedAd?.isReady == true {
+      if GameSettingManager.shared.allowMainSound {
+        GameMusicPlayer.shared.muteBackgroundGameMusic()
+      }
+      rewardedAd?.present(fromRootViewController: self, delegate:self)
     }
   }
   
@@ -260,6 +270,9 @@ class GameOverPopup: PopupViewController {
 extension GameOverPopup: GADInterstitialDelegate {
   
   func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+    if GameSettingManager.shared.allowMainSound {
+      GameMusicPlayer.shared.unmuteBackgroundGameMusic()
+    }
     _dismissAndSendReplayEventToDelegate()
   }
 }
@@ -279,6 +292,11 @@ extension GameOverPopup: GADRewardedAdDelegate {
   
   /// Tells the delegate that the rewarded ad was dismissed.
   func rewardedAdDidDismiss(_ rewardedAd: GADRewardedAd) {
+    
+    if GameSettingManager.shared.allowMainSound {
+      GameMusicPlayer.shared.unmuteBackgroundGameMusic()
+    }
+    
     if earnedReward > 0 {
       /// Send reward to delegate
       _dismissAndSendRewardEventToDelegate()
