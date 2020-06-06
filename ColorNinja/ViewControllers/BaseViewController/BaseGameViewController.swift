@@ -16,6 +16,7 @@ class BaseGameViewController : BaseViewController {
   var readyLabel: UILabel!
   var boardContainer: UIView!
   var topContainer : UIView!
+  var activityIndicator = UIActivityIndicatorView()
   var boardCollectionView : BoardCollectionView!
   let boardDataSource: BoardDataSource = BoardDataSource()
   var currentLevel : LevelModel = LevelModel(levelIndex: 0)
@@ -40,7 +41,6 @@ class BaseGameViewController : BaseViewController {
     let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
     self.present(alert, animated: true, completion: nil)
-    
   }
   
   // MARK: - SetupViews
@@ -51,6 +51,12 @@ class BaseGameViewController : BaseViewController {
     self.setupTopContainer()
     self.setupBoardContainer()
     self.setupReadyView()
+    
+    /// Setup indicator vầy cho lẹ chứ tạo hàm mệt quá rầu
+    view.addSubview(activityIndicator)
+    activityIndicator.snp.makeConstraints { (make) in
+      make.center.equalToSuperview()
+    }
   }
   
   private func setupReadyView() {

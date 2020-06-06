@@ -22,11 +22,11 @@ class GameSettingPopup: PopupViewController {
     }
     
     override var contentSize: CGSize {
-        return Constants.GameSettingPopup.contentSize
+        return CGSize(width: scaledValue(300), height: scaledValue(220))
     }
     
     override var cornerRadius: CGFloat {
-        return Constants.GameSettingPopup.cornerRadius
+        return scaledValue(20)
     }
     
     // MARK: - Setup Views
@@ -39,6 +39,8 @@ class GameSettingPopup: PopupViewController {
     
     private func setupNavigationBar() {
         
+      let fontSize = scaledValue(30)
+      
         // NavigationBar
         navigationBar = UIView()
         navigationBar.backgroundColor = ColorRGB(229, 141, 35)
@@ -46,14 +48,14 @@ class GameSettingPopup: PopupViewController {
         contentView.clipsToBounds = true
         navigationBar.snp.makeConstraints { (make) in
             make.leading.top.trailing.equalToSuperview()
-            make.height.equalTo(Constants.GameSettingPopup.navigationBarHeight)
+            make.height.equalTo(scaledValue(70))
         }
         
         // Title
         let title = UILabel()
         title.text = "SETTING"
         title.textColor = .white
-        title.font = UIFont.systemFont(ofSize: 30, weight: .bold)
+        title.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
         navigationBar.addSubview(title)
         title.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
@@ -66,8 +68,8 @@ class GameSettingPopup: PopupViewController {
         closeButton.addTarget(self, action: #selector(didTapExitButton), for: .touchUpInside)
         navigationBar.addSubview(closeButton)
         closeButton.snp.makeConstraints { (make) in
-            make.width.height.equalTo(20)
-            make.trailing.equalToSuperview().offset(-20)
+            make.width.height.equalTo(scaledValue(20))
+            make.trailing.equalToSuperview().offset(scaledValue(-20))
             make.centerY.equalToSuperview()
         }
     }
@@ -80,7 +82,7 @@ class GameSettingPopup: PopupViewController {
         subContentView.layer.shadowOpacity = 0.5
         subContentView.layer.shadowOffset = .zero
 
-        let padding = 10
+        let padding = scaledValue(10)
         contentView.addSubview(subContentView)
         subContentView.snp.makeConstraints { (make) in
             make.bottom.trailing.equalTo(-padding)
@@ -97,16 +99,17 @@ class GameSettingPopup: PopupViewController {
         mainSoundSwitch.addTarget(self, action: #selector(mainSoundSwitchDidChange(_:)), for: .valueChanged)
         subContentView.addSubview(mainSoundSwitch)
         mainSoundSwitch.snp.makeConstraints { (make) in
-            make.top.equalTo(30)
-            make.trailing.equalTo(-20)
+            make.top.equalTo(scaledValue(15))
+            make.trailing.equalTo(scaledValue(-20))
         }
         
         // MainLabel
         let mainLabel = UILabel()
         mainLabel.text = "MAIN SOUND"
+      mainLabel.font = UIFont.systemFont(ofSize: scaledValue(18))
         subContentView.addSubview(mainLabel)
         mainLabel.snp.makeConstraints { (make) in
-            make.leading.equalTo(20)
+            make.leading.equalTo(scaledValue(20))
             make.centerY.equalTo(mainSoundSwitch)
         }
         
@@ -116,16 +119,18 @@ class GameSettingPopup: PopupViewController {
         effectSoundSwitch.addTarget(self, action: #selector(effectSoundSwitchDidChange(_:)), for: .valueChanged)
         subContentView.addSubview(effectSoundSwitch)
         effectSoundSwitch.snp.makeConstraints { (make) in
-            make.top.equalTo(mainSoundSwitch.snp.bottom).offset(30)
+          make.bottom.equalToSuperview().offset(scaledValue(-15))
             make.centerX.equalTo(mainSoundSwitch)
         }
         
         // MainLabel
         let effectLabel = UILabel()
         effectLabel.text = "EFFECT SOUND"
+      effectLabel.font = UIFont.systemFont(ofSize: scaledValue(18))
+
         subContentView.addSubview(effectLabel)
         effectLabel.snp.makeConstraints { (make) in
-            make.leading.equalTo(20)
+            make.leading.equalTo(scaledValue(20))
             make.centerY.equalTo(effectSoundSwitch)
         }
     }

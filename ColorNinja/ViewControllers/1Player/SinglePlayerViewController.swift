@@ -171,6 +171,8 @@ class SinglePlayerViewController : BaseGameViewController {
   
   private func processGameOver() {
     
+    activityIndicator.startAnimating()
+    
     // Reset CountDownLabel
     self.remainingTime = 0.00
     self.remainTimeLabel.text = self.currentRemainTimeString()
@@ -206,6 +208,10 @@ class SinglePlayerViewController : BaseGameViewController {
     DataBaseService.shared.loadUserRank(user: OwnerInfo.shared.toUser()) { (rank) in
       OwnerInfo.shared.updateUserRank(newRank: rank)
       DispatchQueue.main.async {
+        
+        // Stop animator
+        self.activityIndicator.stopAnimating()
+        
         // Show Popup GameOver
         let gameOverPopup = GameOverPopup()
         if self.didResumeWithRewards {
