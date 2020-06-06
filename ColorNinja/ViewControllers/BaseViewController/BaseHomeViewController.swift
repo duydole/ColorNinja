@@ -110,7 +110,9 @@ class BaseHomeViewController: UIViewController {
     addUserNameButton()
     addAppNameLabel()
     addAppIconView()
+    #if !DISABLE_LOGIN_FB
     addSignoutImageView()
+    #endif
   }
   
   private func addAppNameLabel() {
@@ -192,6 +194,8 @@ class BaseHomeViewController: UIViewController {
         let loginManager = LoginManager()
         loginManager.logOut()
       }
+      
+      OwnerInfo.shared.updateInfoBeforeLogout()
       
       self.navigationController?.popViewController(animated: true)
     }))

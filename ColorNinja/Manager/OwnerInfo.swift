@@ -105,6 +105,10 @@ class OwnerInfo {
     return User(userId: self.userId, username: self.userName, avatarUrl: self.avatarUrl, bestScore: self.bestScore, rank: self.rank)
   }
   
+  func updateInfoBeforeLogout() {
+    updateLoginType(newLoginType: .NotLogin)
+  }
+  
   // MARK: Private
   
   private let userDefault = UserDefaults.standard
