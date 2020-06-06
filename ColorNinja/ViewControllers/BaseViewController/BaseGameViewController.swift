@@ -58,7 +58,7 @@ class BaseGameViewController : BaseViewController {
     self.view.addSubview(readyLabel)
     readyLabel.textAlignment = .center
     readyLabel.textColor = Constants.GameScreen.ReadyView.textColor
-    readyLabel.font = UIFont.systemFont(ofSize: Constants.GameScreen.ReadyView.fontSize, weight: .heavy)
+    readyLabel.font = UIFont.systemFont(ofSize: scaledValue(Constants.GameScreen.ReadyView.fontSize), weight: .heavy)
     readyLabel.alpha = 0.0
     readyLabel.snp.makeConstraints { (make) in
       make.center.equalTo(self.view)

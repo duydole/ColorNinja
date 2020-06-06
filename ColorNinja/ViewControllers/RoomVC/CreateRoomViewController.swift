@@ -31,26 +31,31 @@ class CreateRoomViewController: BaseViewController {
   }
   
   private func setupButtons() {
+    
+    let containerHeight = scaledValue(260)
+    let containerWidth = scaledValue(220)
+    let buttonHeight = scaledValue(60)
+    let spacing = scaledValue(40)
+    
     let container = UIView()
     view.addSubview(container)
     container.snp.makeConstraints { (make) in
-      make.width.equalTo(220)
-      make.height.equalTo(260)
+      make.width.equalTo(containerWidth)
+      make.height.equalTo(containerHeight)
       make.center.equalToSuperview()
     }
     
-    let buttonHeight: CGFloat = 60
-    let spacing: CGFloat = 40
-    let buttonPadding = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    let p = scaledValue(10)
+    let buttonPadding = UIEdgeInsets(top: p, left: p, bottom: p, right: p)
     
     // Random
     randomButton = ButtonWithImage()
     randomButton.buttonPadding = buttonPadding
     randomButton.backgroundColor = .white
-    randomButton.layer.cornerRadius = 12
+    randomButton.layer.cornerRadius = scaledValue(12)
     randomButton.titleLabel.text = "RANDOM"
     randomButton.titleLabel.textAlignment = .center
-    randomButton.titleLabel.font = UIFont(name: Font.squirk, size: 30)
+    randomButton.titleLabel.font = UIFont(name: Font.squirk, size: scaledValue(30))
     randomButton.imageView.image = UIImage(named: "randomicon")
     randomButton.titleLabel.textColor = .black
     randomButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapRandomButton))
@@ -66,10 +71,10 @@ class CreateRoomViewController: BaseViewController {
     newRoomButton = ButtonWithImage()
     newRoomButton.buttonPadding = buttonPadding
     newRoomButton.backgroundColor = .white
-    newRoomButton.layer.cornerRadius = 12
+    newRoomButton.layer.cornerRadius = scaledValue(12)
     newRoomButton.titleLabel.text = "NEW ROOM"
     newRoomButton.titleLabel.textAlignment = .center
-    newRoomButton.titleLabel.font = UIFont(name: Font.squirk, size: 30)
+    newRoomButton.titleLabel.font = UIFont(name: Font.squirk, size: scaledValue(30))
     newRoomButton.imageView.image = UIImage(named: "newroomicon")
     newRoomButton.titleLabel.textColor = .black
     newRoomButton.makeShadow()
@@ -84,10 +89,10 @@ class CreateRoomViewController: BaseViewController {
     joinRoomButton = ButtonWithImage()
     joinRoomButton.buttonPadding = buttonPadding
     joinRoomButton.backgroundColor = .white
-    joinRoomButton.layer.cornerRadius = 12
+    joinRoomButton.layer.cornerRadius = scaledValue(12)
     joinRoomButton.titleLabel.text = "JOIN ROOM"
     joinRoomButton.titleLabel.textAlignment = .center
-    joinRoomButton.titleLabel.font = UIFont(name: Font.squirk, size: 30)
+    joinRoomButton.titleLabel.font = UIFont(name: Font.squirk, size: scaledValue(30))
     joinRoomButton.imageView.image = UIImage(named: "joinroomicon")
     joinRoomButton.titleLabel.textColor = .black
     joinRoomButton.makeShadow()

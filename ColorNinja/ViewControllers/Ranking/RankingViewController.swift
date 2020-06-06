@@ -16,7 +16,8 @@ class RankingViewController: UIViewController {
   private var titleLabel: UILabel!
   private var avatarView: UIImageView!
   private var infoView: UIView!
-  
+  private var activityIndicator = UIActivityIndicatorView()
+
   private var rankingData: [RankingCellModel] = []
   
   // MARK: Life cycle
@@ -26,6 +27,7 @@ class RankingViewController: UIViewController {
     
     self.setupView()
     
+    activityIndicator.startAnimating()
     self.prepareData()
   }
   
@@ -34,12 +36,13 @@ class RankingViewController: UIViewController {
   private func setupView() {
     self.view.backgroundColor = Constants.GameScreen.backgroundColor
     
-    self.setupExitButton()
+    setupExitButton()
     
-    self.setTitleLabel()
-    self.setupAvatarView()
-    self.setupInfoView()
-    self.setupTableView()
+    setTitleLabel()
+    setupAvatarView()
+    setupInfoView()
+    setupTableView()
+    setupIndicator()
   }
   
   private func setTitleLabel() {
@@ -171,9 +174,19 @@ class RankingViewController: UIViewController {
     }
   }
   
+  private func setupIndicator() {
+    rankingView.addSubview(activityIndicator)
+    activityIndicator.snp.makeConstraints { (make) in
+      make.center.equalToSuperview()
+      make.width.height.equalTo(50)
+    }
+  }
+  
   private func prepareData() {
     
     DataBaseService.shared.loadLeaderBoardUsers { (users,error)  in
+      
+      self.activityIndicator.stopAnimating()
       
       if let error = error {
         print("duydl: Error \(error)")

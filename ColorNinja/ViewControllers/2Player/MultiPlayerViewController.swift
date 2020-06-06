@@ -64,8 +64,8 @@ class MultiPlayerViewController : BaseGameViewController {
   
   func setupTopContainer() {
     
-    let paddingTop = 20
-    let paddingLR = 30
+    let paddingTop = scaledValue(20)
+    let paddingLR = scaledValue(30)
     let maxUserNameLabelWidth = scaledValue(100)
     
     // Player 1
@@ -124,7 +124,7 @@ class MultiPlayerViewController : BaseGameViewController {
   func setupStatusLabel() {
     statusLabel = UILabel()
     statusLabel.textColor = .yellow
-    statusLabel.font = UIFont.systemFont(ofSize: 23, weight: .bold)
+    statusLabel.font = UIFont.systemFont(ofSize: scaledValue(23), weight: .bold)
     view.addSubview(statusLabel)
     statusLabel.snp.makeConstraints { (make) in
       make.center.equalToSuperview()
