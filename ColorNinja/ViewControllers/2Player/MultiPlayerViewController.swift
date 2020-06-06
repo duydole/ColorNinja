@@ -233,10 +233,10 @@ class MultiPlayerViewController : BaseGameViewController {
   // MARK: - Send Message to Server
   
   func sendRequiredKeyMessage() {
-    // [type: keyPlayer: username:]
-    // NOTE: name không đc chưa dấu cách
-    let jsonString = "{\"type\":\(ClientSendType.SendRequiredKey.rawValue),\"keyPlayer\":\"\(player1.userId)\",\"username\":\(player1.username)} "
-    client.sendToServer(message: jsonString)
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+      let jsonString = "{\"type\":\(ClientSendType.SendRequiredKey.rawValue),\"keyPlayer\":\"\(self.player1.userId)\",\"username\":\(self.player1.username)} "
+      self.client.sendToServer(message: jsonString)
+    }
   }
   
   private func sendWinMessage() {

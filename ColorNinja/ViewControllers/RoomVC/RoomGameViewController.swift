@@ -71,8 +71,10 @@ class RoomGameViewController: MultiPlayerViewController {
   // MARK: Client send to server
   
   override func sendRequiredKeyMessage() {
-    let jsonString = "{\"type\":\(ClientSendType.SendRequiredKeyGroupMode.rawValue),\"keyPlayer\":\"\(player1.userId)\",\"username\":\(player1.username)} "
-    client.sendToServer(message: jsonString)
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+      let jsonString = "{\"type\":\(ClientSendType.SendRequiredKeyGroupMode.rawValue),\"keyPlayer\":\"\(self.player1.userId)\",\"username\":\(self.player1.username)} "
+      self.client.sendToServer(message: jsonString)
+    }
   }
   
   func sendJoinRoomRequestToServer() {
