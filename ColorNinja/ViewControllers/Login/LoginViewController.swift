@@ -14,8 +14,12 @@ class LoginViewController: UIViewController {
   
   private var usernameTextField: UITextField!
   private var loginWithZaloButton: ButtonWithImage!
+  #if DISABLE_LOGIN_FB
+  private var loginAsGuestButton: UIButton!
+  #else
   private var loginWithFBButton: ButtonWithImage!
   private var loginAsGuestButton: ButtonWithImage!
+  #endif
   
   // MARK: Life Cycle
   
@@ -24,6 +28,9 @@ class LoginViewController: UIViewController {
     setupViews()
     view.backgroundColor = .white
     navigationController?.navigationBar.isHidden = true
+    
+    let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+    view.addGestureRecognizer(tap)
   }
   
   // MARK: Setup Views
@@ -34,11 +41,17 @@ class LoginViewController: UIViewController {
   
   private func setupButtons() {
     
+    let padding: CGFloat = scaledValue(10)
+    let numberOfButtonInContainer: CGFloat = 2
+    #if DISABLE_LOGIN_FB
+    let containerHeight: CGFloat = scaledValue(120)
+    #else
+    let containerHeight: CGFloat = scaledValue(300)
+    #endif
+    let buttonHeight = (containerHeight - (numberOfButtonInContainer - 1)*padding)/numberOfButtonInContainer
+    
     // Container
     let container = UIView()
-    let containerHeight: CGFloat = scaledValue(300)
-    let padding: CGFloat = scaledValue(10)
-    let buttonHeight = (containerHeight - 4*padding)/5
     view.addSubview(container)
     container.snp.makeConstraints { (make) in
       make.width.equalToSuperview().multipliedBy(0.7)
@@ -56,8 +69,16 @@ class LoginViewController: UIViewController {
     }
     
     // login as guest
+    #if DISABLE_LOGIN_FB
+    loginAsGuestButton = UIButton()
+    loginAsGuestButton.setTitle("LET'S GO", for: .normal)
+    loginAsGuestButton.titleLabel?.textColor = .white
+    loginAsGuestButton.layer.cornerRadius = 5.0
+    loginAsGuestButton.addTarget(self, action: #selector(didTapLoginAsGuestButton), for: .touchUpInside)
+    #else
     loginAsGuestButton = ViewCreator.createButtonImageInLoginVC(image: UIImage(named: "defaultAvatar")!, title: "Play game as guest", backgroundColor: Color.Facebook.loginButton)
     loginAsGuestButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapLoginAsGuestButton))
+    #endif
     loginAsGuestButton.backgroundColor = ColorRGB(255, 18, 18)
     container.addSubview(loginAsGuestButton)
     loginAsGuestButton.snp.makeConstraints { (make) in
@@ -67,6 +88,7 @@ class LoginViewController: UIViewController {
     }
     
     // OR Label
+    #if !DISABLE_LOGIN_FB
     let orLabel = UILabel()
     orLabel.text = "OR"
     orLabel.font = UIFont.systemFont(ofSize: 25, weight: .heavy)
@@ -76,6 +98,7 @@ class LoginViewController: UIViewController {
       make.height.equalTo(buttonHeight)
       make.top.equalTo(loginAsGuestButton.snp.bottom).offset(padding)
     }
+    #endif
     
     //        // Login with Zalo
     //        loginWithZaloButton = ViewCreator.createButtonImageInLoginVC(image: UIImage(named: "zalologo")!, title: "Login with Zalo", backgroundColor: Color.Zalo.blue2)
@@ -86,6 +109,7 @@ class LoginViewController: UIViewController {
     //            make.top.equalTo(orLabel.snp.bottom).offset(padding)
     //        }
     
+    #if !DISABLE_LOGIN_FB
     // login with facebook
     loginWithFBButton = ViewCreator.createButtonImageInLoginVC(image: UIImage(named: "fblogo")!, title: "Login with Facebook", backgroundColor: Color.Facebook.loginButton)
     loginWithFBButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapLoginWithFacebookButton))
@@ -94,7 +118,8 @@ class LoginViewController: UIViewController {
       make.width.height.centerX.equalTo(loginAsGuestButton)
       make.top.equalTo(orLabel.snp.bottom).offset(padding)
     }
-  }
+    #endif
+    }
   
   // MARK: Handle Events
   
@@ -165,6 +190,10 @@ class LoginViewController: UIViewController {
     
     // Open homeVC
     openHomeViewController()
+  }
+  
+  @objc private func dismissKeyboard() {
+    usernameTextField.resignFirstResponder()
   }
   
   private func openHomeViewController() {
