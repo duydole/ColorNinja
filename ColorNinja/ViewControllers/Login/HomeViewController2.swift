@@ -9,9 +9,11 @@
 import UIKit
 import ZaloSDK
 import GoogleMobileAds
+import StoreKit
 
 let bannerAdUnitId = "ca-app-pub-2457313692920235/9322423961"
 let ENABLE_SHOW_ADS = true
+let appId = "1516759930"
 
 class HomeViewController2: BaseHomeViewController {
   
@@ -224,7 +226,7 @@ class HomeViewController2: BaseHomeViewController {
   }
   
   @objc private func didTapRateUsButton() {
-    
+    rateApp()
   }
   
   @objc private func didTapMuteButton() {
@@ -241,5 +243,18 @@ class HomeViewController2: BaseHomeViewController {
     let rankingVC = RankingViewController()
     rankingVC.modalPresentationStyle = .fullScreen
     present(rankingVC, animated: true, completion: nil)
+  }
+  
+  func rateApp() {
+      if #available(iOS 10.3, *) {
+          SKStoreReviewController.requestReview()
+
+      } else if let url = URL(string: "itms-apps://itunes.apple.com/app/\(appId)") {
+          if #available(iOS 10, *) {
+              UIApplication.shared.open(url, options: [:], completionHandler: nil)
+          } else {
+              UIApplication.shared.openURL(url)
+          }
+      }
   }
 }
