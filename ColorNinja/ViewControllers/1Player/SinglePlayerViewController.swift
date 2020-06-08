@@ -171,6 +171,7 @@ class SinglePlayerViewController : BaseGameViewController {
   
   private func processGameOver() {
     
+    // Loading...
     activityIndicator.startAnimating()
     
     // Reset CountDownLabel
@@ -191,16 +192,16 @@ class SinglePlayerViewController : BaseGameViewController {
     let resultScored = currentLevel.levelIndex + 1
     if resultScored > OwnerInfo.shared.bestScore {
       OwnerInfo.shared.updateBestScore(newBestScore: resultScored)
-      DataBaseService.shared.updateBestScoreForUser(userid: OwnerInfo.shared.userId, newBestScore: resultScored) { (success, error) in
-        if let _ = error {
-          assert(false)
-          return
-        }
-        
-        self.getRankAndShowGameOverPopup()
+    }
+    
+    /// Luôn luôn quăng score lên Server để server tự update.
+    DataBaseService.shared.updateBestScoreForUser(userid: OwnerInfo.shared.userId, newBestScore: resultScored) { (success, error) in
+      if let _ = error {
+        assert(false)
+        return
       }
-    } else {
-      getRankAndShowGameOverPopup()
+      
+      self.getRankAndShowGameOverPopup()
     }
   }
   

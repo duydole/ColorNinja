@@ -106,6 +106,8 @@ class DataBaseService : NSObject {
       completion?(false,nil)
     }
 
+    print("duydl: Request update score for user with newScore: \(newBestScore)")
+    
     let parameters: Dictionary<String, Any> = [
       "key": userid,
       "bestscore":newBestScore,
@@ -174,7 +176,6 @@ class DataBaseService : NSObject {
       }
     }
   }
-  
   
   // MARK: Private
   

@@ -184,6 +184,9 @@ class LoginViewController: UIViewController {
     DataBaseService.shared.insertUserToDB(user: OwnerInfo.shared) { (success, error) in
       if error != nil {
         assertionFailure()
+        
+        /// Đeo bao
+        self.openHomeViewController()
         return
       }
     }
