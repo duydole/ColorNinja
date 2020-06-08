@@ -22,6 +22,18 @@ class JoinRoomPopup: PopupViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupViews()
+    
+    showDarkDuration = 0.0
+    showContentViewDuration = 0.3
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    
+    /// Open keyboard
+    UIView.animate(withDuration: showContentViewDuration) {
+      self.textField.becomeFirstResponder()
+    }
   }
   
   override var contentSize: CGSize {

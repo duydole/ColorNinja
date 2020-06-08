@@ -144,6 +144,11 @@ class MultiPlayerViewController : BaseGameViewController {
   
   private func serverSendBoardGame(_ json: Dictionary<String, Any>) {
     
+    // workaround:
+    if statusLabel.isHidden == false {
+        statusLabel.isHidden = true
+    }
+    
     let boardGameInfo = json["boardGame"] as! Dictionary<String, Any>
     let levelIndex: Int = boardGameInfo["round"] as! Int
     let listStringAnimation = levelIndex == 1 ? ["Matched", "3", "2", "1", "Go!"] : ["Next"]
