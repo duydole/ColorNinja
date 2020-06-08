@@ -144,17 +144,17 @@ class HomeViewController2: BaseHomeViewController {
     }
     
     
-    // RateUs
-    rateUsButton = UIButton()
-    rateUsButton.setImage(UIImage(named:"staricon")?.withRenderingMode(.alwaysTemplate), for: .normal)
-    rateUsButton.imageView?.tintColor = .white
-    rateUsButton.addTarget(self, action: #selector(didTapRateUsButton), for: .touchUpInside)
-    bottomBar.addSubview(rateUsButton)
-    rateUsButton.snp.makeConstraints { (make) in
-      make.height.equalToSuperview()
-      make.width.equalTo(rateUsButton.snp.height)
-      make.center.equalToSuperview()
-    }
+//    // RateUs
+//    rateUsButton = UIButton()
+//    rateUsButton.setImage(UIImage(named:"staricon")?.withRenderingMode(.alwaysTemplate), for: .normal)
+//    rateUsButton.imageView?.tintColor = .white
+//    rateUsButton.addTarget(self, action: #selector(didTapRateUsButton), for: .touchUpInside)
+//    bottomBar.addSubview(rateUsButton)
+//    rateUsButton.snp.makeConstraints { (make) in
+//      make.height.equalToSuperview()
+//      make.width.equalTo(rateUsButton.snp.height)
+//      make.center.equalToSuperview()
+//    }
     
     // MuteButton
     muteButton = UIButton()
@@ -163,8 +163,9 @@ class HomeViewController2: BaseHomeViewController {
     muteButton.addTarget(self, action: #selector(didTapMuteButton), for: .touchUpInside)
     bottomBar.addSubview(muteButton)
     muteButton.snp.makeConstraints { (make) in
-      make.centerY.width.height.equalTo(rateUsButton)
-      make.trailing.equalTo(rateUsButton.snp.leading).offset(scaledValue(-buttonSpacing))
+      make.height.centerY.equalToSuperview()
+      make.width.equalTo(muteButton.snp.height)
+      make.centerX.equalToSuperview().offset(-(bottomBarHeight - buttonSpacing/2))
     }
     
     // RankingButton
@@ -174,8 +175,8 @@ class HomeViewController2: BaseHomeViewController {
     rankingButton.addTarget(self, action: #selector(didTapRankingButton), for: .touchUpInside)
     bottomBar.addSubview(rankingButton)
     rankingButton.snp.makeConstraints { (make) in
-      make.centerY.width.height.equalTo(rateUsButton)
-      make.leading.equalTo(rateUsButton.snp.trailing).offset(scaledValue(buttonSpacing))
+      make.centerY.width.height.equalTo(muteButton)
+      make.leading.equalTo(muteButton.snp.trailing).offset(scaledValue(buttonSpacing))
     }
   }
   
