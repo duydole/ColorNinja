@@ -22,7 +22,7 @@ class GameSettingPopup: PopupViewController {
     }
     
     override var contentSize: CGSize {
-        return CGSize(width: scaledValue(300), height: scaledValue(220))
+        return CGSize(width: scaledValue(280), height: scaledValue(220))
     }
     
     override var cornerRadius: CGFloat {

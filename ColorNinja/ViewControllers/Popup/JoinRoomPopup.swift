@@ -36,6 +36,14 @@ class JoinRoomPopup: PopupViewController {
     }
   }
   
+  override func dismissPopUp() {
+    UIView.animate(withDuration: 0.3, animations: {
+      self.textField.resignFirstResponder()
+    }) { (success) in
+      super.dismissPopUp()
+    }
+  }
+  
   override var contentSize: CGSize {
     return CGSize(width: scaledValue(220), height: scaledValue(180))
   }
