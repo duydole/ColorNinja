@@ -138,7 +138,7 @@ class MultiPlayerViewController : BaseGameViewController {
   }
   
   private func waitingAnotherPlayerFromServer(_ json: Dictionary<String, Any>) {
-    showStatus(message: "Waiting random matching...")
+    showStatus(message: "Looking for competitor...")
     print("duydl: WAITING ANOTHER PLAYER!")
   }
   

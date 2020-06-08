@@ -37,7 +37,7 @@ class RoomGameViewController: MultiPlayerViewController {
   }
   
   private func showWaitingInRoomStatus() {
-    showStatus(message: "Share RoomId \(roomId) to your friend :D")
+    showStatus(message: "Share Room Id \(roomId) to your friend ^.^")
   }
   
   // MARK: Server responde
