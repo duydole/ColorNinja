@@ -115,7 +115,7 @@ class HomeViewController: BaseViewController {
   private func setupBannerAd() {
     adBannerView = GADBannerView()
     adBannerView.rootViewController = self
-    adBannerView.adUnitID = bannerAdUnitId
+    //adBannerView.adUnitID = bannerAdUnitId
     adBannerView.load(GADRequest())
     self.view.addSubview(adBannerView)
     adBannerView.snp.makeConstraints { (make) in

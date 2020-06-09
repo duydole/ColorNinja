@@ -11,7 +11,7 @@ import ZaloSDK
 import GoogleMobileAds
 import StoreKit
 
-let bannerAdUnitId = "ca-app-pub-2457313692920235/9322423961"
+fileprivate let bannerAdUnitId = "ca-app-pub-2457313692920235/9322423961"
 let colorNinjaAppId = "1516759930"
 
 class HomeViewController2: BaseHomeViewController {

@@ -8,6 +8,9 @@
 
 import Foundation
 import UIKit
+import GoogleMobileAds
+
+fileprivate let bannderIngameId = "ca-app-pub-2457313692920235/1972710690"
 
 class BaseGameViewController : BaseViewController {
   
@@ -17,6 +20,7 @@ class BaseGameViewController : BaseViewController {
   public var currentLevel : LevelModel = LevelModel(levelIndex: 0)
   public var activityIndicator = UIActivityIndicatorView()
   public var shrinkCell : Bool = true
+  public var adBannerView: GADBannerView!
 
   //Private
   private var readyLabel: UILabel!
@@ -39,15 +43,11 @@ class BaseGameViewController : BaseViewController {
   override func setupViews() {
     super.setupViews()
     
-    self.setupTopContainer()
-    self.setupBoardContainer()
-    self.setupReadyView()
-    
-    /// Setup indicator vầy cho lẹ chứ tạo hàm mệt quá rầu
-    view.addSubview(activityIndicator)
-    activityIndicator.snp.makeConstraints { (make) in
-      make.center.equalToSuperview()
-    }
+    setupTopContainer()
+    setupBoardContainer()
+    setupReadyView()
+    setupIndicator()
+    setupBannerAd()
   }
 
   // MARK: Public APIs
@@ -147,6 +147,31 @@ class BaseGameViewController : BaseViewController {
       make.top.equalTo(settingButton.snp.bottom)
       make.leading.trailing.equalToSuperview()
       make.height.equalTo(Constants.GameScreen.LabelsContainer.height)
+    }
+  }
+  
+  private func setupIndicator() {
+    view.addSubview(activityIndicator)
+    activityIndicator.snp.makeConstraints { (make) in
+      make.center.equalToSuperview()
+    }
+  }
+  
+  private func setupBannerAd() {
+    adBannerView = GADBannerView()
+    adBannerView.rootViewController = self
+    adBannerView.adUnitID = bannderIngameId
+    adBannerView.load(GADRequest())
+    view.addSubview(adBannerView)
+    
+    let padding: CGFloat = 10
+    let viewWidth = ScreenSize.width - 2*padding
+    let bottomPadding = safeAreaBottom() > 0 ? safeAreaBottom() : padding
+    
+    adBannerView.adSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(viewWidth)
+    adBannerView.snp.makeConstraints { (make) in
+      make.bottom.equalTo(-bottomPadding)
+      make.centerX.equalToSuperview()
     }
   }
   
