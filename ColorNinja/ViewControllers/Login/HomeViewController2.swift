@@ -121,13 +121,13 @@ class HomeViewController2: BaseHomeViewController {
     view.addSubview(adBannerView)
     
     let padding: CGFloat = 10
-    let adHeight: CGFloat = 70
+    let viewWidth = ScreenSize.width - 2*padding
     let bottomPadding = safeAreaBottom() > 0 ? safeAreaBottom() : padding
+    
+    adBannerView.adSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(viewWidth)
     adBannerView.snp.makeConstraints { (make) in
-      make.trailing.equalTo(scaledValue(-padding))
-      make.bottom.equalTo(scaledValue(-bottomPadding))
-      make.leading.equalTo(scaledValue(padding))
-      make.height.equalTo(scaledValue(adHeight))
+      make.bottom.equalTo(-bottomPadding)
+      make.centerX.equalToSuperview()
     }
   }
   
@@ -136,7 +136,7 @@ class HomeViewController2: BaseHomeViewController {
   private func setupBottomBar() {
     
     let buttonSpacing: CGFloat = scaledValue(30)
-    let spacingWithAd: CGFloat = scaledValue(20)
+    let spacingWithAd: CGFloat = scaledValue(10)
     let bottomBarHeight: CGFloat = scaledValue(45)
     
     // Container
