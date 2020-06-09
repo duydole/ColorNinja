@@ -12,39 +12,46 @@ import GoogleMobileAds
 import StoreKit
 
 let bannerAdUnitId = "ca-app-pub-2457313692920235/9322423961"
-let ENABLE_SHOW_ADS = true
-let appId = "1516759930"
+let colorNinjaAppId = "1516759930"
 
 class HomeViewController2: BaseHomeViewController {
   
+  //Private
   private var singlePlayerButton: UIButton!
   private var multiPlayerButton: UIButton!
   private var bestScoreLabel: UILabel!
-  private var adBannerView: GADBannerView!
   private var bottomBar: UIView!
+  private var adBannerView: GADBannerView!
   
   // BottomBar
   private var rateUsButton: UIButton!
   private var muteButton: UIButton!
   private var rankingButton: UIButton!
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    //printAllFamilyFonts()
-    
-    navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-    
-    // Register aganin if need:
-    DataBaseService.shared.insertUserToDB(user: OwnerInfo.shared, completion: nil)
-  }
+  // MARK: Life cycle
   
-  override func viewWillAppear(_ animated: Bool) {
-    navigationController?.navigationBar.isHidden = true
-    bestScoreLabel.text = "Your best score is \(OwnerInfo.shared.bestScore)"
+  override func viewDidLoad() {
+    
+    super.viewDidLoad()
+    
+    setupNavigationController()
+    regiserUserInfo()
+    
+    #if DEBUG
+    printAllFamilyFonts()
+    #endif
   }
   
   // MARK: Setup views
   
+  private func setupNavigationController() {
+    /// Disable swipe to back
+    navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+    
+    /// Hide naviagtionbar
+    navigationController?.navigationBar.isHidden = true
+  }
+    
   override func setupViews() {
     super.setupViews()
     
@@ -64,7 +71,7 @@ class HomeViewController2: BaseHomeViewController {
     singlePlayerButton.setTitle("1 Player", for: .normal)
     singlePlayerButton.backgroundColor = .black
     singlePlayerButton.titleLabel!.font = UIFont(name: Font.squirk, size: scaledValue(30))
-    singlePlayerButton.layer.cornerRadius = 13
+    singlePlayerButton.layer.cornerRadius = scaledValue(13)
     singlePlayerButton.makeShadow()
     midContainer.addSubview(singlePlayerButton)
     singlePlayerButton.snp.makeConstraints { (make) in
@@ -82,7 +89,7 @@ class HomeViewController2: BaseHomeViewController {
     multiPlayerButton.setTitle("2 Player", for: .normal)
     multiPlayerButton.backgroundColor = .black
     multiPlayerButton.titleLabel!.font = UIFont(name: Font.squirk, size: scaledValue(30))
-    multiPlayerButton.layer.cornerRadius = 13
+    multiPlayerButton.layer.cornerRadius = scaledValue(13)
     multiPlayerButton.makeShadow()
     midContainer.addSubview(multiPlayerButton)
     multiPlayerButton.snp.makeConstraints { (make) in
@@ -110,9 +117,7 @@ class HomeViewController2: BaseHomeViewController {
     adBannerView = GADBannerView()
     adBannerView.rootViewController = self
     adBannerView.adUnitID = bannerAdUnitId
-    if ENABLE_SHOW_ADS {
-      adBannerView.load(GADRequest())
-    }
+    adBannerView.load(GADRequest())
     view.addSubview(adBannerView)
     
     let padding: CGFloat = 10
@@ -144,17 +149,17 @@ class HomeViewController2: BaseHomeViewController {
     }
     
     
-//    // RateUs
-//    rateUsButton = UIButton()
-//    rateUsButton.setImage(UIImage(named:"staricon")?.withRenderingMode(.alwaysTemplate), for: .normal)
-//    rateUsButton.imageView?.tintColor = .white
-//    rateUsButton.addTarget(self, action: #selector(didTapRateUsButton), for: .touchUpInside)
-//    bottomBar.addSubview(rateUsButton)
-//    rateUsButton.snp.makeConstraints { (make) in
-//      make.height.equalToSuperview()
-//      make.width.equalTo(rateUsButton.snp.height)
-//      make.center.equalToSuperview()
-//    }
+    //    // RateUs
+    //    rateUsButton = UIButton()
+    //    rateUsButton.setImage(UIImage(named:"staricon")?.withRenderingMode(.alwaysTemplate), for: .normal)
+    //    rateUsButton.imageView?.tintColor = .white
+    //    rateUsButton.addTarget(self, action: #selector(didTapRateUsButton), for: .touchUpInside)
+    //    bottomBar.addSubview(rateUsButton)
+    //    rateUsButton.snp.makeConstraints { (make) in
+    //      make.height.equalToSuperview()
+    //      make.width.equalTo(rateUsButton.snp.height)
+    //      make.center.equalToSuperview()
+    //    }
     
     // MuteButton
     muteButton = UIButton()
@@ -186,6 +191,13 @@ class HomeViewController2: BaseHomeViewController {
   
   private func speakerImageForCurrentMainSoundState() -> UIImage? {
     return GameMusicPlayer.shared.isMuteMainSound ? UIImage(named:"speakeroff") : UIImage(named:"speakeron")
+  }
+  
+  // MAKR: Other
+  
+  private func regiserUserInfo() {
+    // Register aganin if need:
+    DataBaseService.shared.insertUserToDB(user: OwnerInfo.shared, completion: nil)
   }
   
   // MARK: Action handler
@@ -247,15 +259,15 @@ class HomeViewController2: BaseHomeViewController {
   }
   
   func rateApp() {
-      if #available(iOS 10.3, *) {
-          SKStoreReviewController.requestReview()
-
-      } else if let url = URL(string: "itms-apps://itunes.apple.com/app/\(appId)") {
-          if #available(iOS 10, *) {
-              UIApplication.shared.open(url, options: [:], completionHandler: nil)
-          } else {
-              UIApplication.shared.openURL(url)
-          }
+    if #available(iOS 10.3, *) {
+      SKStoreReviewController.requestReview()
+      
+    } else if let url = URL(string: "itms-apps://itunes.apple.com/app/\(colorNinjaAppId)") {
+      if #available(iOS 10, *) {
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+      } else {
+        UIApplication.shared.openURL(url)
       }
+    }
   }
 }
