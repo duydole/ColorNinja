@@ -11,52 +11,30 @@ import UIKit
 
 class BaseGameViewController : BaseViewController {
   
+  //Public
+  public var topContainer : UIView!
+  public var boardCollectionView : BoardCollectionView!
+  public var currentLevel : LevelModel = LevelModel(levelIndex: 0)
+  public var activityIndicator = UIActivityIndicatorView()
+  public var shrinkCell : Bool = true
+
+  //Private
+  private var readyLabel: UILabel!
+  private var boardContainer: UIView!
+  private let boardDataSource: BoardDataSource = BoardDataSource()
   private var readyListString : [String] = ["Default"]
   
-  var readyLabel: UILabel!
-  var boardContainer: UIView!
-  var topContainer : UIView!
-  var activityIndicator = UIActivityIndicatorView()
-  var boardCollectionView : BoardCollectionView!
-  let boardDataSource: BoardDataSource = BoardDataSource()
-  var currentLevel : LevelModel = LevelModel(levelIndex: 0)
-  var shrinkCell : Bool = true
-  
-  override var preferredStatusBarStyle: UIStatusBarStyle {
-    .lightContent
-  }
+  // MARK: Life cycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
   }
   
-  // MARK: - Public APIs
+  // MARK: Override
   
-  func startAnimationReadyView(withList listString:[String], completion: ((Bool) -> ())?) {
-    readyListString = listString
-    self.animationReadyView(index: 0, completion: completion)
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    .lightContent
   }
-  
-  func showAlertWithMessage(message: String) {
-    let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
-    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-    self.present(alert, animated: true, completion: nil)
-  }
-  
-  // MARK: Handle Animations
-  
-  func zoomLabelAnimation(scale: CGFloat, label: UILabel, text: String) {
-    label.text = text
-    UIView.animate(withDuration: 0.2, animations: {
-      label.transform = CGAffineTransform(scaleX: scale, y: scale)
-    }, completion: { _ in
-      UIView.animate(withDuration: 0.2) {
-        label.transform = CGAffineTransform(scaleX: CGFloat(1.0), y: CGFloat(1.0))
-      }
-    })
-  }
-  
-  // MARK: - SetupViews
   
   override func setupViews() {
     super.setupViews()
@@ -71,7 +49,48 @@ class BaseGameViewController : BaseViewController {
       make.center.equalToSuperview()
     }
   }
+
+  // MARK: Public APIs
   
+  func startAnimationReadyView(withList listString:[String], completion: ((Bool) -> ())?) {
+    readyListString = listString
+    self.animationReadyView(index: 0, completion: completion)
+  }
+  
+  func showAlertWithMessage(message: String) {
+    let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+    self.present(alert, animated: true, completion: nil)
+  }
+  
+  func showCurrentLevel() {
+    
+    // Update level for DataSource
+    boardDataSource.levelModel = currentLevel
+    
+    // ReloadData
+    self.boardCollectionView.reloadData()
+    self.boardCollectionView.layoutIfNeeded()
+    
+    // ReloadItems to gain animations:
+    self.boardCollectionView.alpha = 1.0
+    self.shrinkCell = false
+    self.boardCollectionView.reloadItems(at: self.boardCollectionView.indexPathsForVisibleItems)
+  }
+  
+  func zoomLabelAnimation(scale: CGFloat, label: UILabel, text: String) {
+    label.text = text
+    UIView.animate(withDuration: 0.2, animations: {
+      label.transform = CGAffineTransform(scaleX: scale, y: scale)
+    }, completion: { _ in
+      UIView.animate(withDuration: 0.2) {
+        label.transform = CGAffineTransform(scaleX: CGFloat(1.0), y: CGFloat(1.0))
+      }
+    })
+  }
+  
+  // MARK: SetupViews
+    
   private func setupReadyView() {
     readyLabel = UILabel()
     self.view.addSubview(readyLabel)
@@ -131,7 +150,7 @@ class BaseGameViewController : BaseViewController {
     }
   }
   
-  // MARK: - Support animations
+  // MARK: Support animations
   
   private func animationReadyView(index: Int, completion: ((Bool) -> ())? ) {
     
@@ -153,27 +172,10 @@ class BaseGameViewController : BaseViewController {
       self.animationReadyView(index: index + 1, completion: completion)
     }
   }
-  
-  // MARK: - GameFlow
-  
-  func showCurrentLevel() {
-    
-    // Update level for DataSource
-    boardDataSource.levelModel = currentLevel
-    
-    // ReloadData
-    self.boardCollectionView.reloadData()
-    self.boardCollectionView.layoutIfNeeded()
-    
-    // ReloadItems to gain animations:
-    self.boardCollectionView.alpha = 1.0
-    self.shrinkCell = false
-    self.boardCollectionView.reloadItems(at: self.boardCollectionView.indexPathsForVisibleItems)
-  }
 }
 
 
-// MARK: - CollectionView Delegate
+// MARK: CollectionView Delegate
 
 extension BaseGameViewController : UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
