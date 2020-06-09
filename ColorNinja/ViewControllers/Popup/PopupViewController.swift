@@ -9,9 +9,9 @@
 import UIKit
 
 class PopupViewController: UIViewController {
-  
-  // MARK: Public Property
-  
+
+  // Public
+  public var activityIndicator = UIActivityIndicatorView()
   public var tapDarkLayerToDismiss: Bool = false
   public var contentView: UIView!
   public var contentSize: CGSize {
@@ -38,11 +38,18 @@ class PopupViewController: UIViewController {
     }
   }
   
-  // MARK: - Private Property
+  // Public API
   
+  func showAlertWithMessage(message: String) {
+    let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+    self.present(alert, animated: true, completion: nil)
+  }
+
+  // Private
   private var darkLayer: UIControl!
   
-  // MARK: - Life cycle
+  // MARK: Life cycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -72,11 +79,12 @@ class PopupViewController: UIViewController {
     }
   }
   
-  // MARK: - Setup views
+  // MARK: Setup views
   
   private func setupView() {
-    self.addDarkLayer()
-    self.addContentView()
+    addDarkLayer()
+    addContentView()
+    setupIndicator()
   }
   
   private func addContentView() {
@@ -97,6 +105,13 @@ class PopupViewController: UIViewController {
     self.darkLayer.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4)
     self.view.addSubview(darkLayer)
     self.darkLayer.addTarget(self, action: #selector(didTapDarkLayer), for: .touchUpInside)
+  }
+  
+  private func setupIndicator() {
+    contentView.addSubview(activityIndicator)
+    activityIndicator.snp.makeConstraints { (make) in
+      make.center.equalToSuperview()
+    }
   }
   
   @objc private func showDarkLayer() {

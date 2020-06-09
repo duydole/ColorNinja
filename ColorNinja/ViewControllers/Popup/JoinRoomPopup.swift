@@ -128,10 +128,4 @@ class JoinRoomPopup: PopupViewController {
     return true
   }
   
-  func showAlertWithMessage(message: String) {
-    let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
-    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-    self.present(alert, animated: true, completion: nil)
-    
-  }
 }

@@ -139,7 +139,6 @@ class MultiPlayerViewController : BaseGameViewController {
   
   private func waitingAnotherPlayerFromServer(_ json: Dictionary<String, Any>) {
     showStatus(message: "Looking for competitor...")
-    print("duydl: WAITING ANOTHER PLAYER!")
   }
   
   private func serverSendBoardGame(_ json: Dictionary<String, Any>) {
@@ -221,7 +220,7 @@ class MultiPlayerViewController : BaseGameViewController {
   }
   
   func serverSendCompetitorOutRoom(_ json: Dictionary<String, Any>) {
-    showAlertWithMessage(message: json["message"] as! String)
+    showAlertWithMessage(message: "Your competitor disconnected!")
   }
   
   // MARK: - Send Message to Server
@@ -314,7 +313,11 @@ extension MultiPlayerViewController : ClientDelegate {
     case .RoundExpried:
       break
     default:
+      if NetworkManager.shared.hasConnection {
       showAlertWithMessage(message: json["message"] as! String)
+      } else {
+        showAlertWithMessage(message: "Sorry. Please check your network connection!")
+      }
       print("duydl: UNKNOW MESSAGE TYPE OF SERVER")
     }
   }

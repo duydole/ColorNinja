@@ -11,9 +11,9 @@ import UIKit
 import GoogleMobileAds
 
 
-let rewardForEachAds: Int = 5 /// numb of seconds user gained each ads.
-let fullScreenAdUnitId = "ca-app-pub-2457313692920235/3301114557"
-let rewardAdsUnitId = "ca-app-pub-2457313692920235/5356432254"
+fileprivate let rewardForEachAds: Int = 5 /// numb of seconds user gained each ads.
+fileprivate let fullScreenAdUnitId = "ca-app-pub-2457313692920235/3301114557"
+fileprivate let rewardAdsUnitId = "ca-app-pub-2457313692920235/5356432254"
 
 protocol GameOverPopupDelegate {
   func didTapReplayButton() -> Void
@@ -23,8 +23,8 @@ protocol GameOverPopupDelegate {
 
 class GameOverPopup: PopupViewController {
   
-  static let kCornerRadius: CGFloat = 10
-  static let kContentPadding: CGFloat = 10
+  static let kCornerRadius: CGFloat = scaledValue(10)
+  static let kContentPadding: CGFloat = scaledValue(10)
   
   // MARK: Public
   public var delegate: GameOverPopupDelegate?
@@ -47,10 +47,7 @@ class GameOverPopup: PopupViewController {
   private var rewardedAd: GADRewardedAd?
   private var interstitial: GADInterstitial!
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    self.setupViews()
-  }
+  // MARK: Override
   
   override var contentSize: CGSize {
     return CGSize(width: scaledValue(330), height: scaledValue(370))
@@ -60,7 +57,15 @@ class GameOverPopup: PopupViewController {
     return GameOverPopup.kCornerRadius
   }
   
-  // MARK: Event Handlers
+  // MARK: Life cycle
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    self.setupViews()
+  }
+  
+  // MARK: Event Handler
   
   @objc private func didTapGoHomeButton() {
     self.dismiss(animated: false) {
@@ -77,7 +82,16 @@ class GameOverPopup: PopupViewController {
   }
   
   @objc private func didTapWatchAdsButton() {
-    showRewardAd()
+    if NetworkManager.shared.hasConnection {
+      if !allowWatchAdsToGainReward {
+        /// Not allow to watch ads
+        showAlertWithMessage(message: "You can only see 1 Reward Advertisement per turn")
+      } else {
+        showRewardAd()
+      }
+    } else {
+      showAlertWithMessage(message: "Sorry. Check your network connection, please.")
+    }
   }
   
   // MARK: Setup Views
@@ -240,11 +254,6 @@ class GameOverPopup: PopupViewController {
   }
   
   private func showRewardAd() {
-    if !allowWatchAdsToGainReward {
-      /// Not allow to watch ads
-      return
-    }
-    
     if rewardedAd?.isReady == true {
       if GameSettingManager.shared.allowMainSound {
         GameMusicPlayer.shared.muteBackgroundGameMusic()

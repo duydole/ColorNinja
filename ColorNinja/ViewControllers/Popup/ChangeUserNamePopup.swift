@@ -106,13 +106,6 @@ class ChangeUserNamePopup: PopupViewController {
     }
   }
   
-  func showAlertWithMessage(message: String) {
-    let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
-    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-    self.present(alert, animated: true, completion: nil)
-    
-  }
-  
   private func isValidUsername(userName: String) -> Bool {
     return true
   }
