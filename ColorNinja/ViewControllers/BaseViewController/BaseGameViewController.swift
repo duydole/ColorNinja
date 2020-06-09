@@ -43,6 +43,19 @@ class BaseGameViewController : BaseViewController {
     self.present(alert, animated: true, completion: nil)
   }
   
+  // MARK: Handle Animations
+  
+  func zoomLabelAnimation(scale: CGFloat, label: UILabel, text: String) {
+    label.text = text
+    UIView.animate(withDuration: 0.2, animations: {
+      label.transform = CGAffineTransform(scaleX: scale, y: scale)
+    }, completion: { _ in
+      UIView.animate(withDuration: 0.2) {
+        label.transform = CGAffineTransform(scaleX: CGFloat(1.0), y: CGFloat(1.0))
+      }
+    })
+  }
+  
   // MARK: - SetupViews
   
   override func setupViews() {
@@ -76,9 +89,17 @@ class BaseGameViewController : BaseViewController {
     // Container
     boardContainer = UIView()
     self.view.addSubview(boardContainer)
-    boardContainer.snp.makeConstraints { (make) in
-      make.leading.trailing.bottom.equalToSuperview()
-      make.top.equalTo(self.topContainer.snp.bottom)
+    
+    if  UIDevice.current.userInterfaceIdiom == .pad {
+      boardContainer.snp.makeConstraints { (make) in
+        make.width.height.equalTo(500)
+        make.center.equalToSuperview()
+      }
+    } else {
+      boardContainer.snp.makeConstraints { (make) in
+        make.leading.trailing.bottom.equalToSuperview()
+        make.top.equalTo(self.topContainer.snp.bottom)
+      }
     }
     
     // Board

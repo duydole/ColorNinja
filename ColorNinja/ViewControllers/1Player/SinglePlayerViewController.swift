@@ -52,19 +52,6 @@ class SinglePlayerViewController : BaseGameViewController {
     stopTimer()
   }
   
-  // MARK: Handle Animations
-  
-  private func zoomX2LabelAnimation(label: UILabel, text: String) {
-    label.text = text
-    UIView.animate(withDuration: 0.2, animations: {
-      label.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
-    }, completion: { _ in
-      UIView.animate(withDuration: 0.2) {
-        label.transform = CGAffineTransform(scaleX: CGFloat(1.0), y: CGFloat(1.0))
-      }
-    })
-  }
-  
   // MARK: Setup views
   
   override func setupViews() {
@@ -259,7 +246,7 @@ class SinglePlayerViewController : BaseGameViewController {
     currentLevel = nextLevel
     
     // Update LevelCount
-    self.zoomX2LabelAnimation(label: levelCountLabel, text: "\(nextLevel.levelIndex + 1)")
+    self.zoomLabelAnimation(scale: 2,label: levelCountLabel, text: "\(nextLevel.levelIndex + 1)")
     
     self.showCurrentLevel()
   }

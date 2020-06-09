@@ -20,6 +20,10 @@ class RankingViewController: UIViewController {
 
   private var rankingData: [RankingCellModel] = []
   
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
+  }
+  
   // MARK: Life cycle
   
   override func viewDidLoad() {

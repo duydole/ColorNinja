@@ -145,6 +145,7 @@ class MultiPlayerViewController : BaseGameViewController {
   private func serverSendBoardGame(_ json: Dictionary<String, Any>) {
     
     // workaround:
+    // Không hiểu nhiều khi nó không ẩn
     if statusLabel.isHidden == false {
         statusLabel.isHidden = true
     }
@@ -157,10 +158,10 @@ class MultiPlayerViewController : BaseGameViewController {
       let isOwnerWin = json["isPreviousWinner"] as! Bool
       if isOwnerWin {
         p1Score += 1
-        player1Point.text = "\(p1Score)"
+        zoomLabelAnimation(scale: 3, label: player1Point, text: "\(p1Score)")
       } else {
         p2Score += 1
-        player2Point.text = "\(p2Score)"
+        zoomLabelAnimation(scale: 3, label: player2Point, text: "\(p2Score)")
       }
     }
     
@@ -206,20 +207,8 @@ class MultiPlayerViewController : BaseGameViewController {
     
     let alert = UIAlertController(title: "GameOver", message: "\(winnerName) won, \(looserName) is too slow!", preferredStyle: .alert)
     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-      switch action.style {
-      case .default:
-        print("default")
-        
-      case .cancel:
-        print("cancel")
-        
-      case .destructive:
-        print("destructive")
-        
-      default:
-        print("duydl: Default style")
-        
-      }}))
+      self.dismiss(animated: true, completion: nil)
+    }))
     self.present(alert, animated: true, completion: nil)
   }
   
