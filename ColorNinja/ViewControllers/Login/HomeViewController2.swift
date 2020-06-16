@@ -7,7 +7,9 @@
 //
 
 import UIKit
+#if !DISABLE_ZALOSDK
 import ZaloSDK
+#endif
 import GoogleMobileAds
 import StoreKit
 

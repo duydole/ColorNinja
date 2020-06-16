@@ -8,7 +8,9 @@
 
 import UIKit
 import GoogleMobileAds
+#if !DISABLE_ZALOSDK
 import ZaloSDK
+#endif
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
