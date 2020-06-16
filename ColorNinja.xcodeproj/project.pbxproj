@@ -41,6 +41,7 @@
 		F234763324680D75004C8363 /* GameSettingPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F234763224680D75004C8363 /* GameSettingPopup.swift */; };
 		F2347635246836D7004C8363 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2347634246836D7004C8363 /* UIColor+Extension.swift */; };
 		F2347638246851A5004C8363 /* ButtonWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2347637246851A5004C8363 /* ButtonWithImage.swift */; };
+		F2405A962499339D00E71481 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F2405A982499339E00E71481 /* Localizable.strings */; };
 		F24E4348247A5C5E00FBA7B1 /* DataBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24E4347247A5C5E00FBA7B1 /* DataBaseService.swift */; };
 		F24E4366247A802900FBA7B1 /* CharacterSet+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24E4365247A802900FBA7B1 /* CharacterSet+Extension.swift */; };
 		F260CA622476C63500D00348 /* CreateRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F260CA612476C63500D00348 /* CreateRoomViewController.swift */; };
@@ -115,6 +116,9 @@
 		F234763224680D75004C8363 /* GameSettingPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettingPopup.swift; sourceTree = "<group>"; };
 		F2347634246836D7004C8363 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		F2347637246851A5004C8363 /* ButtonWithImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWithImage.swift; sourceTree = "<group>"; };
+		F2405A952499339400E71481 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		F2405A972499339E00E71481 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F2405A99249933A300E71481 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F24E4347247A5C5E00FBA7B1 /* DataBaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseService.swift; sourceTree = "<group>"; };
 		F24E4365247A802900FBA7B1 /* CharacterSet+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterSet+Extension.swift"; sourceTree = "<group>"; };
 		F260CA612476C63500D00348 /* CreateRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoomViewController.swift; sourceTree = "<group>"; };
@@ -237,6 +241,7 @@
 		8CC6DB45246B8F940017B60A /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				F2405A922499336E00E71481 /* Localization */,
 				F22F85622465A33300493BB6 /* Utilities */,
 				F2347612246726BA004C8363 /* Model */,
 				F23476362468518B004C8363 /* CustomButton */,
@@ -372,6 +377,14 @@
 				F2405A8E24992DF300E71481 /* DataLayer */,
 			);
 			path = 3Tiers;
+			sourceTree = "<group>";
+		};
+		F2405A922499336E00E71481 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				F2405A982499339E00E71481 /* Localizable.strings */,
+			);
+			path = Localization;
 			sourceTree = "<group>";
 		};
 		F260CA602476C5E700D00348 /* RoomVC */ = {
@@ -540,6 +553,7 @@
 			knownRegions = (
 				en,
 				Base,
+				vi,
 			);
 			mainGroup = F2C0606D246566B5001FAD58;
 			productRefGroup = F2C06077246566B5001FAD58 /* Products */;
@@ -560,6 +574,7 @@
 				F27454F8246A76470037A8BA /* incorrectsound.mp3 in Resources */,
 				F27454F6246A74660037A8BA /* correctsound.wav in Resources */,
 				F27454F4246A72F80037A8BA /* bgmusic.mp3 in Resources */,
+				F2405A962499339D00E71481 /* Localizable.strings in Resources */,
 				F2EAD8542470429400B2D6B9 /* Squirk-RMvV.ttf in Resources */,
 				F2C06086246566B7001FAD58 /* LaunchScreen.storyboard in Resources */,
 				F28098C5246B02C00060693D /* SnesItalic-vmAPZ.ttf in Resources */,
@@ -681,10 +696,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		F2405A982499339E00E71481 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F2405A972499339E00E71481 /* en */,
+				F2405A99249933A300E71481 /* vi */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		F2C06084246566B7001FAD58 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				F2C06085246566B7001FAD58 /* Base */,
+				F2405A952499339400E71481 /* vi */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -696,6 +721,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -756,6 +782,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
