@@ -9,19 +9,17 @@ target 'ColorNinja' do
   pod 'SnapKit', '~> 5.0.0'
   pod 'Google-Mobile-Ads-SDK'
   
-
-#pod 'ZaloSDK'
-#pod 'RxSwift', '~> 5'
-#pod 'RxCocoa', '~> 5'
-
   pod 'SVProgressHUD'  
   pod 'FBSDKCoreKit'
   pod 'FBSDKLoginKit'
   pod 'FBSDKShareKit'
 
-pod 'Alamofire', '~> 5.2'
-pod 'AlamofireImage', '~> 4.1'
-pod 'ReachabilitySwift'
+  pod 'Alamofire', '~> 5.2'
+  pod 'AlamofireImage', '~> 4.1'
+  pod 'ReachabilitySwift'
+  pod 'Localize-Swift', '~> 2.0'
 
+
+  #pod 'ZaloSDK'
 
 end

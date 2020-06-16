@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 import FBSDKLoginKit
 
+let MAX_USERNAME_LENGTH: Int = 20
+
 class LoginViewController: UIViewController {
   
   private var usernameTextField: UITextField!
@@ -26,17 +28,19 @@ class LoginViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupViews()
-    view.backgroundColor = .white
-    navigationController?.navigationBar.isHidden = true
-    
-    let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-    view.addGestureRecognizer(tap)
   }
   
   // MARK: Setup Views
   
   private func setupViews() {
+    setupViewController()
     setupButtons()
+  }
+  
+  private func setupViewController() {
+    view.backgroundColor = .white
+    let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+    view.addGestureRecognizer(tap)
   }
   
   private func setupButtons() {
@@ -119,7 +123,7 @@ class LoginViewController: UIViewController {
       make.top.equalTo(orLabel.snp.bottom).offset(padding)
     }
     #endif
-    }
+  }
   
   // MARK: Handle Events
   
@@ -200,7 +204,7 @@ class LoginViewController: UIViewController {
   }
   
   private func openHomeViewController() {
-    let homeVC = HomeViewController2()
+    let homeVC = HomeViewController()
     self.navigationController?.pushViewController(homeVC, animated: true)
   }
   
@@ -245,8 +249,6 @@ class LoginViewController: UIViewController {
   }
 }
 
-
-let MAX_USERNAME_LENGTH: Int = 20
 extension LoginViewController: UITextFieldDelegate {
   
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
