@@ -158,7 +158,7 @@ class ClientSocket : NSObject, StreamDelegate {
             }
             
             if let serverMessage = processedMessageString(buffer: buffer, length: numberOfBytesRead) {
-                print("SERVER: \(serverMessage)")
+                print("duydl: SERVER: \(serverMessage)")
                 let data = serverMessage.data(using: .utf8)!
                 do {
                     if let json = try JSONSerialization.jsonObject(with: data, options : .allowFragments) as? Dictionary<String,Any> {
