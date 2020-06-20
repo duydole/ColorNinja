@@ -14,7 +14,9 @@ import GoogleMobileAds
 import StoreKit
 import Localize_Swift
 
-fileprivate let bannerAdUnitId = "ca-app-pub-2457313692920235/9322423961"
+//fileprivate let bannerAdUnitId = "ca-app-pub-2457313692920235/9322423961" // Ad cũ sao tự nhiên không show trên AppStore nữa.
+fileprivate let bannerAdUnitId = "ca-app-pub-2457313692920235/2853475691"
+
 let colorNinjaAppId = "1516759930"
 
 class HomeViewController: BaseHomeViewController {

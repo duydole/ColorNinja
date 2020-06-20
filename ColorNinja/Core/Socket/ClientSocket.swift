@@ -194,16 +194,16 @@ class ClientSocket : NSObject, StreamDelegate {
         case .endEncountered:
             outputStream.close()
             inputStream.close()
-            print("new message received")
+            print("duydl: New message received")
         case .errorOccurred:
             didReceivedErrorFromServer()
-            print("error occurred")
+            print("duydl: error occurred")
         case .hasSpaceAvailable:
-            print("Có thể gửi message cho Server")
+            print("duydl: Có thể gửi message cho Server")
         case .openCompleted:
-            print("Open Completed...")
+            print("duydl: Open Completed...")
         default:
-            print("Other event..")
+            print("duydl: Other event..")
         }
         
         
