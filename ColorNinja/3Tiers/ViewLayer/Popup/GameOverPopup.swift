@@ -12,8 +12,13 @@ import GoogleMobileAds
 
 
 fileprivate let rewardForEachAds: Int = 5 /// numb of seconds user gained each ads.
+#if DEBUG
+fileprivate let fullScreenAdUnitId = "ca-app-pub-3940256099942544/4411468910"
+fileprivate let rewardAdsUnitId = "ca-app-pub-2457313692920235/5356432254"
+#else
 fileprivate let fullScreenAdUnitId = "ca-app-pub-2457313692920235/3301114557"
 fileprivate let rewardAdsUnitId = "ca-app-pub-2457313692920235/5356432254"
+#endif
 
 protocol GameOverPopupDelegate {
   func didTapReplayButton() -> Void
@@ -199,7 +204,7 @@ class GameOverPopup: PopupViewController {
     rewardedAd = GADRewardedAd(adUnitID: rewardAdsUnitId)
     rewardedAd?.load(GADRequest()) { error in
       if let _ = error {
-        print("duydl: ERROR: Load reward ads failed")
+        print("duydl: ERROR: Load reward ads failed with error: \(error.debugDescription)")
       } else {
         print("duydl: SUCCESS: Load reward ads successfully")
       }
