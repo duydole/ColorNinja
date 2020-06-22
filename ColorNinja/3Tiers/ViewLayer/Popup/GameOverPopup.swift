@@ -12,9 +12,10 @@ import GoogleMobileAds
 
 
 fileprivate let rewardForEachAds: Int = 5 /// numb of seconds user gained each ads.
-#if DEBUG
+
+#if DEBUG_ADS
 fileprivate let fullScreenAdUnitId = "ca-app-pub-3940256099942544/4411468910"
-fileprivate let rewardAdsUnitId = "ca-app-pub-2457313692920235/5356432254"
+fileprivate let rewardAdsUnitId = "ca-app-pub-3940256099942544/1712485313"
 #else
 fileprivate let fullScreenAdUnitId = "ca-app-pub-2457313692920235/3301114557"
 fileprivate let rewardAdsUnitId = "ca-app-pub-2457313692920235/5356432254"

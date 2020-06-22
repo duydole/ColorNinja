@@ -7,17 +7,16 @@
 //
 
 import UIKit
-#if !DISABLE_ZALOSDK
+#if ENABLE_ZALO_SDK
 import ZaloSDK
 #endif
 import GoogleMobileAds
 import StoreKit
 import Localize_Swift
 
-#if DEBUG
+#if DEBUG_ADS
 fileprivate let bannerAdUnitId = "ca-app-pub-3940256099942544/2934735716"
 #else
-//fileprivate let bannerAdUnitId = "ca-app-pub-2457313692920235/9322423961" // Ad cũ sao tự nhiên không show trên AppStore nữa.
 fileprivate let bannerAdUnitId = "ca-app-pub-2457313692920235/2853475691"
 #endif
 
@@ -211,7 +210,7 @@ class HomeViewController: BaseHomeViewController {
   
   // MARK: Action handler
   
-  #if !DISABLE_ZALOSDK
+  #if ENABLE_ZALO_SDK
   @objc private func didTapLoginButton() {
     ZaloSDKApiWrapper.sharedInstance.login(withZalo: self, type: ZAZAloSDKAuthenTypeViaZaloAppAndWebView) {  [weak self] (success) in
       if success {

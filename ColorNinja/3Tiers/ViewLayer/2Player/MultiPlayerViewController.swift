@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 
 let MAX_LEVEL: Int = 30
+let serverIp = "35.198.220.200"
+let serverPort: UInt32 = 8080
 
 class MultiPlayerViewController : BaseGameViewController {
   
@@ -45,7 +47,7 @@ class MultiPlayerViewController : BaseGameViewController {
   }
   
   private func setupClientSocket() {
-    client = ClientSocket(connectWithHost: "119.82.135.105", port: 8080)
+    client = ClientSocket(connectWithHost: serverIp, port: serverPort)
     client.delegate = self
   }
   

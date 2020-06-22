@@ -56,8 +56,9 @@ class JoinRoomPopup: PopupViewController {
     
     // TextField
     textField = UITextField()
-    textField.borderStyle = .roundedRect;
-    textField.placeholder = "Enter RoomId";
+    textField.borderStyle = .roundedRect
+    textField.placeholder = "Enter RoomId"
+    textField.font = UIFont.systemFont(ofSize: scaledValue(20))
     textField.autocorrectionType = .no
     textField.keyboardType = .decimalPad
     textField.returnKeyType = .done

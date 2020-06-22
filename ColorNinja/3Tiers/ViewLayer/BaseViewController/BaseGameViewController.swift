@@ -10,7 +10,11 @@ import Foundation
 import UIKit
 import GoogleMobileAds
 
+#if DEBUG
+fileprivate let bannderIngameId = "ca-app-pub-3940256099942544/2934735716"
+#else
 fileprivate let bannderIngameId = "ca-app-pub-2457313692920235/1972710690"
+#endif
 
 class BaseGameViewController : BaseViewController {
   
