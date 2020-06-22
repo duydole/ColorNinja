@@ -43,7 +43,6 @@ class HomeViewController: BaseHomeViewController {
     super.viewDidLoad()
     
     setupNavigationController()
-    regiserUserInfo()
     
     #if DEBUG
     printAllFamilyFonts()
@@ -200,14 +199,7 @@ class HomeViewController: BaseHomeViewController {
   private func speakerImageForCurrentMainSoundState() -> UIImage? {
     return GameMusicPlayer.shared.isMuteMainSound ? UIImage(named:"speakeroff") : UIImage(named:"speakeron")
   }
-  
-  // MAKR: Other
-  
-  private func regiserUserInfo() {
-    // Register aganin if need:
-    DataBaseService.shared.insertUserToDB(user: OwnerInfo.shared, completion: nil)
-  }
-  
+
   // MARK: Action handler
   
   #if ENABLE_ZALO_SDK

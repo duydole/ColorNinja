@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-fileprivate let serverUrl = "http://119.82.135.105:8000/"
+fileprivate let serverUrl = "http://35.198.220.200:8000/"
 fileprivate let leaderBoardUrl = serverUrl + "leaderboard/bestscore"
 fileprivate let registerUserUrl = serverUrl + "registeruser"
 fileprivate let updateUserDataUrl = serverUrl + "user"
