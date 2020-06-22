@@ -23,6 +23,7 @@ class RankingTableViewCell: UITableViewCell {
   
   override func prepareForReuse() {
     self.contentView.backgroundColor = Constants.GameScreen.forcegroundColor
+    imgAvatar.image = nil
   }
   
   // MARK: - Initialize
