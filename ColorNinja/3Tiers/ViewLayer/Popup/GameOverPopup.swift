@@ -80,7 +80,7 @@ class GameOverPopup: PopupViewController {
   }
   
   @objc private func didTapReplayButton() {
-    if OwnerInfo.shared.countRoundDidPlay % 3 == 0 && NetworkManager.shared.hasConnection {
+    if OwnerInfo.shared.countRoundDidPlay % 3 == 0 && NetworkManager.shared.hasConnection && interstitial.isReady {
       showFullScreenAd()
     } else {
       _dismissAndSendReplayEventToDelegate()
@@ -93,7 +93,11 @@ class GameOverPopup: PopupViewController {
         /// Not allow to watch ads
         showAlertWithMessage(message: "You can only see 1 Reward Advertisement per turn")
       } else {
-        showRewardAd()
+        if rewardedAd?.isReady == true {
+          showRewardAd()
+        } else {
+          showAlertWithMessage(message: "Sorry. We had problems when loading the Advertisement.")
+        }
       }
     } else {
       showAlertWithMessage(message: "Sorry. Check your network connection, please.")

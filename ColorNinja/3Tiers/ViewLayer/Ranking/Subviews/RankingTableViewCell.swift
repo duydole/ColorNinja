@@ -8,6 +8,7 @@
 
 import UIKit
 
+fileprivate let fontSize = scaledValue(16)
 
 class RankingTableViewCell: UITableViewCell {
   
@@ -24,6 +25,7 @@ class RankingTableViewCell: UITableViewCell {
   override func prepareForReuse() {
     self.contentView.backgroundColor = Constants.GameScreen.forcegroundColor
     imgAvatar.image = nil
+    rankingLabel.text = nil
   }
   
   // MARK: - Initialize
@@ -48,17 +50,17 @@ class RankingTableViewCell: UITableViewCell {
     self.imgAvatar.clipsToBounds = true
     
     self.rankingLabel = UILabel()
-    self.rankingLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+    self.rankingLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .medium)
     self.rankingLabel.textColor = .white
     self.rankingLabel.textAlignment = .center
     
     self.nameLabel = UILabel()
-    self.nameLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+    self.nameLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .medium)
     self.nameLabel.textColor = .white
     
     self.recordLabel = UILabel()
     self.recordLabel.textAlignment = .center
-    self.recordLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+    self.recordLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .medium)
     self.recordLabel.textColor = .white
     
     self.contentView.addSubview(self.imgAvatar)
@@ -102,7 +104,7 @@ class RankingTableViewCell: UITableViewCell {
     self.rankingLabel.textColor = cellObject.playerType.colorTitle
     
     if cellObject.playerType != .normal {
-      self.rankingLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+      self.rankingLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .medium)
     }
     
     self.imgAvatar.image = UIImage(named: "defaultAvatar")
@@ -112,6 +114,6 @@ class RankingTableViewCell: UITableViewCell {
   }
   
   static public func heightForCell(cellObject: RankingCellModel, indexPath: IndexPath, tableView: UITableView) -> CGFloat {
-    return 50;
+    return scaledValue(50);
   }
 }

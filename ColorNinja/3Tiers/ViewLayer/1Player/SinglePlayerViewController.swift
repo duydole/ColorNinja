@@ -13,6 +13,7 @@ import AudioToolbox
 
 
 let INIT_REMAIN_TIME: TimeInterval = 2.0
+let MAX_COUNT_PROMPT: Int = 10
 
 class SinglePlayerViewController : BaseGameViewController {
   
@@ -164,6 +165,7 @@ class SinglePlayerViewController : BaseGameViewController {
     // Reset CountDownLabel
     self.remainingTime = 0.00
     self.remainTimeLabel.text = self.currentRemainTimeString()
+    boardCollectionView.isUserInteractionEnabled = false
     
     // StopTimer
     self.stopTimer()
@@ -173,7 +175,9 @@ class SinglePlayerViewController : BaseGameViewController {
     
     // Increase CountPrompt
     let curPromt = OwnerInfo.shared.countPrompt
-    OwnerInfo.shared.updateCountPrompt(newCountPrompt: curPromt + 1)
+    if (curPromt < MAX_COUNT_PROMPT) {
+        OwnerInfo.shared.updateCountPrompt(newCountPrompt: curPromt + 1)
+    }
     
     // Update Max Score
     let resultScored = currentLevel.levelIndex + 1
@@ -227,8 +231,9 @@ class SinglePlayerViewController : BaseGameViewController {
   private func replayGame() {
     
     // Reset lại View
+    boardCollectionView.isUserInteractionEnabled = true
     remainingTime = Constants.GameSetting.maxRemainTime
-    self.remainTimeLabel.text = self.currentRemainTimeString()
+    remainTimeLabel.text = self.currentRemainTimeString()
     levelCountLabel.text = "1"
     
     // Reset lại model

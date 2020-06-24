@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 #if DEBUG
-let MAX_LEVEL: Int = 2
+let MAX_LEVEL: Int = 30
 #else
 let MAX_LEVEL: Int = 30
 #endif
@@ -32,6 +32,7 @@ class MultiPlayerViewController : BaseGameViewController {
   private var currenLevelLabel: UILabel!
   private var statusLabel: UILabel!
   private var rematchButton: UIButton!
+  private var centerImageView: UIImageView!
   
   private var p1Score: Int = 0
   private var p2Score: Int = 0
@@ -45,10 +46,6 @@ class MultiPlayerViewController : BaseGameViewController {
   
   override func viewWillDisappear(_ animated: Bool) {
     client.close()
-  }
-  
-  override func viewDidAppear(_ animated: Bool) {
-    
   }
   
   private func setupClientSocket() {
@@ -68,6 +65,7 @@ class MultiPlayerViewController : BaseGameViewController {
     setupTopContainer()
     setupStatusLabel()
     setupRematchViews()
+    setupCenterImageView()
   }
   
   func setupTopContainer() {
@@ -157,6 +155,17 @@ class MultiPlayerViewController : BaseGameViewController {
     rematchButton.addTarget(self, action: #selector(didTapRematchButton), for: .touchUpInside)
   }
   
+  func setupCenterImageView() {
+    let imageWidth = scaledValue(350)
+    centerImageView = UIImageView()
+    centerImageView.isHidden = true
+    view.addSubview(centerImageView)
+    centerImageView.snp.makeConstraints { (make) in
+      make.center.equalToSuperview()
+      make.width.height.equalTo(imageWidth)
+    }
+  }
+  
   // MARK: - Server Responde
   
   func requirePlayerKeyFromServer(_ json: Dictionary<String, Any>) {
@@ -177,20 +186,15 @@ class MultiPlayerViewController : BaseGameViewController {
     
     let boardGameInfo = json["boardGame"] as! Dictionary<String, Any>
     let levelIndex: Int = boardGameInfo["round"] as! Int
-    let listStringAnimation = levelIndex == 1 ? ["Matched", "3", "2", "1", "Go!"] : ["Next"]
+    let isOwnerWin = json["isPreviousWinner"] as! Bool
+    let isFirstGame = levelIndex == 1
     
-    if levelIndex > 1 {
-      let isOwnerWin = json["isPreviousWinner"] as! Bool
-      if isOwnerWin {
-        p1Score += 1
-        zoomLabelAnimation(scale: 3, label: player1Point, text: "\(p1Score)")
-      } else {
-        p2Score += 1
-        zoomLabelAnimation(scale: 3, label: player2Point, text: "\(p2Score)")
-      }
+    if !isFirstGame {
+      increaseScoreView(isOwnerWin: isOwnerWin)
     }
     
-    if levelIndex == MAX_LEVEL + 1 {
+    let overMaxLevel = levelIndex == MAX_LEVEL + 1
+    if overMaxLevel {
       requireServerStopGame()
       return
     }
@@ -199,12 +203,54 @@ class MultiPlayerViewController : BaseGameViewController {
     self.boardCollectionView.alpha = 0
     shrinkCell = true
     
-    print("duydl: Start Animation Matched, 3, 2, 1")
-    self.startAnimationReadyView(withList: listStringAnimation) { (done) in
-      self.boardCollectionView.alpha = 1
-      self.currentLevel  = self.jsonToLevelModel(json)
-      self.showCurrentLevel()
+    // Nếu game đầu tiên:
+    if (isFirstGame) {
+      startAnimationReadyView(withList: ["Matched", "3", "2", "1", "Go!"]) { (done) in
+        self.showCurrentLevelWithJson(json: json)
+      }
+    } else {
+      let scaleFactor: CGFloat = 0.2
+      if isOwnerWin {
+        centerImageView.image = UIImage(named: "winicon")
+        animationImageView(imageView: centerImageView, scale: scaleFactor, completion:  {
+          self.showCurrentLevelWithJson(json: json)
+
+        })
+      } else {
+        centerImageView.image = UIImage(named: "looseicon")
+        animationImageView(imageView: centerImageView, scale: scaleFactor, completion: {
+          self.showCurrentLevelWithJson(json: json)
+        })
+      }
     }
+  }
+  
+  private func animationImageView(imageView: UIImageView, scale: CGFloat, completion: (() -> ())?) {
+    UIView.animate(withDuration: 0.35, delay: 0.0, options: .curveEaseInOut, animations: {
+      self.centerImageView.isHidden = false
+      self.centerImageView.transform = CGAffineTransform(scaleX: scale, y: scale)
+    }) { (success) in
+      Thread.sleep(forTimeInterval: 0.3)
+      self.centerImageView.isHidden = true
+      self.centerImageView.transform = .identity
+      completion?()
+    }
+  }
+  
+  private func increaseScoreView(isOwnerWin: Bool) {
+    if isOwnerWin {
+      p1Score += 1
+      zoomLabelAnimation(scale: 3, label: player1Point, text: "\(p1Score)")
+    } else {
+      p2Score += 1
+      zoomLabelAnimation(scale: 3, label: player2Point, text: "\(p2Score)")
+    }
+  }
+  
+  private func showCurrentLevelWithJson(json: Dictionary<String, Any>) {
+    self.boardCollectionView.alpha = 1
+    self.currentLevel  = self.jsonToLevelModel(json)
+    self.showCurrentLevel()
   }
   
   private func serverSendMatchedInfo(_ json: Dictionary<String, Any>) {
