@@ -14,6 +14,7 @@ import AudioToolbox
 
 let INIT_REMAIN_TIME: TimeInterval = 2.0
 let MAX_COUNT_PROMPT: Int = 10
+let durationDelayBeforeShowGameOver = 0.2
 
 class SinglePlayerViewController : BaseGameViewController {
   
@@ -159,8 +160,6 @@ class SinglePlayerViewController : BaseGameViewController {
   
   private func processGameOver() {
     
-    // Loading...
-    activityIndicator.startAnimating()
     
     // Reset CountDownLabel
     self.remainingTime = 0.00
@@ -185,14 +184,22 @@ class SinglePlayerViewController : BaseGameViewController {
       OwnerInfo.shared.updateBestScore(newBestScore: resultScored)
     }
     
-    /// Luôn luôn quăng score lên Server để server tự update.
-    DataBaseService.shared.updateBestScoreForUser(userid: OwnerInfo.shared.userId, newBestScore: resultScored) { (success, error) in
-      if let _ = error {
-        assert(false)
-        return
-      }
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
       
-      self.getRankAndShowGameOverPopup()
+      self.showResultBeforeProcessGameOver()
+      
+      // Loading...
+      self.activityIndicator.startAnimating()
+
+      /// Luôn luôn quăng score lên Server để server tự update.
+      DataBaseService.shared.updateBestScoreForUser(userid: OwnerInfo.shared.userId, newBestScore: resultScored) { (success, error) in
+        if let _ = error {
+          assert(false)
+          return
+        }
+        
+        self.getRankAndShowGameOverPopup()
+      }
     }
   }
   
@@ -256,6 +263,12 @@ class SinglePlayerViewController : BaseGameViewController {
     self.showCurrentLevel()
   }
   
+  private func showResultBeforeProcessGameOver() {
+    shakeResultCell()
+    vibrateDevice()
+    Thread.sleep(forTimeInterval: durationDelayBeforeShowGameOver)
+  }
+  
   // MARK: Event handler
   
   @objc func didTapLightBubButton() {
@@ -316,7 +329,8 @@ class SinglePlayerViewController : BaseGameViewController {
   // MARK: Getter
   
   private func currentRemainTimeString() -> String {
-    return String(format: "%.2f", self.remainingTime)
+    let remainTime = remainingTime < 0.001 ? 0.0 : remainingTime
+    return String(format: "%.2f", remainTime)
   }
 }
 
