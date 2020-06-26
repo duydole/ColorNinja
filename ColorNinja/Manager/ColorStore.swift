@@ -89,7 +89,7 @@ class ColorStore {
             ColorRGB(144, 11, 62),
             ColorRGB(119, 1, 56),
             ColorRGB(255, 87, 51),
-            ColorRGB(255, 195, 3),
+            //ColorRGB(255, 195, 3),  // Màu vàng khó thấy mẹ nè
             ColorRGB(67, 41, 103),
             ColorRGB(120, 45, 101),
             ColorRGB(235, 219, 152),
