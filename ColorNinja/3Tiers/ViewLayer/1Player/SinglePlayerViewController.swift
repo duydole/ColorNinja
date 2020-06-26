@@ -11,6 +11,7 @@ import UIKit
 import CoreGraphics
 import AudioToolbox
 
+typealias voidCompletion = () -> Void
 
 let INIT_REMAIN_TIME: TimeInterval = 2.0
 let MAX_COUNT_PROMPT: Int = 10
@@ -185,21 +186,24 @@ class SinglePlayerViewController : BaseGameViewController {
     }
     
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-      
-      self.showResultBeforeProcessGameOver()
-      
-      // Loading...
-      self.activityIndicator.startAnimating()
+        self.shakeResultCellWithCompletion {
+            self.vibrateDevice()
+            Thread.sleep(forTimeInterval: durationDelayBeforeShowGameOver)
 
-      /// Luôn luôn quăng score lên Server để server tự update.
-      DataBaseService.shared.updateBestScoreForUser(userid: OwnerInfo.shared.userId, newBestScore: resultScored) { (success, error) in
-        if let _ = error {
-          assert(false)
-          return
+            // Loading...
+            self.activityIndicator.startAnimating()
+
+            /// Luôn luôn quăng score lên Server để server tự update.
+            DataBaseService.shared.updateBestScoreForUser(userid: OwnerInfo.shared.userId, newBestScore: resultScored) { (success, error) in
+              if let _ = error {
+                assert(false)
+                self.getRankAndShowGameOverPopup()
+                return
+              }
+              
+              self.getRankAndShowGameOverPopup()
+            }
         }
-        
-        self.getRankAndShowGameOverPopup()
-      }
     }
   }
   
@@ -264,9 +268,7 @@ class SinglePlayerViewController : BaseGameViewController {
   }
   
   private func showResultBeforeProcessGameOver() {
-    shakeResultCell()
-    vibrateDevice()
-    Thread.sleep(forTimeInterval: durationDelayBeforeShowGameOver)
+
   }
   
   // MARK: Event handler
@@ -276,7 +278,7 @@ class SinglePlayerViewController : BaseGameViewController {
       let curCountPrompt = OwnerInfo.shared.countPrompt
       OwnerInfo.shared.updateCountPrompt(newCountPrompt: curCountPrompt - 1)
       promptCountLable.text = "\(curCountPrompt - 1)"
-      shakeResultCell()
+      shakeResultCellWithCompletion(completion: nil)
     }
   }
 
@@ -302,12 +304,12 @@ class SinglePlayerViewController : BaseGameViewController {
   
   // MARK: Handle boardgame animation
   
-  private func shakeResultCell() {
+    private func shakeResultCellWithCompletion(completion: voidCompletion?) {
     let resultIndexPath = IndexPath(item: currentLevel.correctIndex, section: 0)
-    shakeCellAtIndexPath(indexPath: resultIndexPath)
+      shakeCellAtIndexPath(indexPath: resultIndexPath,completion: completion)
   }
   
-  private func shakeCellAtIndexPath(indexPath: IndexPath) {
+    private func shakeCellAtIndexPath(indexPath: IndexPath, completion: voidCompletion?) {
     
     let cell = boardCollectionView.cellForItem(at: indexPath)
     UIView.animate(withDuration: 0.05, animations: {
@@ -319,7 +321,7 @@ class SinglePlayerViewController : BaseGameViewController {
         UIView.animate(withDuration: 0.05, animations: {
           cell?.center.x -= 5
         }) { (success) in
-          
+            completion?()
         }
       }
     }
@@ -353,7 +355,7 @@ extension SinglePlayerViewController {
       
       if GameSettingManager.shared.allowEffectSound {
         self.vibrateDevice()
-        shakeCellAtIndexPath(indexPath: indexPath)
+        shakeCellAtIndexPath(indexPath: indexPath, completion: nil)
         GameMusicPlayer.shared.playInCorrectSound()
       }
     }
