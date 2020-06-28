@@ -22,7 +22,7 @@ class ChangeUserNamePopup: PopupViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupViews()
-    tapDarkLayerToDismiss = true
+    allowTapDarkLayerToDismiss = true
   }
   
   override func viewDidAppear(_ animated: Bool) {

@@ -47,6 +47,13 @@ class HomeViewController: BaseHomeViewController {
     #if DEBUG
     printAllFamilyFonts()
     #endif
+    
+    #if DEBUG
+    let eventPopup = EventPopup()
+    eventPopup.modalPresentationStyle = .overCurrentContext
+    eventPopup.allowTapDarkLayerToDismiss = true
+    self.present(eventPopup, animated: false, completion: nil)
+    #endif
   }
   
   // MARK: Setup views
