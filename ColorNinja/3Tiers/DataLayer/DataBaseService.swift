@@ -70,6 +70,21 @@ class DataBaseService : NSObject {
     }
   }
   
+  public func loadAppConfig(completion: ((_ config: Dictionary<String, Any>?) -> ())? ) {
+    if (noConnection()) {
+      completion?(nil)
+    }
+    
+    AF.request(appConfigUrl).responseJSON { (response) in
+      guard let json = response.value as! [String:Any]? else {
+        completion?(nil)
+        return
+      }
+      
+      completion?(json)
+    }
+  }
+  
   // MARK: Update/Insert
   
   public func insertUserToDB(user: OwnerInfo, completion: completionHandler?) {

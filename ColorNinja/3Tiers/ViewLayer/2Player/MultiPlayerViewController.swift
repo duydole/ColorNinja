@@ -371,7 +371,7 @@ class MultiPlayerViewController : BaseGameViewController {
     let mainColorIndex: Int = boardGameInfo["color"] as! Int
     let correctIndex: Int = boardGameInfo["index"] as! Int
     let numberOfRows = boardGameInfo["sizeBoard"] as! Int
-    let mainColor = ColorStore.shared.allColors[mainColorIndex]
+    let mainColor = ColorStore.shared.allColors[mainColorIndex%ColorStore.shared.allColors.count]
     let RGBIndexWillBeChanged = boardGameInfo["secondColor"] as! Int
     return LevelModel(levelIndex: levelIndex,
                       numberOfRows: numberOfRows,

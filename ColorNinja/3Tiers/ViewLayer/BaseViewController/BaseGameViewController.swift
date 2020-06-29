@@ -38,6 +38,10 @@ class BaseGameViewController : BaseViewController {
     super.viewDidLoad()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    LevelStore.shared.setColorForAllLevels()
+  }
+  
   // MARK: Override
   
   override var preferredStatusBarStyle: UIStatusBarStyle {

@@ -36,10 +36,6 @@ class SinglePlayerViewController : BaseGameViewController {
     currentLevel = LevelStore.shared.allLevels[0]
   }
   
-  override func viewWillAppear(_ animated: Bool) {
-    LevelStore.shared.setColorForAllLevels()
-  }
-  
   override func viewDidAppear(_ animated: Bool) {
     
     // Animation ReadyView

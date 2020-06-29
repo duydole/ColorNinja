@@ -78,6 +78,7 @@
 		F2D8623E2474343E006D3FD4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D8623D2474343E006D3FD4 /* LoginViewController.swift */; };
 		F2EAD8542470429400B2D6B9 /* Squirk-RMvV.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F2EAD8532470429400B2D6B9 /* Squirk-RMvV.ttf */; };
 		F2EAFC2E24A711DC001ADCFB /* EventPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EAFC2D24A711DC001ADCFB /* EventPopup.swift */; };
+		F2EAFC3024A8656E001ADCFB /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EAFC2F24A8656E001ADCFB /* AppConfig.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -159,6 +160,7 @@
 		F2D8623D2474343E006D3FD4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		F2EAD8532470429400B2D6B9 /* Squirk-RMvV.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Squirk-RMvV.ttf"; sourceTree = "<group>"; };
 		F2EAFC2D24A711DC001ADCFB /* EventPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPopup.swift; sourceTree = "<group>"; };
+		F2EAFC2F24A8656E001ADCFB /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -452,6 +454,7 @@
 				F28098BC246AE2410060693D /* GameSettingManager.swift */,
 				F275A103247832590077E42F /* OwnerInfo.swift */,
 				F29AFC0D248952EF002CD0E0 /* NetworkManager.swift */,
+				F2EAFC2F24A8656E001ADCFB /* AppConfig.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -677,6 +680,7 @@
 				8C2C72782467A58C00883388 /* RankingViewController.swift in Sources */,
 				8C5FFEEF2472E8D800D9FA5E /* FacebookSDKAppDelegate.swift in Sources */,
 				F263FDBB246F950000A4AB0B /* BaseViewController.swift in Sources */,
+				F2EAFC3024A8656E001ADCFB /* AppConfig.swift in Sources */,
 				F2347638246851A5004C8363 /* ButtonWithImage.swift in Sources */,
 				F21145F4247CE092005ACB50 /* LeaderBoardStruct.swift in Sources */,
 				8CC6DB47246B8FA90017B60A /* Date+Extension.swift in Sources */,
@@ -857,7 +861,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.duydl.colorninja;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "appstore-profile-colorninja-3";
-				"SWIFT_ACTIVE_COMPILATION_CONDITIONS[arch=*]" = "DISABLE_ZALOSDK DISABLE_LOGIN_FB DEBUG_ADS DEBUG";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS[arch=*]" = "DISABLE_ZALOSDK DISABLE_LOGIN_FB DEBUG_ADS DEBUG ENABLE_SERVER_CONFIG";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -883,7 +887,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.duydl.colorninja;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "appstore-profile-colorninja-3";
-				"SWIFT_ACTIVE_COMPILATION_CONDITIONS[arch=*]" = "DISABLE_ZALOSDK DISABLE_LOGIN_FB";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS[arch=*]" = "DISABLE_ZALOSDK DISABLE_LOGIN_FB ENABLE_SERVER_CONFIG";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

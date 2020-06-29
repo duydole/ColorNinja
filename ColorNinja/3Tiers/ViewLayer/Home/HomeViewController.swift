@@ -43,16 +43,10 @@ class HomeViewController: BaseHomeViewController {
     super.viewDidLoad()
     
     setupNavigationController()
+    getAppConfigFromServer()
     
     #if DEBUG
     printAllFamilyFonts()
-    #endif
-    
-    #if DEBUG
-    let eventPopup = EventPopup()
-    eventPopup.modalPresentationStyle = .overCurrentContext
-    eventPopup.allowTapDarkLayerToDismiss = true
-    self.present(eventPopup, animated: false, completion: nil)
     #endif
   }
   
@@ -143,6 +137,40 @@ class HomeViewController: BaseHomeViewController {
       make.bottom.equalTo(-bottomPadding)
       make.centerX.equalToSuperview()
     }
+  }
+  
+  private func getAppConfigFromServer() {
+    
+    /// Load
+    DataBaseService.shared.loadAppConfig { (config) in
+      if let config = config {
+        self.parseAndSaveAppConfigFromServer(configJson: config)
+      }
+    }
+  }
+  
+  private func parseAndSaveAppConfigFromServer(configJson: JSON) {
+    if let data = configJson["data"] as! JSON? {
+      
+      // ListColor
+      if let listColros = data["listColors"] as! Array<JSON>? {
+        for color in listColros {
+          AppConfig.shared.listColors.append(ColorRGB(color["red"] as! CGFloat, color["green"] as! CGFloat, color["blue"] as! CGFloat))
+        }
+      }
+      
+      // BackgroundColor
+      if let homeBackgroundColorJSON = data["homeBackgroundColor"] as! JSON? {
+        AppConfig.shared.homeBackgroundColor = ColorRGB(homeBackgroundColorJSON["red"] as! CGFloat, homeBackgroundColorJSON["green"] as! CGFloat, homeBackgroundColorJSON["blue"] as! CGFloat)
+      }
+    }
+  }
+  
+  private func showEventPopup() {
+    let eventPopup = EventPopup()
+    eventPopup.modalPresentationStyle = .overCurrentContext
+    eventPopup.allowTapDarkLayerToDismiss = true
+    self.present(eventPopup, animated: false, completion: nil)
   }
   
   // MARK: Setup BottomBar

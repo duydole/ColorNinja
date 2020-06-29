@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window?.makeKeyAndVisible()
     
     // If didLogin open HomeViewController
-    if OwnerInfo.shared.didLogin {
+    if OwnerInfo.shared.didLogin { 
       let homeVC = HomeViewController()
       navigationViewController.pushViewController(homeVC, animated: false)
     }
