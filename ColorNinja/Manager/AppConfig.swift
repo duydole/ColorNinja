@@ -17,7 +17,5 @@ class AppConfig {
   public var didShowEventPopup = false
   
   public var listColors: Array<UIColor> = []
-  
-  public var homeBackgroundColor = Constants.HomeScreen.backgroundColor
-  
+    
 }

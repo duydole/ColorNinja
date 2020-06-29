@@ -141,15 +141,29 @@ class HomeViewController: BaseHomeViewController {
   
   private func getAppConfigFromServer() {
     
-    /// Load
+    print("duydl: [AppConfig] - Start load AppConfig from server")
     DataBaseService.shared.loadAppConfig { (config) in
       if let config = config {
-        self.parseAndSaveAppConfigFromServer(configJson: config)
+        /// Loaded configJson from server
+        print("duydl: [AppConfig] - Load success AppConfig from server")
+
+        self.parseAndSaveAppConfigFromServerW(configJson: config) { (done) in
+          
+          /// Parse + Save all config done
+        }
+      } else {
+        print("duydl: [AppConfig] - Load failed AppConfig from server")
+
+        self.handleWhenCannotLoadAppConfigFromServer()
       }
     }
   }
   
-  private func parseAndSaveAppConfigFromServer(configJson: JSON) {
+  private func handleWhenCannotLoadAppConfigFromServer() {
+    let _ = ColorStore.shared
+  }
+  
+  private func parseAndSaveAppConfigFromServerW(configJson: JSON,completion: (Bool) -> ()) {
     if let data = configJson["data"] as! JSON? {
       
       // ListColor
@@ -159,10 +173,9 @@ class HomeViewController: BaseHomeViewController {
         }
       }
       
-      // BackgroundColor
-      if let homeBackgroundColorJSON = data["homeBackgroundColor"] as! JSON? {
-        AppConfig.shared.homeBackgroundColor = ColorRGB(homeBackgroundColorJSON["red"] as! CGFloat, homeBackgroundColorJSON["green"] as! CGFloat, homeBackgroundColorJSON["blue"] as! CGFloat)
-      }
+      print("duydl: Load and save \(AppConfig.shared.listColors.count) colors from server successfully!")
+      
+      let _ = ColorStore.shared
     }
   }
   

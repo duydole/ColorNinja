@@ -80,32 +80,39 @@ class ColorStore {
   }
   
   private func setupColors() {
-    
-    allColors = [
-      ColorRGB(8, 170, 145),
-      ColorRGB(238, 93, 39),
-      ColorRGB(223, 27, 83),
-      ColorRGB(118, 41, 140),
-      ColorRGB(84, 79, 136),
-      ColorRGB(144, 11, 62),
-      ColorRGB(119, 1, 56),
-      ColorRGB(255, 87, 51),
-      //ColorRGB(255, 195, 3),  // Màu vàng khó thấy mẹ nè
-      ColorRGB(67, 41, 103),
-      ColorRGB(120, 45, 101),
-      ColorRGB(235, 219, 152),
-      ColorRGB(249, 66, 82),
-      ColorRGB(32, 68, 91),
-      ColorRGB(123, 56, 65),
-      ColorRGB(248, 231, 169),
-      ColorRGB(197, 225, 111),
-      ColorRGB(196, 55, 129),
-      ColorRGB(70, 93, 110),
-      ColorRGB(240, 192, 168)
-    ]
-    
+        
     if AppConfig.shared.listColors.count > 15 {
+      
+      /// Color from server
       allColors = AppConfig.shared.listColors
+      print("duydl: From SERVER: we have \(allColors.count) colors")
+    } else {
+      
+      /// Local
+      allColors = [
+        ColorRGB(8, 170, 145),
+        ColorRGB(238, 93, 39),
+        ColorRGB(223, 27, 83),
+        ColorRGB(118, 41, 140),
+        ColorRGB(84, 79, 136),
+        ColorRGB(144, 11, 62),
+        ColorRGB(119, 1, 56),
+        ColorRGB(255, 87, 51),
+        //ColorRGB(255, 195, 3),  // Màu vàng khó thấy mẹ nè
+        ColorRGB(67, 41, 103),
+        ColorRGB(120, 45, 101),
+        ColorRGB(235, 219, 152),
+        ColorRGB(249, 66, 82),
+        ColorRGB(32, 68, 91),
+        ColorRGB(123, 56, 65),
+        ColorRGB(248, 231, 169),
+        ColorRGB(197, 225, 111),
+        ColorRGB(196, 55, 129),
+        ColorRGB(70, 93, 110),
+        ColorRGB(240, 192, 168)
+      ]
+      
+      print("duydl: NO INTERNET, From LOCAL: we have \(allColors.count) colors")
     }
   }
 }

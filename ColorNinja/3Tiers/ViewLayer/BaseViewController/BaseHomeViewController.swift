@@ -29,7 +29,7 @@ class BaseHomeViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.view.backgroundColor = AppConfig.shared.homeBackgroundColor
+    self.view.backgroundColor = Constants.HomeScreen.backgroundColor
     self.setupViews()
   }
   
