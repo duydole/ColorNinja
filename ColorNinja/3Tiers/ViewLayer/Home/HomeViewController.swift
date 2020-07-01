@@ -130,7 +130,7 @@ class HomeViewController: BaseHomeViewController {
   
   private func addBestScoreLabel() {
     bestScoreLabel = UILabel()
-    bestScoreLabel.text = "Your best score is \(OwnerInfo.shared.bestScore)"
+    bestScoreLabel.text = "BEST SCORE: \(OwnerInfo.shared.bestScore)"
     bestScoreLabel.textAlignment = NSTextAlignment.center
     bestScoreLabel.font = UIFont(name: Font.squirk, size: scaledValue(30))
     bestScoreLabel.textColor = .white

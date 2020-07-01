@@ -58,6 +58,9 @@ class BaseHomeViewController: UIViewController {
     avatarView = UIImageView()
     avatarView.layer.cornerRadius = avtWidth/2
     avatarView.clipsToBounds = true
+    avatarView.layer.borderWidth = 1.0
+    avatarView.layer.borderColor = UIColor.white.cgColor
+    
     switch OwnerInfo.shared.loginType {
     case .Facebook:
       avatarView.image = UIImage(named: "defaultAvatar")
