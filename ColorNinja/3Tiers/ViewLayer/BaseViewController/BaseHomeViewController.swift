@@ -102,7 +102,7 @@ class BaseHomeViewController: UIViewController {
     topContainer.snp.makeConstraints { (make) in
       make.width.equalToSuperview()
       make.top.equalTo(fakeNavigationbar.snp.bottom)
-      make.height.equalToSuperview().multipliedBy(0.3)
+      make.height.equalToSuperview().multipliedBy(0.25)
       make.centerX.equalToSuperview()
     }
     
@@ -173,7 +173,7 @@ class BaseHomeViewController: UIViewController {
     midContainer.snp.makeConstraints { (make) in
       make.trailing.leading.equalToSuperview()
       make.top.equalTo(topContainer.snp.bottom)
-      make.height.equalToSuperview().multipliedBy(0.3)
+      make.height.equalToSuperview().multipliedBy(0.35)
     }
   }
   

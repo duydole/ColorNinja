@@ -25,8 +25,11 @@ let colorNinjaAppId = "1516759930"
 class HomeViewController: BaseHomeViewController {
   
   //Private
-  private var singlePlayerButton: UIButton!
-  private var multiPlayerButton: UIButton!
+  private var singlePlayerButton: ButtonWithImage!
+  private var matchRandomButton: ButtonWithImage!
+  private var newRoomButton: ButtonWithImage!
+  private var joinRoomButton: ButtonWithImage!
+  
   private var bestScoreLabel: UILabel!
   private var bottomBar: UIView!
   private var adBannerView: GADBannerView!
@@ -59,7 +62,7 @@ class HomeViewController: BaseHomeViewController {
     /// Hide naviagtionbar
     navigationController?.navigationBar.isHidden = true
   }
-    
+  
   override func setupViews() {
     super.setupViews()
     
@@ -69,43 +72,60 @@ class HomeViewController: BaseHomeViewController {
   }
   
   private func settingMidContainer() {
-    add1PlayerButton()
-    add2PlayerButton()
+    addButtons()
     addBestScoreLabel()
   }
   
-  private func add1PlayerButton() {
-    singlePlayerButton = UIButton()
-    singlePlayerButton.setTitle("1 Player", for: .normal)
-    singlePlayerButton.backgroundColor = .black
-    singlePlayerButton.titleLabel!.font = UIFont(name: Font.squirk, size: scaledValue(30))
-    singlePlayerButton.layer.cornerRadius = scaledValue(13)
-    singlePlayerButton.makeShadow()
+  private func addButtons() {
+    #if DEBUG
+    //midContainer.backgroundColor = .blue
+    #endif
+    
+    let spacing = scaledValue(10)
+    let paddingTopOfMidContainer = scaledValue(30)
+    
+    singlePlayerButton = ViewCreator.createButtonInHome(title: "1 Player", imamgeName: "singleicon")
     midContainer.addSubview(singlePlayerButton)
     singlePlayerButton.snp.makeConstraints { (make) in
-      make.top.equalTo(scaledValue(50))
+      make.top.equalTo(paddingTopOfMidContainer)
       make.centerX.equalToSuperview()
       make.width.equalTo(scaledValue(227))
       make.height.equalTo(scaledValue(52))
     }
     
-    singlePlayerButton.addTarget(self, action: #selector(didTapSinglePlayerButton), for: .touchUpInside)
-  }
-  
-  private func add2PlayerButton() {
-    multiPlayerButton = UIButton()
-    multiPlayerButton.setTitle("2 Player", for: .normal)
-    multiPlayerButton.backgroundColor = .black
-    multiPlayerButton.titleLabel!.font = UIFont(name: Font.squirk, size: scaledValue(30))
-    multiPlayerButton.layer.cornerRadius = scaledValue(13)
-    multiPlayerButton.makeShadow()
-    midContainer.addSubview(multiPlayerButton)
-    multiPlayerButton.snp.makeConstraints { (make) in
+    singlePlayerButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapSinglePlayerButton))
+    
+    
+    /// MultiPlayer Button
+    matchRandomButton = ViewCreator.createButtonInHome(title: "VS STRANGER", imamgeName: "twopeopleicon")
+    midContainer.addSubview(matchRandomButton)
+    matchRandomButton.snp.makeConstraints { (make) in
       make.width.height.centerX.equalTo(singlePlayerButton)
-      make.top.equalTo(singlePlayerButton.snp.bottom).offset(scaledValue(20))
+      make.top.equalTo(singlePlayerButton.snp.bottom).offset(spacing)
     }
     
-    multiPlayerButton.addTarget(self, action: #selector(didTapMultiPlayerButton), for: .touchUpInside)
+    matchRandomButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapMatchRandomButton))
+    
+    
+    /// NewRoom Button
+    newRoomButton = ViewCreator.createButtonInHome(title: "NEW ROOM", imamgeName: "newroomicon")
+    midContainer.addSubview(newRoomButton)
+    newRoomButton.snp.makeConstraints { (make) in
+      make.width.height.centerX.equalTo(singlePlayerButton)
+      make.top.equalTo(matchRandomButton.snp.bottom).offset(spacing)
+    }
+    
+    newRoomButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapNewRoomButton))
+
+    /// NewRoom Button
+    joinRoomButton = ViewCreator.createButtonInHome(title: "JOIN ROOM", imamgeName: "joinroomicon")
+    midContainer.addSubview(joinRoomButton)
+    joinRoomButton.snp.makeConstraints { (make) in
+      make.width.height.centerX.equalTo(singlePlayerButton)
+      make.top.equalTo(newRoomButton.snp.bottom).offset(spacing)
+    }
+    
+    joinRoomButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapJoinRoomButton))
   }
   
   private func addBestScoreLabel() {
@@ -116,7 +136,7 @@ class HomeViewController: BaseHomeViewController {
     bestScoreLabel.textColor = .white
     midContainer.addSubview(bestScoreLabel)
     bestScoreLabel.snp.makeConstraints { (make) in
-      make.top.equalTo(multiPlayerButton.snp.bottom).offset(scaledValue(20))
+      make.top.equalTo(joinRoomButton.snp.bottom).offset(scaledValue(20))
       make.centerX.equalToSuperview()
     }
   }
@@ -146,14 +166,14 @@ class HomeViewController: BaseHomeViewController {
       if let config = config {
         /// Loaded configJson from server
         print("duydl: [AppConfig] - Load success AppConfig from server")
-
+        
         self.parseAndSaveAppConfigFromServerW(configJson: config) { (done) in
           
           /// Parse + Save all config done
         }
       } else {
         print("duydl: [AppConfig] - Load failed AppConfig from server")
-
+        
         self.handleWhenCannotLoadAppConfigFromServer()
       }
     }
@@ -247,7 +267,7 @@ class HomeViewController: BaseHomeViewController {
   private func speakerImageForCurrentMainSoundState() -> UIImage? {
     return GameMusicPlayer.shared.isMuteMainSound ? UIImage(named:"speakeroff") : UIImage(named:"speakeron")
   }
-
+  
   // MARK: Action handler
   
   #if ENABLE_ZALO_SDK
@@ -280,10 +300,10 @@ class HomeViewController: BaseHomeViewController {
     self.present(gameVC, animated: false, completion: nil)
   }
   
-  @objc private func didTapMultiPlayerButton() {
-    let vc = CreateRoomViewController()
+  @objc private func didTapMatchRandomButton() {
+    let vc = MultiPlayerViewController()
     vc.modalPresentationStyle = .fullScreen
-    self.present(vc, animated: false, completion: nil)
+    present(vc, animated: false, completion: nil)
   }
   
   @objc private func didTapRateUsButton() {
@@ -306,6 +326,21 @@ class HomeViewController: BaseHomeViewController {
     present(rankingVC, animated: true, completion: nil)
   }
   
+  @objc func didTapNewRoomButton() {
+    let vc = RoomGameViewController()
+    vc.modalPresentationStyle = .fullScreen
+    present(vc, animated: false, completion: nil)
+  }
+  
+  @objc func didTapJoinRoomButton() {
+    let popup = JoinRoomPopup()
+    popup.allowTapDarkLayerToDismiss = true
+    popup.dismissInterval = 0.2
+    popup.delegate = self
+    popup.modalPresentationStyle = .overCurrentContext
+    self.present(popup, animated: false, completion: nil)
+  }
+  
   func rateApp() {
     if #available(iOS 10.3, *) {
       SKStoreReviewController.requestReview()
@@ -317,5 +352,15 @@ class HomeViewController: BaseHomeViewController {
         UIApplication.shared.openURL(url)
       }
     }
+  }
+}
+
+
+extension HomeViewController: JoinRoomPopupDelegate {
+  func didDismissWithRoomId(roomId: Int) {
+    let homeVC = RoomGameViewController()
+    homeVC.roomId = roomId
+    homeVC.modalPresentationStyle = .fullScreen
+    present(homeVC, animated: false, completion: nil)
   }
 }
