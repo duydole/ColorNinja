@@ -381,7 +381,8 @@ extension SinglePlayerViewController: GameOverPopupDelegate {
       // Reset lại View
       remainingTime = Double(reward)
       self.remainTimeLabel.text = self.currentRemainTimeString()
-      
+        self.boardCollectionView.isUserInteractionEnabled = true
+        
       self.resumeGame()
     } else {
       self.dismiss(animated: false, completion: nil)

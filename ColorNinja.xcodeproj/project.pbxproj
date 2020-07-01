@@ -849,7 +849,7 @@
 				CODE_SIGN_ENTITLEMENTS = ColorNinja/ColorNinja.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.9;
+				CURRENT_PROJECT_VERSION = 2.0;
 				DEVELOPMENT_TEAM = GSDWJHQ3A4;
 				INFOPLIST_FILE = ColorNinja/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -857,7 +857,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.duydl.colorninja;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "appstore-profile-colorninja-3";
@@ -875,7 +875,7 @@
 				CODE_SIGN_ENTITLEMENTS = ColorNinja/ColorNinja.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.9;
+				CURRENT_PROJECT_VERSION = 2.0;
 				DEVELOPMENT_TEAM = GSDWJHQ3A4;
 				INFOPLIST_FILE = ColorNinja/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -883,7 +883,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.duydl.colorninja;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "appstore-profile-colorninja-3";
