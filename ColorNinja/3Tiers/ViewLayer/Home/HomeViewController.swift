@@ -17,7 +17,7 @@ import Localize_Swift
 #if DEBUG_ADS
 fileprivate let bannerAdUnitId = "ca-app-pub-3940256099942544/2934735716"
 #else
-fileprivate let bannerAdUnitId = "ca-app-pub-2457313692920235/2853475691"
+fileprivate let bannerAdUnitId = "ca-app-pub-9846859688916273/5767994203"
 #endif
 
 let colorNinjaAppId = "1516759930"
