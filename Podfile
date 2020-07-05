@@ -18,8 +18,15 @@ target 'ColorNinja' do
   pod 'AlamofireImage', '~> 4.1'
   pod 'ReachabilitySwift'
   pod 'Localize-Swift', '~> 2.0'
+  pod 'OneSignal', '>= 2.11.2', '< 3.0'
 
 
   #pod 'ZaloSDK'
 
+end
+
+target 'OneSignalNotificationServiceExtension' do
+  #only copy below line
+  use_frameworks!
+  pod 'OneSignal', '>= 2.11.2', '< 3.0'
 end
