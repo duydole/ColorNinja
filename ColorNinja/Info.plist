@@ -27,10 +27,7 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
-	<key>FacebookAppID</key>
-	<string>279949343187837</string>
-	<key>FacebookDisplayName</key>
-	<string>Color Ninja</string>
+	<key>CFBundleURLTypes</key> <array> <dict> <key>CFBundleURLSchemes</key> <array> <string>fb702817230295742</string> </array> </dict> </array> <key>FacebookAppID</key> <string>702817230295742</string> <key>FacebookDisplayName</key> <string>ColorNinja</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-2457313692920235~6034127677</string>
 	<key>LSApplicationQueriesSchemes</key>

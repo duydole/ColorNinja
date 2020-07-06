@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1610B08324A8C6A200504CC8 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1610B08224A8C6A200504CC8 /* GradientView.swift */; };
 		8C2C72782467A58C00883388 /* RankingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C72772467A58C00883388 /* RankingViewController.swift */; };
 		8C2C727C2467A79700883388 /* RankingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C727B2467A79700883388 /* RankingTableView.swift */; };
 		8C2C72802467A7CC00883388 /* RankingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C727F2467A7CC00883388 /* RankingTableViewCell.swift */; };
@@ -80,6 +81,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1610B08224A8C6A200504CC8 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		2EA3A6356F910FED2BED91AD /* Pods-ColorNinja.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorNinja.release.xcconfig"; path = "Target Support Files/Pods-ColorNinja/Pods-ColorNinja.release.xcconfig"; sourceTree = "<group>"; };
 		57C86C5C019D378438E37339 /* Pods-ColorNinja.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorNinja.debug.xcconfig"; path = "Target Support Files/Pods-ColorNinja/Pods-ColorNinja.debug.xcconfig"; sourceTree = "<group>"; };
 		57F237B10E2F49C95DDF1EC4 /* Pods_ColorNinja.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ColorNinja.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -329,6 +331,7 @@
 				8CC6DB46246B8FA90017B60A /* Date+Extension.swift */,
 				8C8BA173246E707900A73046 /* UIImageView+Extension.swift */,
 				F24E4365247A802900FBA7B1 /* CharacterSet+Extension.swift */,
+				1610B08224A8C6A200504CC8 /* GradientView.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -633,6 +636,7 @@
 			files = (
 				F2347631246809C5004C8363 /* GameOverPopup.swift in Sources */,
 				8C2C72822467ACD300883388 /* RankingCellModel.swift in Sources */,
+				1610B08324A8C6A200504CC8 /* GradientView.swift in Sources */,
 				8C6350A924735C8C00ADAB01 /* FacebookService.swift in Sources */,
 				F22F8584246679DA00493BB6 /* Size.swift in Sources */,
 				8C6EC7492467E3C100612802 /* PopupViewController.swift in Sources */,
@@ -842,7 +846,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.7;
-				DEVELOPMENT_TEAM = GSDWJHQ3A4;
+				DEVELOPMENT_TEAM = FGKAKJ775H;
 				INFOPLIST_FILE = ColorNinja/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -868,7 +872,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.7;
-				DEVELOPMENT_TEAM = GSDWJHQ3A4;
+				DEVELOPMENT_TEAM = FGKAKJ775H;
 				INFOPLIST_FILE = ColorNinja/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (

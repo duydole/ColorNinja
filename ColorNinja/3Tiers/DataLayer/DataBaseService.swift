@@ -90,13 +90,17 @@ class DataBaseService : NSObject {
     
     AF.request(registerUserUrl, method: .post, parameters:parameters).responseJSON { (response) in
       if let json = response.value as! [String : Any]? {
-        guard let error: Int = json["error"] as? Int else { return }
-        if error < 0 {
-          print("duydl: SERVER: \(json["message"] ?? "Something Error")")
-          return
+        guard let error: Int = json["error"] as? Int else {
+            completion?(false,nil)
+            return
         }
-        completion?(true,nil)
-        
+        if error < 0 {
+            print("duydl: SERVER: \(json["message"] ?? "Something Error")")
+            completion?(false,nil)
+            return
+        } else {
+            completion?(true,nil)
+        }
       }
     }
   }

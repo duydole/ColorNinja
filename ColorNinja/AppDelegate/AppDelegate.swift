@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMobileAds
+import FBSDKCoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,26 +17,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
-    // Initial Screen is LoginViewController
-    let navigationViewController = UINavigationController(rootViewController: LoginViewController())
-    navigationViewController.navigationBar.isHidden = true
     window = UIWindow(frame: UIScreen.main.bounds)
-    window?.rootViewController = navigationViewController
-    window?.makeKeyAndVisible()
-    
-    // If didLogin open HomeViewController
     if OwnerInfo.shared.didLogin {
-      let homeVC = HomeViewController()
-      navigationViewController.pushViewController(homeVC, animated: false)
+        let navigationViewController = UINavigationController(rootViewController: HomeViewController())
+        navigationViewController.navigationBar.isHidden = true
+        window?.rootViewController = navigationViewController
+    } else {
+        window?.rootViewController = LoginViewController()
     }
+    
+    window?.makeKeyAndVisible()
     
     setupCommonWhenLaughingApp()
     return true
   }
+    
+    
+    func application( _ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:] ) -> Bool { ApplicationDelegate.shared.application( app, open: url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplication.OpenURLOptionsKey.annotation] )
+    }
   
   private func setupCommonWhenLaughingApp() {
     GameMusicPlayer.shared.startBackgroundMusic()
     GADMobileAds.sharedInstance().start(completionHandler: nil)
   }
 }
-
