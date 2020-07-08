@@ -12,7 +12,7 @@ class PopupViewController: UIViewController {
 
   // Public
   public var activityIndicator = UIActivityIndicatorView()
-  public var tapDarkLayerToDismiss: Bool = false
+  public var allowTapDarkLayerToDismiss: Bool = false
   public var contentView: UIView!
   public var contentSize: CGSize {
     return CGSize(width: 3*Constants.Screen.width/4, height: Constants.Screen.height/2)
@@ -123,7 +123,7 @@ class PopupViewController: UIViewController {
   }
   
   @objc private func didTapDarkLayer() {
-    if tapDarkLayerToDismiss {
+    if allowTapDarkLayerToDismiss {
       dismissPopUp()
     }
   }

@@ -75,6 +75,8 @@ class RankingViewController: UIViewController {
     
     self.avatarView.layer.cornerRadius = scaledValue(40)
     self.avatarView.clipsToBounds = true
+    self.avatarView.layer.borderWidth = 1.0
+    self.avatarView.layer.borderColor = UIColor.white.cgColor
     
     self.avatarView.snp.makeConstraints { (make) in
       make.left.equalToSuperview().offset(scaledValue(20))

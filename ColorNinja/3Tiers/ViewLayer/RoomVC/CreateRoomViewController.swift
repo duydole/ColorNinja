@@ -120,7 +120,7 @@ class CreateRoomViewController: BaseViewController {
   
   @objc func didTapJoinRoomButton() {
     let popup = JoinRoomPopup()
-    popup.tapDarkLayerToDismiss = true
+    popup.allowTapDarkLayerToDismiss = true
     popup.dismissInterval = 0.2
     popup.delegate = self
     popup.modalPresentationStyle = .overCurrentContext

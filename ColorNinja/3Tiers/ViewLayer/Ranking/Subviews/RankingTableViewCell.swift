@@ -8,6 +8,7 @@
 
 import UIKit
 
+fileprivate let fontSize = scaledValue(16)
 
 class RankingTableViewCell: UITableViewCell {
   
@@ -19,10 +20,12 @@ class RankingTableViewCell: UITableViewCell {
   private var rankingLabel: UILabel!
   private var nameLabel: UILabel!
   private var recordLabel: UILabel!
-  
+  private var rateLabel: UILabel!
   
   override func prepareForReuse() {
     self.contentView.backgroundColor = Constants.GameScreen.forcegroundColor
+    imgAvatar.image = nil
+    rankingLabel.text = nil
   }
   
   // MARK: - Initialize
@@ -47,51 +50,61 @@ class RankingTableViewCell: UITableViewCell {
     self.imgAvatar.clipsToBounds = true
     
     self.rankingLabel = UILabel()
-    self.rankingLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+    self.rankingLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .medium)
     self.rankingLabel.textColor = .white
     self.rankingLabel.textAlignment = .center
     
     self.nameLabel = UILabel()
-    self.nameLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+    self.nameLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .medium)
     self.nameLabel.textColor = .white
     
     self.recordLabel = UILabel()
     self.recordLabel.textAlignment = .center
-    self.recordLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+    self.recordLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .medium)
     self.recordLabel.textColor = .white
+
+    self.rateLabel = UILabel()
+    self.rateLabel.textAlignment = .center
+    self.rateLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .medium)
+    self.rateLabel.textColor = .white
+    self.rateLabel.text = "100%"
     
     self.contentView.addSubview(self.imgAvatar)
     self.contentView.addSubview(self.rankingLabel)
     self.contentView.addSubview(self.nameLabel)
     self.contentView.addSubview(self.recordLabel)
-    
+    self.contentView.addSubview(self.rateLabel)
     
     self.rankingLabel.snp.makeConstraints { (make) in
-      make.centerY.equalToSuperview()
-      make.left.equalToSuperview().offset(RankingTableViewCell.padding)
-      make.width.height.equalTo(30)
+      make.centerY.height.equalToSuperview()
+      make.left.equalToSuperview().offset(10)
+      make.width.equalTo(30)
     }
     
     self.imgAvatar.snp.makeConstraints { (make) in
       make.centerY.equalToSuperview()
-      make.left.equalTo(self.rankingLabel.snp.right).offset(20)
+      make.left.equalTo(self.rankingLabel.snp.right).offset(5)
       make.width.height.equalTo(30)
     }
+        
+    self.nameLabel.snp.makeConstraints { (make) in
+      make.height.centerY.equalToSuperview()
+      make.left.equalTo(imgAvatar.snp.right).offset(10)
+      make.right.equalTo(recordLabel.snp.left).offset(-5)
+    }
     
+    self.rateLabel.snp.makeConstraints { (make) in
+      make.height.centerY.equalToSuperview()
+      make.width.equalTo(45)
+      make.right.equalToSuperview().offset(-5)
+    }
     
     self.recordLabel.snp.makeConstraints { (make) in
-      make.centerY.equalToSuperview()
-      make.right.equalToSuperview().offset(-RankingTableViewCell.padding)
-      make.height.equalTo(30)
+      make.height.centerY.equalToSuperview()
+      make.right.equalTo(rateLabel.snp.left).offset(-5)
       make.width.equalTo(50)
     }
     
-    self.nameLabel.snp.makeConstraints { (make) in
-      make.centerY.equalToSuperview()
-      make.right.equalTo(self.recordLabel.snp.left).offset(20)
-      make.left.equalTo(self.imgAvatar.snp.right).offset(10)
-      make.height.equalTo(30)
-    }
   }
   
   public func shouldUpdateCell(cellObject: RankingCellModel) {
@@ -99,9 +112,10 @@ class RankingTableViewCell: UITableViewCell {
     self.nameLabel.text = getRealNameWithoutPlus(name: cellObject.name)
     self.recordLabel.text = "\(cellObject.record)"
     self.rankingLabel.textColor = cellObject.playerType.colorTitle
+    self.rateLabel.text = "\(cellObject.rate ?? 0)%"
     
     if cellObject.playerType != .normal {
-      self.rankingLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+      self.rankingLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .medium)
     }
     
     self.imgAvatar.image = UIImage(named: "defaultAvatar")
@@ -111,6 +125,6 @@ class RankingTableViewCell: UITableViewCell {
   }
   
   static public func heightForCell(cellObject: RankingCellModel, indexPath: IndexPath, tableView: UITableView) -> CGFloat {
-    return 50;
+    return scaledValue(50);
   }
 }

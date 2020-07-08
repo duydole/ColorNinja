@@ -9,7 +9,13 @@
 import Foundation
 import UIKit
 
+#if DEBUG
 let MAX_LEVEL: Int = 30
+#else
+let MAX_LEVEL: Int = 30
+#endif
+let serverIp = "35.198.220.200"
+let serverPort: UInt32 = 8080
 
 class MultiPlayerViewController : BaseGameViewController {
   
@@ -25,6 +31,8 @@ class MultiPlayerViewController : BaseGameViewController {
   
   private var currenLevelLabel: UILabel!
   private var statusLabel: UILabel!
+  private var rematchButton: UIButton!
+  private var centerImageView: UIImageView!
   
   private var p1Score: Int = 0
   private var p2Score: Int = 0
@@ -40,12 +48,8 @@ class MultiPlayerViewController : BaseGameViewController {
     client.close()
   }
   
-  override func viewDidAppear(_ animated: Bool) {
-    
-  }
-  
   private func setupClientSocket() {
-    client = ClientSocket(connectWithHost: "119.82.135.105", port: 8080)
+    client = ClientSocket(connectWithHost: serverIp, port: serverPort)
     client.delegate = self
   }
   
@@ -60,6 +64,8 @@ class MultiPlayerViewController : BaseGameViewController {
     super.setupViews()
     setupTopContainer()
     setupStatusLabel()
+    setupRematchViews()
+    setupCenterImageView()
   }
   
   func setupTopContainer() {
@@ -124,10 +130,39 @@ class MultiPlayerViewController : BaseGameViewController {
   func setupStatusLabel() {
     statusLabel = UILabel()
     statusLabel.textColor = .yellow
-    statusLabel.font = UIFont.systemFont(ofSize: scaledValue(23), weight: .bold)
+    statusLabel.font = UIFont.systemFont(ofSize: scaledValue(20), weight: .bold)
     view.addSubview(statusLabel)
     statusLabel.snp.makeConstraints { (make) in
       make.center.equalToSuperview()
+    }
+  }
+  
+  func setupRematchViews() {
+    rematchButton = UIButton()
+    rematchButton.isHidden = true
+    rematchButton.setTitle("REMATCH", for: .normal)
+    rematchButton.backgroundColor = .white
+    rematchButton.titleLabel!.font = UIFont(name: Font.squirk, size: scaledValue(30))
+    rematchButton.layer.cornerRadius = scaledValue(13)
+    rematchButton.makeShadow()
+    rematchButton.setTitleColor(.black, for: .normal)
+    view.addSubview(rematchButton)
+    rematchButton.snp.makeConstraints { (make) in
+      make.center.equalToSuperview()
+      make.width.equalTo(scaledValue(200))
+    }
+    
+    rematchButton.addTarget(self, action: #selector(didTapRematchButton), for: .touchUpInside)
+  }
+  
+  func setupCenterImageView() {
+    let imageWidth = scaledValue(350)
+    centerImageView = UIImageView()
+    centerImageView.isHidden = true
+    view.addSubview(centerImageView)
+    centerImageView.snp.makeConstraints { (make) in
+      make.center.equalToSuperview()
+      make.width.height.equalTo(imageWidth)
     }
   }
   
@@ -146,42 +181,80 @@ class MultiPlayerViewController : BaseGameViewController {
     // workaround:
     // Không hiểu nhiều khi nó không ẩn
     if statusLabel.isHidden == false {
-        statusLabel.isHidden = true
+      statusLabel.isHidden = true
     }
     
     let boardGameInfo = json["boardGame"] as! Dictionary<String, Any>
     let levelIndex: Int = boardGameInfo["round"] as! Int
-    let listStringAnimation = levelIndex == 1 ? ["Matched", "3", "2", "1", "Go!"] : ["Next"]
+    let isOwnerWin = json["isPreviousWinner"] as! Bool
+    let isFirstGame = levelIndex == 1
     
-    if levelIndex > 1 {
-      let isOwnerWin = json["isPreviousWinner"] as! Bool
-      if isOwnerWin {
-        p1Score += 1
-        zoomLabelAnimation(scale: 3, label: player1Point, text: "\(p1Score)")
-      } else {
-        p2Score += 1
-        zoomLabelAnimation(scale: 3, label: player2Point, text: "\(p2Score)")
-      }
+    if !isFirstGame {
+      increaseScoreView(isOwnerWin: isOwnerWin)
     }
     
-    if levelIndex == MAX_LEVEL + 1 {
+    let overMaxLevel = levelIndex == MAX_LEVEL + 1
+    if overMaxLevel {
       requireServerStopGame()
       return
     }
     
-    currenLevelLabel.text = levelCountString()
+    currenLevelLabel.text = "\(levelIndex)/\(MAX_LEVEL)"
     self.boardCollectionView.alpha = 0
     shrinkCell = true
     
-    print("duydl: Start Animation Matched, 3, 2, 1")
-    self.startAnimationReadyView(withList: listStringAnimation) { (done) in
-      self.boardCollectionView.alpha = 1
-      self.currentLevel  = self.jsonToLevelModel(json)
-      self.showCurrentLevel()
+    // Nếu game đầu tiên:
+    if (isFirstGame) {
+      startAnimationReadyView(withList: ["Matched", "3", "2", "1", "Go!"]) { (done) in
+        self.showCurrentLevelWithJson(json: json)
+      }
+    } else {
+      let scaleFactor: CGFloat = 0.2
+      if isOwnerWin {
+        centerImageView.image = UIImage(named: "winicon")
+        animationImageView(imageView: centerImageView, scale: scaleFactor, completion:  {
+          self.showCurrentLevelWithJson(json: json)
+
+        })
+      } else {
+        centerImageView.image = UIImage(named: "looseicon")
+        animationImageView(imageView: centerImageView, scale: scaleFactor, completion: {
+          self.showCurrentLevelWithJson(json: json)
+        })
+      }
     }
   }
   
+  private func animationImageView(imageView: UIImageView, scale: CGFloat, completion: (() -> ())?) {
+    UIView.animate(withDuration: 0.35, delay: 0.0, options: .curveEaseInOut, animations: {
+      self.centerImageView.isHidden = false
+      self.centerImageView.transform = CGAffineTransform(scaleX: scale, y: scale)
+    }) { (success) in
+      Thread.sleep(forTimeInterval: 0.3)
+      self.centerImageView.isHidden = true
+      self.centerImageView.transform = .identity
+      completion?()
+    }
+  }
+  
+  private func increaseScoreView(isOwnerWin: Bool) {
+    if isOwnerWin {
+      p1Score += 1
+      zoomLabelAnimation(scale: 3, label: player1Point, text: "\(p1Score)")
+    } else {
+      p2Score += 1
+      zoomLabelAnimation(scale: 3, label: player2Point, text: "\(p2Score)")
+    }
+  }
+  
+  private func showCurrentLevelWithJson(json: Dictionary<String, Any>) {
+    self.boardCollectionView.alpha = 1
+    self.currentLevel  = self.jsonToLevelModel(json)
+    self.showCurrentLevel()
+  }
+  
   private func serverSendMatchedInfo(_ json: Dictionary<String, Any>) {
+    print("duydl: Server send MatchedInfo")
     let usernames = json["key_usernames"] as! Dictionary<String, String>
     for id in usernames.keys {
       if id != player1.userId {
@@ -192,6 +265,8 @@ class MultiPlayerViewController : BaseGameViewController {
     }
     
     self.statusLabel.isHidden = true
+    self.boardCollectionView.isHidden = false
+    self.rematchButton.isHidden = true
   }
   
   private func serverSendFinalResult(_ json: Dictionary<String, Any>) {
@@ -206,7 +281,7 @@ class MultiPlayerViewController : BaseGameViewController {
     
     let alert = UIAlertController(title: "GameOver", message: "\(winnerName) won, \(looserName) is too slow!", preferredStyle: .alert)
     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-      self.dismiss(animated: true, completion: nil)
+      self.showRematchButton()
     }))
     self.present(alert, animated: true, completion: nil)
   }
@@ -264,6 +339,30 @@ class MultiPlayerViewController : BaseGameViewController {
     }
   }
   
+  // MARK: Handle Events
+  
+  @objc func didTapRematchButton() {
+    resetAllViewsAndData()
+    sendRematchToServer()
+    
+    rematchButton.isHidden = true
+    showStatus(message: "Waiting your competitor to rematch! ^.^")
+  }
+  
+  private func resetAllViewsAndData() {
+    player1Point.text = "0"
+    player2Point.text = "0"
+    currenLevelLabel.text = "0/\(MAX_LEVEL)"
+    
+    p1Score = 0
+    p2Score = 0
+  }
+  
+  private func sendRematchToServer() {
+    let jsonString = "{\"type\":\(ClientSendType.RequireRematch.rawValue)} "
+    client.sendToServer(message: jsonString)
+  }
+  
   // MARK: - Other
   
   private func jsonToLevelModel(_ json: Dictionary<String, Any>) -> LevelModel {
@@ -272,7 +371,7 @@ class MultiPlayerViewController : BaseGameViewController {
     let mainColorIndex: Int = boardGameInfo["color"] as! Int
     let correctIndex: Int = boardGameInfo["index"] as! Int
     let numberOfRows = boardGameInfo["sizeBoard"] as! Int
-    let mainColor = ColorStore.shared.allColors[mainColorIndex]
+    let mainColor = ColorStore.shared.allColors[mainColorIndex%ColorStore.shared.allColors.count]
     let RGBIndexWillBeChanged = boardGameInfo["secondColor"] as! Int
     return LevelModel(levelIndex: levelIndex,
                       numberOfRows: numberOfRows,
@@ -281,8 +380,9 @@ class MultiPlayerViewController : BaseGameViewController {
                       RGBIndexWillBeChanged: RGBIndexWillBeChanged)
   }
   
-  private func levelCountString() -> String {
-    return "\(currentLevel.levelIndex+1)/\(MAX_LEVEL)"
+  private func showRematchButton() {
+    boardCollectionView.isHidden = true
+    rematchButton.isHidden = false
   }
 }
 
@@ -314,7 +414,7 @@ extension MultiPlayerViewController : ClientDelegate {
       break
     default:
       if NetworkManager.shared.hasConnection {
-      showAlertWithMessage(message: json["message"] as! String)
+        showAlertWithMessage(message: json["message"] as! String)
       } else {
         showAlertWithMessage(message: "Sorry. Please check your network connection!")
       }

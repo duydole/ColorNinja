@@ -9,20 +9,16 @@
 import Foundation
 import Alamofire
 
-fileprivate let serverUrl = "http://119.82.135.105:8000/"
+fileprivate let serverUrl = "http://35.198.220.200:8000/"
 fileprivate let leaderBoardUrl = serverUrl + "leaderboard/bestscore"
 fileprivate let registerUserUrl = serverUrl + "registeruser"
 fileprivate let updateUserDataUrl = serverUrl + "user"
+fileprivate let appConfigUrl = serverUrl + "appconfig"
 
 enum UpdateUserType: String {
   case Username = "username"
   case AvatarUrl = "avatar"
   case BestScore = "bestscore"
-}
-
-enum ErrorCode {
-  case NoDataReturn
-  case StatusCodeNot200s
 }
 
 typealias completionHandler = (_ success: Bool, _ error: Error?) -> Void
@@ -55,9 +51,9 @@ class DataBaseService : NSObject {
   public func loadUserRank(user: User, completion: @escaping((_ rank: Int) -> Void)) {
     
     if (noConnection()) {
-         completion(-1)
-       }
-      
+      completion(-1)
+    }
+    
     let url = "\(updateUserDataUrl)?key=\(user.userId)"
     AF.request(url).responseJSON { (response) in
       guard let json = response.value as! [String : Any]? else {
@@ -71,6 +67,21 @@ class DataBaseService : NSObject {
       } else {
         completion(-1)
       }
+    }
+  }
+  
+  public func loadAppConfig(completion: ((_ config: Dictionary<String, Any>?) -> ())? ) {
+    if (noConnection()) {
+      completion?(nil)
+    }
+    
+    AF.request(appConfigUrl).responseJSON { (response) in
+      guard let json = response.value as! [String:Any]? else {
+        completion?(nil)
+        return
+      }
+      
+      completion?(json)
     }
   }
   
@@ -109,7 +120,7 @@ class DataBaseService : NSObject {
     if (noConnection()) {
       completion?(false,nil)
     }
-
+    
     print("duydl: Request update score for user with newScore: \(newBestScore)")
     
     let parameters: Dictionary<String, Any> = [
@@ -137,7 +148,7 @@ class DataBaseService : NSObject {
     if (noConnection()) {
       completion?(false,nil)
     }
-
+    
     let parameters: Dictionary<String, Any> = [
       "key": userid,
       "username":newUsername,
@@ -158,11 +169,11 @@ class DataBaseService : NSObject {
   }
   
   public func updateAvatarForUser(userid: String, newAvatarUrl: String, completion: completionHandler?) {
-
+    
     if (noConnection()) {
       completion?(false,nil)
     }
-
+    
     let parameters: Dictionary<String, Any> = [
       "key": userid,
       "avatar":newAvatarUrl,

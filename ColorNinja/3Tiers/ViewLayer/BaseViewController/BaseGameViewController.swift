@@ -10,7 +10,11 @@ import Foundation
 import UIKit
 import GoogleMobileAds
 
-fileprivate let bannderIngameId = "ca-app-pub-2457313692920235/1972710690"
+#if DEBUG_ADS
+fileprivate let bannderIngameId = "ca-app-pub-3940256099942544/2934735716"
+#else
+fileprivate let bannderIngameId = "ca-app-pub-9846859688916273/9376475848"
+#endif
 
 class BaseGameViewController : BaseViewController {
   
@@ -32,6 +36,10 @@ class BaseGameViewController : BaseViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    LevelStore.shared.setColorForAllLevels()
   }
   
   // MARK: Override

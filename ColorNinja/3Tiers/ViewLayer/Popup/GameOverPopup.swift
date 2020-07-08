@@ -12,12 +12,13 @@ import GoogleMobileAds
 
 
 fileprivate let rewardForEachAds: Int = 5 /// numb of seconds user gained each ads.
-#if DEBUG
+
+#if DEBUG_ADS
 fileprivate let fullScreenAdUnitId = "ca-app-pub-3940256099942544/4411468910"
-fileprivate let rewardAdsUnitId = "ca-app-pub-2457313692920235/5356432254"
+fileprivate let rewardAdsUnitId = "ca-app-pub-3940256099942544/1712485313"
 #else
-fileprivate let fullScreenAdUnitId = "ca-app-pub-2457313692920235/3301114557"
-fileprivate let rewardAdsUnitId = "ca-app-pub-2457313692920235/5356432254"
+fileprivate let fullScreenAdUnitId = "ca-app-pub-9846859688916273/1497985828"
+fileprivate let rewardAdsUnitId = "ca-app-pub-9846859688916273/2433354046"
 #endif
 
 protocol GameOverPopupDelegate {
@@ -79,7 +80,7 @@ class GameOverPopup: PopupViewController {
   }
   
   @objc private func didTapReplayButton() {
-    if OwnerInfo.shared.countRoundDidPlay % 3 == 0 && NetworkManager.shared.hasConnection {
+    if OwnerInfo.shared.countRoundDidPlay % 3 == 0 && NetworkManager.shared.hasConnection && interstitial.isReady {
       showFullScreenAd()
     } else {
       _dismissAndSendReplayEventToDelegate()
@@ -92,7 +93,11 @@ class GameOverPopup: PopupViewController {
         /// Not allow to watch ads
         showAlertWithMessage(message: "You can only see 1 Reward Advertisement per turn")
       } else {
-        showRewardAd()
+        if rewardedAd?.isReady == true {
+          showRewardAd()
+        } else {
+          showAlertWithMessage(message: "Sorry. We had problems when loading the Advertisement.")
+        }
       }
     } else {
       showAlertWithMessage(message: "Sorry. Check your network connection, please.")

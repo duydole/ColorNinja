@@ -11,8 +11,11 @@ import UIKit
 import CoreGraphics
 import AudioToolbox
 
+typealias voidCompletion = () -> Void
 
 let INIT_REMAIN_TIME: TimeInterval = 2.0
+let MAX_COUNT_PROMPT: Int = 10
+let durationDelayBeforeShowGameOver = 0.2
 
 class SinglePlayerViewController : BaseGameViewController {
   
@@ -31,10 +34,6 @@ class SinglePlayerViewController : BaseGameViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     currentLevel = LevelStore.shared.allLevels[0]
-  }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    LevelStore.shared.setColorForAllLevels()
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -158,12 +157,11 @@ class SinglePlayerViewController : BaseGameViewController {
   
   private func processGameOver() {
     
-    // Loading...
-    activityIndicator.startAnimating()
     
     // Reset CountDownLabel
     self.remainingTime = 0.00
     self.remainTimeLabel.text = self.currentRemainTimeString()
+    boardCollectionView.isUserInteractionEnabled = false
     
     // StopTimer
     self.stopTimer()
@@ -173,7 +171,9 @@ class SinglePlayerViewController : BaseGameViewController {
     
     // Increase CountPrompt
     let curPromt = OwnerInfo.shared.countPrompt
-    OwnerInfo.shared.updateCountPrompt(newCountPrompt: curPromt + 1)
+    if (curPromt < MAX_COUNT_PROMPT) {
+        OwnerInfo.shared.updateCountPrompt(newCountPrompt: curPromt + 1)
+    }
     
     // Update Max Score
     let resultScored = currentLevel.levelIndex + 1
@@ -181,14 +181,25 @@ class SinglePlayerViewController : BaseGameViewController {
       OwnerInfo.shared.updateBestScore(newBestScore: resultScored)
     }
     
-    /// Luôn luôn quăng score lên Server để server tự update.
-    DataBaseService.shared.updateBestScoreForUser(userid: OwnerInfo.shared.userId, newBestScore: resultScored) { (success, error) in
-      if let _ = error {
-        assert(false)
-        return
-      }
-      
-      self.getRankAndShowGameOverPopup()
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        self.shakeResultCellWithCompletion {
+            self.vibrateDevice()
+            Thread.sleep(forTimeInterval: durationDelayBeforeShowGameOver)
+
+            // Loading...
+            self.activityIndicator.startAnimating()
+
+            /// Luôn luôn quăng score lên Server để server tự update.
+            DataBaseService.shared.updateBestScoreForUser(userid: OwnerInfo.shared.userId, newBestScore: resultScored) { (success, error) in
+              if let _ = error {
+                assert(false)
+                self.getRankAndShowGameOverPopup()
+                return
+              }
+              
+              self.getRankAndShowGameOverPopup()
+            }
+        }
     }
   }
   
@@ -227,8 +238,9 @@ class SinglePlayerViewController : BaseGameViewController {
   private func replayGame() {
     
     // Reset lại View
+    boardCollectionView.isUserInteractionEnabled = true
     remainingTime = Constants.GameSetting.maxRemainTime
-    self.remainTimeLabel.text = self.currentRemainTimeString()
+    remainTimeLabel.text = self.currentRemainTimeString()
     levelCountLabel.text = "1"
     
     // Reset lại model
@@ -251,6 +263,10 @@ class SinglePlayerViewController : BaseGameViewController {
     self.showCurrentLevel()
   }
   
+  private func showResultBeforeProcessGameOver() {
+
+  }
+  
   // MARK: Event handler
   
   @objc func didTapLightBubButton() {
@@ -258,7 +274,7 @@ class SinglePlayerViewController : BaseGameViewController {
       let curCountPrompt = OwnerInfo.shared.countPrompt
       OwnerInfo.shared.updateCountPrompt(newCountPrompt: curCountPrompt - 1)
       promptCountLable.text = "\(curCountPrompt - 1)"
-      shakeResultCell()
+      shakeResultCellWithCompletion(completion: nil)
     }
   }
 
@@ -284,12 +300,12 @@ class SinglePlayerViewController : BaseGameViewController {
   
   // MARK: Handle boardgame animation
   
-  private func shakeResultCell() {
+    private func shakeResultCellWithCompletion(completion: voidCompletion?) {
     let resultIndexPath = IndexPath(item: currentLevel.correctIndex, section: 0)
-    shakeCellAtIndexPath(indexPath: resultIndexPath)
+      shakeCellAtIndexPath(indexPath: resultIndexPath,completion: completion)
   }
   
-  private func shakeCellAtIndexPath(indexPath: IndexPath) {
+    private func shakeCellAtIndexPath(indexPath: IndexPath, completion: voidCompletion?) {
     
     let cell = boardCollectionView.cellForItem(at: indexPath)
     UIView.animate(withDuration: 0.05, animations: {
@@ -301,7 +317,7 @@ class SinglePlayerViewController : BaseGameViewController {
         UIView.animate(withDuration: 0.05, animations: {
           cell?.center.x -= 5
         }) { (success) in
-          
+            completion?()
         }
       }
     }
@@ -311,7 +327,8 @@ class SinglePlayerViewController : BaseGameViewController {
   // MARK: Getter
   
   private func currentRemainTimeString() -> String {
-    return String(format: "%.2f", self.remainingTime)
+    let remainTime = remainingTime < 0.001 ? 0.0 : remainingTime
+    return String(format: "%.2f", remainTime)
   }
 }
 
@@ -334,7 +351,7 @@ extension SinglePlayerViewController {
       
       if GameSettingManager.shared.allowEffectSound {
         self.vibrateDevice()
-        shakeCellAtIndexPath(indexPath: indexPath)
+        shakeCellAtIndexPath(indexPath: indexPath, completion: nil)
         GameMusicPlayer.shared.playInCorrectSound()
       }
     }
@@ -364,7 +381,8 @@ extension SinglePlayerViewController: GameOverPopupDelegate {
       // Reset lại View
       remainingTime = Double(reward)
       self.remainTimeLabel.text = self.currentRemainTimeString()
-      
+        self.boardCollectionView.isUserInteractionEnabled = true
+        
       self.resumeGame()
     } else {
       self.dismiss(animated: false, completion: nil)
