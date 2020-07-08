@@ -225,17 +225,16 @@ class LoginViewController: UIViewController {
       if !loginResult.isCancelled {
         
         // Update UserInfo
-        self.updateUserInfoFromFacebookProfile()
-        
-        // Insert DB:
-        DataBaseService.shared.insertUserToDB(user: OwnerInfo.shared) { (success, error) in
-          if error != nil {
-            assertionFailure()
-            return
-          }
+        self.updateUserInfoFromFacebookProfile { (success) in
+            // Insert DB:
+            DataBaseService.shared.insertUserToDB(user: OwnerInfo.shared) {[weak self] (success, error) in
+                if error != nil {
+                    print("Can not insertUserToDB")
+                } else {
+                    self?.openHomeViewController()
+                }
+            }
         }
-        
-        self.openHomeViewController()
       }
     }
   }
@@ -284,20 +283,22 @@ class LoginViewController: UIViewController {
     }, completion: nil)
   }
   
-  private func updateUserInfoFromFacebookProfile() {
-    if let _ = AccessToken.current {
-      Profile.loadCurrentProfile { (profile, error) in
-        if let profile = profile {
-            if let name = profile.name {
-                OwnerInfo.shared.updateUserName(newusername: name)
+    private func updateUserInfoFromFacebookProfile(completion: ((Bool)->())?) {
+        if let _ = AccessToken.current {
+          Profile.loadCurrentProfile { (profile, error) in
+            if let profile = profile {
+                if let name = profile.name {
+                    OwnerInfo.shared.updateUserName(newusername: name)
+                }
+                
+                OwnerInfo.shared.updateLoginType(newLoginType: .Facebook)
+                OwnerInfo.shared.updateUserId(newUserId: profile.userID)
+                DataBaseService.shared.updateAvatarForUser(userid: OwnerInfo.shared.userId, newAvatarUrl: OwnerInfo.shared.avatarUrl ?? "") { (success, error) in
+                    completion?(success)
+                }
             }
-            
-            OwnerInfo.shared.updateLoginType(newLoginType: .Facebook)
-            OwnerInfo.shared.updateUserId(newUserId: profile.userID)
-            DataBaseService.shared.updateAvatarForUser(userid: OwnerInfo.shared.userId, newAvatarUrl: OwnerInfo.shared.avatarUrl ?? "", completion: nil)
+          }
         }
-      }
-    }
   }
   
   // MARK: Helper
