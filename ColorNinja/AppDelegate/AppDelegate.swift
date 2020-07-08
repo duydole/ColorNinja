@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMobileAds
+import FBSDKCoreKit
 import OneSignal
 
 let onesignalAppId = "6d6c31de-f3c9-40b5-bb18-4e3550b22188"
@@ -21,23 +22,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // APNS OneSignal
     setupAPNSWithLaunchOptions(launchOptions: launchOptions)
-      
-    // Initial Screen is LoginViewController
-    let navigationViewController = UINavigationController(rootViewController: LoginViewController())
-    navigationViewController.navigationBar.isHidden = true
-    window = UIWindow(frame: UIScreen.main.bounds)
-    window?.rootViewController = navigationViewController
-    window?.makeKeyAndVisible()
     
-    // If didLogin open HomeViewController
-    if OwnerInfo.shared.didLogin { 
-      let homeVC = HomeViewController()
-      navigationViewController.pushViewController(homeVC, animated: false)
+    window = UIWindow(frame: UIScreen.main.bounds)
+    if OwnerInfo.shared.didLogin {
+        let navigationViewController = UINavigationController(rootViewController: HomeViewController())
+        navigationViewController.navigationBar.isHidden = true
+        window?.rootViewController = navigationViewController
+    } else {
+        window?.rootViewController = LoginViewController()
     }
+    
+    window?.makeKeyAndVisible()
     
     setupCommonWhenLaughingApp()
     return true
   }
+    
+    
+    func application( _ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:] ) -> Bool { ApplicationDelegate.shared.application( app, open: url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplication.OpenURLOptionsKey.annotation] )
+    }
   
   private func setupCommonWhenLaughingApp() {
     GameMusicPlayer.shared.startBackgroundMusic()

@@ -37,7 +37,7 @@ class OwnerInfo {
   public private(set) var countRoundDidPlay: Int = 0
   public var didLogin: Bool {
     get {
-      if loginType.rawValue != 0 {
+        if loginType != .NotLogin {
         return true
       } else {
         return false

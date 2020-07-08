@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1610B08324A8C6A200504CC8 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1610B08224A8C6A200504CC8 /* GradientView.swift */; };
 		1F24DE30531F19FD720BDCE9 /* Pods_ColorNinja.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CAA71D5E770FF4DCA29EEEA /* Pods_ColorNinja.framework */; };
 		55A5653B40B2938C039A214B /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFD7FFB1A0788B5C3CC3126A /* Pods_OneSignalNotificationServiceExtension.framework */; };
 		8C2C72782467A58C00883388 /* RankingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C72772467A58C00883388 /* RankingViewController.swift */; };
@@ -109,6 +110,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1610B08224A8C6A200504CC8 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		2EA3A6356F910FED2BED91AD /* Pods-ColorNinja.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorNinja.release.xcconfig"; path = "Target Support Files/Pods-ColorNinja/Pods-ColorNinja.release.xcconfig"; sourceTree = "<group>"; };
 		57C86C5C019D378438E37339 /* Pods-ColorNinja.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorNinja.debug.xcconfig"; path = "Target Support Files/Pods-ColorNinja/Pods-ColorNinja.debug.xcconfig"; sourceTree = "<group>"; };
 		5E0E02E044182AD4183D8A58 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
@@ -378,6 +380,7 @@
 				8CC6DB46246B8FA90017B60A /* Date+Extension.swift */,
 				8C8BA173246E707900A73046 /* UIImageView+Extension.swift */,
 				F24E4365247A802900FBA7B1 /* CharacterSet+Extension.swift */,
+				1610B08224A8C6A200504CC8 /* GradientView.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -747,6 +750,7 @@
 			files = (
 				F2347631246809C5004C8363 /* GameOverPopup.swift in Sources */,
 				8C2C72822467ACD300883388 /* RankingCellModel.swift in Sources */,
+				1610B08324A8C6A200504CC8 /* GradientView.swift in Sources */,
 				8C6350A924735C8C00ADAB01 /* FacebookService.swift in Sources */,
 				F22F8584246679DA00493BB6 /* Size.swift in Sources */,
 				8C6EC7492467E3C100612802 /* PopupViewController.swift in Sources */,
