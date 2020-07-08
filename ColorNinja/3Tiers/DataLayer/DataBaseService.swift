@@ -180,12 +180,16 @@ class DataBaseService : NSObject {
       "type":UpdateUserType.AvatarUrl.rawValue
     ]
     AF.request(updateUserDataUrl, method: .post, parameters:parameters).responseJSON { (response) in
-      
+        
       if let json = response.value as! JSON? {
-        guard let error: Int = json["error"] as? Int else { return }
+        guard let error: Int = json["error"] as? Int else {
+            completion?(false, response.error)
+            return
+        }
         if error < 0 {
-          print("duydl: SERVER: \(json["message"] ?? "Something Error")")
-          return
+            print("duydl: SERVER: \(json["message"] ?? "Something Error")")
+            completion?(false, response.error)
+            return
         }
         completion?(true,nil)
       }
