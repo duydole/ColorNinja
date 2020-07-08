@@ -29,13 +29,14 @@ class HomeViewController: BaseHomeViewController {
   private var singlePlayerButton: UIButton!
   private var multiPlayerButton: UIButton!
   private var bestScoreLabel: UILabel!
-  private var bottomBar: UIView!
+  private var bottomBar: UIStackView!
   private var adBannerView: GADBannerView!
   
   // BottomBar
   private var rateUsButton: UIButton!
   private var muteButton: UIButton!
   private var rankingButton: UIButton!
+    private var sharedButton: UIButton!
   
   // MARK: Life cycle
   
@@ -149,10 +150,14 @@ class HomeViewController: BaseHomeViewController {
     let bottomBarHeight: CGFloat = scaledValue(45)
     
     // Container
-    bottomBar = UIView()
+    bottomBar = UIStackView()
     view.addSubview(bottomBar)
+    bottomBar.distribution = .fillEqually
+    bottomBar.axis = .horizontal
+    bottomBar.alignment = .center
+    bottomBar.spacing = buttonSpacing
     bottomBar.snp.makeConstraints { (make) in
-      make.width.centerX.equalTo(adBannerView)
+      make.centerX.equalToSuperview()
       make.height.equalTo(bottomBarHeight)
       make.bottom.equalTo(adBannerView.snp.top).offset(-spacingWithAd)
     }
@@ -175,11 +180,9 @@ class HomeViewController: BaseHomeViewController {
     muteButton.setImage(speakerImageForCurrentMainSoundState()?.withRenderingMode(.alwaysTemplate), for: .normal)
     muteButton.imageView?.tintColor = .white
     muteButton.addTarget(self, action: #selector(didTapMuteButton), for: .touchUpInside)
-    bottomBar.addSubview(muteButton)
+    bottomBar.addArrangedSubview(muteButton)
     muteButton.snp.makeConstraints { (make) in
-      make.height.centerY.equalToSuperview()
-      make.width.equalTo(muteButton.snp.height)
-      make.centerX.equalToSuperview().offset(-(bottomBarHeight - buttonSpacing/2))
+        make.width.equalTo(muteButton.snp.height)
     }
     
     // RankingButton
@@ -187,11 +190,13 @@ class HomeViewController: BaseHomeViewController {
     rankingButton.setImage(UIImage(named:"rankingicon")?.withRenderingMode(.alwaysTemplate), for: .normal)
     rankingButton.imageView?.tintColor = .white
     rankingButton.addTarget(self, action: #selector(didTapRankingButton), for: .touchUpInside)
-    bottomBar.addSubview(rankingButton)
-    rankingButton.snp.makeConstraints { (make) in
-      make.centerY.width.height.equalTo(muteButton)
-      make.leading.equalTo(muteButton.snp.trailing).offset(scaledValue(buttonSpacing))
-    }
+    bottomBar.addArrangedSubview(rankingButton)
+    
+    sharedButton = UIButton()
+    sharedButton.setImage(UIImage(named:"icon_share_white")?.withRenderingMode(.alwaysTemplate), for: .normal)
+    sharedButton.imageView?.tintColor = .white
+    sharedButton.addTarget(self, action: #selector(didTapSharedButton), for: .touchUpInside)
+    bottomBar.addArrangedSubview(sharedButton)
   }
   
   override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -266,6 +271,14 @@ class HomeViewController: BaseHomeViewController {
     rankingVC.modalPresentationStyle = .fullScreen
     present(rankingVC, animated: true, completion: nil)
   }
+    
+    @objc private func didTapSharedButton() {
+        guard let url = URL(string: "https://apps.apple.com/vn/app/color-ninja-pro/id1516759930") else {
+            return
+        }
+        let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        present(activityVC, animated: true, completion: nil)
+    }
   
   func rateApp() {
     if #available(iOS 10.3, *) {
