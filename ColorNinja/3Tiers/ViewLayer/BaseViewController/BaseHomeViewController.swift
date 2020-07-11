@@ -198,16 +198,16 @@ class BaseHomeViewController: UIViewController {
       
       OwnerInfo.shared.updateInfoBeforeLogout()
       
-        guard let window = UIApplication.shared.keyWindow else{
-            return
-        }
-        let loginVC = LoginViewController()
-        window.rootViewController = loginVC
-        
-        loginVC.view.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-        UIView.transition(with: window, duration: 0.4, options: .transitionCrossDissolve, animations: {
-            loginVC.view.transform = .identity
-        }, completion: nil)
+      guard let window = UIApplication.shared.keyWindow else{
+        return
+      }
+      let loginVC = LoginViewController()
+      window.rootViewController = loginVC
+      
+      loginVC.view.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+      UIView.transition(with: window, duration: 0.4, options: .transitionCrossDissolve, animations: {
+        loginVC.view.transform = .identity
+      }, completion: nil)
     }))
     alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
       self.dismiss(animated: true, completion: nil)
