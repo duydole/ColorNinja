@@ -38,7 +38,7 @@ class HomeViewController: BaseHomeViewController {
   private var rateUsButton: UIButton!
   private var muteButton: UIButton!
   private var rankingButton: UIButton!
-    private var sharedButton: UIButton!
+  private var sharedButton: UIButton!
   
   // MARK: Life cycle
   
@@ -331,13 +331,13 @@ class HomeViewController: BaseHomeViewController {
     present(rankingVC, animated: true, completion: nil)
   }
     
-    @objc private func didTapSharedButton() {
-        guard let url = URL(string: "https://apps.apple.com/vn/app/color-ninja-pro/id1516759930") else {
-            return
-        }
-        let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
-        present(activityVC, animated: true, completion: nil)
+  @objc private func didTapSharedButton() {
+    guard let url = URL(string: "https://apps.apple.com/vn/app/color-ninja-pro/id1516759930") else {
+      return
     }
+    let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+    present(activityVC, animated: true, completion: nil)
+  }
   
   @objc func didTapNewRoomButton() {
     let vc = RoomGameViewController()
