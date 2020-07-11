@@ -10,12 +10,6 @@ import Foundation
 import UIKit
 import GoogleMobileAds
 
-#if DEBUG_ADS
-fileprivate let bannderIngameId = "ca-app-pub-3940256099942544/2934735716"
-#else
-fileprivate let bannderIngameId = "ca-app-pub-9846859688916273/9376475848"
-#endif
-
 class BaseGameViewController : BaseViewController {
   
   //Public
@@ -24,7 +18,7 @@ class BaseGameViewController : BaseViewController {
   public var currentLevel : LevelModel = LevelModel(levelIndex: 0)
   public var activityIndicator = UIActivityIndicatorView()
   public var shrinkCell : Bool = true
-  public var adBannerView: GADBannerView!
+  public var adBannerView = LDBannerAdView.shared
 
   //Private
   private var readyLabel: UILabel!
@@ -166,19 +160,11 @@ class BaseGameViewController : BaseViewController {
   }
   
   private func setupBannerAd() {
-    adBannerView = GADBannerView()
     adBannerView.rootViewController = self
-    adBannerView.adUnitID = bannderIngameId
-    adBannerView.load(GADRequest())
     view.addSubview(adBannerView)
     
-    let padding: CGFloat = 10
-    let viewWidth = ScreenSize.width - 2*padding
-    let bottomPadding = safeAreaBottom() > 0 ? safeAreaBottom() : padding
-    
-    adBannerView.adSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(viewWidth)
     adBannerView.snp.makeConstraints { (make) in
-      make.bottom.equalTo(-bottomPadding)
+      make.bottom.equalTo(-bottomPadding())
       make.centerX.equalToSuperview()
     }
   }

@@ -31,6 +31,7 @@
 		8CC6DB44246B8E470017B60A /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC6DB43246B8E470017B60A /* Collection+Extension.swift */; };
 		8CC6DB47246B8FA90017B60A /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC6DB46246B8FA90017B60A /* Date+Extension.swift */; };
 		F21145F4247CE092005ACB50 /* LeaderBoardStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21145F3247CE092005ACB50 /* LeaderBoardStruct.swift */; };
+		F2278BBB24B9C3A80091D898 /* LDBannerAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2278BBA24B9C3A80091D898 /* LDBannerAdView.swift */; };
 		F22F85642465A34900493BB6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F85632465A34900493BB6 /* Constants.swift */; };
 		F22F85662465A71E00493BB6 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F85652465A71E00493BB6 /* UIView+Extension.swift */; };
 		F22F85682465AF2100493BB6 /* ZButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F85672465AF2100493BB6 /* ZButton.swift */; };
@@ -138,6 +139,7 @@
 		BFD7FFB1A0788B5C3CC3126A /* Pods_OneSignalNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OneSignalNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEC542EFC5658C36941397A3 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 		F21145F3247CE092005ACB50 /* LeaderBoardStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderBoardStruct.swift; sourceTree = "<group>"; };
+		F2278BBA24B9C3A80091D898 /* LDBannerAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LDBannerAdView.swift; sourceTree = "<group>"; };
 		F22F85632465A34900493BB6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F22F85652465A71E00493BB6 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		F22F85672465AF2100493BB6 /* ZButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZButton.swift; sourceTree = "<group>"; };
@@ -350,9 +352,18 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		F2278BBC24B9CBC50091D898 /* Ads */ = {
+			isa = PBXGroup;
+			children = (
+				F2278BBA24B9C3A80091D898 /* LDBannerAdView.swift */,
+			);
+			path = Ads;
+			sourceTree = "<group>";
+		};
 		F22F85612465A32500493BB6 /* ViewLayer */ = {
 			isa = PBXGroup;
 			children = (
+				F2278BBC24B9CBC50091D898 /* Ads */,
 				F260CA602476C5E700D00348 /* RoomVC */,
 				F263FDB9246F94F400A4AB0B /* BaseViewController */,
 				F263FDB6246F943D00A4AB0B /* 2Player */,
@@ -765,6 +776,7 @@
 				F2A6E68A2466FF5600970D1B /* LevelStore.swift in Sources */,
 				8CC6DB44246B8E470017B60A /* Collection+Extension.swift in Sources */,
 				8CC6DB42246B8E160017B60A /* Dictionary+Extension.swift in Sources */,
+				F2278BBB24B9C3A80091D898 /* LDBannerAdView.swift in Sources */,
 				F260CA622476C63500D00348 /* CreateRoomViewController.swift in Sources */,
 				F263FDB8246F945A00A4AB0B /* MultiPlayerViewController.swift in Sources */,
 				F2D862372474330E006D3FD4 /* BaseHomeViewController.swift in Sources */,

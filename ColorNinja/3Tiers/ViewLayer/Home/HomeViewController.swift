@@ -14,12 +14,6 @@ import GoogleMobileAds
 import StoreKit
 import Localize_Swift
 
-#if DEBUG_ADS
-fileprivate let bannerAdUnitId = "ca-app-pub-3940256099942544/2934735716"
-#else
-fileprivate let bannerAdUnitId = "ca-app-pub-9846859688916273/5767994203"
-#endif
-
 let colorNinjaAppId = "1516759930"
 
 class HomeViewController: BaseHomeViewController {
@@ -32,7 +26,7 @@ class HomeViewController: BaseHomeViewController {
   
   private var bestScoreLabel: UILabel!
   private var bottomBar: UIStackView!
-  private var adBannerView: GADBannerView!
+  private var adBannerView = LDBannerAdView.shared
   
   // BottomBar
   private var rateUsButton: UIButton!
@@ -52,6 +46,13 @@ class HomeViewController: BaseHomeViewController {
     #if DEBUG
     printAllFamilyFonts()
     #endif
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    /// Add lại bannerAd
+    setupBannerAd()
   }
   
   // MARK: Setup views
@@ -143,19 +144,12 @@ class HomeViewController: BaseHomeViewController {
   }
   
   private func setupBannerAd() {
-    adBannerView = GADBannerView()
     adBannerView.rootViewController = self
-    adBannerView.adUnitID = bannerAdUnitId
-    adBannerView.load(GADRequest())
+    adBannerView.delegate = self
     view.addSubview(adBannerView)
-    
-    let padding: CGFloat = 10
-    let viewWidth = ScreenSize.width - 2*padding
-    let bottomPadding = safeAreaBottom() > 0 ? safeAreaBottom() : padding
-    
-    adBannerView.adSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(viewWidth)
+        
     adBannerView.snp.makeConstraints { (make) in
-      make.bottom.equalTo(-bottomPadding)
+      make.bottom.equalTo(-bottomPadding())
       make.centerX.equalToSuperview()
     }
   }
@@ -214,6 +208,7 @@ class HomeViewController: BaseHomeViewController {
     let buttonSpacing: CGFloat = scaledValue(30)
     let spacingWithAd: CGFloat = scaledValue(10)
     let bottomBarHeight: CGFloat = scaledValue(45)
+    let bottomBarBottomPadding = bottomPadding() + adBannerView.adSize.size.height + spacingWithAd
     
     // Container
     bottomBar = UIStackView()
@@ -225,7 +220,7 @@ class HomeViewController: BaseHomeViewController {
     bottomBar.snp.makeConstraints { (make) in
       make.centerX.equalToSuperview()
       make.height.equalTo(bottomBarHeight)
-      make.bottom.equalTo(adBannerView.snp.top).offset(-spacingWithAd)
+      make.bottom.equalTo(-bottomBarBottomPadding)
     }
     
     
@@ -368,12 +363,40 @@ class HomeViewController: BaseHomeViewController {
   }
 }
 
-
+/// JoinRoom Popup Delegate
 extension HomeViewController: JoinRoomPopupDelegate {
   func didDismissWithRoomId(roomId: Int) {
     let homeVC = RoomGameViewController()
     homeVC.roomId = roomId
     homeVC.modalPresentationStyle = .fullScreen
     present(homeVC, animated: false, completion: nil)
+  }
+}
+
+/// BannerAd Delegate
+extension HomeViewController: GADBannerViewDelegate {
+  
+  func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+    print("duydl: BannerAd: adViewDidReceiveAd")
+  }
+  
+  func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+    print("duydl: BannerAd: didFailToReceiveAdWithError")
+  }
+  
+  func adViewWillPresentScreen(_ bannerView: GADBannerView) {
+    print("duydl: BannerAd: adViewWillPresentScreen")
+  }
+
+  func adViewWillDismissScreen(_ bannerView: GADBannerView) {
+    print("duydl: BannerAd: adViewWillDismissScreen")
+  }
+  
+  func adViewDidDismissScreen(_ bannerView: GADBannerView) {
+    print("duydl: BannerAd: adViewDidDismissScreen")
+  }
+  
+  func adViewWillLeaveApplication(_ bannerView: GADBannerView) {
+    print("duydl: BannerAd: adViewWillLeaveApplication")
   }
 }

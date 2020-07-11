@@ -24,5 +24,12 @@ func getRealNameWithoutPlus(name: String) -> String {
   return name.replacingOccurrences(of: "+", with: " ", options: .literal, range: nil)
 }
 
+func bottomPadding() -> CGFloat {
+  let padding: CGFloat = 10
+  let bottomPadding = safeAreaBottom() > 0 ? safeAreaBottom() : padding
+  
+  return bottomPadding
+}
+
 let ScreenSize = UIScreen.main.bounds.size
 
