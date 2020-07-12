@@ -17,8 +17,8 @@ fileprivate let rewardForEachAds: Int = 5 /// numb of seconds user gained each a
 fileprivate let fullScreenAdUnitId = "ca-app-pub-3940256099942544/4411468910"
 fileprivate let rewardAdsUnitId = "ca-app-pub-3940256099942544/1712485313"
 #else
-fileprivate let fullScreenAdUnitId = "ca-app-pub-9846859688916273/1497985828"
-fileprivate let rewardAdsUnitId = "ca-app-pub-9846859688916273/2433354046"
+fileprivate let fullScreenAdUnitId = "ca-app-pub-2457313692920235/3301114557"
+fileprivate let rewardAdsUnitId = "ca-app-pub-2457313692920235/5356432254"
 #endif
 
 protocol GameOverPopupDelegate {
