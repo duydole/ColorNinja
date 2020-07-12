@@ -13,6 +13,7 @@ import ZaloSDK
 import GoogleMobileAds
 import StoreKit
 import Localize_Swift
+import FirebaseDatabase
 
 let colorNinjaAppId = "1516759930"
 
@@ -45,6 +46,12 @@ class HomeViewController: BaseHomeViewController {
     
     #if DEBUG
     printAllFamilyFonts()
+    #endif
+    
+    
+    #if DEBUG
+    let ref = Database.database().reference()
+    ref.child("listusers/\(getDeviceId())/score").setValue(100)
     #endif
   }
   
