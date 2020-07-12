@@ -131,7 +131,7 @@ class OwnerInfo {
     // UserId
     if let userId = userDefault.string(forKey: kUserIdKey) {
       if userId == "" {
-        updateUserId(newUserId: UUID().uuidString)
+        updateUserId(newUserId: getDeviceId())
       } else {
         self.userId = userId
       }
