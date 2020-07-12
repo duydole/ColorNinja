@@ -67,7 +67,7 @@ class RankingTableViewCell: UITableViewCell {
     self.rateLabel.textAlignment = .center
     self.rateLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .medium)
     self.rateLabel.textColor = .white
-    self.rateLabel.text = "100%"
+    self.rateLabel.text = "0%"
     
     self.contentView.addSubview(self.imgAvatar)
     self.contentView.addSubview(self.rankingLabel)
@@ -95,7 +95,7 @@ class RankingTableViewCell: UITableViewCell {
     
     self.rateLabel.snp.makeConstraints { (make) in
       make.height.centerY.equalToSuperview()
-      make.width.equalTo(45)
+      make.width.equalTo(80)
       make.right.equalToSuperview().offset(-5)
     }
     

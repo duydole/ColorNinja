@@ -108,7 +108,7 @@ extension RankingTableView: UITableViewDelegate, UITableViewDataSource {
     
     let rateLabel = UILabel()
     rateLabel.textAlignment = .center
-    rateLabel.text = "RATE"
+    rateLabel.text = "WIN RATE"
     rateLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
     rateLabel.textColor = .white
     
@@ -131,7 +131,7 @@ extension RankingTableView: UITableViewDelegate, UITableViewDataSource {
     
     rateLabel.snp.makeConstraints { (make) in
       make.height.centerY.equalToSuperview()
-      make.width.equalTo(45)
+      make.width.equalTo(80)
       make.right.equalToSuperview().offset(-5)
     }
     
