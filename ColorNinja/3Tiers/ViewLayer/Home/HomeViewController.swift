@@ -252,6 +252,12 @@ class HomeViewController: BaseHomeViewController {
     muteButton.snp.makeConstraints { (make) in
         make.width.equalTo(muteButton.snp.height)
     }
+
+    sharedButton = UIButton()
+    sharedButton.setImage(UIImage(named:"icon_share_white")?.withRenderingMode(.alwaysTemplate), for: .normal)
+    sharedButton.imageView?.tintColor = .white
+    sharedButton.addTarget(self, action: #selector(didTapSharedButton), for: .touchUpInside)
+    bottomBar.addArrangedSubview(sharedButton)
     
     // RankingButton
     rankingButton = UIButton()
@@ -259,12 +265,6 @@ class HomeViewController: BaseHomeViewController {
     rankingButton.imageView?.tintColor = .white
     rankingButton.addTarget(self, action: #selector(didTapRankingButton), for: .touchUpInside)
     bottomBar.addArrangedSubview(rankingButton)
-    
-    sharedButton = UIButton()
-    sharedButton.setImage(UIImage(named:"icon_share_white")?.withRenderingMode(.alwaysTemplate), for: .normal)
-    sharedButton.imageView?.tintColor = .white
-    sharedButton.addTarget(self, action: #selector(didTapSharedButton), for: .touchUpInside)
-    bottomBar.addArrangedSubview(sharedButton)
   }
   
   override var preferredStatusBarStyle: UIStatusBarStyle {
