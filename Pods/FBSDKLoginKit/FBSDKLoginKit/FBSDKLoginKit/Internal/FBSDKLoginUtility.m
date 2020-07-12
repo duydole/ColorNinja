@@ -67,7 +67,7 @@
 
   NSString *userID = [[self class] userIDFromSignedRequest:params[@"signed_request"]];
   if (userID) {
-    params[@"user_id"] = userID;
+    [FBSDKTypeUtility dictionary:params setObject:userID forKey:@"user_id"];
   }
 
   return params;
@@ -83,9 +83,9 @@
   NSString *userID = nil;
 
   if (signatureAndPayload.count == 2) {
-    NSData *data = [FBSDKBase64 decodeAsData:signatureAndPayload[1]];
+    NSData *data = [FBSDKBase64 decodeAsData:[FBSDKTypeUtility array:signatureAndPayload objectAtIndex:1]];
     if (data) {
-      NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+      NSDictionary *dictionary = [FBSDKTypeUtility JSONObjectWithData:data options:0 error:nil];
       userID = dictionary[@"user_id"];
     }
   }

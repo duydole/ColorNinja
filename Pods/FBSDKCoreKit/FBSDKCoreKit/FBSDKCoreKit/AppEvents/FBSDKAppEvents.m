@@ -529,7 +529,7 @@ static NSString *g_overrideAppID = nil;
 
   NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithObject:campaign forKey:FBSDKAppEventParameterPushCampaign];
   if (action && action.length > 0) {
-    parameters[FBSDKAppEventParameterPushAction] = action;
+    [FBSDKTypeUtility dictionary:parameters setObject:action forKey:FBSDKAppEventParameterPushAction];
   }
   [self logEvent:FBSDKAppEventNamePushOpened parameters:parameters];
 }
@@ -586,7 +586,7 @@ static NSString *g_overrideAppID = nil;
     [dict setValuesForKeysWithDictionary:parameters];
   }
 
-  dict[FBSDKAppEventParameterProductItemID] = itemID;
+  [FBSDKTypeUtility dictionary:dict setObject:itemID forKey:FBSDKAppEventParameterProductItemID];
 
   NSString *avail = nil;
   switch (availability) {
@@ -602,7 +602,7 @@ static NSString *g_overrideAppID = nil;
       avail = @"DISCONTINUED"; break;
   }
   if (avail) {
-    dict[FBSDKAppEventParameterProductAvailability] = avail;
+    [FBSDKTypeUtility dictionary:dict setObject:avail forKey:FBSDKAppEventParameterProductAvailability];
   }
 
   NSString *cond = nil;
@@ -615,23 +615,23 @@ static NSString *g_overrideAppID = nil;
       cond = @"USED"; break;
   }
   if (cond) {
-    dict[FBSDKAppEventParameterProductCondition] = cond;
+    [FBSDKTypeUtility dictionary:dict setObject:cond forKey:FBSDKAppEventParameterProductCondition];
   }
 
-  dict[FBSDKAppEventParameterProductDescription] = description;
-  dict[FBSDKAppEventParameterProductImageLink] = imageLink;
-  dict[FBSDKAppEventParameterProductLink] = link;
-  dict[FBSDKAppEventParameterProductTitle] = title;
-  dict[FBSDKAppEventParameterProductPriceAmount] = [NSString stringWithFormat:@"%.3lf", priceAmount];
-  dict[FBSDKAppEventParameterProductPriceCurrency] = currency;
+  [FBSDKTypeUtility dictionary:dict setObject:description forKey:FBSDKAppEventParameterProductDescription];
+  [FBSDKTypeUtility dictionary:dict setObject:imageLink forKey:FBSDKAppEventParameterProductImageLink];
+  [FBSDKTypeUtility dictionary:dict setObject:link forKey:FBSDKAppEventParameterProductLink];
+  [FBSDKTypeUtility dictionary:dict setObject:title forKey:FBSDKAppEventParameterProductTitle];
+  [FBSDKTypeUtility dictionary:dict setObject:[NSString stringWithFormat:@"%.3lf", priceAmount] forKey:FBSDKAppEventParameterProductPriceAmount];
+  [FBSDKTypeUtility dictionary:dict setObject:currency forKey:FBSDKAppEventParameterProductPriceCurrency];
   if (gtin) {
-    dict[FBSDKAppEventParameterProductGTIN] = gtin;
+    [FBSDKTypeUtility dictionary:dict setObject:gtin forKey:FBSDKAppEventParameterProductGTIN];
   }
   if (mpn) {
-    dict[FBSDKAppEventParameterProductMPN] = mpn;
+    [FBSDKTypeUtility dictionary:dict setObject:mpn forKey:FBSDKAppEventParameterProductMPN];
   }
   if (brand) {
-    dict[FBSDKAppEventParameterProductBrand] = brand;
+    [FBSDKTypeUtility dictionary:dict setObject:brand forKey:FBSDKAppEventParameterProductBrand];
   }
 
   [FBSDKAppEvents logEvent:FBSDKAppEventNameProductCatalogUpdate
@@ -783,51 +783,8 @@ static NSString *g_overrideAppID = nil;
   [FBSDKUserDataStore clearDataForType:type];
 }
 
-
 + (void)updateUserProperties:(NSDictionary<NSString *, id> *)properties handler:(FBSDKGraphRequestBlock)handler
 {
-  NSString *userID = [[self class] userID];
-
-  if (userID.length == 0) {
-    [FBSDKLogger singleShotLogEntry:FBSDKLoggingBehaviorDeveloperErrors logEntry:@"Missing [FBSDKAppEvents userID] for [FBSDKAppEvents updateUserProperties:]"];
-    NSError *error = [FBSDKError requiredArgumentErrorWithName:@"userID" message:@"Missing [FBSDKAppEvents userID] for [FBSDKAppEvents updateUserProperties:]"];
-    if (handler) {
-      handler(nil, nil, error);
-    }
-    return;
-  }
-  NSMutableDictionary *dataDictionary = [NSMutableDictionary dictionaryWithCapacity:3];
-  [FBSDKBasicUtility dictionary:dataDictionary setObject:[FBSDKAppEvents userID] forKey:@"user_unique_id"];
-  [FBSDKBasicUtility dictionary:dataDictionary setObject:[FBSDKAppEventsUtility advertiserID] forKey:@"advertiser_id"];
-  [FBSDKBasicUtility dictionary:dataDictionary setObject:properties forKey:@"custom_data"];
-
-  NSError *error;
-  __block NSError *invalidObjectError;
-  NSString *dataJSONString = [FBSDKBasicUtility JSONStringForObject:@[dataDictionary] error:&error invalidObjectHandler:^id(id object, BOOL *stop) {
-    *stop = YES;
-    invalidObjectError = [FBSDKError unknownErrorWithMessage:@"The values in the properties dictionary must be NSStrings or NSNumbers"];
-    return nil;
-  }];
-  if (!error) {
-    error = invalidObjectError;
-  }
-  if (error) {
-    [FBSDKLogger singleShotLogEntry:FBSDKLoggingBehaviorDeveloperErrors logEntry:@"Failed to serialize properties for [FBSDKAppEvents updateUserProperties:]"];
-    if (handler) {
-      handler(nil, nil, error);
-    }
-    return;
-  }
-  NSDictionary *params = @{ @"data" : dataJSONString };
-  FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"%@/user_properties", [[self singleton] appID]]
-                                                                 parameters:params
-                                                                tokenString:[FBSDKAccessToken currentAccessToken].tokenString
-                                                                 HTTPMethod:FBSDKHTTPMethodPOST
-                                                                      flags:FBSDKGraphRequestFlagDisableErrorRecovery |
-                                FBSDKGraphRequestFlagDoNotInvalidateTokenOnError |
-                                FBSDKGraphRequestFlagSkipClientToken
-                                ];
-  [request startWithCompletionHandler:handler];
 }
 
 + (NSString *)anonymousID
@@ -876,11 +833,11 @@ static NSString *g_overrideAppID = nil;
   // Send event bindings to Unity only Unity is initialized
   if ([FBSDKAppEvents singleton]->_isUnityInit
       && [FBSDKAppEvents singleton]->_serverConfiguration
-      && [NSJSONSerialization isValidJSONObject:[FBSDKAppEvents singleton]->_serverConfiguration.eventBindings]
+      && [FBSDKTypeUtility isValidJSONObject:[FBSDKAppEvents singleton]->_serverConfiguration.eventBindings]
       ) {
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:[FBSDKAppEvents singleton]->_serverConfiguration.eventBindings ?: @""
-                                                       options:0
-                                                         error:nil];
+    NSData *jsonData = [FBSDKTypeUtility dataWithJSONObject:[FBSDKAppEvents singleton]->_serverConfiguration.eventBindings ?: @""
+                                                    options:0
+                                                      error:nil];
     NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     Class classFBUnityUtility = objc_lookUpClass(FBUnityUtilityClassName);
     SEL updateBindingSelector = NSSelectorFromString(FBUnityUtilityUpdateBindingsSelector);
@@ -1091,13 +1048,9 @@ static dispatch_once_t *onceTokenPointer;
     }];
     [FBSDKFeatureManager checkFeature:FBSDKFeatureAAM completionBlock:^(BOOL enabled) {
       if (enabled) {
-        // Enable AAM
         [FBSDKMetadataIndexer enable];
       }
     }];
-#endif
-
-#if !defined BUCK && !TARGET_OS_TV
     [FBSDKFeatureManager checkFeature:FBSDKFeaturePrivacyProtection completionBlock:^(BOOL enabled) {
       if (enabled) {
         [FBSDKModelManager enable];
@@ -1110,6 +1063,8 @@ static dispatch_once_t *onceTokenPointer;
   }];
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 - (void)instanceLogEvent:(FBSDKAppEventName)eventName
               valueToSum:(NSNumber *)valueToSum
               parameters:(NSDictionary *)parameters
@@ -1135,7 +1090,7 @@ static dispatch_once_t *onceTokenPointer;
   __block BOOL failed = ![FBSDKAppEventsUtility validateIdentifier:eventName];
 
   // Make sure parameter dictionary is well formed.  Log and exit if not.
-  [parameters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+  [FBSDKTypeUtility dictionary:parameters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
     if (![key isKindOfClass:[NSString class]]) {
       [FBSDKAppEventsUtility logAndNotify:[NSString stringWithFormat:@"The keys in the parameters must be NSStrings, '%@' is not.", key]];
       failed = YES;
@@ -1147,8 +1102,7 @@ static dispatch_once_t *onceTokenPointer;
       [FBSDKAppEventsUtility logAndNotify:[NSString stringWithFormat:@"The values in the parameters dictionary must be NSStrings or NSNumbers, '%@' is not.", obj]];
       failed = YES;
     }
-  }
-   ];
+  }];
 
   if (failed) {
     return;
@@ -1156,7 +1110,7 @@ static dispatch_once_t *onceTokenPointer;
   // Filter out deactivated params
   parameters = [FBSDKEventDeactivationManager processParameters:parameters eventName:eventName];
 
-#if !defined BUCK && !TARGET_OS_TV
+#if !TARGET_OS_TV
   // Filter out restrictive data with on-device ML
   parameters = [FBSDKIntegrityManager processParameters:parameters];
 #endif
@@ -1165,13 +1119,13 @@ static dispatch_once_t *onceTokenPointer;
                                                           eventName:eventName];
 
   NSMutableDictionary<NSString *, id> *eventDictionary = [NSMutableDictionary dictionaryWithDictionary:parameters];
-  eventDictionary[FBSDKAppEventParameterEventName] = eventName;
+  [FBSDKTypeUtility dictionary:eventDictionary setObject:eventName forKey:FBSDKAppEventParameterEventName];
   if (!eventDictionary[FBSDKAppEventParameterLogTime]) {
-    eventDictionary[FBSDKAppEventParameterLogTime] = @([FBSDKAppEventsUtility unixTimeNow]);
+    [FBSDKTypeUtility dictionary:eventDictionary setObject:@([FBSDKAppEventsUtility unixTimeNow]) forKey:FBSDKAppEventParameterLogTime];
   }
-  [FBSDKBasicUtility dictionary:eventDictionary setObject:valueToSum forKey:@"_valueToSum"];
+  [FBSDKTypeUtility dictionary:eventDictionary setObject:valueToSum forKey:@"_valueToSum"];
   if (isImplicitlyLogged) {
-    eventDictionary[FBSDKAppEventParameterImplicitlyLogged] = @"1";
+    [FBSDKTypeUtility dictionary:eventDictionary setObject:@"1" forKey:FBSDKAppEventParameterImplicitlyLogged];
   }
 
   NSString *currentViewControllerName;
@@ -1192,10 +1146,10 @@ static dispatch_once_t *onceTokenPointer;
     currentViewControllerName = @"off_thread";
     applicationState = [FBSDKApplicationDelegate applicationState];
   }
-  eventDictionary[@"_ui"] = currentViewControllerName;
+  [FBSDKTypeUtility dictionary:eventDictionary setObject:currentViewControllerName forKey:@"_ui"];
 
   if (applicationState == UIApplicationStateBackground) {
-    eventDictionary[FBSDKAppEventParameterInBackground] = @"1";
+    [FBSDKTypeUtility dictionary:eventDictionary setObject:@"1" forKey:FBSDKAppEventParameterInBackground];
   }
 
   NSString *tokenString = [FBSDKAppEventsUtility tokenStringToUseFor:accessToken];
@@ -1229,6 +1183,7 @@ static dispatch_once_t *onceTokenPointer;
     }
   }
 }
+#pragma clang diagnostic pop
 
 // this fetches persisted event states.
 // for those matching the currently tracked events, add it.
@@ -1287,7 +1242,7 @@ static dispatch_once_t *onceTokenPointer;
   [self fetchServerConfiguration:^(void) {
     NSString *receipt_data = appEventsState.extractReceiptData;
     NSString *encodedEvents = [appEventsState JSONStringForEvents:self->_serverConfiguration.implicitLoggingEnabled];
-    if (!encodedEvents) {
+    if (!encodedEvents || appEventsState.events.count == 0) {
       [FBSDKLogger singleShotLogEntry:FBSDKLoggingBehaviorAppEvents
                              logEntry:@"FBSDKAppEvents: Flushing skipped - no events after removing implicitly logged ones.\n"];
       return;
@@ -1297,22 +1252,22 @@ static dispatch_once_t *onceTokenPointer;
                                            shouldAccessAdvertisingID:self->_serverConfiguration.advertisingIDEnabled];
     NSInteger length = receipt_data.length;
     if (length > 0) {
-      postParameters[@"receipt_data"] = receipt_data;
+      [FBSDKTypeUtility dictionary:postParameters setObject:receipt_data forKey:@"receipt_data"];
     }
 
-    postParameters[@"custom_events"] = encodedEvents;
+    [FBSDKTypeUtility dictionary:postParameters setObject:encodedEvents forKey:@"custom_events"];
     if (appEventsState.numSkipped > 0) {
-      postParameters[@"num_skipped_events"] = [NSString stringWithFormat:@"%lu", (unsigned long)appEventsState.numSkipped];
+      [FBSDKTypeUtility dictionary:postParameters setObject:[NSString stringWithFormat:@"%lu", (unsigned long)appEventsState.numSkipped] forKey:@"num_skipped_events"];
     }
     if (self.pushNotificationsDeviceTokenString) {
-      postParameters[FBSDKActivitesParameterPushDeviceToken] = self.pushNotificationsDeviceTokenString;
+      [FBSDKTypeUtility dictionary:postParameters setObject:self.pushNotificationsDeviceTokenString forKey:FBSDKActivitesParameterPushDeviceToken];
     }
 
     NSString *loggingEntry = nil;
     if ([FBSDKSettings.loggingBehaviors containsObject:FBSDKLoggingBehaviorAppEvents]) {
-      NSData *prettyJSONData = [NSJSONSerialization dataWithJSONObject:appEventsState.events
-                                                               options:NSJSONWritingPrettyPrinted
-                                                                 error:NULL];
+      NSData *prettyJSONData = [FBSDKTypeUtility dataWithJSONObject:appEventsState.events
+                                                            options:NSJSONWritingPrettyPrinted
+                                                              error:NULL];
       NSString *prettyPrintedJsonEvents = [[NSString alloc] initWithData:prettyJSONData
                                                                 encoding:NSUTF8StringEncoding];
       // Remove this param -- just an encoding of the events which we pretty print later.

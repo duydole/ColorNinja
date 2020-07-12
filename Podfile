@@ -19,6 +19,11 @@ target 'ColorNinja' do
   pod 'ReachabilitySwift'
   pod 'Localize-Swift', '~> 2.0'
   pod 'OneSignal', '>= 2.11.2', '< 3.0'
+  
+
+  pod 'Firebase/Core'
+  pod 'Firebase/Database'
+  pod 'Firebase/Analytics'
 
 
   #pod 'ZaloSDK'

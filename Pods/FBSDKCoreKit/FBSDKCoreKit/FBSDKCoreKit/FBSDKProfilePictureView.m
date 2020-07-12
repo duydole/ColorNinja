@@ -334,9 +334,9 @@
   NSString *path = [[NSString alloc] initWithFormat:@"/%@/picture", [FBSDKUtility URLEncode:state.profileID]];
   CGSize size = state.size;
   NSMutableDictionary<NSString *, id> *parameters = [[NSMutableDictionary alloc] init];
-  parameters[@"width"] = @(size.width);
-  parameters[@"height"] = @(size.height);
-  [FBSDKBasicUtility dictionary:parameters setObject:accessToken.tokenString forKey:@"access_token"];
+  [FBSDKTypeUtility dictionary:parameters setObject:@(size.width) forKey:@"width"];
+  [FBSDKTypeUtility dictionary:parameters setObject:@(size.height) forKey:@"height"];
+  [FBSDKTypeUtility dictionary:parameters setObject:accessToken.tokenString forKey:@"access_token"];
   NSURL *imageURL = [FBSDKInternalUtility facebookURLWithHostPrefix:@"graph" path:path queryParameters:parameters error:NULL];
 
   __weak FBSDKProfilePictureView *weakSelf = self;

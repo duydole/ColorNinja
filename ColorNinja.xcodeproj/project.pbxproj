@@ -82,6 +82,7 @@
 		F2EAD8542470429400B2D6B9 /* Squirk-RMvV.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F2EAD8532470429400B2D6B9 /* Squirk-RMvV.ttf */; };
 		F2EAFC2E24A711DC001ADCFB /* EventPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EAFC2D24A711DC001ADCFB /* EventPopup.swift */; };
 		F2EAFC3024A8656E001ADCFB /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EAFC2F24A8656E001ADCFB /* AppConfig.swift */; };
+		F2EB90CB24BAF6B800181467 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F2EB90CA24BAF6B800181467 /* GoogleService-Info.plist */; };
 		F2FC529824B0935500443C5B /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FC529724B0935500443C5B /* NotificationService.swift */; };
 		F2FC529C24B0935500443C5B /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F2FC529524B0935500443C5B /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -195,6 +196,7 @@
 		F2EAD8532470429400B2D6B9 /* Squirk-RMvV.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Squirk-RMvV.ttf"; sourceTree = "<group>"; };
 		F2EAFC2D24A711DC001ADCFB /* EventPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPopup.swift; sourceTree = "<group>"; };
 		F2EAFC2F24A8656E001ADCFB /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		F2EB90CA24BAF6B800181467 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F2FC529524B0935500443C5B /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2FC529724B0935500443C5B /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		F2FC529924B0935500443C5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -570,6 +572,7 @@
 				8C73DB8A246AA8C20095FE8A /* Core */,
 				F28098C6246B0D2E0060693D /* Assets.xcassets */,
 				F2C06084246566B7001FAD58 /* LaunchScreen.storyboard */,
+				F2EB90CA24BAF6B800181467 /* GoogleService-Info.plist */,
 				F2C06087246566B7001FAD58 /* Info.plist */,
 			);
 			path = ColorNinja;
@@ -676,6 +679,7 @@
 				F2405A962499339D00E71481 /* Localizable.strings in Resources */,
 				F2EAD8542470429400B2D6B9 /* Squirk-RMvV.ttf in Resources */,
 				F2C06086246566B7001FAD58 /* LaunchScreen.storyboard in Resources */,
+				F2EB90CB24BAF6B800181467 /* GoogleService-Info.plist in Resources */,
 				F28098C5246B02C00060693D /* SnesItalic-vmAPZ.ttf in Resources */,
 				F28098C7246B0D2E0060693D /* Assets.xcassets in Resources */,
 			);
@@ -985,7 +989,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 57C86C5C019D378438E37339 /* Pods-ColorNinja.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ColorNinja/ColorNinja.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -1012,7 +1016,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2EA3A6356F910FED2BED91AD /* Pods-ColorNinja.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ColorNinja/ColorNinja.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";

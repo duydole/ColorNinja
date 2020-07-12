@@ -31,5 +31,9 @@ func bottomPadding() -> CGFloat {
   return bottomPadding
 }
 
+func getDeviceId() -> String {
+  return UIDevice.current.identifierForVendor!.uuidString
+}
+
 let ScreenSize = UIScreen.main.bounds.size
 

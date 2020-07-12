@@ -62,6 +62,8 @@ static NSString *_lastTreeHash;
 #endif
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 // DO NOT call this function, it is only called once in the load function
 + (void)loadCodelessSettingWithCompletionBlock:(FBSDKCodelessSettingLoadBlock)completionBlock
 {
@@ -89,7 +91,7 @@ static NSString *_lastTreeHash;
       _codelessSetting = [[NSMutableDictionary alloc] init];
     }
 
-    if (![self _codelessSetupTimestampIsValid:[_codelessSetting objectForKey:CODELESS_SETTING_TIMESTAMP_KEY]]) {
+    if (![self _codelessSetupTimestampIsValid:[FBSDKTypeUtility dictionary:_codelessSetting objectForKey:CODELESS_SETTING_TIMESTAMP_KEY ofType:NSObject.class]]) {
       FBSDKGraphRequest *request = [self requestToLoadCodelessSetup:appID];
       if (request == nil) {
         return;
@@ -104,8 +106,8 @@ static NSString *_lastTreeHash;
         NSDictionary<NSString *, id> *resultDictionary = [FBSDKTypeUtility dictionaryValue:result];
         if (resultDictionary) {
           BOOL isCodelessSetupEnabled = [FBSDKTypeUtility boolValue:resultDictionary[CODELESS_SETUP_ENABLED_FIELD]];
-          [_codelessSetting setObject:@(isCodelessSetupEnabled) forKey:CODELESS_SETUP_ENABLED_KEY];
-          [_codelessSetting setObject:[NSDate date] forKey:CODELESS_SETTING_TIMESTAMP_KEY];
+          [FBSDKTypeUtility dictionary:_codelessSetting setObject:@(isCodelessSetupEnabled) forKey:CODELESS_SETUP_ENABLED_KEY];
+          [FBSDKTypeUtility dictionary:_codelessSetting setObject:[NSDate date] forKey:CODELESS_SETTING_TIMESTAMP_KEY];
           // update the cached copy in user defaults
           [defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:_codelessSetting] forKey:defaultKey];
           completionBlock(isCodelessSetupEnabled, codelessLoadingError);
@@ -113,10 +115,11 @@ static NSString *_lastTreeHash;
       }];
       [requestConnection start];
     } else {
-      completionBlock([FBSDKTypeUtility boolValue:[_codelessSetting objectForKey:CODELESS_SETUP_ENABLED_KEY]], nil);
+      completionBlock([FBSDKTypeUtility boolValue:[FBSDKTypeUtility dictionary:_codelessSetting objectForKey:CODELESS_SETUP_ENABLED_KEY ofType:NSObject.class]], nil);
     }
   }];
 }
+#pragma clang diagnostic pop
 
 + (FBSDKGraphRequest *)requestToLoadCodelessSetup:(NSString *)appID
 {
@@ -324,7 +327,7 @@ static NSString *_lastTreeHash;
       if (window.isKeyWindow) {
         [trees insertObject:tree atIndex:0];
       } else {
-        [trees addObject:tree];
+        [FBSDKTypeUtility array:trees addObject:tree];
       }
     }
   }
@@ -340,11 +343,11 @@ static NSString *_lastTreeHash;
 
   NSMutableDictionary *treeInfo = [NSMutableDictionary dictionary];
 
-  treeInfo[@"view"] = viewTrees;
-  treeInfo[@"screenshot"] = screenshot ?: @"";
+  [FBSDKTypeUtility dictionary:treeInfo setObject:viewTrees forKey:@"view"];
+  [FBSDKTypeUtility dictionary:treeInfo setObject:screenshot ?: @"" forKey:@"screenshot"];
 
   NSString *tree = nil;
-  data = [NSJSONSerialization dataWithJSONObject:treeInfo options:0 error:nil];
+  data = [FBSDKTypeUtility dataWithJSONObject:treeInfo options:0 error:nil];
   if (data) {
     tree = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
   }
