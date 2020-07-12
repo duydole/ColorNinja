@@ -35,5 +35,9 @@ func getDeviceId() -> String {
   return UIDevice.current.identifierForVendor!.uuidString
 }
 
+func notEmptyString(string: String) -> Bool {
+  return string != ""
+}
+
 let ScreenSize = UIScreen.main.bounds.size
 

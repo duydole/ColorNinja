@@ -83,6 +83,7 @@
 		F2EAFC2E24A711DC001ADCFB /* EventPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EAFC2D24A711DC001ADCFB /* EventPopup.swift */; };
 		F2EAFC3024A8656E001ADCFB /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EAFC2F24A8656E001ADCFB /* AppConfig.swift */; };
 		F2EB90CB24BAF6B800181467 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F2EB90CA24BAF6B800181467 /* GoogleService-Info.plist */; };
+		F2EB90CD24BB5EAE00181467 /* LDImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EB90CC24BB5EAE00181467 /* LDImageView.swift */; };
 		F2FC529824B0935500443C5B /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FC529724B0935500443C5B /* NotificationService.swift */; };
 		F2FC529C24B0935500443C5B /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F2FC529524B0935500443C5B /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -197,6 +198,7 @@
 		F2EAFC2D24A711DC001ADCFB /* EventPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPopup.swift; sourceTree = "<group>"; };
 		F2EAFC2F24A8656E001ADCFB /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		F2EB90CA24BAF6B800181467 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F2EB90CC24BB5EAE00181467 /* LDImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LDImageView.swift; sourceTree = "<group>"; };
 		F2FC529524B0935500443C5B /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2FC529724B0935500443C5B /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		F2FC529924B0935500443C5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -335,6 +337,7 @@
 		8CD60302246ED85300003447 /* Ranking */ = {
 			isa = PBXGroup;
 			children = (
+				F2EB90CC24BB5EAE00181467 /* LDImageView.swift */,
 				8C2C72772467A58C00883388 /* RankingViewController.swift */,
 				8C2C727B2467A79700883388 /* RankingTableView.swift */,
 				8C2C72812467ACD300883388 /* RankingCellModel.swift */,
@@ -789,6 +792,7 @@
 				F22F85882466940900493BB6 /* StaticFunctions.swift in Sources */,
 				F234763324680D75004C8363 /* GameSettingPopup.swift in Sources */,
 				8C5FFEED2472E8B500D9FA5E /* ZaloSDKAppDelegate.swift in Sources */,
+				F2EB90CD24BB5EAE00181467 /* LDImageView.swift in Sources */,
 				8C5FFEE92472E84500D9FA5E /* AppDelegateDispatcher.swift in Sources */,
 				F260CA642476DFBF00D00348 /* JoinRoomPopup.swift in Sources */,
 				F22F85682465AF2100493BB6 /* ZButton.swift in Sources */,
