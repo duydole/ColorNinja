@@ -227,13 +227,7 @@ class LoginViewController: UIViewController {
         // Update UserInfo
         self.updateUserInfoFromFacebookProfile { (success) in
           // Insert DB:
-          DataBaseService.shared.insertUserToDB(user: OwnerInfo.shared) {[weak self] (success, error) in
-            if error != nil {
-              print("Can not insertUserToDB")
-            } else {
-              self?.openHomeViewController()
-            }
-          }
+          self.registerOwnerInfoAndMoveToHome()
         }
       }
     }
@@ -249,21 +243,34 @@ class LoginViewController: UIViewController {
         OwnerInfo.shared.updateUserName(newusername: text)
         OwnerInfo.shared.updateLoginType(newLoginType: .Guest)
         
-        // Insert DB:
-        DataBaseService.shared.insertUserToDB(user: OwnerInfo.shared) { (success, error) in
-          DispatchQueue.main.async {[weak self] in
-            if success {
-              self?.openHomeViewController()
-            } else {
-              self?.showLoginErrorPopup()
-            }
-          }
-        }
+        self.registerOwnerInfoAndMoveToHome()
       } else {
         self.showAlertWithMessage(message: "Please input your username. Thanks.")
       }
     }
     userNameView.present(from: view)
+  }
+  
+  private func registerOwnerInfoAndMoveToHome() {
+    DataBaseService.shared.insertUserToDB(user: OwnerInfo.shared) { (success, error) in
+      DispatchQueue.main.async {[weak self] in
+        if let error = error {
+          /// Nếu register user bị lỗi
+          if  error.errorType == .DBErrorTypeUserExisted {
+            
+            /// Case login lại vào account đã register
+            print("duydl: Go to HOME, acc này đã login rồi logout. Giờ vô lại nè.")
+            self?.openHomeViewController()
+          } else {
+            
+            /// Đeo bao
+            self?.showLoginErrorPopup()
+          }
+        } else {
+          self?.openHomeViewController()
+        }
+      }
+    }
   }
   
   @objc private func dismissKeyboard() {
