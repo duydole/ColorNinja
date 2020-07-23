@@ -21,6 +21,7 @@ enum LoginType: Int {
   case Guest = 1
   case Facebook = 2
   case Zalo = 3
+    case AppleId = 4
 }
 
 class OwnerInfo {

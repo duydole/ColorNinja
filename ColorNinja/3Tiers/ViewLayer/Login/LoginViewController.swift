@@ -10,14 +10,18 @@ import Foundation
 import UIKit
 import FBSDKLoginKit
 import SnapKit
+import AuthenticationServices
 
 let MAX_USERNAME_LENGTH: Int = 20
 
 class LoginViewController: UIViewController {
   
+    private var stackView: UIStackView!
+    private var sloganLabel: UILabel!
   private var usernameTextField: UITextField!
   private var loginWithZaloButton: ButtonWithImage!
     private var loginWithFBButton: UIButton!
+    private var appleButton: UIButton!
   #if DISABLE_LOGIN_FB
   private var loginAsGuestButton: UIButton!
   #else
@@ -56,16 +60,35 @@ class LoginViewController: UIViewController {
     gradientView.snp.makeConstraints { (make) in
         make.edges.equalToSuperview()
     }
-    //let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-    //view.addGestureRecognizer(tap)
   }
     
     private func setupLoginMethodView() {
-        let containerView = UIView()
-        view.addSubview(containerView)
-        containerView.snp.makeConstraints { (make) in
-            make.center.equalToSuperview()
-            make.width.equalToSuperview().multipliedBy(0.7)
+        
+        sloganLabel = UILabel()
+        sloganLabel.font = UIFont(name: Font.squirk, size: 34)
+        sloganLabel.text = "Color Ninja"
+        sloganLabel.textColor = .white
+        view.addSubview(sloganLabel)
+        sloganLabel.snp.makeConstraints { (make) in
+            make.top.equalToSuperview().offset(UIScreen.main.bounds.height / 5)
+            make.centerX.equalToSuperview()
+        }
+        
+        var stackViewHeight = 48 * 2 + 16
+        if #available(iOS 13.0, *) {
+            stackViewHeight = 44 * 3 + 16 * 2
+        }
+        
+        stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.spacing = 16.0
+        self.view.addSubview(stackView)
+        stackView.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().inset(54 + safeAreaBottom())
+            make.width.equalToSuperview().multipliedBy(0.8)
+            make.height.equalTo(stackViewHeight)
         }
         
         loginWithFBButton = UIButton()
@@ -89,12 +112,31 @@ class LoginViewController: UIViewController {
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview().inset(16)
         }
+        stackView.addArrangedSubview(loginWithFBButton)
         
-        
-        containerView.addSubview(loginWithFBButton)
-        loginWithFBButton.snp.makeConstraints { (make) in
-            make.left.right.top.equalToSuperview()
-            make.height.equalTo(48)
+        if #available(iOS 13.0, *) {
+            appleButton = UIButton()
+            appleButton.addTarget(self, action: #selector(didTapAppleButton(_:)), for: .touchUpInside)
+            appleButton.setTitle("Sign in with Apple", for: .normal)
+            appleButton.backgroundColor = UIColor.white
+            appleButton.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+            appleButton.setTitleColor(UIColor.black, for: .normal)
+            appleButton.layer.cornerRadius = 8
+            appleButton.contentHorizontalAlignment = .center
+            appleButton.clipsToBounds = true
+            
+            let imageView = UIImageView()
+            imageView.contentMode = .scaleAspectFit
+            imageView.image = UIImage(named: "ic_apple")
+            imageView.isUserInteractionEnabled = false
+            appleButton.addSubview(imageView)
+            
+            imageView.snp.makeConstraints { (make) in
+                make.centerY.equalToSuperview()
+                make.leading.equalToSuperview().inset(12)
+            }
+            
+            self.stackView.addArrangedSubview(self.appleButton)
         }
         
         loginAsGuestButton = UIButton()
@@ -108,12 +150,8 @@ class LoginViewController: UIViewController {
         loginAsGuestButton.addTarget(self, action: #selector(didTapLoginAsGuestButton), for: .touchUpInside)
         loginAsGuestButton.layer.cornerRadius = 8
         loginAsGuestButton.backgroundColor = .white
-        containerView.addSubview(loginAsGuestButton)
-        loginAsGuestButton.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalToSuperview()
-            make.height.equalTo(48)
-            make.top.equalTo(loginWithFBButton.snp.bottom).offset(16)
-        }
+        
+        stackView.addArrangedSubview(loginAsGuestButton)
     }
   
   private func setupButtons() {
@@ -229,7 +267,7 @@ class LoginViewController: UIViewController {
             // Insert DB:
             DataBaseService.shared.insertUserToDB(user: OwnerInfo.shared) {[weak self] (success, error) in
                 if error != nil {
-                    print("Can not insertUserToDB")
+                    self?.showLoginErrorPopup()
                 } else {
                     self?.openHomeViewController()
                 }
@@ -265,6 +303,19 @@ class LoginViewController: UIViewController {
     }
     userNameView.present(from: view)
   }
+    
+    @objc func didTapAppleButton(_ sender: Any) {
+        if #available(iOS 13.0, *) {
+            let appleIDProvider = ASAuthorizationAppleIDProvider()
+            let request = appleIDProvider.createRequest()
+            request.requestedScopes = [.fullName, .email]
+
+            let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+            authorizationController.delegate = self
+            authorizationController.presentationContextProvider = self
+            authorizationController.performRequests()
+        }
+    }
   
   @objc private func dismissKeyboard() {
     usernameTextField.resignFirstResponder()
@@ -331,6 +382,58 @@ extension LoginViewController: UITextFieldDelegate {
     
     return newLength <= MAX_USERNAME_LENGTH || returnkey;
   }
+}
+
+extension LoginViewController: ASAuthorizationControllerDelegate {
+    /// - Tag: did_complete_authorization
+    @available(iOS 13.0, *)
+    public func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        var loginSuccess = false
+        var username: String = ""
+        switch authorization.credential {
+        case let appleIDCredential as ASAuthorizationAppleIDCredential:
+            username = appleIDCredential.fullName?.givenName ?? appleIDCredential.user
+            OwnerInfo.shared.updateUserId(newUserId: appleIDCredential.user)
+            loginSuccess = true
+        
+        case let passwordCredential as ASPasswordCredential:
+        
+            // Sign in using an existing iCloud Keychain credential.
+            username = passwordCredential.user
+            OwnerInfo.shared.updateUserId(newUserId: username)
+            loginSuccess = true
+            
+        default:
+            break
+        }
+        if loginSuccess {
+            OwnerInfo.shared.updateUserName(newusername: username)
+            OwnerInfo.shared.updateLoginType(newLoginType: .AppleId)
+            DataBaseService.shared.insertUserToDB(user: OwnerInfo.shared) {[weak self] (success, error) in
+                if error != nil {
+                    self?.showLoginErrorPopup()
+                } else {
+                    self?.openHomeViewController()
+                }
+            }
+        } else {
+            self.showLoginErrorPopup()
+        }
+    }
+    
+    /// - Tag: did_complete_error
+    @available(iOS 13.0, *)
+    public func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        self.showLoginErrorPopup()
+    }
+}
+
+extension LoginViewController: ASAuthorizationControllerPresentationContextProviding {
+    /// - Tag: provide_presentation_anchor
+    @available(iOS 13.0, *)
+    public func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
+    }
 }
 
 
