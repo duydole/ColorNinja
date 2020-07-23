@@ -68,9 +68,13 @@ class RankingViewController: UIViewController {
     self.avatarView = UIImageView()
     self.view.addSubview(self.avatarView)
     
-    self.avatarView.image = UIImage(named: "defaultAvatar")
-    if let avtUrl = OwnerInfo.shared.avatarUrl {
-      self.avatarView.setImageWithLink(from: avtUrl)
+    if let avatarImage = OwnerInfo.shared.avatarImage {
+      avatarView.image = avatarImage
+    } else {
+      self.avatarView.image = UIImage(named: "defaultAvatar")
+      if let avtUrl = OwnerInfo.shared.avatarUrl {
+        self.avatarView.setImageWithLink(from: avtUrl)
+      }
     }
     
     self.avatarView.layer.cornerRadius = scaledValue(40)

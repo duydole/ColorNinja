@@ -413,7 +413,7 @@ static inline void FBSDKShareDialogValidateShareExtensionSchemeRegisteredForCanO
       if ([media isKindOfClass:[FBSDKSharePhoto class]]) {
         UIImage *image = ((FBSDKSharePhoto *)media).image;
         if (image != nil) {
-          [ret addObject:image];
+          [FBSDKTypeUtility array:ret addObject:image];
         }
       }
     }
@@ -433,7 +433,7 @@ static inline void FBSDKShareDialogValidateShareExtensionSchemeRegisteredForCanO
         if (!_temporaryFiles) {
           _temporaryFiles = [NSMutableArray new];
         }
-        [_temporaryFiles addObject:temporaryFile];
+        [FBSDKTypeUtility array:_temporaryFiles addObject:temporaryFile];
         if ([video.data writeToURL:temporaryFile atomically:YES]) {
           return temporaryFile;
         }
@@ -452,14 +452,14 @@ static inline void FBSDKShareDialogValidateShareExtensionSchemeRegisteredForCanO
   if ([shareContent isKindOfClass:[FBSDKShareVideoContent class]]) {
     NSURL *const videoURL = [self _contentVideoURL:[(FBSDKShareVideoContent *)shareContent video]];
     if (videoURL != nil) {
-      [ret addObject:videoURL];
+      [FBSDKTypeUtility array:ret addObject:videoURL];
     }
   } else if ([shareContent isKindOfClass:[FBSDKShareMediaContent class]]) {
     for (const id media in ((FBSDKShareMediaContent *)shareContent).media) {
       if ([media isKindOfClass:[FBSDKShareVideo class]]) {
         NSURL *const videoURL = [self _contentVideoURL:(FBSDKShareVideo *)media];
         if (videoURL != nil) {
-          [ret addObject:videoURL];
+          [FBSDKTypeUtility array:ret addObject:videoURL];
         }
       }
     }
@@ -496,7 +496,7 @@ static inline void FBSDKShareDialogValidateShareExtensionSchemeRegisteredForCanO
       // not all web dialogs report cancellation, so assume that the share has completed with no additional information
       NSMutableDictionary *results = [[NSMutableDictionary alloc] init];
       // the web response comes back with a different payload, so we need to translate it
-      [FBSDKBasicUtility dictionary:results
+      [FBSDKTypeUtility dictionary:results
                           setObject:webResponseParameters[FBSDK_SHARE_WEB_PARAM_POST_ID_KEY]
                              forKey:FBSDK_SHARE_RESULT_POST_ID_KEY];
       [self _invokeDelegateDidCompleteWithResults:results];
@@ -659,7 +659,7 @@ static inline void FBSDKShareDialogValidateShareExtensionSchemeRegisteredForCanO
       [self _invokeDelegateDidFailWithError:response.error];
     } else {
       NSMutableDictionary *results = [[NSMutableDictionary alloc] init];
-      [FBSDKBasicUtility dictionary:results
+      [FBSDKTypeUtility dictionary:results
                           setObject:responseParameters[FBSDK_SHARE_RESULT_POST_ID_KEY]
                              forKey:FBSDK_SHARE_RESULT_POST_ID_KEY];
       [self _invokeDelegateDidCompleteWithResults:results];
@@ -1148,15 +1148,15 @@ static inline void FBSDKShareDialogValidateShareExtensionSchemeRegisteredForCanO
     NSMutableDictionary<NSString *, id> *const parameters = [NSMutableDictionary new];
     NSString *const appID = [FBSDKSettings appID];
     if (appID.length > 0) {
-      parameters[FBSDKShareExtensionParamAppID] = [FBSDKSettings appID];
+      [FBSDKTypeUtility dictionary:parameters setObject:[FBSDKSettings appID] forKey:FBSDKShareExtensionParamAppID];
     }
     if (hashtag.length > 0) {
-      parameters[FBSDKShareExtensionParamHashtags] = @[hashtag];
+      [FBSDKTypeUtility dictionary:parameters setObject:@[hashtag] forKey:FBSDKShareExtensionParamHashtags];
     }
     if ([self.shareContent isKindOfClass:[FBSDKShareLinkContent class]]) {
       NSString *const quote = ((FBSDKShareLinkContent *)self.shareContent).quote;
       if (quote.length > 0) {
-        parameters[FBSDKShareExtensionParamQuotes] = @[quote];
+        [FBSDKTypeUtility dictionary:parameters setObject:@[quote] forKey:FBSDKShareExtensionParamQuotes];
       }
     }
 

@@ -198,7 +198,7 @@ class ClientSocket : NSObject, StreamDelegate {
       print("duydl: New message received")
     case .errorOccurred:
       didReceivedErrorFromServer()
-      print("duydl: error occurred")
+      print("duydl: error occurred when connect to server")
     case .hasSpaceAvailable:
       print("duydl: Có thể gửi message cho Server")
     case .openCompleted:

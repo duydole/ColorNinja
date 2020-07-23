@@ -8,6 +8,7 @@
 
 import Foundation
 import FBSDKLoginKit
+import Alamofire
 
 fileprivate let kUserNameKey = "kUserName"
 fileprivate let kBestScoreKey = "kBestScoreKey"
@@ -36,6 +37,7 @@ class OwnerInfo {
   public private(set) var userName: String = ""
   public private(set) var rank: Int = -1
   public private(set) var countRoundDidPlay: Int = 0
+  public private(set) var avatarImage: UIImage?
   public var didLogin: Bool {
     get {
         if loginType != .NotLogin {
@@ -66,6 +68,8 @@ class OwnerInfo {
   func updateLoginType(newLoginType: LoginType) {
     loginType = newLoginType
     userDefault.set(loginType.rawValue,forKey: kUserLoginType)
+    
+    downloadAvatarUrlIfNeed()
   }
   
   func updateUserName(newusername: String) {
@@ -132,7 +136,7 @@ class OwnerInfo {
     // UserId
     if let userId = userDefault.string(forKey: kUserIdKey) {
       if userId == "" {
-        updateUserId(newUserId: UUID().uuidString)
+        updateUserId(newUserId: getDeviceId())
       } else {
         self.userId = userId
       }
@@ -146,6 +150,9 @@ class OwnerInfo {
       updateLoginType(newLoginType: .NotLogin)
     } else {
       self.loginType = LoginType(rawValue: loginType) ?? LoginType.Guest
+      
+      /// Tạm cheat vậy
+      downloadAvatarUrlIfNeed()
     }
     
     // Rank
@@ -185,6 +192,24 @@ class OwnerInfo {
     self.countPrompt = countPrompt
     if countRoundDidPlay < 5 {
       updateCountPrompt(newCountPrompt: 5)
+    }
+  }
+  
+  private func downloadAvatarUrlIfNeed() {
+    if loginType == .Facebook {
+      if let avatarUrl = avatarUrl {
+        if notEmptyString(string: avatarUrl) {
+          AF.request(avatarUrl).responseImage { (response) in
+            if let image = response.value {
+                self.avatarImage = image
+            } else {
+                self.avatarImage = UIImage(named: "defaultAvatar")
+            }
+          }
+        } else {
+          self.avatarImage = UIImage(named: "defaultAvatar")
+        }
+      }
     }
   }
 }

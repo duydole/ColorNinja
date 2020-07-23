@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AlamofireImage
+import Alamofire
 
 enum TopPlayerType: Int {
   case top1    = 0
@@ -41,8 +43,11 @@ class RankingCellModel: NSObject {
   public var playerType: TopPlayerType = .normal
   public var id: String!
   public var rate: Int!
+  public var avatarImage: UIImage!
   
   public init(userRank: UserRank) {
+    super.init()
+    
     ranking = userRank.rank
     record = userRank.bestscore
     name = userRank.name ?? "Default"
@@ -62,6 +67,23 @@ class RankingCellModel: NSObject {
     } else {
       rate = 0
     }
+    
+    downloadAvatarIfNeed()
   }
   
+  private func downloadAvatarIfNeed() {
+    if let avatarURL = avatarURL {
+      if notEmptyString(string: avatarURL) {
+        AF.request(avatarURL).responseImage { (response) in
+          if let image = response.value {
+              self.avatarImage = image
+          } else {
+              self.avatarImage = UIImage(named: "defaultAvatar")
+          }
+        }
+      } else {
+        self.avatarImage = UIImage(named: "defaultAvatar")
+      }
+    }
+  }
 }

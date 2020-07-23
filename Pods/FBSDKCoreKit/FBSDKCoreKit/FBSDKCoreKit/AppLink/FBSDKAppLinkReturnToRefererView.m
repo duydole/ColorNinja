@@ -148,6 +148,8 @@ static const CGFloat FBSDKCloseButtonHeight = 12.0;
     return size;
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 - (CGFloat)statusBarHeight {
     UIApplication *application = [UIApplication sharedApplication];
 
@@ -168,6 +170,7 @@ static const CGFloat FBSDKCloseButtonHeight = 12.0;
 
     return 0;
 }
+#pragma clang diagnostic pop
 
 #pragma mark - Public API
 
@@ -205,7 +208,7 @@ static const CGFloat FBSDKCloseButtonHeight = 12.0;
 #pragma mark - Private
 
 - (void)updateLabelText {
-    NSString *appName = (_refererAppLink && _refererAppLink.targets[0]) ? _refererAppLink.targets[0].appName : nil;
+    NSString *appName = (_refererAppLink && [FBSDKTypeUtility array:_refererAppLink.targets objectAtIndex:0]) ? [[FBSDKTypeUtility array:_refererAppLink.targets objectAtIndex:0] appName] : nil;
     _labelView.text = [self localizedLabelForReferer:appName];
 }
 
@@ -253,7 +256,7 @@ static const CGFloat FBSDKCloseButtonHeight = 12.0;
 }
 
 - (BOOL)hasRefererData {
-    return _refererAppLink && _refererAppLink.targets[0];
+    return _refererAppLink && [FBSDKTypeUtility array:_refererAppLink.targets objectAtIndex:0];
 }
 
 - (void)closeButtonTapped:(id)sender {

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>342741400025-o6s89d2lvmtbsb9vj5vbkj7iic360c0c.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.342741400025-o6s89d2lvmtbsb9vj5vbkj7iic360c0c</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAYpNbILP_QotE8FJ3Q6taxRM7iIdRZBek</string>
+	<key>GCM_SENDER_ID</key>
+	<string>342741400025</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.duydl.colorninja</string>
+	<key>PROJECT_ID</key>
+	<string>colorninja-dd78b</string>
+	<key>STORAGE_BUCKET</key>
+	<string>colorninja-dd78b.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:342741400025:ios:c31fa4cfc2f30080cd81c8</string>
+	<key>DATABASE_URL</key>
+	<string>https://colorninja-dd78b.firebaseio.com</string>
+</dict>
+</plist>

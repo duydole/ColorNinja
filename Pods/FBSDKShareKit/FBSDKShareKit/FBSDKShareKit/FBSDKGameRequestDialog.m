@@ -114,14 +114,14 @@ static FBSDKGameRequestFrictionlessRecipientCache *_recipientCache = nil;
   }
 
   NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
-  [FBSDKBasicUtility dictionary:parameters setObject:[content.recipients componentsJoinedByString:@","] forKey:@"to"];
-  [FBSDKBasicUtility dictionary:parameters setObject:content.message forKey:@"message"];
-  [FBSDKBasicUtility dictionary:parameters setObject:[self _actionTypeNameForActionType:content.actionType] forKey:@"action_type"];
-  [FBSDKBasicUtility dictionary:parameters setObject:content.objectID forKey:@"object_id"];
-  [FBSDKBasicUtility dictionary:parameters setObject:[self _filtersNameForFilters:content.filters] forKey:@"filters"];
-  [FBSDKBasicUtility dictionary:parameters setObject:[content.recipientSuggestions componentsJoinedByString:@","] forKey:@"suggestions"];
-  [FBSDKBasicUtility dictionary:parameters setObject:content.data forKey:@"data"];
-  [FBSDKBasicUtility dictionary:parameters setObject:content.title forKey:@"title"];
+  [FBSDKTypeUtility dictionary:parameters setObject:[content.recipients componentsJoinedByString:@","] forKey:@"to"];
+  [FBSDKTypeUtility dictionary:parameters setObject:content.message forKey:@"message"];
+  [FBSDKTypeUtility dictionary:parameters setObject:[self _actionTypeNameForActionType:content.actionType] forKey:@"action_type"];
+  [FBSDKTypeUtility dictionary:parameters setObject:content.objectID forKey:@"object_id"];
+  [FBSDKTypeUtility dictionary:parameters setObject:[self _filtersNameForFilters:content.filters] forKey:@"filters"];
+  [FBSDKTypeUtility dictionary:parameters setObject:[content.recipientSuggestions componentsJoinedByString:@","] forKey:@"suggestions"];
+  [FBSDKTypeUtility dictionary:parameters setObject:content.data forKey:@"data"];
+  [FBSDKTypeUtility dictionary:parameters setObject:content.title forKey:@"title"];
 
   // check if we are sending to a specific set of recipients.  if we are and they are all frictionless recipients, we
   // can perform this action without displaying the web dialog
@@ -249,7 +249,14 @@ static FBSDKGameRequestFrictionlessRecipientCache *_recipientCache = nil;
 
 - (void)_didCompleteWithResults:(NSDictionary *)results
 {
-  if (_dialogIsFrictionless && results) {
+  if (!results) {
+    NSError *error = [NSError errorWithDomain:FBSDKShareErrorDomain
+                                         code:FBSDKShareErrorUnknown
+                                     userInfo:nil];
+    return [self _handleCompletionWithDialogResults:nil error:error];
+  }
+
+  if (_dialogIsFrictionless) {
     [_recipientCache updateWithResults:results];
   }
   [self _cleanUp];
@@ -263,14 +270,14 @@ static FBSDKGameRequestFrictionlessRecipientCache *_recipientCache = nil;
     while (true) {
       NSString *key = [NSString stringWithFormat:@"to[%d]", counter++];
       if (results[key]) {
-        [toArray addObject:results[key]];
+        [FBSDKTypeUtility array:toArray addObject:results[key]];
       } else {
         break;
       }
     }
     if (toArray.count) {
       NSMutableDictionary *mutableResults = [results mutableCopy];
-      mutableResults[@"to"] = toArray;
+      [FBSDKTypeUtility dictionary:mutableResults setObject:toArray forKey:@"to"];
       results = mutableResults;
     }
   }

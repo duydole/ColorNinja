@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-fileprivate let serverUrl = "http://35.198.220.200:8000/"
+fileprivate let serverUrl = "http://colorninjagame.tk:8000/"
 fileprivate let leaderBoardUrl = serverUrl + "leaderboard/bestscore"
 fileprivate let registerUserUrl = serverUrl + "registeruser"
 fileprivate let updateUserDataUrl = serverUrl + "user"
@@ -21,7 +21,20 @@ enum UpdateUserType: String {
   case BestScore = "bestscore"
 }
 
-typealias completionHandler = (_ success: Bool, _ error: Error?) -> Void
+typealias completionHandler = (_ success: Bool, _ error: DBError?) -> Void
+
+class DBError: Error {
+  public var errorType: DBErrorType = .DBErrorTypeUnkown
+  
+  init(errorType: DBErrorType) {
+    self.errorType = errorType
+  }
+}
+
+enum DBErrorType: Int {
+  case DBErrorTypeUserExisted = 0
+  case DBErrorTypeUnkown
+}
 
 class DataBaseService : NSObject {
   
@@ -101,17 +114,27 @@ class DataBaseService : NSObject {
     
     AF.request(registerUserUrl, method: .post, parameters:parameters).responseJSON { (response) in
       if let json = response.value as! [String : Any]? {
+        /// Có json response
+        
+        /// Đeo bao
         guard let error: Int = json["error"] as? Int else {
-            completion?(false,nil)
-            return
+          completion?(false,DBError(errorType: .DBErrorTypeUnkown))
+          return
         }
+        
+        /// Nếu errorCode < 0
         if error < 0 {
-            print("duydl: SERVER: \(json["message"] ?? "Something Error")")
-            completion?(false,nil)
-            return
+          print("duydl: SERVER: \(json["message"] ?? "Something Error")")
+          completion?(false,DBError(errorType: .DBErrorTypeUserExisted))
+          return
         } else {
-            completion?(true,nil)
+          
+          /// Insert thành công vào DB trên server
+          completion?(true,nil)
         }
+      } else {
+        /// Không có jsonResponse
+        completion?(false,DBError(errorType: .DBErrorTypeUnkown))
       }
     }
   }
@@ -180,11 +203,15 @@ class DataBaseService : NSObject {
       "type":UpdateUserType.AvatarUrl.rawValue
     ]
     AF.request(updateUserDataUrl, method: .post, parameters:parameters).responseJSON { (response) in
-      
+        
       if let json = response.value as! JSON? {
-        guard let error: Int = json["error"] as? Int else { return }
+        guard let error: Int = json["error"] as? Int else {
+          completion?(false, response.error as? DBError)
+          return
+        }
         if error < 0 {
           print("duydl: SERVER: \(json["message"] ?? "Something Error")")
+          completion?(false, response.error as? DBError)
           return
         }
         completion?(true,nil)

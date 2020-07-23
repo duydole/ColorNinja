@@ -13,12 +13,7 @@ import ZaloSDK
 import GoogleMobileAds
 import StoreKit
 import Localize_Swift
-
-#if DEBUG_ADS
-fileprivate let bannerAdUnitId = "ca-app-pub-3940256099942544/2934735716"
-#else
-fileprivate let bannerAdUnitId = "ca-app-pub-9846859688916273/5767994203"
-#endif
+import FirebaseDatabase
 
 let colorNinjaAppId = "1516759930"
 
@@ -32,13 +27,13 @@ class HomeViewController: BaseHomeViewController {
   
   private var bestScoreLabel: UILabel!
   private var bottomBar: UIStackView!
-  private var adBannerView: GADBannerView!
+  private var adBannerView = LDBannerAdView.shared
   
   // BottomBar
   private var rateUsButton: UIButton!
   private var muteButton: UIButton!
   private var rankingButton: UIButton!
-    private var sharedButton: UIButton!
+  private var sharedButton: UIButton!
   
   // MARK: Life cycle
   
@@ -52,6 +47,19 @@ class HomeViewController: BaseHomeViewController {
     #if DEBUG
     printAllFamilyFonts()
     #endif
+    
+    
+    #if DEBUG
+    let ref = Database.database().reference()
+    ref.child("listusers/\(getDeviceId())/score").setValue(100)
+    #endif
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    /// Add lại bannerAd
+    setupBannerAd()
   }
   
   // MARK: Setup views
@@ -143,19 +151,12 @@ class HomeViewController: BaseHomeViewController {
   }
   
   private func setupBannerAd() {
-    adBannerView = GADBannerView()
     adBannerView.rootViewController = self
-    adBannerView.adUnitID = bannerAdUnitId
-    adBannerView.load(GADRequest())
+    adBannerView.delegate = self
     view.addSubview(adBannerView)
-    
-    let padding: CGFloat = 10
-    let viewWidth = ScreenSize.width - 2*padding
-    let bottomPadding = safeAreaBottom() > 0 ? safeAreaBottom() : padding
-    
-    adBannerView.adSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(viewWidth)
+        
     adBannerView.snp.makeConstraints { (make) in
-      make.bottom.equalTo(-bottomPadding)
+      make.bottom.equalTo(-bottomPadding())
       make.centerX.equalToSuperview()
     }
   }
@@ -214,6 +215,7 @@ class HomeViewController: BaseHomeViewController {
     let buttonSpacing: CGFloat = scaledValue(30)
     let spacingWithAd: CGFloat = scaledValue(10)
     let bottomBarHeight: CGFloat = scaledValue(45)
+    let bottomBarBottomPadding = bottomPadding() + adBannerView.adSize.size.height + spacingWithAd
     
     // Container
     bottomBar = UIStackView()
@@ -225,7 +227,7 @@ class HomeViewController: BaseHomeViewController {
     bottomBar.snp.makeConstraints { (make) in
       make.centerX.equalToSuperview()
       make.height.equalTo(bottomBarHeight)
-      make.bottom.equalTo(adBannerView.snp.top).offset(-spacingWithAd)
+      make.bottom.equalTo(-bottomBarBottomPadding)
     }
     
     
@@ -250,6 +252,12 @@ class HomeViewController: BaseHomeViewController {
     muteButton.snp.makeConstraints { (make) in
         make.width.equalTo(muteButton.snp.height)
     }
+
+    sharedButton = UIButton()
+    sharedButton.setImage(UIImage(named:"icon_share_white")?.withRenderingMode(.alwaysTemplate), for: .normal)
+    sharedButton.imageView?.tintColor = .white
+    sharedButton.addTarget(self, action: #selector(didTapSharedButton), for: .touchUpInside)
+    bottomBar.addArrangedSubview(sharedButton)
     
     // RankingButton
     rankingButton = UIButton()
@@ -257,12 +265,6 @@ class HomeViewController: BaseHomeViewController {
     rankingButton.imageView?.tintColor = .white
     rankingButton.addTarget(self, action: #selector(didTapRankingButton), for: .touchUpInside)
     bottomBar.addArrangedSubview(rankingButton)
-    
-    sharedButton = UIButton()
-    sharedButton.setImage(UIImage(named:"icon_share_white")?.withRenderingMode(.alwaysTemplate), for: .normal)
-    sharedButton.imageView?.tintColor = .white
-    sharedButton.addTarget(self, action: #selector(didTapSharedButton), for: .touchUpInside)
-    bottomBar.addArrangedSubview(sharedButton)
   }
   
   override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -331,13 +333,13 @@ class HomeViewController: BaseHomeViewController {
     present(rankingVC, animated: true, completion: nil)
   }
     
-    @objc private func didTapSharedButton() {
-        guard let url = URL(string: "https://apps.apple.com/vn/app/color-ninja-pro/id1516759930") else {
-            return
-        }
-        let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
-        present(activityVC, animated: true, completion: nil)
+  @objc private func didTapSharedButton() {
+    guard let url = URL(string: "https://apps.apple.com/vn/app/color-ninja-pro/id1516759930") else {
+      return
     }
+    let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+    present(activityVC, animated: true, completion: nil)
+  }
   
   @objc func didTapNewRoomButton() {
     let vc = RoomGameViewController()
@@ -368,12 +370,40 @@ class HomeViewController: BaseHomeViewController {
   }
 }
 
-
+/// JoinRoom Popup Delegate
 extension HomeViewController: JoinRoomPopupDelegate {
   func didDismissWithRoomId(roomId: Int) {
     let homeVC = RoomGameViewController()
     homeVC.roomId = roomId
     homeVC.modalPresentationStyle = .fullScreen
     present(homeVC, animated: false, completion: nil)
+  }
+}
+
+/// BannerAd Delegate
+extension HomeViewController: GADBannerViewDelegate {
+  
+  func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+    print("duydl: BannerAd: adViewDidReceiveAd")
+  }
+  
+  func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+    print("duydl: BannerAd: didFailToReceiveAdWithError")
+  }
+  
+  func adViewWillPresentScreen(_ bannerView: GADBannerView) {
+    print("duydl: BannerAd: adViewWillPresentScreen")
+  }
+
+  func adViewWillDismissScreen(_ bannerView: GADBannerView) {
+    print("duydl: BannerAd: adViewWillDismissScreen")
+  }
+  
+  func adViewDidDismissScreen(_ bannerView: GADBannerView) {
+    print("duydl: BannerAd: adViewDidDismissScreen")
+  }
+  
+  func adViewWillLeaveApplication(_ bannerView: GADBannerView) {
+    print("duydl: BannerAd: adViewWillLeaveApplication")
   }
 }

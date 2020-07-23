@@ -29,7 +29,7 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>CFBundleURLTypes</key> <array> <dict> <key>CFBundleURLSchemes</key> <array> <string>fb702817230295742</string> </array> </dict> </array> <key>FacebookAppID</key> <string>702817230295742</string> <key>FacebookDisplayName</key> <string>ColorNinja</string>
 	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-9846859688916273~6935210998</string>
+	<string>ca-app-pub-2457313692920235~6034127677</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>

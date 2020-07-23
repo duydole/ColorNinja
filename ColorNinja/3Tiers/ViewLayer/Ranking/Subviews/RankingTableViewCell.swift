@@ -16,7 +16,7 @@ class RankingTableViewCell: UITableViewCell {
   static let padding: Int = 15;
   
   // MARK: - Property
-  private var imgAvatar: UIImageView!
+  private var imgAvatar: LDImageView!
   private var rankingLabel: UILabel!
   private var nameLabel: UILabel!
   private var recordLabel: UILabel!
@@ -24,7 +24,7 @@ class RankingTableViewCell: UITableViewCell {
   
   override func prepareForReuse() {
     self.contentView.backgroundColor = Constants.GameScreen.forcegroundColor
-    imgAvatar.image = nil
+    imgAvatar.cancelDownloadImage()
     rankingLabel.text = nil
   }
   
@@ -45,7 +45,7 @@ class RankingTableViewCell: UITableViewCell {
     
     self.contentView.backgroundColor = Constants.GameScreen.forcegroundColor
     
-    self.imgAvatar = UIImageView()
+    self.imgAvatar = LDImageView()
     self.imgAvatar.layer.cornerRadius = 30.0/2
     self.imgAvatar.clipsToBounds = true
     
@@ -67,7 +67,7 @@ class RankingTableViewCell: UITableViewCell {
     self.rateLabel.textAlignment = .center
     self.rateLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .medium)
     self.rateLabel.textColor = .white
-    self.rateLabel.text = "100%"
+    self.rateLabel.text = "0%"
     
     self.contentView.addSubview(self.imgAvatar)
     self.contentView.addSubview(self.rankingLabel)
@@ -95,7 +95,7 @@ class RankingTableViewCell: UITableViewCell {
     
     self.rateLabel.snp.makeConstraints { (make) in
       make.height.centerY.equalToSuperview()
-      make.width.equalTo(45)
+      make.width.equalTo(80)
       make.right.equalToSuperview().offset(-5)
     }
     
@@ -118,9 +118,15 @@ class RankingTableViewCell: UITableViewCell {
       self.rankingLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .medium)
     }
     
-    self.imgAvatar.image = UIImage(named: "defaultAvatar")
-    if let avatarUrl = cellObject.avatarURL {
-      self.imgAvatar.setImageWithLink(from: avatarUrl)
+    if let avatarImage = cellObject.avatarImage {
+      self.imgAvatar.image = avatarImage
+    } else {
+      if let avatarUrl = cellObject.avatarURL {
+        let url = URL(string: avatarUrl)
+        if let url = url {
+          self.imgAvatar.downloadAndSetImageWithLink(from: url)
+        }
+      }
     }
   }
   

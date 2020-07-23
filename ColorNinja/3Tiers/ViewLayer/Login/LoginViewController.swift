@@ -30,11 +30,11 @@ class LoginViewController: UIViewController {
   #endif
   
   // MARK: Life Cycle
-    
-    override func loadView() {
-        super.loadView()
-        setupViews()
-    }
+  
+  override func loadView() {
+    super.loadView()
+    setupViews()
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -235,12 +235,12 @@ class LoginViewController: UIViewController {
     }
     #endif
   }
-    
-    private func showLoginErrorPopup() {
-        let alertVC = UIAlertController(title: "Oops!", message: "Something went wrong. Please log back in and try again.", preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-        present(alertVC, animated: true)
-    }
+  
+  private func showLoginErrorPopup() {
+    let alertVC = UIAlertController(title: "Oops!", message: "Something went wrong. Please log back in and try again.", preferredStyle: .alert)
+    alertVC.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+    present(alertVC, animated: true)
+  }
   
   // MARK: Handle Events
   
@@ -252,26 +252,20 @@ class LoginViewController: UIViewController {
     
     let loginManager = LoginManager()
     loginManager.logIn(permissions: ["public_profile"], from: self) {[weak self] (loginResult, error) in
-        guard let self = self else {
-            return
-        }
-        guard error == nil, let loginResult = loginResult else {
-            self.showLoginErrorPopup()
-            return
-        }
-        
+      guard let self = self else {
+        return
+      }
+      guard error == nil, let loginResult = loginResult else {
+        self.showLoginErrorPopup()
+        return
+      }
+      
       if !loginResult.isCancelled {
         
         // Update UserInfo
         self.updateUserInfoFromFacebookProfile { (success) in
             // Insert DB:
-            DataBaseService.shared.insertUserToDB(user: OwnerInfo.shared) {[weak self] (success, error) in
-                if error != nil {
-                    self?.showLoginErrorPopup()
-                } else {
-                    self?.openHomeViewController()
-                }
-            }
+            self.registerOwnerInfoAndMoveToHome()
         }
       }
     }
@@ -281,27 +275,40 @@ class LoginViewController: UIViewController {
     
     let userNameView = UserNameView(buttonTitle: "LET'S GO", placeHolderText: "Your username")
     userNameView.onButtonDidPress = {[weak self] text in
-        guard let self = self else {return}
-        if let text = text, !text.isEmpty, self.isValidUsername(userName: text) {
-            // Save username
-            OwnerInfo.shared.updateUserName(newusername: text)
-            OwnerInfo.shared.updateLoginType(newLoginType: .Guest)
-            
-            // Insert DB:
-            DataBaseService.shared.insertUserToDB(user: OwnerInfo.shared) { (success, error) in
-                DispatchQueue.main.async {[weak self] in
-                    if success {
-                        self?.openHomeViewController()
-                    } else {
-                        self?.showLoginErrorPopup()
-                    }
-                }
-            }
-        } else {
-            self.showAlertWithMessage(message: "Please input your username. Thanks.")
-        }
+      guard let self = self else {return}
+      if let text = text, !text.isEmpty, self.isValidUsername(userName: text) {
+        // Save username
+        OwnerInfo.shared.updateUserName(newusername: text)
+        OwnerInfo.shared.updateLoginType(newLoginType: .Guest)
+        
+        self.registerOwnerInfoAndMoveToHome()
+      } else {
+        self.showAlertWithMessage(message: "Please input your username. Thanks.")
+      }
     }
     userNameView.present(from: view)
+  }
+  
+  private func registerOwnerInfoAndMoveToHome() {
+    DataBaseService.shared.insertUserToDB(user: OwnerInfo.shared) { (success, error) in
+      DispatchQueue.main.async {[weak self] in
+        if let error = error {
+          /// Nếu register user bị lỗi
+          if  error.errorType == .DBErrorTypeUserExisted {
+            
+            /// Case login lại vào account đã register
+            print("duydl: Go to HOME, acc này đã login rồi logout. Giờ vô lại nè.")
+            self?.openHomeViewController()
+          } else {
+            
+            /// Đeo bao
+            self?.showLoginErrorPopup()
+          }
+        } else {
+          self?.openHomeViewController()
+        }
+      }
+    }
   }
     
     @objc func didTapAppleButton(_ sender: Any) {
@@ -323,33 +330,33 @@ class LoginViewController: UIViewController {
   
   private func openHomeViewController() {
     guard let window = UIApplication.shared.keyWindow else{
-        return
+      return
     }
     let homeVC = HomeViewController()
     window.rootViewController = homeVC
     
     homeVC.view.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
     UIView.transition(with: window, duration: 0.4, options: .transitionCrossDissolve, animations: {
-        homeVC.view.transform = .identity
+      homeVC.view.transform = .identity
     }, completion: nil)
   }
   
-    private func updateUserInfoFromFacebookProfile(completion: ((Bool)->())?) {
-        if let _ = AccessToken.current {
-          Profile.loadCurrentProfile { (profile, error) in
-            if let profile = profile {
-                if let name = profile.name {
-                    OwnerInfo.shared.updateUserName(newusername: name)
-                }
-                
-                OwnerInfo.shared.updateLoginType(newLoginType: .Facebook)
-                OwnerInfo.shared.updateUserId(newUserId: profile.userID)
-                DataBaseService.shared.updateAvatarForUser(userid: OwnerInfo.shared.userId, newAvatarUrl: OwnerInfo.shared.avatarUrl ?? "") { (success, error) in
-                    completion?(success)
-                }
-            }
+  private func updateUserInfoFromFacebookProfile(completion: ((Bool)->())?) {
+    if let _ = AccessToken.current {
+      Profile.loadCurrentProfile { (profile, error) in
+        if let profile = profile {
+          if let name = profile.name {
+            OwnerInfo.shared.updateUserName(newusername: name)
+          }
+          
+          OwnerInfo.shared.updateLoginType(newLoginType: .Facebook)
+          OwnerInfo.shared.updateUserId(newUserId: profile.userID)
+          DataBaseService.shared.updateAvatarForUser(userid: OwnerInfo.shared.userId, newAvatarUrl: OwnerInfo.shared.avatarUrl ?? "") { (success, error) in
+            completion?(success)
           }
         }
+      }
+    }
   }
   
   // MARK: Helper
@@ -438,156 +445,156 @@ extension LoginViewController: ASAuthorizationControllerPresentationContextProvi
 
 
 class UserNameView: UIView {
-    var buttonTitle: String? {
-        didSet {
-            if let buttonTitle = buttonTitle {
-                let textRange = NSMakeRange(0, buttonTitle.count)
-                let attributedText = NSMutableAttributedString(string: buttonTitle)
-                attributedText.addAttribute(NSAttributedString.Key.underlineStyle , value: NSUnderlineStyle.single.rawValue, range: textRange)
-                attributedText.addAttribute(.foregroundColor, value: UIColor.white, range: textRange)
-                attributedText.addAttribute(.font, value: UIFont(name: Font.squirk, size: 12) ?? UIFont.systemFont(ofSize: 16), range: textRange)
-                button.setAttributedTitle(attributedText, for: .normal)
-            } else {
-                button.setAttributedTitle(nil, for: .normal)
-            }
-        }
+  var buttonTitle: String? {
+    didSet {
+      if let buttonTitle = buttonTitle {
+        let textRange = NSMakeRange(0, buttonTitle.count)
+        let attributedText = NSMutableAttributedString(string: buttonTitle)
+        attributedText.addAttribute(NSAttributedString.Key.underlineStyle , value: NSUnderlineStyle.single.rawValue, range: textRange)
+        attributedText.addAttribute(.foregroundColor, value: UIColor.white, range: textRange)
+        attributedText.addAttribute(.font, value: UIFont(name: Font.squirk, size: 12) ?? UIFont.systemFont(ofSize: 16), range: textRange)
+        button.setAttributedTitle(attributedText, for: .normal)
+      } else {
+        button.setAttributedTitle(nil, for: .normal)
+      }
     }
-
-    var placeHolderText: String? {
-        didSet {
-            textField.placeholder = placeHolderText
-        }
+  }
+  
+  var placeHolderText: String? {
+    didSet {
+      textField.placeholder = placeHolderText
     }
-
-    var text: String? {
-        didSet {
-            textField.text = text
-        }
+  }
+  
+  var text: String? {
+    didSet {
+      textField.text = text
     }
-
-    var onButtonDidPress: ((String?) -> ())?
-
-    private var button: UIButton!
-    private var textField: UITextField!
-    private var containerView: UIView!
-    private var bottomLine: CALayer!
+  }
+  
+  var onButtonDidPress: ((String?) -> ())?
+  
+  private var button: UIButton!
+  private var textField: UITextField!
+  private var containerView: UIView!
+  private var bottomLine: CALayer!
+  
+  private var containerViewBottomConstraint: Constraint!
+  
+  convenience init(buttonTitle: String? = nil,
+                   placeHolderText: String? = nil,
+                   text: String? = nil,
+                   onButtonDidPress: ((String?) -> ())? = nil) {
+    self.init()
+    self.buttonTitle = buttonTitle
+    self.placeHolderText = placeHolderText
+    self.text = text
+    self.onButtonDidPress = onButtonDidPress
+    self.commonInit()
+    addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapOutSide(_:))))
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(keyboardWillShow),
+      name: UIResponder.keyboardWillShowNotification,
+      object: nil
+    )
+  }
+  
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    bottomLine.frame = CGRect(x: 0, y: bottomLine.superlayer?.bounds.height ?? 0, width: bottomLine.superlayer?.bounds.width ?? 0, height: 0.7)
+  }
+  
+  func commonInit() {
+    self.backgroundColor = UIColor.black.withAlphaComponent(0.7)
     
-    private var containerViewBottomConstraint: Constraint!
-
-    convenience init(buttonTitle: String? = nil,
-                     placeHolderText: String? = nil,
-                     text: String? = nil,
-                     onButtonDidPress: ((String?) -> ())? = nil) {
-        self.init()
-        self.buttonTitle = buttonTitle
-        self.placeHolderText = placeHolderText
-        self.text = text
-        self.onButtonDidPress = onButtonDidPress
-        self.commonInit()
-        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapOutSide(_:))))
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillShow),
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil
-        )
-    }
+    containerView = UIView()
+    containerView.backgroundColor = .white
+    containerView.clipsToBounds = true
+    containerView.layer.cornerRadius = 16
+    //containerView.transform = CGAffineTransform(translationX: 0, y: 400)
+    addSubview(containerView)
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        bottomLine.frame = CGRect(x: 0, y: bottomLine.superlayer?.bounds.height ?? 0, width: bottomLine.superlayer?.bounds.width ?? 0, height: 0.7)
-    }
-
-    func commonInit() {
-        self.backgroundColor = UIColor.black.withAlphaComponent(0.7)
-
-        containerView = UIView()
-        containerView.backgroundColor = .white
-        containerView.clipsToBounds = true
-        containerView.layer.cornerRadius = 16
-        //containerView.transform = CGAffineTransform(translationX: 0, y: 400)
-        addSubview(containerView)
-
-        containerView.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
-            make.width.equalToSuperview().multipliedBy(0.8)
-            containerViewBottomConstraint = make.bottom.equalToSuperview().constraint
-        }
-        
-        bottomLine = CALayer()
-        bottomLine.backgroundColor = UIColor.gray.cgColor
-        
-        textField = UITextField()
-        textField.placeholder = placeHolderText
-        textField.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        textField.borderStyle = .none
-        textField.textAlignment = .center
-        textField.returnKeyType = .done
-        textField.layer.addSublayer(bottomLine)
-        containerView.addSubview(textField)
-        textField.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(48)
-            make.left.right.equalToSuperview().inset(16)
-        }
-        
-        
-        button = UIButton()
-        button.titleLabel?.font = UIFont(name: Font.squirk, size: 16)
-        button.clipsToBounds = true
-        button.layer.cornerRadius = 16
-        button.backgroundColor = UIColor.black
-        button.setTitle(buttonTitle, for: .normal)
-        button.addTarget(self, action: #selector(handlePrimaryButton), for: .touchUpInside)
-        containerView.addSubview(button)
-        button.snp.makeConstraints { (make) in
-            make.top.equalTo(textField.snp.bottom).offset(48)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(128)
-            make.height.equalTo(48)
-            make.bottom.equalToSuperview().inset(16)
-        }
-    }
-
-    @objc private func handlePrimaryButton() {
-        onButtonDidPress?(textField.text)
+    containerView.snp.makeConstraints { (make) in
+      make.centerX.equalToSuperview()
+      make.width.equalToSuperview().multipliedBy(0.8)
+      containerViewBottomConstraint = make.bottom.equalToSuperview().constraint
     }
     
-    @objc private func handleTapOutSide(_ gesture: UITapGestureRecognizer) {
-        if !containerView.frame.contains(gesture.location(in: self)) {
-            dismiss()
-        }
+    bottomLine = CALayer()
+    bottomLine.backgroundColor = UIColor.gray.cgColor
+    
+    textField = UITextField()
+    textField.placeholder = placeHolderText
+    textField.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+    textField.borderStyle = .none
+    textField.textAlignment = .center
+    textField.returnKeyType = .done
+    textField.layer.addSublayer(bottomLine)
+    containerView.addSubview(textField)
+    textField.snp.makeConstraints { (make) in
+      make.top.equalToSuperview().offset(48)
+      make.left.right.equalToSuperview().inset(16)
     }
     
-    @objc private func keyboardWillShow(_ notification: Notification) {
-        guard let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
-            let animationDuration: Double = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double
-            else { return }
-        
-        let keyboardRectangle = keyboardFrame.cgRectValue
-        let keyboardHeight = keyboardRectangle.height
-        
-        UIView.animate(withDuration: animationDuration, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: [], animations: { [weak self] in
-            guard let self = self else {return}
-            self.containerViewBottomConstraint.update(inset: keyboardHeight + 16)
-            self.layoutIfNeeded()
-        }, completion: nil)
+    
+    button = UIButton()
+    button.titleLabel?.font = UIFont(name: Font.squirk, size: 16)
+    button.clipsToBounds = true
+    button.layer.cornerRadius = 16
+    button.backgroundColor = UIColor.black
+    button.setTitle(buttonTitle, for: .normal)
+    button.addTarget(self, action: #selector(handlePrimaryButton), for: .touchUpInside)
+    containerView.addSubview(button)
+    button.snp.makeConstraints { (make) in
+      make.top.equalTo(textField.snp.bottom).offset(48)
+      make.centerX.equalToSuperview()
+      make.width.equalTo(128)
+      make.height.equalTo(48)
+      make.bottom.equalToSuperview().inset(16)
     }
-
-    func present(from parentView: UIView) {
-        self.frame = parentView.bounds
-        parentView.addSubview(self)
-        layoutIfNeeded()
-        textField.becomeFirstResponder()
+  }
+  
+  @objc private func handlePrimaryButton() {
+    onButtonDidPress?(textField.text)
+  }
+  
+  @objc private func handleTapOutSide(_ gesture: UITapGestureRecognizer) {
+    if !containerView.frame.contains(gesture.location(in: self)) {
+      dismiss()
     }
-
-    func dismiss() {
-        UIView.animate(withDuration: 0.5, animations: { [weak self] in
-        guard let self = self else {return}
-        self.containerView.transform = CGAffineTransform(translationX: 0, y: 400)
-        self.alpha = 0
-        }) {[weak self] (_) in
-            self?.removeFromSuperview()
-        }
-        textField.resignFirstResponder()
+  }
+  
+  @objc private func keyboardWillShow(_ notification: Notification) {
+    guard let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
+      let animationDuration: Double = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double
+      else { return }
+    
+    let keyboardRectangle = keyboardFrame.cgRectValue
+    let keyboardHeight = keyboardRectangle.height
+    
+    UIView.animate(withDuration: animationDuration, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: [], animations: { [weak self] in
+      guard let self = self else {return}
+      self.containerViewBottomConstraint.update(inset: keyboardHeight + 16)
+      self.layoutIfNeeded()
+      }, completion: nil)
+  }
+  
+  func present(from parentView: UIView) {
+    self.frame = parentView.bounds
+    parentView.addSubview(self)
+    layoutIfNeeded()
+    textField.becomeFirstResponder()
+  }
+  
+  func dismiss() {
+    UIView.animate(withDuration: 0.5, animations: { [weak self] in
+      guard let self = self else {return}
+      self.containerView.transform = CGAffineTransform(translationX: 0, y: 400)
+      self.alpha = 0
+    }) {[weak self] (_) in
+      self?.removeFromSuperview()
     }
+    textField.resignFirstResponder()
+  }
 }

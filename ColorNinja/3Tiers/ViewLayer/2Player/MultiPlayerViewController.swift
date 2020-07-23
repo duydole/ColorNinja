@@ -14,7 +14,7 @@ let MAX_LEVEL: Int = 30
 #else
 let MAX_LEVEL: Int = 30
 #endif
-let serverIp = "35.198.220.200"
+let serverIp = "colorninjagame.tk"
 let serverPort: UInt32 = 8080
 
 class MultiPlayerViewController : BaseGameViewController {

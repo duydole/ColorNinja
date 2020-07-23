@@ -22,6 +22,8 @@
 #import "FBSDKGraphRequest.h"
 #import "FBSDKGraphRequestConnection.h"
 #import "FBSDKSettings.h"
+#import "FBSDKSettings+Internal.h"
+#import "FBSDKTypeUtility.h"
 
 @implementation FBSDKCrashShield
 
@@ -81,11 +83,14 @@ static NSDictionary<NSString *, NSArray<NSString *> *> *_featureMapping;
         continue;
       }
   }
+  if ([FBSDKSettings isDataProcessingRestricted]) {
+    return;
+  }
   if (disabledFeatues.count > 0) {
     NSDictionary<NSString *, id> *disabledFeatureLog = @{@"feature_names":[disabledFeatues allObjects],
                                                          @"timestamp":[NSString stringWithFormat:@"%.0lf", [[NSDate date] timeIntervalSince1970]],
     };
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:disabledFeatureLog options:0 error:nil];
+    NSData *jsonData = [FBSDKTypeUtility dataWithJSONObject:disabledFeatureLog options:0 error:nil];
     if (jsonData) {
       NSString *disabledFeatureReport = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
       if (disabledFeatureReport) {
@@ -105,7 +110,7 @@ static NSDictionary<NSString *, NSArray<NSString *> *> *_featureMapping;
   for (NSString *entry in callstack) {
     NSString *className = [self getClassName:entry];
     for (NSString *featureName in featureNames) {
-      NSArray<NSString *> *classArray = [_featureMapping objectForKey:featureName];
+      NSArray<NSString *> *classArray = [FBSDKTypeUtility dictionary:_featureMapping objectForKey:featureName ofType:NSObject.class];
       if (className && [classArray containsObject:className]) {
         return featureName;
       }
@@ -120,8 +125,8 @@ static NSDictionary<NSString *, NSArray<NSString *> *> *_featureMapping;
   NSString *className = nil;
   // parse class name only from an entry in format "-[className functionName]+offset"
   // or "+[className functionName]+offset"
-  if (items.count > 0 && ([items[0] hasPrefix:@"+["] || [items[0] hasPrefix:@"-["])) {
-    className = [items[0] substringFromIndex:2];
+  if (items.count > 0 && ([[FBSDKTypeUtility array:items objectAtIndex:0] hasPrefix:@"+["] || [[FBSDKTypeUtility array:items objectAtIndex:0] hasPrefix:@"-["])) {
+    className = [[FBSDKTypeUtility array:items objectAtIndex:0] substringFromIndex:2];
   }
   return className;
 }

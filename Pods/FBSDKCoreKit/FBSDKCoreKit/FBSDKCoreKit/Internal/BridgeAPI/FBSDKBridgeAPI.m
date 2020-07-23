@@ -76,10 +76,17 @@ typedef void (^FBSDKAuthenticationCompletionHandler)(NSURL *_Nullable callbackUR
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-  // Handle the case where the app is backgrounded while the "ExampleApp wants to use facebook.com to Sign In" alert is still open
-  // Call the completion handler with a Cancel
   if (@available(iOS 11.0, *)) {
-    if (!_active && (_authenticationSession != nil)) {
+    if (_active && _authenticationSession) {
+      // applicationDidBecomeActive: is called after tapping Continue or Cancel in the "{app name} wants to use facebook.com to Sign In" alert.
+      // authenticationSession will be nil when it's Cancel.
+      _isRequestingSFAuthenticationSession = YES;
+    } else if (_active && !_authenticationSession) {
+      // In theory, this should be done whenever authenticationSession is set to nil, but just in case.
+      _isRequestingSFAuthenticationSession = NO;
+    } else if (!_active && !_isRequestingSFAuthenticationSession && _authenticationSession) {
+      // Handle the case where the app is backgrounded while the "ExampleApp wants to use facebook.com to Sign In" alert is still open
+      // Call the completion handler with a Cancel
       [_authenticationSession cancel];
       _authenticationSession = nil;
       NSString *errorDomain;
@@ -108,7 +115,6 @@ typedef void (^FBSDKAuthenticationCompletionHandler)(NSURL *_Nullable callbackUR
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-  _isRequestingSFAuthenticationSession = NO;
   _active = NO;
   _expectingBackground = NO;
 }
@@ -205,6 +211,8 @@ didFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey, id> *
 
 #pragma mark - Internal Methods
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 - (void)openURL:(NSURL *)url sender:(id<FBSDKURLOpening>)sender handler:(FBSDKSuccessBlock)handler
 {
   _expectingBackground = YES;
@@ -235,6 +243,7 @@ didFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey, id> *
     }
   });
 }
+#pragma clang diagnostic pop
 
 - (void)openBridgeAPIRequest:(FBSDKBridgeAPIRequest *)request
      useSafariViewController:(BOOL)useSafariViewController
@@ -369,7 +378,6 @@ didFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey, id> *
         [_authenticationSession setPresentationContextProvider:self];
       }
     }
-    _isRequestingSFAuthenticationSession = YES;
     [_authenticationSession start];
   }
 }
@@ -467,6 +475,8 @@ didFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey, id> *
   _pendingRequestCompletionBlock = NULL;
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 #pragma mark - ASWebAuthenticationPresentationContextProviding
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 130000
 - (ASPresentationAnchor)presentationAnchorForWebAuthenticationSession:(ASWebAuthenticationSession *)session API_AVAILABLE(ios(13.0)){
@@ -475,6 +485,7 @@ didFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey, id> *
 #endif
   return UIApplication.sharedApplication.keyWindow;
 }
+#pragma clang diagnostic pop
 
 @end
 
