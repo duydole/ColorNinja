@@ -12,7 +12,6 @@ import Alamofire
 
 fileprivate let kUserNameKey = "kUserName"
 fileprivate let kBestScoreKey = "kBestScoreKey"
-fileprivate let kUserIdKey = "kUserIdKey"
 fileprivate let kUserLoginType = "kUserLoginType"
 fileprivate let kCountRoundDidPlay = "kCountRoundDidPlay"
 fileprivate let kCountPrompt = "kCountPrompt"
@@ -22,7 +21,7 @@ enum LoginType: Int {
   case Guest = 1
   case Facebook = 2
   case Zalo = 3
-    case AppleId = 4
+  case AppleId = 4
 }
 
 class OwnerInfo {
@@ -40,7 +39,7 @@ class OwnerInfo {
   public private(set) var avatarImage: UIImage?
   public var didLogin: Bool {
     get {
-        if loginType != .NotLogin {
+      if loginType != .NotLogin {
         return true
       } else {
         return false
@@ -59,11 +58,6 @@ class OwnerInfo {
   }
   
   // MARK: Public
-  
-  func updateUserId(newUserId: String) {
-    userId = newUserId
-    userDefault.set(newUserId, forKey: kUserIdKey)
-  }
   
   func updateLoginType(newLoginType: LoginType) {
     loginType = newLoginType
@@ -133,17 +127,6 @@ class OwnerInfo {
     let bestscore = userDefault.integer(forKey: kBestScoreKey)
     self.bestScore = bestscore
     
-    // UserId
-    if let userId = userDefault.string(forKey: kUserIdKey) {
-      if userId == "" {
-        updateUserId(newUserId: getDeviceId())
-      } else {
-        self.userId = userId
-      }
-    } else {
-      updateUserId(newUserId: UUID().uuidString)
-    }
-    
     // LoginType
     let loginType = userDefault.integer(forKey: kUserLoginType)
     if loginType == 0 {
@@ -176,7 +159,6 @@ class OwnerInfo {
     updateLoginType(newLoginType: .NotLogin)
     userDefault.set(0, forKey: kCountRoundDidPlay)
     userDefault.set(0, forKey: kCountRoundDidPlay)
-    userDefault.set("",forKey: kUserIdKey)
   }
   
   private func _loadOwnerRank() {
@@ -201,9 +183,9 @@ class OwnerInfo {
         if notEmptyString(string: avatarUrl) {
           AF.request(avatarUrl).responseImage { (response) in
             if let image = response.value {
-                self.avatarImage = image
+              self.avatarImage = image
             } else {
-                self.avatarImage = UIImage(named: "defaultAvatar")
+              self.avatarImage = UIImage(named: "defaultAvatar")
             }
           }
         } else {

@@ -96,7 +96,7 @@ class LoginViewController: UIViewController {
     let fbTextRange = NSMakeRange(0, fbText.count)
     let attributedFbText = NSMutableAttributedString(string: fbText)
     attributedFbText.addAttribute(.foregroundColor, value: UIColor.white, range: fbTextRange)
-    attributedFbText.addAttribute(.font, value: UIFont(name: Font.squirk, size: 12) ?? UIFont.systemFont(ofSize: 16), range: fbTextRange)
+    attributedFbText.addAttribute(.font, value: UIFont.systemFont(ofSize: 12, weight: .bold) , range: fbTextRange)
     loginWithFBButton.setAttributedTitle(attributedFbText, for: .normal)
     loginWithFBButton.backgroundColor = ColorRGB(62, 88, 144)
     loginWithFBButton.layer.cornerRadius = 8
@@ -142,9 +142,7 @@ class LoginViewController: UIViewController {
     let text = "Play as a guest"
     let textRange = NSMakeRange(0, text.count)
     let attributedText = NSMutableAttributedString(string: text)
-    attributedText.addAttribute(NSAttributedString.Key.underlineStyle , value: NSUnderlineStyle.single.rawValue, range: textRange)
-    attributedText.addAttribute(.foregroundColor, value: ColorRGB(62, 88, 144), range: textRange)
-    attributedText.addAttribute(.font, value: UIFont(name: Font.squirk, size: 12) ?? UIFont.systemFont(ofSize: 16), range: textRange)
+    attributedText.addAttribute(.font, value: UIFont.systemFont(ofSize: 14, weight: .bold), range: textRange)
     loginAsGuestButton.setAttributedTitle(attributedText, for: .normal)
     loginAsGuestButton.addTarget(self, action: #selector(didTapLoginAsGuestButton), for: .touchUpInside)
     loginAsGuestButton.layer.cornerRadius = 8
@@ -211,26 +209,6 @@ class LoginViewController: UIViewController {
       make.centerX.equalToSuperview()
       make.height.equalTo(buttonHeight)
       make.top.equalTo(loginAsGuestButton.snp.bottom).offset(padding)
-    }
-    #endif
-    
-    //        // Login with Zalo
-    //        loginWithZaloButton = ViewCreator.createButtonImageInLoginVC(image: UIImage(named: "zalologo")!, title: "Login with Zalo", backgroundColor: Color.Zalo.blue2)
-    //        loginWithZaloButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapLoginWithZaloButton))
-    //        container.addSubview(loginWithZaloButton)
-    //        loginWithZaloButton.snp.makeConstraints { (make) in
-    //            make.width.height.centerX.equalTo(loginAsGuestButton)
-    //            make.top.equalTo(orLabel.snp.bottom).offset(padding)
-    //        }
-    
-    #if !DISABLE_LOGIN_FB
-    // login with facebook
-    loginWithFBButton = ViewCreator.createButtonImageInLoginVC(image: UIImage(named: "fblogo")!, title: "Login with Facebook", backgroundColor: Color.Facebook.loginButton)
-    loginWithFBButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapLoginWithFacebookButton))
-    container.addSubview(loginWithFBButton)
-    loginWithFBButton.snp.makeConstraints { (make) in
-      make.width.height.centerX.equalTo(loginAsGuestButton)
-      make.top.equalTo(orLabel.snp.bottom).offset(padding)
     }
     #endif
   }
@@ -349,7 +327,6 @@ class LoginViewController: UIViewController {
           }
           
           OwnerInfo.shared.updateLoginType(newLoginType: .Facebook)
-          OwnerInfo.shared.updateUserId(newUserId: profile.userID)
           DataBaseService.shared.updateAvatarForUser(userid: OwnerInfo.shared.userId, newAvatarUrl: OwnerInfo.shared.avatarUrl ?? "") { (success, error) in
             completion?(success)
           }
@@ -394,33 +371,31 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
   /// - Tag: did_complete_authorization
   @available(iOS 13.0, *)
   public func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+    
     var loginSuccess = false
     var username: String = ""
+    
     switch authorization.credential {
+    
     case let appleIDCredential as ASAuthorizationAppleIDCredential:
       username = appleIDCredential.fullName?.givenName ?? appleIDCredential.user
-      OwnerInfo.shared.updateUserId(newUserId: appleIDCredential.user)
       loginSuccess = true
       
     case let passwordCredential as ASPasswordCredential:
-      
       // Sign in using an existing iCloud Keychain credential.
       username = passwordCredential.user
-      OwnerInfo.shared.updateUserId(newUserId: username)
       loginSuccess = true
       
     default:
       break
     }
+    
     if loginSuccess {
       OwnerInfo.shared.updateUserName(newusername: username)
       OwnerInfo.shared.updateLoginType(newLoginType: .AppleId)
       DataBaseService.shared.insertUserToDB(user: OwnerInfo.shared) {[weak self] (success, error) in
-        if error != nil {
-          self?.showLoginErrorPopup()
-        } else {
-          self?.openHomeViewController()
-        }
+        /// không cần check userexisted, vô luôn cho lẹ.
+        self?.openHomeViewController()
       }
     } else {
       self.showLoginErrorPopup()
