@@ -30,7 +30,7 @@ class OwnerInfo {
   
   //MARK: Readonly Prop
   public private(set) var countPrompt: Int = 0
-  public private(set) var userId: String = ""
+  public private(set) var userId: String = getDeviceId()
   public private(set) var loginType: LoginType = .NotLogin
   public private(set) var bestScore: Int = 0
   public private(set) var userName: String = ""
