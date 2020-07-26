@@ -159,6 +159,7 @@ class LoginViewController: UIViewController {
     let text = "Play as a guest"
     let textRange = NSMakeRange(0, text.count)
     let attributedText = NSMutableAttributedString(string: text)
+    attributedText.addAttribute(.foregroundColor, value: ColorRGB(0, 0, 0), range: textRange)
     attributedText.addAttribute(.font, value: UIFont.systemFont(ofSize: 14, weight: .bold), range: textRange)
     loginAsGuestButton.setAttributedTitle(attributedText, for: .normal)
     loginAsGuestButton.addTarget(self, action: #selector(didTapLoginAsGuestButton), for: .touchUpInside)

@@ -21,13 +21,16 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb279949343187837</string>
+				<string>fb702817230295742</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
-	<key>CFBundleURLTypes</key> <array> <dict> <key>CFBundleURLSchemes</key> <array> <string>fb702817230295742</string> </array> </dict> </array> <key>FacebookAppID</key> <string>702817230295742</string> <key>FacebookDisplayName</key> <string>ColorNinja</string>
+	<key>FacebookAppID</key>
+	<string>702817230295742</string>
+	<key>FacebookDisplayName</key>
+	<string>ColorNinja</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-2457313692920235~6034127677</string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -65,6 +68,10 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We use location for supporting multiple languages</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We use location for supporting multiple languages</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Squirk-RMvV.ttf</string>
