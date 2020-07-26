@@ -73,22 +73,35 @@ class LoginViewController: UIViewController {
       make.centerX.equalToSuperview()
     }
     
+    #if ENABLE_LOGIN_FB_APPLE /// khi nào enable feature login wtih fb, apple thì thêm cờ này vào  BuildSettings là được
     var stackViewHeight = 48 * 2 + 16
     if #available(iOS 13.0, *) {
       stackViewHeight = 44 * 3 + 16 * 2
     }
+    #else
+    let stackViewHeight = 44
+    #endif
     
     stackView = UIStackView()
     stackView.axis = .vertical
     stackView.distribution = .fillEqually
     stackView.spacing = 16.0
     self.view.addSubview(stackView)
+    
+    #if ENABLE_LOGIN_FB_APPLE
     stackView.snp.makeConstraints { (make) in
       make.centerX.equalToSuperview()
       make.bottom.equalToSuperview().inset(54 + safeAreaBottom())
       make.width.equalToSuperview().multipliedBy(0.8)
       make.height.equalTo(stackViewHeight)
     }
+    #else
+    stackView.snp.makeConstraints { (make) in
+      make.center.equalToSuperview()
+      make.width.equalToSuperview().multipliedBy(0.8)
+      make.height.equalTo(stackViewHeight)
+    }
+    #endif
     
     loginWithFBButton = UIButton()
     loginWithFBButton.addTarget(self, action: #selector(didTapLoginWithFacebookButton), for: .touchUpInside)
@@ -111,7 +124,9 @@ class LoginViewController: UIViewController {
       make.centerY.equalToSuperview()
       make.leading.equalToSuperview().inset(16)
     }
+    #if ENABLE_LOGIN_FB_APPLE /// khi nào muốn enable thì thêm cờ này vào config
     stackView.addArrangedSubview(loginWithFBButton)
+    #endif
     
     if #available(iOS 13.0, *) {
       appleButton = UIButton()
@@ -135,7 +150,9 @@ class LoginViewController: UIViewController {
         make.leading.equalToSuperview().inset(12)
       }
       
+      #if ENABLE_LOGIN_FB_APPLE
       self.stackView.addArrangedSubview(self.appleButton)
+      #endif
     }
     
     loginAsGuestButton = UIButton()
