@@ -27,7 +27,6 @@ class HomeViewController: BaseHomeViewController {
   
   private var bestScoreLabel: UILabel!
   private var bottomBar: UIStackView!
-  private var adBannerView = LDBannerAdView.shared
   
   // BottomBar
   private var rateUsButton: UIButton!
@@ -57,9 +56,6 @@ class HomeViewController: BaseHomeViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    
-    /// Add lại bannerAd
-    setupBannerAd()
   }
   
   // MARK: Setup views
@@ -76,7 +72,6 @@ class HomeViewController: BaseHomeViewController {
     super.setupViews()
     
     settingMidContainer()
-    setupBannerAd()
     setupBottomBar()
   }
   
@@ -149,18 +144,7 @@ class HomeViewController: BaseHomeViewController {
       make.centerX.equalToSuperview()
     }
   }
-  
-  private func setupBannerAd() {
-    adBannerView.rootViewController = self
-    adBannerView.delegate = self
-    view.addSubview(adBannerView)
-        
-    adBannerView.snp.makeConstraints { (make) in
-      make.bottom.equalTo(-bottomPadding())
-      make.centerX.equalToSuperview()
-    }
-  }
-  
+    
   private func getAppConfigFromServer() {
     
     print("duydl: [AppConfig] - Start load AppConfig from server")
@@ -215,7 +199,7 @@ class HomeViewController: BaseHomeViewController {
     let buttonSpacing: CGFloat = scaledValue(30)
     let spacingWithAd: CGFloat = scaledValue(10)
     let bottomBarHeight: CGFloat = scaledValue(45)
-    let bottomBarBottomPadding = bottomPadding() + adBannerView.adSize.size.height + spacingWithAd
+    let bottomBarBottomPadding = bottomPadding() + spacingWithAd
     
     // Container
     bottomBar = UIStackView()
