@@ -7,3 +7,16 @@
 //
 
 import Foundation
+
+class AppleUserInfoStore {
+    
+    private init() {}
+    
+    static func getUserDisplayName(for id: String) -> String? {
+        return UserDefaults.standard.value(forKey: id) as? String
+    }
+    
+    static func setUserDisplayName(for id: String, name: String) {
+        UserDefaults.standard.set(name, forKey: id)
+    }
+}

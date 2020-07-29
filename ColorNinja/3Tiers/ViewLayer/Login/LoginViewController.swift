@@ -396,12 +396,20 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
     switch authorization.credential {
     
     case let appleIDCredential as ASAuthorizationAppleIDCredential:
-      username = appleIDCredential.fullName?.givenName ?? appleIDCredential.user
+      if let givenName = appleIDCredential.fullName?.givenName {
+        username = givenName
+        AppleUserInfoStore.setUserDisplayName(for: givenName, name: appleIDCredential.user)
+      } else {
+        let stringIndex = appleIDCredential.user.index(appleIDCredential.user.startIndex, offsetBy: min(6, appleIDCredential.user.count))
+        username = AppleUserInfoStore.getUserDisplayName(for: appleIDCredential.user) ?? String(appleIDCredential.user.prefix(upTo: stringIndex))
+      }
       loginSuccess = true
       
     case let passwordCredential as ASPasswordCredential:
       // Sign in using an existing iCloud Keychain credential.
-      username = passwordCredential.user
+      let stringIndex = passwordCredential.user.index(passwordCredential.user.startIndex, offsetBy: min(6, passwordCredential.user.count))
+      username = AppleUserInfoStore.getUserDisplayName(for: passwordCredential.user) ?? String(passwordCredential.user.prefix(upTo: stringIndex))
+      
       loginSuccess = true
       
     default:

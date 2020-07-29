@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1610B08324A8C6A200504CC8 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1610B08224A8C6A200504CC8 /* GradientView.swift */; };
+		1677289C24D1B93500463869 /* AppleUserInfoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1677289B24D1B93500463869 /* AppleUserInfoStore.swift */; };
 		1F24DE30531F19FD720BDCE9 /* Pods_ColorNinja.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CAA71D5E770FF4DCA29EEEA /* Pods_ColorNinja.framework */; };
 		55A5653B40B2938C039A214B /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFD7FFB1A0788B5C3CC3126A /* Pods_OneSignalNotificationServiceExtension.framework */; };
 		8C2C72782467A58C00883388 /* RankingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C72772467A58C00883388 /* RankingViewController.swift */; };
@@ -114,6 +115,7 @@
 
 /* Begin PBXFileReference section */
 		1610B08224A8C6A200504CC8 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		1677289B24D1B93500463869 /* AppleUserInfoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleUserInfoStore.swift; sourceTree = "<group>"; };
 		2EA3A6356F910FED2BED91AD /* Pods-ColorNinja.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorNinja.release.xcconfig"; path = "Target Support Files/Pods-ColorNinja/Pods-ColorNinja.release.xcconfig"; sourceTree = "<group>"; };
 		57C86C5C019D378438E37339 /* Pods-ColorNinja.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorNinja.debug.xcconfig"; path = "Target Support Files/Pods-ColorNinja/Pods-ColorNinja.debug.xcconfig"; sourceTree = "<group>"; };
 		5E0E02E044182AD4183D8A58 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
@@ -518,6 +520,7 @@
 				F275A103247832590077E42F /* OwnerInfo.swift */,
 				F29AFC0D248952EF002CD0E0 /* NetworkManager.swift */,
 				F2EAFC2F24A8656E001ADCFB /* AppConfig.swift */,
+				1677289B24D1B93500463869 /* AppleUserInfoStore.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -827,6 +830,7 @@
 				8C73DB8D246AA8E40095FE8A /* ZaloSDKApiWrapper.swift in Sources */,
 				F2A6E68C2466FF5600970D1B /* BoardCollectionView.swift in Sources */,
 				F24E4366247A802900FBA7B1 /* CharacterSet+Extension.swift in Sources */,
+				1677289C24D1B93500463869 /* AppleUserInfoStore.swift in Sources */,
 				F234761124671FE1004C8363 /* ColorCellModel.swift in Sources */,
 				8C34F005246E914600E156FD /* ZaloService.swift in Sources */,
 				8C5FFEEB2472E87E00D9FA5E /* BaseAppDelegate.swift in Sources */,
