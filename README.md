@@ -1,3 +1,3 @@
 # ColorNinja
 
-Game hay nhất vũ 
+Find different color
