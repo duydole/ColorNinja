@@ -216,6 +216,8 @@ class BaseHomeViewController: UIViewController {
   }
 }
 
+// MARK: ChangeUserNamePopupDelegate
+
 extension BaseHomeViewController: ChangeUserNamePopupDelegate {
   func didDismissPopupWithNewUserName(newUserName: String) {
     if newUserName != OwnerInfo.shared.userName {

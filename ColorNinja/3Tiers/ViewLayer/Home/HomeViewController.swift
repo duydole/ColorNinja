@@ -7,9 +7,6 @@
 //
 
 import UIKit
-#if ENABLE_ZALO_SDK
-import ZaloSDK
-#endif
 import GoogleMobileAds
 import StoreKit
 import Localize_Swift
@@ -261,30 +258,6 @@ class HomeViewController: BaseHomeViewController {
   
   // MARK: Action handler
   
-  #if ENABLE_ZALO_SDK
-  @objc private func didTapLoginButton() {
-    ZaloSDKApiWrapper.sharedInstance.login(withZalo: self, type: ZAZAloSDKAuthenTypeViaZaloAppAndWebView) {  [weak self] (success) in
-      if success {
-        let homeVC = HomeViewController()
-        homeVC.modalPresentationStyle = .fullScreen
-        self?.present(homeVC, animated: true, completion: nil)
-      } else {
-        print("Login failed")
-      }
-    }
-  }
-  
-  @objc private func didTapProfile() {
-    //ZaloSDKApiWrapper.sharedInstance.loadZaloUserProfile()
-  }
-  
-  @objc private func didTapgetfriend() {
-    //ZaloSDKApiWrapper.sharedInstance.loadZaloFriend(0, count: 500)
-    let feed = ZOFeed(link: "https://www.google.com.vn/", appName: "ColorNinja", message: "message", others: nil)
-    ZaloSDKApiWrapper.sharedInstance.shareFeedZalo(feed, andParentVC: self)
-  }
-  #endif
-  
   @objc private func didTapSinglePlayerButton() {
     let gameVC = SinglePlayerViewController()
     gameVC.modalPresentationStyle = .fullScreen
@@ -354,7 +327,8 @@ class HomeViewController: BaseHomeViewController {
   }
 }
 
-/// JoinRoom Popup Delegate
+// MARK: JoinRoomPopupDelegate
+
 extension HomeViewController: JoinRoomPopupDelegate {
   func didDismissWithRoomId(roomId: Int) {
     let homeVC = RoomGameViewController()
@@ -364,7 +338,8 @@ extension HomeViewController: JoinRoomPopupDelegate {
   }
 }
 
-/// BannerAd Delegate
+// MARK: GADBannerViewDelegate
+
 extension HomeViewController: GADBannerViewDelegate {
   
   func adViewDidReceiveAd(_ bannerView: GADBannerView) {

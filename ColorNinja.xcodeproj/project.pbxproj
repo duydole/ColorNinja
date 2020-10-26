@@ -77,6 +77,7 @@
 		F2B07F29248A9C6F0019D075 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B07F28248A9C6F0019D075 /* GameKit.framework */; };
 		F2C0607A246566B5001FAD58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C06079246566B5001FAD58 /* AppDelegate.swift */; };
 		F2C06086246566B7001FAD58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2C06084246566B7001FAD58 /* LaunchScreen.storyboard */; };
+		F2C5962D25472010000F5380 /* UserNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C5962C25472010000F5380 /* UserNameView.swift */; };
 		F2D862372474330E006D3FD4 /* BaseHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D862362474330E006D3FD4 /* BaseHomeViewController.swift */; };
 		F2D862392474332C006D3FD4 /* RoomGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D862382474332C006D3FD4 /* RoomGameViewController.swift */; };
 		F2D8623E2474343E006D3FD4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D8623D2474343E006D3FD4 /* LoginViewController.swift */; };
@@ -102,14 +103,14 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		F2FC52A024B0935500443C5B /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
 				F2FC529C24B0935500443C5B /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -193,6 +194,7 @@
 		F2C06079246566B5001FAD58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2C06085246566B7001FAD58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F2C06087246566B7001FAD58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2C5962C25472010000F5380 /* UserNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNameView.swift; sourceTree = "<group>"; };
 		F2D862362474330E006D3FD4 /* BaseHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseHomeViewController.swift; sourceTree = "<group>"; };
 		F2D862382474332C006D3FD4 /* RoomGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomGameViewController.swift; sourceTree = "<group>"; };
 		F2D8623D2474343E006D3FD4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				F2D8623D2474343E006D3FD4 /* LoginViewController.swift */,
+				F2C5962C25472010000F5380 /* UserNameView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -432,18 +435,10 @@
 			path = DataLayer;
 			sourceTree = "<group>";
 		};
-		F2405A8F24992E0100E71481 /* BusinessLayer */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = BusinessLayer;
-			sourceTree = "<group>";
-		};
 		F2405A9124992E2300E71481 /* 3Tiers */ = {
 			isa = PBXGroup;
 			children = (
 				F22F85612465A32500493BB6 /* ViewLayer */,
-				F2405A8F24992E0100E71481 /* BusinessLayer */,
 				F2405A8E24992DF300E71481 /* DataLayer */,
 			);
 			path = 3Tiers;
@@ -829,6 +824,7 @@
 				8CC6DB40246B8D380017B60A /* ZaloUser.swift in Sources */,
 				8C73DB8D246AA8E40095FE8A /* ZaloSDKApiWrapper.swift in Sources */,
 				F2A6E68C2466FF5600970D1B /* BoardCollectionView.swift in Sources */,
+				F2C5962D25472010000F5380 /* UserNameView.swift in Sources */,
 				F24E4366247A802900FBA7B1 /* CharacterSet+Extension.swift in Sources */,
 				1677289C24D1B93500463869 /* AppleUserInfoStore.swift in Sources */,
 				F234761124671FE1004C8363 /* ColorCellModel.swift in Sources */,
