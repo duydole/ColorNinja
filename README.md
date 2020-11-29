@@ -17,6 +17,13 @@ Color Ninja is a simple game, just find out different colors in the grid of colo
 - Match 2 random players
 - Play with friend by Room Id
 
+## Demo
+
+#### [Youtube Demo_IOS](https://youtu.be/uZiFrHLuQFk)
+![Demo Application](https://github.com/hcnhatnam/GPSocial/blob/master/Resource/gifOfficalLight.gif)
+## Link
+<pre><b>Web</b> : <a href="http://gpsocial.tk/">gpsocial.tk</a>         <b>Api</b> : <a href="http://apigpsocial.tk/">apigpsocial.tk</a>           <b>Mobile(iOS)</b> : Coming soon to App Store</pre>
+
 ## License
 Distributed under the MIT License. See `LICENSE` for more information.
 
