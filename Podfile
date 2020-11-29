@@ -26,8 +26,6 @@ target 'ColorNinja' do
   pod 'Firebase/Analytics'
 
 
-  #pod 'ZaloSDK'
-
 end
 
 target 'OneSignalNotificationServiceExtension' do

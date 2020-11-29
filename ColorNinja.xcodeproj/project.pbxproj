@@ -600,7 +600,6 @@
 				F2C06073246566B5001FAD58 /* Frameworks */,
 				F2C06074246566B5001FAD58 /* Resources */,
 				F2FC52A024B0935500443C5B /* Embed App Extensions */,
-				14E8F2A57927A43B20F1F9C7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -696,23 +695,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		14E8F2A57927A43B20F1F9C7 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ColorNinja/Pods-ColorNinja-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ColorNinja/Pods-ColorNinja-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ColorNinja/Pods-ColorNinja-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		A4653A546A9CD7AC3FFE50D1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
