@@ -21,8 +21,6 @@ Color Ninja is a simple game, just find out different colors in the grid of colo
 **Color Ninja** has been published to the **AppStore**, you can download and try it [here](https://apps.apple.com/vn/app/find-different-color-2-players/id1516759930)
 
 ## Demo
-
-#### [Youtube Demo_IOS](https://youtu.be/uZiFrHLuQFk)
 ![Demo Application](https://github.com/hcnhatnam/GPSocial/blob/master/Resource/gifOfficalLight.gif)
 
 ## License
