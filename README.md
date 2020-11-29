@@ -27,6 +27,7 @@
 Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
+Submit an issue or email me if you have any questions.  [doleduy97@gmail.com](mailto:doleduy97@gmail.com)
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
