@@ -10,19 +10,20 @@
 
 ## About Color Ninja
 **Color Ninja** is a game project using Swift, the purpose is to get familiar with Swift and some popular frameworks such as: Alamofire, SnapKit, ... 
-Color Ninja is a simple game, just find out different colors in the grid of colors and tap it. It has been published to the **AppStore**, you can download and try it [here](https://apps.apple.com/vn/app/find-different-color-2-players/id1516759930)
+Color Ninja is a simple game, just find out different colors in the grid of colors and tap it.
 
 ## Features
 - Single player
 - Match 2 random players
 - Play with friend by Room Id
 
+## Download
+**Color Ninja** has been published to the **AppStore**, you can download and try it [here](https://apps.apple.com/vn/app/find-different-color-2-players/id1516759930)
+
 ## Demo
 
 #### [Youtube Demo_IOS](https://youtu.be/uZiFrHLuQFk)
 ![Demo Application](https://github.com/hcnhatnam/GPSocial/blob/master/Resource/gifOfficalLight.gif)
-## Link
-<pre><b>Web</b> : <a href="http://gpsocial.tk/">gpsocial.tk</a>         <b>Api</b> : <a href="http://apigpsocial.tk/">apigpsocial.tk</a>           <b>Mobile(iOS)</b> : Coming soon to App Store</pre>
 
 ## License
 Distributed under the MIT License. See `LICENSE` for more information.
