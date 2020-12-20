@@ -152,7 +152,9 @@ class DataBaseService : NSObject {
       "type":UpdateUserType.BestScore.rawValue
     ]
     
-    AF.request(updateUserDataUrl, method: .post, parameters:parameters).responseJSON { (response) in
+    AF.request(updateUserDataUrl, method: .post, parameters:parameters)
+        .validate()
+        .responseJSON { (response) in
       let response: JSON? = response.value as? JSON
       if let response = response {
         guard let error: Int = response["error"] as? Int else { return }
@@ -222,7 +224,20 @@ class DataBaseService : NSObject {
   // MARK: Private
   
   private func noConnection() -> Bool {
-    return !NetworkManager.shared.hasConnection
+    return !NetworkManager.shared.hasConnection || isServerDie()
+  }
+  
+  private func isServerDie() -> Bool {
+    return verifyUrl(urlString: serverUrl)
+  }
+  
+  private func verifyUrl (urlString: String?) -> Bool {
+    if let urlString = urlString {
+      if let url = NSURL(string: urlString) {
+        return UIApplication.shared.canOpenURL(url as URL)
+      }
+    }
+    return false
   }
   
 }
