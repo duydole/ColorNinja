@@ -9,6 +9,7 @@
 import Foundation
 
 // Reponse of leaderboard/bestscore
+// Build the struct base on Json which server return
 struct LeaderBoardDBDefine: Decodable {
     let data: UserRanks
     
@@ -17,7 +18,7 @@ struct LeaderBoardDBDefine: Decodable {
     }
 }
 
-// list RankingModel
+// List UserRanks
 struct UserRanks: Decodable {
     let listUserRanks: [UserRank]?
     
@@ -26,7 +27,7 @@ struct UserRanks: Decodable {
     }
 }
 
-// UserRank info
+// UserRank Info base on Json of server
 struct UserRank: Decodable {
   
     let id: String
