@@ -28,8 +28,8 @@ target 'ColorNinja' do
 
 end
 
-target 'OneSignalNotificationServiceExtension' do
+#target 'OneSignalNotificationServiceExtension' do
   #only copy below line
-  use_frameworks!
-  pod 'OneSignal', '>= 2.11.2', '< 3.0'
-end
+  #use_frameworks!
+  #pod 'OneSignal', '>= 2.11.2', '< 3.0'
+#end

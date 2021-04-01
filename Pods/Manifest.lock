@@ -90,7 +90,6 @@ PODS:
     - nanopb/encode (= 1.30905.0)
   - nanopb/decode (1.30905.0)
   - nanopb/encode (1.30905.0)
-  - OneSignal (2.14.3)
   - PromisesObjC (1.2.9)
   - ReachabilitySwift (5.0.0)
   - SnapKit (5.0.1)
@@ -107,7 +106,6 @@ DEPENDENCIES:
   - Firebase/Database
   - Google-Mobile-Ads-SDK
   - Localize-Swift (~> 2.0)
-  - OneSignal (< 3.0, >= 2.11.2)
   - ReachabilitySwift
   - SnapKit (~> 5.0.0)
   - SVProgressHUD
@@ -133,7 +131,6 @@ SPEC REPOS:
     - leveldb-library
     - Localize-Swift
     - nanopb
-    - OneSignal
     - PromisesObjC
     - ReachabilitySwift
     - SnapKit
@@ -159,12 +156,11 @@ SPEC CHECKSUMS:
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   Localize-Swift: c798ec9286494866f7068f85f7c71283ac5bdab4
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
-  OneSignal: 7dfe466265c05f02b95a274b9c997a0619ad2117
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 64ab51d6b3e54563e051e9ec0eafa221d7887697
+PODFILE CHECKSUM: 61a5c5028691db520ce9dcc6edfd704ca4b56b9e
 
 COCOAPODS: 1.8.4
