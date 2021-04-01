@@ -74,6 +74,12 @@ class DataBaseService : NSObject {
         return
       }
       
+      //Check status:
+      if (json.keys.contains("data") == false) {
+        completion(-1)
+        return
+      }
+
       let data = json["data"] as! [String: Any]
       if let rank = data["rank"] as! Int? {
         completion(rank)
