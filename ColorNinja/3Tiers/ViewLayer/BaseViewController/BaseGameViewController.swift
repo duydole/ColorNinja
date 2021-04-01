@@ -49,7 +49,7 @@ class BaseGameViewController : BaseViewController {
     setupBoardContainer()
     setupReadyView()
     setupIndicator()
-    setupBannerAd()
+    //setupBannerAd()
   }
 
   // MARK: Public APIs

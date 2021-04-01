@@ -107,7 +107,7 @@ class GameOverPopup: PopupViewController {
   // MARK: Setup Views
   
   private func setupViews() {
-    setupAds()
+    //setupAds()
     
     setupGameOverViews()
     setupGameResult()
@@ -158,7 +158,8 @@ class GameOverPopup: PopupViewController {
       make.height.equalToSuperview().multipliedBy(0.12)
     }
     
-    let buttonWidthRatio = 0.32
+    //let buttonWidthRatio = 0.32
+    let buttonWidthRatio = 0.48
     
     // GoHome
     goHomeButton = ViewCreator.createButtonInGameOverPopup(image: UIImage(named: "homeicon"), title: "HOME")
@@ -175,18 +176,19 @@ class GameOverPopup: PopupViewController {
     container.addSubview(replayButton)
     replayButton.snp.makeConstraints { (make) in
       make.width.equalToSuperview().multipliedBy(buttonWidthRatio)
-      make.centerX.centerY.equalToSuperview()
+      //make.centerX.centerY.equalToSuperview()
+      make.right.centerY.equalToSuperview()
       make.height.equalTo(goHomeButton)
     }
     
     // Watch Ads
-    watchAdsButton = ViewCreator.createButtonInGameOverPopup(image: UIImage(named: "adsicon"), title: "+\(rewardForEachAds)s")
-    watchAdsButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapWatchAdsButton))
-    container.addSubview(watchAdsButton)
-    watchAdsButton.snp.makeConstraints { (make) in
-      make.width.equalToSuperview().multipliedBy(buttonWidthRatio)
-      make.top.right.bottom.equalToSuperview()
-    }
+    //watchAdsButton = ViewCreator.createButtonInGameOverPopup(image: UIImage(named: "adsicon"), title: "+\(rewardForEachAds)s")
+    //watchAdsButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapWatchAdsButton))
+    //container.addSubview(watchAdsButton)
+    //watchAdsButton.snp.makeConstraints { (make) in
+    //  make.width.equalToSuperview().multipliedBy(buttonWidthRatio)
+    //  make.top.right.bottom.equalToSuperview()
+    //}
   }
   
   private func setupAds() {

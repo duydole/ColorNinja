@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-fileprivate let serverUrl = "http://colorninjagame.tk:8000/"
+fileprivate let serverUrl = "http://colorninjagame.tk:9090/"
 fileprivate let leaderBoardUrl = serverUrl + "leaderboard/bestscore"
 fileprivate let registerUserUrl = serverUrl + "registeruser"
 fileprivate let updateUserDataUrl = serverUrl + "user"
