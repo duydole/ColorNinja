@@ -80,7 +80,12 @@ class GameOverPopup: PopupViewController {
   }
   
   @objc private func didTapReplayButton() {
-    if OwnerInfo.shared.countRoundDidPlay % 3 == 0 && NetworkManager.shared.hasConnection && interstitial.isReady {
+    let canShowAds = GameSettingManager.shared.allowShowAds
+      && OwnerInfo.shared.countRoundDidPlay % 3 == 0
+      && NetworkManager.shared.hasConnection
+      && interstitial.isReady
+    
+    if canShowAds {
       showFullScreenAd()
     } else {
       _dismissAndSendReplayEventToDelegate()

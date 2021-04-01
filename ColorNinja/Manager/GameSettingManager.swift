@@ -14,9 +14,11 @@ class GameSettingManager {
   
   public var allowEffectSound: Bool!
   public var allowMainSound: Bool!
+  public var allowShowAds: Bool!
   
   private init() {
     allowEffectSound = true
     allowMainSound = true
+    allowShowAds = false
   }
 }

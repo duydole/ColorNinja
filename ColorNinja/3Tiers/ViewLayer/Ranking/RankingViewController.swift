@@ -29,9 +29,9 @@ class RankingViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.setupView()
-    
     activityIndicator.startAnimating()
+    
+    self.setupView()
     self.prepareData()
   }
   
@@ -194,12 +194,14 @@ class RankingViewController: UIViewController {
   
   private func prepareData() {
     
+    // Load leaderBoard from Server
     DataBaseService.shared.loadLeaderBoardUsers { (users,error)  in
       
+      // Stop indicator
       self.activityIndicator.stopAnimating()
       
       if let error = error {
-        print("duydl: Error \(error)")
+        print("duydl>> Error \(error)")
         return
       }
       
@@ -222,6 +224,7 @@ class RankingViewController: UIViewController {
   }
   
   // MARK: Hanlde event
+  
   @objc private func didTapExitButton() {
     self.dismiss(animated: true, completion: nil)
   }
