@@ -44,9 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   private func setupCommonWhenLaughingApp() {
-    #if !DEBUG
     GameMusicPlayer.shared.startBackgroundMusic()
-    #endif
     GADMobileAds.sharedInstance().start(completionHandler: nil)
   }
   
