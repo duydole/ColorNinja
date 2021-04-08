@@ -157,7 +157,6 @@ class SinglePlayerViewController : BaseGameViewController {
   
   private func processGameOver() {
     
-    
     // Reset CountDownLabel
     self.remainingTime = 0.00
     self.remainTimeLabel.text = self.currentRemainTimeString()
