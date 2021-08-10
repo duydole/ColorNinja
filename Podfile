@@ -24,6 +24,7 @@ target 'ColorNinja' do
   pod 'Firebase/Core'
   pod 'Firebase/Database'
   pod 'Firebase/Analytics'
+  pod 'Firebase/Auth'
 
 
 end
