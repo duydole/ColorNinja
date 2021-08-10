@@ -16,10 +16,6 @@
 		8C2C72822467ACD300883388 /* RankingCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C72812467ACD300883388 /* RankingCellModel.swift */; };
 		8C34F005246E914600E156FD /* ZaloService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C34F004246E914600E156FD /* ZaloService.swift */; };
 		8C5FA0B9246AE6F4005D33E0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5FA0B8246AE6F4005D33E0 /* HomeViewController.swift */; };
-		8C5FFEE92472E84500D9FA5E /* AppDelegateDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5FFEE82472E84500D9FA5E /* AppDelegateDispatcher.swift */; };
-		8C5FFEEB2472E87E00D9FA5E /* BaseAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5FFEEA2472E87E00D9FA5E /* BaseAppDelegate.swift */; };
-		8C5FFEED2472E8B500D9FA5E /* ZaloSDKAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5FFEEC2472E8B500D9FA5E /* ZaloSDKAppDelegate.swift */; };
-		8C5FFEEF2472E8D800D9FA5E /* FacebookSDKAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5FFEEE2472E8D800D9FA5E /* FacebookSDKAppDelegate.swift */; };
 		8C6350A924735C8C00ADAB01 /* FacebookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6350A824735C8C00ADAB01 /* FacebookService.swift */; };
 		8C6EC7442467DE8E00612802 /* ZPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EC7432467DE8E00612802 /* ZPopup.swift */; };
 		8C6EC7492467E3C100612802 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EC7482467E3C100612802 /* PopupViewController.swift */; };
@@ -87,7 +83,6 @@
 		F2B07F29248A9C6F0019D075 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B07F28248A9C6F0019D075 /* GameKit.framework */; };
 		F2C0607A246566B5001FAD58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C06079246566B5001FAD58 /* AppDelegate.swift */; };
 		F2C06086246566B7001FAD58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2C06084246566B7001FAD58 /* LaunchScreen.storyboard */; };
-		F2C5962D25472010000F5380 /* UserNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C5962C25472010000F5380 /* UserNameView.swift */; };
 		F2D862372474330E006D3FD4 /* BaseHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D862362474330E006D3FD4 /* BaseHomeViewController.swift */; };
 		F2D862392474332C006D3FD4 /* RoomGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D862382474332C006D3FD4 /* RoomGameViewController.swift */; };
 		F2D8623E2474343E006D3FD4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D8623D2474343E006D3FD4 /* LoginViewController.swift */; };
@@ -123,10 +118,6 @@
 		8C2C72812467ACD300883388 /* RankingCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingCellModel.swift; sourceTree = "<group>"; };
 		8C34F004246E914600E156FD /* ZaloService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZaloService.swift; sourceTree = "<group>"; };
 		8C5FA0B8246AE6F4005D33E0 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		8C5FFEE82472E84500D9FA5E /* AppDelegateDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateDispatcher.swift; sourceTree = "<group>"; };
-		8C5FFEEA2472E87E00D9FA5E /* BaseAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAppDelegate.swift; sourceTree = "<group>"; };
-		8C5FFEEC2472E8B500D9FA5E /* ZaloSDKAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZaloSDKAppDelegate.swift; sourceTree = "<group>"; };
-		8C5FFEEE2472E8D800D9FA5E /* FacebookSDKAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookSDKAppDelegate.swift; sourceTree = "<group>"; };
 		8C6350A824735C8C00ADAB01 /* FacebookService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookService.swift; sourceTree = "<group>"; };
 		8C6EC7432467DE8E00612802 /* ZPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZPopup.swift; sourceTree = "<group>"; };
 		8C6EC7482467E3C100612802 /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
@@ -202,7 +193,6 @@
 		F2C06079246566B5001FAD58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2C06085246566B7001FAD58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F2C06087246566B7001FAD58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F2C5962C25472010000F5380 /* UserNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNameView.swift; sourceTree = "<group>"; };
 		F2D862362474330E006D3FD4 /* BaseHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseHomeViewController.swift; sourceTree = "<group>"; };
 		F2D862382474332C006D3FD4 /* RoomGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomGameViewController.swift; sourceTree = "<group>"; };
 		F2D8623D2474343E006D3FD4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -246,24 +236,19 @@
 			path = Subviews;
 			sourceTree = "<group>";
 		};
-		8C5FA0B7246AE693005D33E0 /* Login */ = {
+		8C5FA0B7246AE693005D33E0 /* Login And Registration */ = {
 			isa = PBXGroup;
 			children = (
 				F2D8623D2474343E006D3FD4 /* LoginViewController.swift */,
-				F2C5962C25472010000F5380 /* UserNameView.swift */,
 				93C04ABE26C271F80048CE2F /* RegistrationViewController.swift */,
 			);
-			path = Login;
+			path = "Login And Registration";
 			sourceTree = "<group>";
 		};
 		8C5FFECF2472E7E200D9FA5E /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
 				F2C06079246566B5001FAD58 /* AppDelegate.swift */,
-				8C5FFEE82472E84500D9FA5E /* AppDelegateDispatcher.swift */,
-				8C5FFEEA2472E87E00D9FA5E /* BaseAppDelegate.swift */,
-				8C5FFEEC2472E8B500D9FA5E /* ZaloSDKAppDelegate.swift */,
-				8C5FFEEE2472E8D800D9FA5E /* FacebookSDKAppDelegate.swift */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -389,7 +374,7 @@
 				8CD60301246ED84E00003447 /* Popup */,
 				8CD60300246ED83100003447 /* 1Player */,
 				8CD602FF246ED82800003447 /* Home */,
-				8C5FA0B7246AE693005D33E0 /* Login */,
+				8C5FA0B7246AE693005D33E0 /* Login And Registration */,
 			);
 			path = ViewLayer;
 			sourceTree = "<group>";
@@ -758,10 +743,8 @@
 				F22F85882466940900493BB6 /* StaticFunctions.swift in Sources */,
 				93C04AC726C2729B0048CE2F /* StorageManager.swift in Sources */,
 				F234763324680D75004C8363 /* GameSettingPopup.swift in Sources */,
-				8C5FFEED2472E8B500D9FA5E /* ZaloSDKAppDelegate.swift in Sources */,
 				93C04AB926C26FE40048CE2F /* Model.swift in Sources */,
 				F2EB90CD24BB5EAE00181467 /* LDImageView.swift in Sources */,
-				8C5FFEE92472E84500D9FA5E /* AppDelegateDispatcher.swift in Sources */,
 				F260CA642476DFBF00D00348 /* JoinRoomPopup.swift in Sources */,
 				F22F85682465AF2100493BB6 /* ZButton.swift in Sources */,
 				F22F85642465A34900493BB6 /* Constants.swift in Sources */,
@@ -779,7 +762,6 @@
 				F27454F2246A71A40037A8BA /* MusicPlayer.swift in Sources */,
 				F2D862392474332C006D3FD4 /* RoomGameViewController.swift in Sources */,
 				8C2C72782467A58C00883388 /* RankingViewController.swift in Sources */,
-				8C5FFEEF2472E8D800D9FA5E /* FacebookSDKAppDelegate.swift in Sources */,
 				F263FDBB246F950000A4AB0B /* BaseViewController.swift in Sources */,
 				F2EAFC3024A8656E001ADCFB /* AppConfig.swift in Sources */,
 				F2347638246851A5004C8363 /* ButtonWithImage.swift in Sources */,
@@ -799,13 +781,11 @@
 				F2A6E68C2466FF5600970D1B /* BoardCollectionView.swift in Sources */,
 				93C04AC126C272420048CE2F /* ErrorPresenter.swift in Sources */,
 				93C04ACB26C272F20048CE2F /* FBLoginKitManager.swift in Sources */,
-				F2C5962D25472010000F5380 /* UserNameView.swift in Sources */,
 				F24E4366247A802900FBA7B1 /* CharacterSet+Extension.swift in Sources */,
 				1677289C24D1B93500463869 /* AppleUserInfoStore.swift in Sources */,
 				93C04AC926C272D60048CE2F /* URLSessionManager.swift in Sources */,
 				F234761124671FE1004C8363 /* ColorCellModel.swift in Sources */,
 				8C34F005246E914600E156FD /* ZaloService.swift in Sources */,
-				8C5FFEEB2472E87E00D9FA5E /* BaseAppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

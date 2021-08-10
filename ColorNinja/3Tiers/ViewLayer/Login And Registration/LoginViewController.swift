@@ -46,7 +46,7 @@ class LoginViewController: UIViewController {
     private var googleLoginButton: GIDSignInButton!
     
     private var spinner: JGProgressHUD!
-
+    
     // MARK: Life Cycle
     
     override func viewDidLoad() {
@@ -138,13 +138,13 @@ class LoginViewController: UIViewController {
         facebookLoginButton.delegate = self
         facebookLoginButton.permissions = ["email","public_profile"]
         view.addSubview(facebookLoginButton)
-
+        
         /// LoginWithGoogle
         googleLoginButton = GIDSignInButton()
         googleLoginButton.style = .wide
         googleLoginButton.addTarget(self, action: #selector(didTapLoginWithGoogleButton), for: .touchUpInside)
         view.addSubview(googleLoginButton)
-
+        
         /// Terms Button
         termsButton = UIButton()
         termsButton.setTitle("Terms of Service", for: .normal)
@@ -210,9 +210,9 @@ class LoginViewController: UIViewController {
         
         /// LoginWtihFacebook
         facebookLoginButton.frame = CGRect(x: paddingLeft,
-                                     y: loginButton.bottom + spacing,
-                                     width: view.width - paddingLeft*2,
-                                     height: fieldHeight)
+                                           y: loginButton.bottom + spacing,
+                                           width: view.width - paddingLeft*2,
+                                           height: fieldHeight)
         
         /// GoogleLoginButton
         googleLoginButton.frame = CGRect(x: paddingLeft,
@@ -258,7 +258,7 @@ class LoginViewController: UIViewController {
             ErrorPresenter.shared.showError(on: self, title: "Login Error", message: "Invalid username or password")
             return
         }
-    
+        
         /// StartLoading
         spinner.show(in: view)
         
@@ -309,7 +309,7 @@ class LoginViewController: UIViewController {
     @objc private func didTapLoginWithGoogleButton() {
         /// Start loading
         spinner.show(in: view)
-
+        
         /// Start Login
         GoogleSignInManager.shared.signInWithPresenting(viewController: self) { [weak self] user, error in
             DispatchQueue.main.async {
@@ -337,7 +337,7 @@ class LoginViewController: UIViewController {
                 if let email = email {
                     
                     /// Insert newUser to Database
-                    let newUser = UserModel(firstName: firstName ?? "", lastName: lastName ?? "", email: email, avatarURL: avatarUrl)
+                    let newUser = UserModel(firstName: firstName ?? "", lastName: lastName ?? "", email: email, avatarURL: avatarUrl, maxScore: 0)
                     DatabaseManager.shared.insertNewUserIfNotExisted(user: newUser) { success, error in
                         guard error == nil else {
                             return
@@ -371,19 +371,24 @@ class LoginViewController: UIViewController {
         }
     }
     
-    private func openHomeViewController() {
-      guard let window = UIApplication.shared.keyWindow else{
-        return
-      }
-      let homeVC = HomeViewController()
-      window.rootViewController = homeVC
-      
-      homeVC.view.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-      UIView.transition(with: window, duration: 0.4, options: .transitionCrossDissolve, animations: {
-        homeVC.view.transform = .identity
-      }, completion: nil)
-    }
+    // MARK: Privates
     
+    private func openHomeViewController() {
+        guard let window = UIApplication.shared.windows.first else {
+            return
+        }
+        
+        let homeVC = HomeViewController()
+        window.rootViewController = homeVC
+        homeVC.view.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+        UIView.transition(with: window,
+                          duration: 0.4,
+                          options: .transitionCrossDissolve,
+                          animations: {
+                            homeVC.view.transform = .identity
+                          },
+                          completion: nil)
+    }
     
     private func showError(error: Error?) {
         ErrorPresenter.shared.showError(on: self, message: "\(String(describing: error))")
@@ -431,7 +436,7 @@ extension LoginViewController: LoginButtonDelegate {
             /// Login with facebook failed
             spinner.dismiss()
             ErrorPresenter.shared.showError(on: self, message: "\(String(describing: error))")
-             return
+            return
         }
         
         let requestFields = ["fields":"email, first_name, last_name, picture.type(large)"]
@@ -457,7 +462,7 @@ extension LoginViewController: LoginButtonDelegate {
             }
             
             /// Insert to Database newuser with info of facebook
-            let newUser = UserModel(firstName: firstName, lastName: lastName, email: email, avatarURL: URL(string: avatarUrl))
+            let newUser = UserModel(firstName: firstName, lastName: lastName, email: email, avatarURL: URL(string: avatarUrl), maxScore: 0)
             DatabaseManager.shared.insertNewUserIfNotExisted(user: newUser) { success, error in
                 guard error == nil else {
                     return

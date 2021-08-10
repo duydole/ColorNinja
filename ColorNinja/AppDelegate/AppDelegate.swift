@@ -9,11 +9,8 @@
 import UIKit
 import GoogleMobileAds
 import FBSDKCoreKit
-//import OneSignal
 import Firebase
 import GoogleSignIn
-
-let onesignalAppId = "6d6c31de-f3c9-40b5-bb18-4e3550b22188"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,21 +20,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         /// Firsebase
-        setupFirebase()
-        
+        FirebaseApp.configure()
+
         /// RootViewController
-        window = UIWindow(frame: UIScreen.main.bounds)
+        var rootViewController: UIViewController = LoginViewController()
         if AuthManager.shared.isLogIn() {
             let navigationViewController = UINavigationController(rootViewController: HomeViewController())
             navigationViewController.navigationBar.isHidden = true
-            window?.rootViewController = navigationViewController
-        } else {
-            window?.rootViewController = LoginViewController()
+            rootViewController = navigationViewController
         }
-        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
 
-        
         /// PreSetup
         setupCommonWhenLaughingApp()
         
@@ -55,9 +50,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func setupCommonWhenLaughingApp() {
         GameMusicPlayer.shared.startBackgroundMusic()
         GADMobileAds.sharedInstance().start(completionHandler: nil)
-    }
-    
-    private func setupFirebase() {
-        FirebaseApp.configure()
     }
 }

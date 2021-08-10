@@ -14,6 +14,7 @@ public struct UserModel {
     public let lastName: String
     public let email: String
     public var avatarURL: URL?
+    public var maxScore: Int
     
     /// FileName of avatar will be stored on Storage
     public var avatarFileName: String {
@@ -33,7 +34,8 @@ public struct UserModel {
         return ["firstname":firstName,
                 "lastname":lastName,
                 "avatarUrl":avatarURL?.absoluteString ?? "",
-                "email": email]
+                "email": email,
+                "maxscore": String(maxScore)]
     }
     
     public static func avatarFileName(with email: String) -> String {
@@ -47,10 +49,11 @@ public struct UserModel {
         guard let firstname = dataDict["firstname"],
               let lastname = dataDict["lastname"],
               let avatarUrlStr = dataDict["avatarUrl"],
-              let email = dataDict["email"] else {
+              let email = dataDict["email"],
+              let maxscore = dataDict["maxscore"] else {
             return nil
         }
         
-        return UserModel(firstName: firstname, lastName: lastname, email: email, avatarURL: URL(string: avatarUrlStr))
+        return UserModel(firstName: firstname, lastName: lastname, email: email, avatarURL: URL(string: avatarUrlStr), maxScore: maxscore.toInt())
     }
 }

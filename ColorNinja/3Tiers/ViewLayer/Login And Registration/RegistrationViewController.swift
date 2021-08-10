@@ -200,7 +200,7 @@ class RegistrationViewController: UIViewController {
         spinner.show(in: view)
         
         /// Process Register account
-        let newUser = UserModel(firstName: firstName, lastName: lastName, email: email, avatarURL: nil)
+        let newUser = UserModel(firstName: firstName, lastName: lastName, email: email, avatarURL: nil, maxScore: 0)
         AuthManager.shared.registerNewUser(user: newUser, password: password) { [weak self] registered, error in
             DispatchQueue.main.async {
                 

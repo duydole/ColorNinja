@@ -16,7 +16,7 @@ let colorNinjaAppId = "1516759930"
 
 class HomeViewController: BaseHomeViewController {
     
-    //Private
+    // MARK: Private Properties
     private var singlePlayerButton: ButtonWithImage!
     private var matchRandomButton: ButtonWithImage!
     private var newRoomButton: ButtonWithImage!
@@ -43,18 +43,6 @@ class HomeViewController: BaseHomeViewController {
         #if DEBUG
         printAllFamilyFonts()
         #endif
-        
-        #if DEBUG
-        let ref = Database.database().reference()
-        ref.child("listusers/\(getDeviceId())/score").setValue(100)
-        #endif
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        /// Check should show LoginViewController or not
-        showLoginViewControllerIfNeed()
     }
 
     // MARK: Setup views
@@ -315,30 +303,19 @@ class HomeViewController: BaseHomeViewController {
         self.present(popup, animated: false, completion: nil)
     }
     
-    func rateApp() {
-        if #available(iOS 10.3, *) {
-            SKStoreReviewController.requestReview()
-            
-        } else if let url = URL(string: "itms-apps://itunes.apple.com/app/\(colorNinjaAppId)") {
-            if #available(iOS 10, *) {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            } else {
-                UIApplication.shared.openURL(url)
-            }
-        }
-    }
-    
     // MARK: Private
     
-    private func showLoginViewControllerIfNeed() {
-        if AuthManager.shared.isLogIn() {
-            return
-        }
-        
-        /// Show LoginViewController
-        let loginVC = LoginViewController()
-        loginVC.modalPresentationStyle = .fullScreen
-        present(loginVC, animated: false)
+    func rateApp() {
+//        if #available(iOS 10.3, *) {
+//            SKStoreReviewController.requestReview()
+//
+//        } else if let url = URL(string: "itms-apps://itunes.apple.com/app/\(colorNinjaAppId)") {
+//            if #available(iOS 10, *) {
+//                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+//            } else {
+//                UIApplication.shared.openURL(url)
+//            }
+//        }
     }
 }
 
