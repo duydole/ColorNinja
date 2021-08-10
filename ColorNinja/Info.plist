@@ -23,7 +23,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb1090671361706475</string>
+				<string>fb800531177284937</string>
 			</array>
 		</dict>
 		<dict>
@@ -39,7 +39,7 @@
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>FacebookAppID</key>
-	<string>1090671361706475</string>
+	<string>800531177284937</string>
 	<key>FacebookDisplayName</key>
 	<string>ColorNinja</string>
 	<key>GADApplicationIdentifier</key>
