@@ -21,7 +21,7 @@ public class AuthManager {
     /// 1. Check user existed or not
     /// 2. Create user in <Authentication>
     /// 3. Insert user to <RealtimeDatabase>
-    public func registerNewUser(user: ChatAppUser,
+    public func registerNewUser(user: UserModel,
                                 password: String,
                                 completion: @escaping (Bool, RegisterUserError?) -> Void) {
         

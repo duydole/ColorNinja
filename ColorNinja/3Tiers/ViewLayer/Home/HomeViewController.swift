@@ -56,7 +56,7 @@ class HomeViewController: BaseHomeViewController {
         /// Check should show LoginViewController or not
         showLoginViewControllerIfNeed()
     }
-    
+
     // MARK: Setup views
     
     private func setupNavigationController() {

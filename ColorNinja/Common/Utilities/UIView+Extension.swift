@@ -11,18 +11,6 @@ import UIKit
 
 extension UIView {
     
-    var top : CGFloat  {
-        get {
-            return self.frame.origin.y
-        }
-    }
-    
-    var bottom : CGFloat {
-        get {
-            return self.frame.origin.y + self.frame.size.height
-        }
-    }
-    
     func makeShadow() {
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.5

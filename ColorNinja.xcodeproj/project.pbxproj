@@ -31,6 +31,16 @@
 		8CC6DB44246B8E470017B60A /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC6DB43246B8E470017B60A /* Collection+Extension.swift */; };
 		8CC6DB47246B8FA90017B60A /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC6DB46246B8FA90017B60A /* Date+Extension.swift */; };
 		93C04AB626C26F780048CE2F /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C04AB526C26F780048CE2F /* AuthManager.swift */; };
+		93C04AB926C26FE40048CE2F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C04AB826C26FE40048CE2F /* Model.swift */; };
+		93C04ABB26C2702C0048CE2F /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C04ABA26C2702C0048CE2F /* DatabaseManager.swift */; };
+		93C04ABD26C2706A0048CE2F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C04ABC26C2706A0048CE2F /* Extensions.swift */; };
+		93C04ABF26C271F80048CE2F /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C04ABE26C271F80048CE2F /* RegistrationViewController.swift */; };
+		93C04AC126C272420048CE2F /* ErrorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C04AC026C272420048CE2F /* ErrorPresenter.swift */; };
+		93C04AC326C272590048CE2F /* GoogleSignInManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C04AC226C272590048CE2F /* GoogleSignInManager.swift */; };
+		93C04AC526C272800048CE2F /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C04AC426C272800048CE2F /* UserDefaultManager.swift */; };
+		93C04AC726C2729B0048CE2F /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C04AC626C2729B0048CE2F /* StorageManager.swift */; };
+		93C04AC926C272D60048CE2F /* URLSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C04AC826C272D60048CE2F /* URLSessionManager.swift */; };
+		93C04ACB26C272F20048CE2F /* FBLoginKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C04ACA26C272F20048CE2F /* FBLoginKitManager.swift */; };
 		F21145F4247CE092005ACB50 /* LeaderBoardStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21145F3247CE092005ACB50 /* LeaderBoardStruct.swift */; };
 		F2278BBB24B9C3A80091D898 /* LDBannerAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2278BBA24B9C3A80091D898 /* LDBannerAdView.swift */; };
 		F22F85642465A34900493BB6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F85632465A34900493BB6 /* Constants.swift */; };
@@ -128,6 +138,16 @@
 		8CC6DB43246B8E470017B60A /* Collection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
 		8CC6DB46246B8FA90017B60A /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		93C04AB526C26F780048CE2F /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		93C04AB826C26FE40048CE2F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		93C04ABA26C2702C0048CE2F /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		93C04ABC26C2706A0048CE2F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		93C04ABE26C271F80048CE2F /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		93C04AC026C272420048CE2F /* ErrorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPresenter.swift; sourceTree = "<group>"; };
+		93C04AC226C272590048CE2F /* GoogleSignInManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInManager.swift; sourceTree = "<group>"; };
+		93C04AC426C272800048CE2F /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
+		93C04AC626C2729B0048CE2F /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		93C04AC826C272D60048CE2F /* URLSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionManager.swift; sourceTree = "<group>"; };
+		93C04ACA26C272F20048CE2F /* FBLoginKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBLoginKitManager.swift; sourceTree = "<group>"; };
 		9CAA71D5E770FF4DCA29EEEA /* Pods_ColorNinja.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ColorNinja.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD7FFB1A0788B5C3CC3126A /* Pods_OneSignalNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OneSignalNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEC542EFC5658C36941397A3 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
@@ -231,6 +251,7 @@
 			children = (
 				F2D8623D2474343E006D3FD4 /* LoginViewController.swift */,
 				F2C5962C25472010000F5380 /* UserNameView.swift */,
+				93C04ABE26C271F80048CE2F /* RegistrationViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -330,6 +351,14 @@
 			path = Ranking;
 			sourceTree = "<group>";
 		};
+		93C04AB726C26FD70048CE2F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				93C04AB826C26FE40048CE2F /* Model.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		9ABBD60AE1D01816F1BBF25E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -381,6 +410,8 @@
 				8C8BA173246E707900A73046 /* UIImageView+Extension.swift */,
 				F24E4365247A802900FBA7B1 /* CharacterSet+Extension.swift */,
 				1610B08224A8C6A200504CC8 /* GradientView.swift */,
+				93C04ABC26C2706A0048CE2F /* Extensions.swift */,
+				93C04AC026C272420048CE2F /* ErrorPresenter.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -496,6 +527,12 @@
 				F2EAFC2F24A8656E001ADCFB /* AppConfig.swift */,
 				1677289B24D1B93500463869 /* AppleUserInfoStore.swift */,
 				93C04AB526C26F780048CE2F /* AuthManager.swift */,
+				93C04ABA26C2702C0048CE2F /* DatabaseManager.swift */,
+				93C04AC226C272590048CE2F /* GoogleSignInManager.swift */,
+				93C04AC426C272800048CE2F /* UserDefaultManager.swift */,
+				93C04AC626C2729B0048CE2F /* StorageManager.swift */,
+				93C04AC826C272D60048CE2F /* URLSessionManager.swift */,
+				93C04ACA26C272F20048CE2F /* FBLoginKitManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -543,6 +580,7 @@
 		F2C06078246566B5001FAD58 /* ColorNinja */ = {
 			isa = PBXGroup;
 			children = (
+				93C04AB726C26FD70048CE2F /* Model */,
 				F2B07F2A248A9CE10019D075 /* ColorNinja.entitlements */,
 				F2405A9124992E2300E71481 /* 3Tiers */,
 				8C5FFECF2472E7E200D9FA5E /* AppDelegate */,
@@ -696,6 +734,8 @@
 				1610B08324A8C6A200504CC8 /* GradientView.swift in Sources */,
 				8C6350A924735C8C00ADAB01 /* FacebookService.swift in Sources */,
 				F22F8584246679DA00493BB6 /* Size.swift in Sources */,
+				93C04AC326C272590048CE2F /* GoogleSignInManager.swift in Sources */,
+				93C04ABB26C2702C0048CE2F /* DatabaseManager.swift in Sources */,
 				8C6EC7492467E3C100612802 /* PopupViewController.swift in Sources */,
 				F27312D9248235F200B9ADCF /* ChangeUserNamePopup.swift in Sources */,
 				F2347635246836D7004C8363 /* UIColor+Extension.swift in Sources */,
@@ -716,8 +756,10 @@
 				8C8BA174246E707900A73046 /* UIImageView+Extension.swift in Sources */,
 				8C7ABAB6246D5AE900063AE4 /* Utils.swift in Sources */,
 				F22F85882466940900493BB6 /* StaticFunctions.swift in Sources */,
+				93C04AC726C2729B0048CE2F /* StorageManager.swift in Sources */,
 				F234763324680D75004C8363 /* GameSettingPopup.swift in Sources */,
 				8C5FFEED2472E8B500D9FA5E /* ZaloSDKAppDelegate.swift in Sources */,
+				93C04AB926C26FE40048CE2F /* Model.swift in Sources */,
 				F2EB90CD24BB5EAE00181467 /* LDImageView.swift in Sources */,
 				8C5FFEE92472E84500D9FA5E /* AppDelegateDispatcher.swift in Sources */,
 				F260CA642476DFBF00D00348 /* JoinRoomPopup.swift in Sources */,
@@ -730,6 +772,7 @@
 				F2AB0F56246FD07600FE7FDA /* ViewCreator.swift in Sources */,
 				F23476142467B4D0004C8363 /* ColorStore.swift in Sources */,
 				F275A104247832590077E42F /* OwnerInfo.swift in Sources */,
+				93C04AC526C272800048CE2F /* UserDefaultManager.swift in Sources */,
 				F22F85662465A71E00493BB6 /* UIView+Extension.swift in Sources */,
 				F2A6E68E2466FF5600970D1B /* ColorCollectionViewCell.swift in Sources */,
 				F2C0607A246566B5001FAD58 /* AppDelegate.swift in Sources */,
@@ -741,9 +784,11 @@
 				F2EAFC3024A8656E001ADCFB /* AppConfig.swift in Sources */,
 				F2347638246851A5004C8363 /* ButtonWithImage.swift in Sources */,
 				F21145F4247CE092005ACB50 /* LeaderBoardStruct.swift in Sources */,
+				93C04ABF26C271F80048CE2F /* RegistrationViewController.swift in Sources */,
 				8CC6DB47246B8FA90017B60A /* Date+Extension.swift in Sources */,
 				F2AB0F58246FD31B00FE7FDA /* User.swift in Sources */,
 				F263FDBE246F993500A4AB0B /* ClientSocket.swift in Sources */,
+				93C04ABD26C2706A0048CE2F /* Extensions.swift in Sources */,
 				F2A6E68B2466FF5600970D1B /* BoardCollectionViewFlowLayout.swift in Sources */,
 				F2A6E6912467029300970D1B /* LevelModel.swift in Sources */,
 				8C6EC7442467DE8E00612802 /* ZPopup.swift in Sources */,
@@ -752,9 +797,12 @@
 				8CC6DB40246B8D380017B60A /* ZaloUser.swift in Sources */,
 				8C73DB8D246AA8E40095FE8A /* ZaloSDKApiWrapper.swift in Sources */,
 				F2A6E68C2466FF5600970D1B /* BoardCollectionView.swift in Sources */,
+				93C04AC126C272420048CE2F /* ErrorPresenter.swift in Sources */,
+				93C04ACB26C272F20048CE2F /* FBLoginKitManager.swift in Sources */,
 				F2C5962D25472010000F5380 /* UserNameView.swift in Sources */,
 				F24E4366247A802900FBA7B1 /* CharacterSet+Extension.swift in Sources */,
 				1677289C24D1B93500463869 /* AppleUserInfoStore.swift in Sources */,
+				93C04AC926C272D60048CE2F /* URLSessionManager.swift in Sources */,
 				F234761124671FE1004C8363 /* ColorCellModel.swift in Sources */,
 				8C34F005246E914600E156FD /* ZaloService.swift in Sources */,
 				8C5FFEEB2472E87E00D9FA5E /* BaseAppDelegate.swift in Sources */,
@@ -913,7 +961,7 @@
 				CURRENT_PROJECT_VERSION = 2.6;
 				DEVELOPMENT_TEAM = GSDWJHQ3A4;
 				INFOPLIST_FILE = ColorNinja/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -940,7 +988,7 @@
 				CURRENT_PROJECT_VERSION = 2.6;
 				DEVELOPMENT_TEAM = GSDWJHQ3A4;
 				INFOPLIST_FILE = ColorNinja/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -20,11 +20,16 @@ target 'ColorNinja' do
   pod 'Localize-Swift', '~> 2.0'
   #pod 'OneSignal', '>= 2.11.2', '< 3.0'
   
+  # Login with Google
+  pod 'GoogleSignIn'
+
+  pod 'JGProgressHUD'
 
   pod 'Firebase/Core'
   pod 'Firebase/Database'
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
+  pod 'Firebase/Storage'
 
 
 end
