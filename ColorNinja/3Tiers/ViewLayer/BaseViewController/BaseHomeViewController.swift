@@ -62,13 +62,13 @@ class BaseHomeViewController: UIViewController {
         avatarView.layer.borderWidth = 1.0
         avatarView.layer.borderColor = UIColor.white.cgColor
         
-        switch OwnerInfo.shared.loginType {
-        case .Facebook:
-            avatarView.image = UIImage(named: "defaultAvatar")
-            avatarView.setImageWithLink(from: OwnerInfo.shared.avatarUrl ?? "")
-        default:
-            avatarView.image = UIImage(named: "defaultAvatar")
-        }
+//        switch OwnerInfo.shared.loginType {
+//        case .Facebook:
+//            avatarView.image = UIImage(named: "defaultAvatar")
+//            avatarView.setImageWithLink(from: OwnerInfo.shared.avatarUrl ?? "")
+//        default:
+//            avatarView.image = UIImage(named: "defaultAvatar")
+//        }
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapAvatarViewOrUserNameLabel))
         avatarView.isUserInteractionEnabled = true
@@ -189,12 +189,10 @@ class BaseHomeViewController: UIViewController {
         let alert = UIAlertController(title: "Log out", message: "Do you want to log out?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Log out", style: .default, handler: { (action) in
             
-            if OwnerInfo.shared.loginType == .Facebook {
-                let loginManager = LoginManager()
-                loginManager.logOut()
-            }
-            
-            OwnerInfo.shared.updateInfoBeforeLogout()
+//            if OwnerInfo.shared.loginType == .Facebook {
+//                let loginManager = LoginManager()
+//                loginManager.logOut()
+//            }
             
             guard let window = UIApplication.shared.windows.first else {
                 return

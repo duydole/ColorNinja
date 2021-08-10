@@ -16,14 +16,6 @@ fileprivate let kUserLoginType = "kUserLoginType"
 fileprivate let kCountRoundDidPlay = "kCountRoundDidPlay"
 fileprivate let kCountPrompt = "kCountPrompt"
 
-enum LoginType: Int {
-    case NotLogin = 0
-    case Guest = 1
-    case Facebook = 2
-    case Zalo = 3
-    case AppleId = 4
-}
-
 class OwnerInfo {
     
     static let shared = OwnerInfo()
@@ -31,33 +23,17 @@ class OwnerInfo {
     //MARK: Readonly Prop
     public private(set) var countPrompt: Int = 0
     public private(set) var userId: String = getDeviceId()
-    public private(set) var loginType: LoginType = .NotLogin
     public private(set) var bestScore: Int = 0
     public private(set) var userName: String = ""
     public private(set) var rank: Int = -1
     public private(set) var countRoundDidPlay: Int = 0
-    public private(set) var avatarImage: UIImage?
     
     public var avatarUrl: String? {
-        get {
-            switch loginType {
-            case .Facebook:
-                return "http://graph.facebook.com/\(userId)/picture?type=large"
-            default:
-                return nil
-            }
-        }
+        return nil
     }
     
     // MARK: Public
-    
-    func updateLoginType(newLoginType: LoginType) {
-        loginType = newLoginType
-        userDefault.set(loginType.rawValue,forKey: kUserLoginType)
-        
-        downloadAvatarUrlIfNeed()
-    }
-    
+
     func updateUserName(newusername: String) {
         
         // UpdateMemory
@@ -96,10 +72,6 @@ class OwnerInfo {
         return User(userId: self.userId, username: self.userName, avatarUrl: self.avatarUrl, bestScore: self.bestScore, rank: self.rank)
     }
     
-    func updateInfoBeforeLogout() {
-        updateLoginType(newLoginType: .NotLogin)
-    }
-    
     // MARK: Private
     
     private let userDefault = UserDefaults.standard
@@ -119,17 +91,6 @@ class OwnerInfo {
         let bestscore = userDefault.integer(forKey: kBestScoreKey)
         self.bestScore = bestscore
         
-        // LoginType
-        let loginType = userDefault.integer(forKey: kUserLoginType)
-        if loginType == 0 {
-            updateLoginType(newLoginType: .NotLogin)
-        } else {
-            self.loginType = LoginType(rawValue: loginType) ?? LoginType.Guest
-            
-            // Tạm cheat vậy
-            downloadAvatarUrlIfNeed()
-        }
-        
         // Rank
         _loadOwnerRank()
         
@@ -139,13 +100,6 @@ class OwnerInfo {
         
         // Count Prompt
         _loadCountPromt()
-    }
-    
-    private func resetUserInfo() {
-        updateBestScore(newBestScore: 0)
-        updateLoginType(newLoginType: .NotLogin)
-        userDefault.set(0, forKey: kCountRoundDidPlay)
-        userDefault.set(0, forKey: kCountRoundDidPlay)
     }
     
     private func _loadOwnerRank() {
@@ -161,24 +115,6 @@ class OwnerInfo {
         self.countPrompt = countPrompt
         if countRoundDidPlay < 5 {
             updateCountPrompt(newCountPrompt: 5)
-        }
-    }
-    
-    private func downloadAvatarUrlIfNeed() {
-        if loginType == .Facebook {
-            if let avatarUrl = avatarUrl {
-                if notEmptyString(string: avatarUrl) {
-                    AF.request(avatarUrl).responseImage { (response) in
-                        if let image = response.value {
-                            self.avatarImage = image
-                        } else {
-                            self.avatarImage = UIImage(named: "defaultAvatar")
-                        }
-                    }
-                } else {
-                    self.avatarImage = UIImage(named: "defaultAvatar")
-                }
-            }
         }
     }
 }
