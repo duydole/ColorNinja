@@ -19,9 +19,11 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb702817230295742</string>
+				<string>fb1090671361706475</string>
 			</array>
 		</dict>
 		<dict>
@@ -37,7 +39,7 @@
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>FacebookAppID</key>
-	<string>702817230295742</string>
+	<string>1090671361706475</string>
 	<key>FacebookDisplayName</key>
 	<string>ColorNinja</string>
 	<key>GADApplicationIdentifier</key>

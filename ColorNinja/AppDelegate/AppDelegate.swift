@@ -36,6 +36,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /// PreSetup
         setupCommonWhenLaughingApp()
         
+        /// Setup login with facebook
+        ApplicationDelegate.shared.application(application,didFinishLaunchingWithOptions: launchOptions)
+
         return true
     }
     
