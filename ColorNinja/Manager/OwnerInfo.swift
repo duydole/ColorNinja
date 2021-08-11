@@ -118,3 +118,54 @@ class OwnerInfo {
         }
     }
 }
+
+class SessionManager {
+    public static let shared = SessionManager()
+    
+    /// currentUser
+    public var currentUser: UserModel?
+        
+    /// Update info when registered newuser
+    /// - Parameter newUser: newuser
+    public func didRegisterNewUser(newUser: UserModel) {
+        currentUser = newUser
+        
+        /// Update userDefault
+        UserDefaultManager.shared.updateWhenRegisteredNewUser(newUser)
+        
+        /// Download user avatar
+        if let urlStr = newUser.avatarUrlStr {
+            ImageDownloader.shared.downloadImage(with: URL(string: urlStr)!, cachedKey: urlStr) { image in
+                guard let image = image else {
+                    return
+                }
+                
+                /// Store to userDefault, then we can load when launch app again
+                UserDefaultManager.shared.storeUserAvatar(avatarData: image.pngData()!)
+                
+                /// Notify update UI when download Avatar success
+                NotificationCenter.default.post(Notification(name: Notification.Name(kDownloadAvatarSuccessNotificationName)))
+            }
+        }
+    }
+    
+    /// Clear all userDefault data
+    public func clearInfoOffCurrentUser() {
+        UserDefaultManager.shared.clearCurrentUserInfo()
+    }
+    
+    /// Download avatar of current loggine
+    /// - Parameter completion: completion handler
+    public func getCurrentUserAvatar(completion: @escaping (UIImage?) -> Void) {
+        guard let urlStr = currentUser?.avatarUrlStr, urlStr.isEmpty == false else {
+            completion(nil)
+            return
+        }
+        
+        ImageDownloader.shared.downloadImage(with: URL(string: urlStr)!, cachedKey: urlStr, completion: completion)
+    }
+    
+    private init() {
+        currentUser = UserDefaultManager.shared.loadCurrentUser()
+    }
+}

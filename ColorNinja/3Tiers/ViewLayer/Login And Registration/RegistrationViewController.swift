@@ -200,7 +200,7 @@ class RegistrationViewController: UIViewController {
         spinner.show(in: view)
         
         /// Process Register account
-        let newUser = UserModel(firstName: firstName, lastName: lastName, email: email, avatarURL: nil, maxScore: 0)
+        let newUser = UserModel(firstName: firstName, lastName: lastName, email: email, maxScore: 0, avatarUrlStr: nil)
         AuthManager.shared.registerNewUser(user: newUser, password: password) { [weak self] registered, error in
             DispatchQueue.main.async {
                 
@@ -213,8 +213,8 @@ class RegistrationViewController: UIViewController {
                     self?.uploadSelectedAvatar(filename: newUser.avatarFileName, of: newUser)
                     
                     /// Update UserDefaults
-                    UserDefaultManager.shared.updateWhenRegisteredNewUser(newUser)
-                    
+                    SessionManager.shared.didRegisterNewUser(newUser: newUser)
+
                     /// Dismiss
                     self?.dismiss(animated: false, completion: nil)
                     self?.delegate?.didRegisterNewUserSuccess(email: email, password: password)
@@ -238,11 +238,15 @@ class RegistrationViewController: UIViewController {
             case .failure(let error):
                 ErrorPresenter.shared.showError(on: self, title: "Upload Avatar Error", message: "\(error)")
             case .success(let urlStr):
-                /// Save to UserDefaults
-                UserDefaultManager.shared.setString(str: urlStr, forKey: "avatar_url")
+                
+                /// Upload Avatar success
                 var user = user
-                user.avatarURL = URL(string: urlStr)
+                user.avatarUrlStr = urlStr
+                
+                /// Update DB, update userDefault
                 DatabaseManager.shared.insertNewUser(user: user, completion: nil)
+                SessionManager.shared.didRegisterNewUser(newUser: user)
+                ImageDownloader.shared.cacheImage(image: image, key: urlStr)
             }
         }
     }

@@ -66,16 +66,6 @@ public func isCurrentDeviceInstalled(app appDeepLink: String = "zalo://app") -> 
     return UIApplication.shared.canOpenURL(appUrl as URL)
 }
 
-public func saveArrayIntToUserDefault(_ array:[Int], key: String) {
-    let defaults = UserDefaults.standard
-    defaults.set(array, forKey: key)
-}
-
-public func getArrayIntFromUserDefault(key: String) -> [Int]{
-    let defaults = UserDefaults.standard
-    return defaults.array(forKey: key)  as? [Int] ?? [Int]()
-}
-
 public func safeAreaBottom() -> CGFloat {
     var bottomPadding: CGFloat = 0.0
     if #available(iOS 11.0, *) {

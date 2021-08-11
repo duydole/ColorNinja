@@ -11,6 +11,8 @@ import UIKit
 import FBSDKLoginKit
 import GoogleSignIn
 
+let kDownloadAvatarSuccessNotificationName: String = "com.user.donwload.avatar.success"
+
 class BaseHomeViewController: UIViewController {
     
     // NavigationBar
@@ -32,6 +34,30 @@ class BaseHomeViewController: UIViewController {
         
         view.backgroundColor = Constants.HomeScreen.backgroundColor
         setupViews()
+        setupNotifications()
+    }
+    
+    private func setupNotifications() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didDownloadSuccessAvatar),
+                                               name: NSNotification.Name(kDownloadAvatarSuccessNotificationName),
+                                               object: nil)
+    }
+    
+    @objc private func didDownloadSuccessAvatar() {
+        updateAvatarView()
+    }
+    
+    private func updateAvatarView() {
+        self.avatarView.image = UIImage(named: "defaultAvatar")
+        SessionManager.shared.getCurrentUserAvatar { image in
+            DispatchQueue.main.async {
+                guard image != nil else {
+                    return
+                }
+                self.avatarView.image = image
+            }
+        }
     }
     
     // MARK: Setup and Layout
@@ -61,14 +87,8 @@ class BaseHomeViewController: UIViewController {
         avatarView.clipsToBounds = true
         avatarView.layer.borderWidth = 1.0
         avatarView.layer.borderColor = UIColor.white.cgColor
-        
-//        switch OwnerInfo.shared.loginType {
-//        case .Facebook:
-//            avatarView.image = UIImage(named: "defaultAvatar")
-//            avatarView.setImageWithLink(from: OwnerInfo.shared.avatarUrl ?? "")
-//        default:
-//            avatarView.image = UIImage(named: "defaultAvatar")
-//        }
+        avatarView.contentMode = .scaleAspectFit
+        updateAvatarView()
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapAvatarViewOrUserNameLabel))
         avatarView.isUserInteractionEnabled = true
@@ -81,7 +101,6 @@ class BaseHomeViewController: UIViewController {
             make.leading.equalTo(scaledValue(20))
             make.centerY.equalToSuperview()
         }
-        
         
         // UserName
         usernamelabel = UILabel()
@@ -160,7 +179,7 @@ class BaseHomeViewController: UIViewController {
             make.width.height.equalTo(signoutWidth)
         }
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapSignOutButton))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapLogoutButton))
         signOutButton.isUserInteractionEnabled = true
         signOutButton.addGestureRecognizer(tap)
     }
@@ -185,31 +204,52 @@ class BaseHomeViewController: UIViewController {
         present(popup, animated: false, completion: nil)
     }
     
-    @objc func didTapSignOutButton() {
+    @objc func didTapLogoutButton() {
         let alert = UIAlertController(title: "Log out", message: "Do you want to log out?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Log out", style: .default, handler: { (action) in
-            
-//            if OwnerInfo.shared.loginType == .Facebook {
-//                let loginManager = LoginManager()
-//                loginManager.logOut()
-//            }
-            
-            guard let window = UIApplication.shared.windows.first else {
-                return
-            }
-            let loginVC = LoginViewController()
-            window.rootViewController = loginVC
-            
-            loginVC.view.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-            UIView.transition(with: window, duration: 0.4, options: .transitionCrossDissolve, animations: {
-                loginVC.view.transform = .identity
-            }, completion: nil)
+        alert.addAction(UIAlertAction(title: "Log out", style: .default, handler: { _ in
+            self.proccessLogout()
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
             self.dismiss(animated: true, completion: nil)
         }))
         
         present(alert, animated: true, completion: nil)
+    }
+    
+    private func proccessLogout() {
+        
+        /// Logout Facebook
+        FBSDKLoginKit.LoginManager().logOut()
+        
+        /// Logout Google
+        GIDSignIn.sharedInstance.signOut()
+        
+        /// Clear localData
+        SessionManager.shared.clearInfoOffCurrentUser()
+        
+        /// Logout Auth
+        AuthManager.shared.logOutUser { success in
+            DispatchQueue.main.async {
+                if success == false {
+                    fatalError("Could not log out")
+                }
+                
+                guard let window = UIApplication.shared.windows.first else {
+                    return
+                }
+                let loginVC = LoginViewController()
+                window.rootViewController = loginVC
+                loginVC.view.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+                UIView.transition(with: window,
+                                  duration: 0.4,
+                                  options: .transitionCrossDissolve,
+                                  animations: {
+                                    loginVC.view.transform = .identity
+                                  },
+                                  completion: nil)
+                
+            }
+        }
     }
 }
 

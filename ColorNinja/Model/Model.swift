@@ -13,8 +13,8 @@ public struct UserModel {
     public let firstName: String
     public let lastName: String
     public let email: String
-    public var avatarURL: URL?
     public var maxScore: Int
+    public var avatarUrlStr: String?
     
     /// FileName of avatar will be stored on Storage
     public var avatarFileName: String {
@@ -33,7 +33,7 @@ public struct UserModel {
     public var toJson: [String: String] {
         return ["firstname":firstName,
                 "lastname":lastName,
-                "avatarUrl":avatarURL?.absoluteString ?? "",
+                "avatarUrl":avatarUrlStr ?? "",
                 "email": email,
                 "maxscore": String(maxScore)]
     }
@@ -54,6 +54,10 @@ public struct UserModel {
             return nil
         }
         
-        return UserModel(firstName: firstname, lastName: lastname, email: email, avatarURL: URL(string: avatarUrlStr), maxScore: maxscore.toInt())
+        return UserModel(firstName: firstname,
+                         lastName: lastname,
+                         email: email,
+                         maxScore: maxscore.toInt(),
+                         avatarUrlStr: avatarUrlStr)
     }
 }

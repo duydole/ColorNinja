@@ -8,24 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		1610B08324A8C6A200504CC8 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1610B08224A8C6A200504CC8 /* GradientView.swift */; };
-		1677289C24D1B93500463869 /* AppleUserInfoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1677289B24D1B93500463869 /* AppleUserInfoStore.swift */; };
 		1F24DE30531F19FD720BDCE9 /* Pods_ColorNinja.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CAA71D5E770FF4DCA29EEEA /* Pods_ColorNinja.framework */; };
 		8C2C72782467A58C00883388 /* RankingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C72772467A58C00883388 /* RankingViewController.swift */; };
 		8C2C727C2467A79700883388 /* RankingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C727B2467A79700883388 /* RankingTableView.swift */; };
 		8C2C72802467A7CC00883388 /* RankingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C727F2467A7CC00883388 /* RankingTableViewCell.swift */; };
 		8C2C72822467ACD300883388 /* RankingCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C72812467ACD300883388 /* RankingCellModel.swift */; };
-		8C34F005246E914600E156FD /* ZaloService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C34F004246E914600E156FD /* ZaloService.swift */; };
 		8C5FA0B9246AE6F4005D33E0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5FA0B8246AE6F4005D33E0 /* HomeViewController.swift */; };
 		8C6350A924735C8C00ADAB01 /* FacebookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6350A824735C8C00ADAB01 /* FacebookService.swift */; };
 		8C6EC7442467DE8E00612802 /* ZPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EC7432467DE8E00612802 /* ZPopup.swift */; };
 		8C6EC7492467E3C100612802 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EC7482467E3C100612802 /* PopupViewController.swift */; };
-		8C73DB8D246AA8E40095FE8A /* ZaloSDKApiWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C73DB8C246AA8E40095FE8A /* ZaloSDKApiWrapper.swift */; };
 		8C7ABAB6246D5AE900063AE4 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7ABAB5246D5AE900063AE4 /* Utils.swift */; };
 		8C8BA174246E707900A73046 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8BA173246E707900A73046 /* UIImageView+Extension.swift */; };
-		8CC6DB40246B8D380017B60A /* ZaloUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC6DB3F246B8D380017B60A /* ZaloUser.swift */; };
 		8CC6DB42246B8E160017B60A /* Dictionary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC6DB41246B8E160017B60A /* Dictionary+Extension.swift */; };
 		8CC6DB44246B8E470017B60A /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC6DB43246B8E470017B60A /* Collection+Extension.swift */; };
 		8CC6DB47246B8FA90017B60A /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC6DB46246B8FA90017B60A /* Date+Extension.swift */; };
+		93BEB70026C2C144004A350C /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BEB6FF26C2C144004A350C /* ImageDownloader.swift */; };
+		93BEB70226C2C6DC004A350C /* NotificationCenterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BEB70126C2C6DC004A350C /* NotificationCenterManager.swift */; };
 		93C04AB626C26F780048CE2F /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C04AB526C26F780048CE2F /* AuthManager.swift */; };
 		93C04AB926C26FE40048CE2F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C04AB826C26FE40048CE2F /* Model.swift */; };
 		93C04ABB26C2702C0048CE2F /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C04ABA26C2702C0048CE2F /* DatabaseManager.swift */; };
@@ -108,7 +106,6 @@
 
 /* Begin PBXFileReference section */
 		1610B08224A8C6A200504CC8 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
-		1677289B24D1B93500463869 /* AppleUserInfoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleUserInfoStore.swift; sourceTree = "<group>"; };
 		2EA3A6356F910FED2BED91AD /* Pods-ColorNinja.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorNinja.release.xcconfig"; path = "Target Support Files/Pods-ColorNinja/Pods-ColorNinja.release.xcconfig"; sourceTree = "<group>"; };
 		57C86C5C019D378438E37339 /* Pods-ColorNinja.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorNinja.debug.xcconfig"; path = "Target Support Files/Pods-ColorNinja/Pods-ColorNinja.debug.xcconfig"; sourceTree = "<group>"; };
 		5E0E02E044182AD4183D8A58 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
@@ -116,18 +113,17 @@
 		8C2C727B2467A79700883388 /* RankingTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingTableView.swift; sourceTree = "<group>"; };
 		8C2C727F2467A7CC00883388 /* RankingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingTableViewCell.swift; sourceTree = "<group>"; };
 		8C2C72812467ACD300883388 /* RankingCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingCellModel.swift; sourceTree = "<group>"; };
-		8C34F004246E914600E156FD /* ZaloService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZaloService.swift; sourceTree = "<group>"; };
 		8C5FA0B8246AE6F4005D33E0 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		8C6350A824735C8C00ADAB01 /* FacebookService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookService.swift; sourceTree = "<group>"; };
 		8C6EC7432467DE8E00612802 /* ZPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZPopup.swift; sourceTree = "<group>"; };
 		8C6EC7482467E3C100612802 /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
-		8C73DB8C246AA8E40095FE8A /* ZaloSDKApiWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZaloSDKApiWrapper.swift; sourceTree = "<group>"; };
 		8C7ABAB5246D5AE900063AE4 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		8C8BA173246E707900A73046 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIImageView+Extension.swift"; path = "../UIImageView+Extension.swift"; sourceTree = "<group>"; };
-		8CC6DB3F246B8D380017B60A /* ZaloUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZaloUser.swift; sourceTree = "<group>"; };
 		8CC6DB41246B8E160017B60A /* Dictionary+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extension.swift"; sourceTree = "<group>"; };
 		8CC6DB43246B8E470017B60A /* Collection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
 		8CC6DB46246B8FA90017B60A /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		93BEB6FF26C2C144004A350C /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
+		93BEB70126C2C6DC004A350C /* NotificationCenterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterManager.swift; sourceTree = "<group>"; };
 		93C04AB526C26F780048CE2F /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		93C04AB826C26FE40048CE2F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		93C04ABA26C2702C0048CE2F /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
@@ -266,20 +262,9 @@
 			children = (
 				F263FDBC246F992500A4AB0B /* Socket */,
 				F27454F0246A718E0037A8BA /* MusicComponent */,
-				8C73DB8B246AA8C90095FE8A /* Zalo */,
 				8C6350AA24735CA700ADAB01 /* Facebook */,
 			);
 			path = Core;
-			sourceTree = "<group>";
-		};
-		8C73DB8B246AA8C90095FE8A /* Zalo */ = {
-			isa = PBXGroup;
-			children = (
-				8C73DB8C246AA8E40095FE8A /* ZaloSDKApiWrapper.swift */,
-				8CC6DB3F246B8D380017B60A /* ZaloUser.swift */,
-				8C34F004246E914600E156FD /* ZaloService.swift */,
-			);
-			path = Zalo;
 			sourceTree = "<group>";
 		};
 		8CC6DB45246B8F940017B60A /* Common */ = {
@@ -510,7 +495,6 @@
 				F275A103247832590077E42F /* OwnerInfo.swift */,
 				F29AFC0D248952EF002CD0E0 /* NetworkManager.swift */,
 				F2EAFC2F24A8656E001ADCFB /* AppConfig.swift */,
-				1677289B24D1B93500463869 /* AppleUserInfoStore.swift */,
 				93C04AB526C26F780048CE2F /* AuthManager.swift */,
 				93C04ABA26C2702C0048CE2F /* DatabaseManager.swift */,
 				93C04AC226C272590048CE2F /* GoogleSignInManager.swift */,
@@ -518,6 +502,8 @@
 				93C04AC626C2729B0048CE2F /* StorageManager.swift */,
 				93C04AC826C272D60048CE2F /* URLSessionManager.swift */,
 				93C04ACA26C272F20048CE2F /* FBLoginKitManager.swift */,
+				93BEB6FF26C2C144004A350C /* ImageDownloader.swift */,
+				93BEB70126C2C6DC004A350C /* NotificationCenterManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -565,8 +551,8 @@
 		F2C06078246566B5001FAD58 /* ColorNinja */ = {
 			isa = PBXGroup;
 			children = (
-				93C04AB726C26FD70048CE2F /* Model */,
 				F2B07F2A248A9CE10019D075 /* ColorNinja.entitlements */,
+				93C04AB726C26FD70048CE2F /* Model */,
 				F2405A9124992E2300E71481 /* 3Tiers */,
 				8C5FFECF2472E7E200D9FA5E /* AppDelegate */,
 				F28098BB246AE2060060693D /* Manager */,
@@ -725,6 +711,7 @@
 				F27312D9248235F200B9ADCF /* ChangeUserNamePopup.swift in Sources */,
 				F2347635246836D7004C8363 /* UIColor+Extension.swift in Sources */,
 				8C5FA0B9246AE6F4005D33E0 /* HomeViewController.swift in Sources */,
+				93BEB70226C2C6DC004A350C /* NotificationCenterManager.swift in Sources */,
 				F263FDC0246F9FB600A4AB0B /* BaseGameViewController.swift in Sources */,
 				F22F856A2465B55400493BB6 /* SinglePlayerViewController.swift in Sources */,
 				93C04AB626C26F780048CE2F /* AuthManager.swift in Sources */,
@@ -763,6 +750,7 @@
 				F2D862392474332C006D3FD4 /* RoomGameViewController.swift in Sources */,
 				8C2C72782467A58C00883388 /* RankingViewController.swift in Sources */,
 				F263FDBB246F950000A4AB0B /* BaseViewController.swift in Sources */,
+				93BEB70026C2C144004A350C /* ImageDownloader.swift in Sources */,
 				F2EAFC3024A8656E001ADCFB /* AppConfig.swift in Sources */,
 				F2347638246851A5004C8363 /* ButtonWithImage.swift in Sources */,
 				F21145F4247CE092005ACB50 /* LeaderBoardStruct.swift in Sources */,
@@ -776,16 +764,12 @@
 				8C6EC7442467DE8E00612802 /* ZPopup.swift in Sources */,
 				F28098BD246AE2410060693D /* GameSettingManager.swift in Sources */,
 				F2A6E68D2466FF5600970D1B /* BoardDataSource.swift in Sources */,
-				8CC6DB40246B8D380017B60A /* ZaloUser.swift in Sources */,
-				8C73DB8D246AA8E40095FE8A /* ZaloSDKApiWrapper.swift in Sources */,
 				F2A6E68C2466FF5600970D1B /* BoardCollectionView.swift in Sources */,
 				93C04AC126C272420048CE2F /* ErrorPresenter.swift in Sources */,
 				93C04ACB26C272F20048CE2F /* FBLoginKitManager.swift in Sources */,
 				F24E4366247A802900FBA7B1 /* CharacterSet+Extension.swift in Sources */,
-				1677289C24D1B93500463869 /* AppleUserInfoStore.swift in Sources */,
 				93C04AC926C272D60048CE2F /* URLSessionManager.swift in Sources */,
 				F234761124671FE1004C8363 /* ColorCellModel.swift in Sources */,
-				8C34F005246E914600E156FD /* ZaloService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

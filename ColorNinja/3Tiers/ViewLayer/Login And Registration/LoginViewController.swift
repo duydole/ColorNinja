@@ -34,8 +34,6 @@ class LoginViewController: UIViewController {
     // MARK: Private Properties
     
     private var headerView: UIView!
-    private var backgroundImageView: UIImageView!
-    private var logoImageView: UIImageView!
     private var emailField: UITextField!
     private var passwordField: UITextField!
     private var loginButton: UIButton!
@@ -70,18 +68,9 @@ class LoginViewController: UIViewController {
         
         /// HeaderView
         headerView = UIView()
+        headerView.backgroundColor = ColorRGB(255, 44, 44)
         headerView.clipsToBounds = true
         view.addSubview(headerView)
-        
-        /// BgImageView
-        backgroundImageView = UIImageView(image: UIImage(named: "bggradient"))
-        headerView.addSubview(backgroundImageView)
-        
-        /// LogoImageView
-        logoImageView = UIImageView(image:UIImage(named: "logo")?.withRenderingMode(.alwaysTemplate))
-        logoImageView.tintColor = .white
-        logoImageView.contentMode = .scaleAspectFit
-        headerView.addSubview(logoImageView)
         
         /// UsernameEmailField
         emailField = UITextField()
@@ -167,46 +156,32 @@ class LoginViewController: UIViewController {
     private func layoutSubViews() {
         
         /// HeaderView
-        headerView.frame = CGRect(
-            x: 0,
-            y: 0,
-            width: view.width,
-            height: view.height/3)
-        
-        /// BackgroundImageView
-        backgroundImageView.frame = headerView.bounds
-        
-        /// Logo
-        logoImageView.frame = CGRect(
-            x: headerView.width/4.0,
-            y: view.safeAreaInsets.top,
-            width: headerView.width/2.0,
-            height: headerView.height - view.safeAreaInsets.top)
+        headerView.frame = CGRect(x: 0,
+                                  y: 0,
+                                  width: view.width,
+                                  height: view.height/3)
         
         /// UsernameEmailField
         let paddingLeft: CGFloat = 25.0
         let fieldHeight: CGFloat = 52.0
         let spacing: CGFloat = 10.0
         
-        emailField.frame = CGRect(
-            x: paddingLeft,
-            y: headerView.bottom + 40,
-            width: view.width - 2*paddingLeft,
-            height: fieldHeight)
+        emailField.frame = CGRect(x: paddingLeft,
+                                  y: headerView.bottom + 40,
+                                  width: view.width - 2*paddingLeft,
+                                  height: fieldHeight)
         
         /// PasswordField
-        passwordField.frame = CGRect(
-            x: paddingLeft,
-            y: emailField.bottom + spacing,
-            width: view.width - 2*paddingLeft,
-            height: fieldHeight)
+        passwordField.frame = CGRect(x: paddingLeft,
+                                     y: emailField.bottom + spacing,
+                                     width: view.width - 2*paddingLeft,
+                                     height: fieldHeight)
         
         /// LoginButton
-        loginButton.frame = CGRect(
-            x: paddingLeft,
-            y: passwordField.bottom + spacing,
-            width: view.width - paddingLeft*2,
-            height: fieldHeight)
+        loginButton.frame = CGRect(x: paddingLeft,
+                                   y: passwordField.bottom + spacing,
+                                   width: view.width - paddingLeft*2,
+                                   height: fieldHeight)
         
         /// LoginWtihFacebook
         facebookLoginButton.frame = CGRect(x: paddingLeft,
@@ -221,26 +196,23 @@ class LoginViewController: UIViewController {
                                          height: fieldHeight)
         
         /// CreateAccount Button
-        createAccountButton.frame = CGRect(
-            x: paddingLeft,
-            y: googleLoginButton.bottom + spacing,
-            width: view.width - paddingLeft*2,
-            height: fieldHeight)
+        createAccountButton.frame = CGRect(x: paddingLeft,
+                                           y: googleLoginButton.bottom + spacing,
+                                           width: view.width - paddingLeft*2,
+                                           height: fieldHeight)
         
         /// PrivacyButton
         let privacyHeight: CGFloat = 50.0
-        privacyButton.frame = CGRect(
-            x: paddingLeft,
-            y: view.height - view.safeAreaInsets.bottom - privacyHeight,
-            width: view.width - paddingLeft*2,
-            height: privacyHeight)
+        privacyButton.frame = CGRect(x: paddingLeft,
+                                     y: view.height - view.safeAreaInsets.bottom - privacyHeight,
+                                     width: view.width - paddingLeft*2,
+                                     height: privacyHeight)
         
         /// TermsButton
-        termsButton.frame = CGRect(
-            x: paddingLeft,
-            y: privacyButton.top - privacyHeight,
-            width: view.width - paddingLeft*2,
-            height: privacyHeight)
+        termsButton.frame = CGRect(x: paddingLeft,
+                                   y: privacyButton.top - privacyHeight,
+                                   width: view.width - paddingLeft*2,
+                                   height: privacyHeight)
     }
     
     // MARK: Actions
@@ -272,7 +244,7 @@ class LoginViewController: UIViewController {
                 if success {
                     
                     /// Dismiss to show HomeViewController
-                    self?.dismiss(animated: true, completion: nil)
+                    self?.openHomeViewController()
                 } else {
                     
                     /// Show error when login failed
@@ -332,12 +304,14 @@ class LoginViewController: UIViewController {
                 /// Insert to Database newuser with info of Google
                 let avatarUrl = user?.profile?.imageURL(withDimension: 200)
                 let email = user?.profile?.email
-                let firstName = user?.profile?.familyName
-                let lastName = user?.profile?.givenName
-                if let email = email {
+                let firstname = user?.profile?.familyName
+                let lastname = user?.profile?.givenName
+                if let email = email,
+                   let firstname = firstname,
+                   let lastname = lastname {
                     
                     /// Insert newUser to Database
-                    let newUser = UserModel(firstName: firstName ?? "", lastName: lastName ?? "", email: email, avatarURL: avatarUrl, maxScore: 0)
+                    let newUser = UserModel(firstName: firstname, lastName: lastname, email: email, maxScore: 0, avatarUrlStr: avatarUrl?.absoluteString)
                     DatabaseManager.shared.insertNewUserIfNotExisted(user: newUser) { success, error in
                         guard error == nil else {
                             return
@@ -350,7 +324,7 @@ class LoginViewController: UIViewController {
                     }
                     
                     /// Update UserDefaults
-                    UserDefaultManager.shared.updateWhenRegisteredNewUser(newUser)
+                    SessionManager.shared.didRegisterNewUser(newUser: newUser)
                 }
                 
                 /// Create credential and SignIn
@@ -462,7 +436,7 @@ extension LoginViewController: LoginButtonDelegate {
             }
             
             /// Insert to Database newuser with info of facebook
-            let newUser = UserModel(firstName: firstName, lastName: lastName, email: email, avatarURL: URL(string: avatarUrl), maxScore: 0)
+            let newUser = UserModel(firstName: firstName, lastName: lastName, email: email, maxScore: 0, avatarUrlStr: avatarUrl)
             DatabaseManager.shared.insertNewUserIfNotExisted(user: newUser) { success, error in
                 guard error == nil else {
                     return
@@ -473,7 +447,7 @@ extension LoginViewController: LoginButtonDelegate {
             }
             
             /// Update UserDefaults
-            UserDefaultManager.shared.updateWhenRegisteredNewUser(newUser)
+            SessionManager.shared.didRegisterNewUser(newUser: newUser)
             
             /// Start login with facebook token
             /// <Login> = <FacebookToken> + <FirebaseLoginFacebook>
@@ -482,7 +456,7 @@ extension LoginViewController: LoginButtonDelegate {
                 self?.spinner.dismiss()
                 
                 if success {
-                    self?.dismiss(animated: true, completion: nil)
+                    self?.openHomeViewController()
                 } else {
                     ErrorPresenter.shared.showError(on: self, message: "\(String(describing: error))")
                 }
