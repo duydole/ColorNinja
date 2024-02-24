@@ -131,7 +131,7 @@ class BaseHomeViewController: UIViewController {
         addUserNameButton()
         addAppNameLabel()
         addAppIconView()
-        addSignoutImageView()
+        //addSignoutImageView()
     }
     
     private func addAppNameLabel() {
