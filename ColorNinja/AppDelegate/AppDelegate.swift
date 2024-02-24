@@ -23,12 +23,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
 
         /// RootViewController
-        var rootViewController: UIViewController = LoginViewController()
-        if AuthManager.shared.isLogIn() {
+//        var rootViewController: UIViewController = LoginViewController()
+//        if AuthManager.shared.isLogIn() {
             let navigationViewController = UINavigationController(rootViewController: HomeViewController())
             navigationViewController.navigationBar.isHidden = true
-            rootViewController = navigationViewController
-        }
+        var rootViewController = navigationViewController
+//        }
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupCommonWhenLaughingApp()
         
         /// Setup login with facebook
-        ApplicationDelegate.shared.application(application,didFinishLaunchingWithOptions: launchOptions)
+//        ApplicationDelegate.shared.application(application,didFinishLaunchingWithOptions: launchOptions)
 
         return true
     }

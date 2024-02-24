@@ -283,7 +283,7 @@ class LoginViewController: UIViewController {
         spinner.show(in: view)
         
         /// Start Login
-        GoogleSignInManager.shared.signInWithPresenting(viewController: self) { [weak self] user, error in
+        GoogleSignInManager.shared.signInWithPresenting(viewController: self) { [weak self] result, error in
             DispatchQueue.main.async {
                 
                 /// Login with Google failed
@@ -294,18 +294,18 @@ class LoginViewController: UIViewController {
                 }
                 
                 /// Check token
-                guard let authentication = user?.authentication,
-                      let idToken = authentication.idToken else {
+                guard let user = result?.user,
+                    let idToken = user.idToken else {
                     self?.spinner.dismiss()
                     self?.showError(error: nil)
                     return
                 }
                 
                 /// Insert to Database newuser with info of Google
-                let avatarUrl = user?.profile?.imageURL(withDimension: 200)
-                let email = user?.profile?.email
-                let firstname = user?.profile?.familyName
-                let lastname = user?.profile?.givenName
+                let avatarUrl = user.profile?.imageURL(withDimension: 200)
+                let email = user.profile?.email
+                let firstname = user.profile?.familyName
+                let lastname = user.profile?.givenName
                 if let email = email,
                    let firstname = firstname,
                    let lastname = lastname {
@@ -327,20 +327,20 @@ class LoginViewController: UIViewController {
                     SessionManager.shared.didRegisterNewUser(newUser: newUser)
                 }
                 
-                /// Create credential and SignIn
-                let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: authentication.accessToken)
-                Auth.auth().signIn(with: credential) { [weak self] authResult, error in
-                    self?.spinner.dismiss()
-                    
-                    /// Login with Credential failed
-                    guard authResult != nil, error == nil else {
-                        self?.showError(error: error)
-                        return
-                    }
-                    
-                    /// Login Success
-                    self?.openHomeViewController()
-                }
+//                /// Create credential and SignIn
+//                let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: user?.accessToken)
+//                Auth.auth().signIn(with: credential) { [weak self] authResult, error in
+//                    self?.spinner.dismiss()
+//                    
+//                    /// Login with Credential failed
+//                    guard authResult != nil, error == nil else {
+//                        self?.showError(error: error)
+//                        return
+//                    }
+//                    
+//                    /// Login Success
+//                    self?.openHomeViewController()
+//                }
             }
         }
     }

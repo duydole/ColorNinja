@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import GoogleMobileAds
 import StoreKit
 import Localize_Swift
 import FirebaseDatabase
@@ -327,34 +326,5 @@ extension HomeViewController: JoinRoomPopupDelegate {
         homeVC.roomId = roomId
         homeVC.modalPresentationStyle = .fullScreen
         present(homeVC, animated: false, completion: nil)
-    }
-}
-
-// MARK: GADBannerViewDelegate
-
-extension HomeViewController: GADBannerViewDelegate {
-    
-    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-        print("duydl: BannerAd: adViewDidReceiveAd")
-    }
-    
-    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
-        print("duydl: BannerAd: didFailToReceiveAdWithError")
-    }
-    
-    func adViewWillPresentScreen(_ bannerView: GADBannerView) {
-        print("duydl: BannerAd: adViewWillPresentScreen")
-    }
-    
-    func adViewWillDismissScreen(_ bannerView: GADBannerView) {
-        print("duydl: BannerAd: adViewWillDismissScreen")
-    }
-    
-    func adViewDidDismissScreen(_ bannerView: GADBannerView) {
-        print("duydl: BannerAd: adViewDidDismissScreen")
-    }
-    
-    func adViewWillLeaveApplication(_ bannerView: GADBannerView) {
-        print("duydl: BannerAd: adViewWillLeaveApplication")
     }
 }

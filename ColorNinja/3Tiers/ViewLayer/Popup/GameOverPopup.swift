@@ -8,18 +8,6 @@
 
 import Foundation
 import UIKit
-import GoogleMobileAds
-
-
-fileprivate let rewardForEachAds: Int = 5 /// numb of seconds user gained each ads.
-
-#if DEBUG_ADS
-fileprivate let fullScreenAdUnitId = "ca-app-pub-3940256099942544/4411468910"
-fileprivate let rewardAdsUnitId = "ca-app-pub-3940256099942544/1712485313"
-#else
-fileprivate let fullScreenAdUnitId = "ca-app-pub-2457313692920235/3301114557"
-fileprivate let rewardAdsUnitId = "ca-app-pub-2457313692920235/5356432254"
-#endif
 
 protocol GameOverPopupDelegate {
   func didTapReplayButton() -> Void
@@ -49,10 +37,6 @@ class GameOverPopup: PopupViewController {
   private var bestLevelLabel: UILabel!
   private var gameOverContainer: UIView!
   
-  // MARK: Ads
-  private var rewardedAd: GADRewardedAd?
-  private var interstitial: GADInterstitial!
-  
   // MARK: Override
   
   override var contentSize: CGSize {
@@ -79,36 +63,10 @@ class GameOverPopup: PopupViewController {
     }
   }
   
-  @objc private func didTapReplayButton() {
-    let canShowAds = GameSettingManager.shared.allowShowAds
-      && OwnerInfo.shared.countRoundDidPlay % 3 == 0
-      && NetworkManager.shared.hasConnection
-      && interstitial.isReady
+    @objc private func didTapReplayButton() {
+        _dismissAndSendReplayEventToDelegate()
+    }
     
-    if canShowAds {
-      showFullScreenAd()
-    } else {
-      _dismissAndSendReplayEventToDelegate()
-    }
-  }
-  
-  @objc private func didTapWatchAdsButton() {
-    if NetworkManager.shared.hasConnection {
-      if !allowWatchAdsToGainReward {
-        /// Not allow to watch ads
-        showAlertWithMessage(message: "You can only see 1 Reward Advertisement per turn")
-      } else {
-        if rewardedAd?.isReady == true {
-          showRewardAd()
-        } else {
-          showAlertWithMessage(message: "Sorry. We had problems when loading the Advertisement.")
-        }
-      }
-    } else {
-      showAlertWithMessage(message: "Sorry. Check your network connection, please.")
-    }
-  }
-  
   // MARK: Setup Views
   
   private func setupViews() {
@@ -185,44 +143,8 @@ class GameOverPopup: PopupViewController {
       make.right.centerY.equalToSuperview()
       make.height.equalTo(goHomeButton)
     }
-    
-    // Watch Ads
-    //watchAdsButton = ViewCreator.createButtonInGameOverPopup(image: UIImage(named: "adsicon"), title: "+\(rewardForEachAds)s")
-    //watchAdsButton.addTargetForTouchUpInsideEvent(target: self, selector: #selector(didTapWatchAdsButton))
-    //container.addSubview(watchAdsButton)
-    //watchAdsButton.snp.makeConstraints { (make) in
-    //  make.width.equalToSuperview().multipliedBy(buttonWidthRatio)
-    //  make.top.right.bottom.equalToSuperview()
-    //}
   }
-  
-  private func setupAds() {
-    
-    // FullScreen
-    loadFullScreenAds()
-    
-    //RewardAds:
-    loadRewardAds()
-  }
-  
-  private func loadFullScreenAds() {
-    interstitial = GADInterstitial(adUnitID: fullScreenAdUnitId)
-    interstitial.delegate = self
-    let request = GADRequest()
-    interstitial.load(request)
-  }
-  
-  private func loadRewardAds() {
-    rewardedAd = GADRewardedAd(adUnitID: rewardAdsUnitId)
-    rewardedAd?.load(GADRequest()) { error in
-      if let _ = error {
-        print("duydl: ERROR: Load reward ads failed with error: \(error.debugDescription)")
-      } else {
-        print("duydl: SUCCESS: Load reward ads successfully")
-      }
-    }
-  }
-  
+
   private func setupResultsView() {
     
     // LooseLevel
@@ -258,27 +180,7 @@ class GameOverPopup: PopupViewController {
   }
   
   // MARK: Other
-  
-  private func showFullScreenAd() {
-    if interstitial.isReady {
-      if GameSettingManager.shared.allowMainSound {
-        GameMusicPlayer.shared.muteBackgroundGameMusic()
-      }
-      interstitial.present(fromRootViewController: self)
-    } else {
-      assert(true, "Ads is not ready")
-    }
-  }
-  
-  private func showRewardAd() {
-    if rewardedAd?.isReady == true {
-      if GameSettingManager.shared.allowMainSound {
-        GameMusicPlayer.shared.muteBackgroundGameMusic()
-      }
-      rewardedAd?.present(fromRootViewController: self, delegate:self)
-    }
-  }
-  
+
   private func _dismissAndSendReplayEventToDelegate() {
     self.dismissPopUp()
     self.delegate?.didTapReplayButton()
@@ -287,53 +189,5 @@ class GameOverPopup: PopupViewController {
   private func _dismissAndSendRewardEventToDelegate() {
     dismissPopUp()
     delegate?.didEarnedRewardToContinuePlay(reward: earnedReward)
-  }
-}
-
-
-// MARK: FullScreenAds delegate
-
-extension GameOverPopup: GADInterstitialDelegate {
-  
-  func interstitialDidDismissScreen(_ ad: GADInterstitial) {
-    if GameSettingManager.shared.allowMainSound {
-      GameMusicPlayer.shared.unmuteBackgroundGameMusic()
-    }
-    _dismissAndSendReplayEventToDelegate()
-  }
-}
-
-// MARK: RewardAds delegate
-extension GameOverPopup: GADRewardedAdDelegate {
-  /// Tells the delegate that the user earned a reward.
-  func rewardedAd(_ rewardedAd: GADRewardedAd, userDidEarn reward: GADAdReward) {
-    print("Reward received with currency: \(reward.type), amount \(reward.amount).")
-    earnedReward = rewardForEachAds
-  }
-  
-  /// Tells the delegate that the rewarded ad was presented.
-  func rewardedAdDidPresent(_ rewardedAd: GADRewardedAd) {
-    print("Rewarded ad presented.")
-  }
-  
-  /// Tells the delegate that the rewarded ad was dismissed.
-  func rewardedAdDidDismiss(_ rewardedAd: GADRewardedAd) {
-    
-    if GameSettingManager.shared.allowMainSound {
-      GameMusicPlayer.shared.unmuteBackgroundGameMusic()
-    }
-    
-    if earnedReward > 0 {
-      /// Send reward to delegate
-      _dismissAndSendRewardEventToDelegate()
-    } else {
-      /// No reward
-      loadRewardAds()
-    }
-  }
-  
-  /// Tells the delegate that the rewarded ad failed to present.
-  func rewardedAd(_ rewardedAd: GADRewardedAd, didFailToPresentWithError error: Error) {
-    print("Rewarded ad failed to present.")
   }
 }

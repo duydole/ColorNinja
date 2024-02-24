@@ -17,14 +17,14 @@ public enum GoogleSignInError: Error {
 final class GoogleSignInManager {
     public static let shared = GoogleSignInManager()
     
-    public func signInWithPresenting(viewController: UIViewController, completion:((GIDGoogleUser?, Error?) -> Void)?) {
+    public func signInWithPresenting(viewController: UIViewController, completion:((GIDSignInResult?, Error?) -> Void)?) {
         
         guard let clientID = FirebaseApp.app()?.options.clientID else {
             completion?(nil,GoogleSignInError.clientIdIsNil)
             return
         }
         let config = GIDConfiguration(clientID: clientID)
-        
-        GIDSignIn.sharedInstance.signIn(with: config, presenting: viewController, callback: completion)
+        GIDSignIn.sharedInstance.configuration = config
+        GIDSignIn.sharedInstance.signIn(withPresenting: viewController, completion: completion)
     }
 }
